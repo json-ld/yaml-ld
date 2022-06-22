@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset='utf-8'>
     <title>YAML-LD Use Cases and Requirements</title>
@@ -47,20 +47,20 @@
         and <a href="https://github.com/json-ld/yaml-ld/issues?q=is%3Aissue+is%3Aopen+label%3Aucr">issues</a>
         of the  community's GitHub repository.
 
-    <section>
-      <h2>Contributing Use Cases and Requirements</h2>
-      <p>
-        <a href="https://github.com/json-ld/yaml-ld/issues/new?template=use-case.md">Create a GitHub issue following the dedicated template</a>. The suggested form is:
-      </p>
-      <pre>
-        WHO:  As an &lt;actor&gt;
-        WHAT: I want a &lt;feature&gt;
-        WHY:  So that &lt;benefit&gt;
-      </pre>
-      <p>
-          This is not mandatory.
-      </p>
-    </section>
+      <section>
+        <h2>Contributing Use Cases and Requirements</h2>
+        <p>
+          <a href="https://github.com/json-ld/yaml-ld/issues/new?template=use-case.md">Create a GitHub issue following the dedicated template</a>. The suggested form is:
+        </p>
+        <pre>
+          WHO:  As an &lt;actor&gt;
+          WHAT: I want a &lt;feature&gt;
+          WHY:  So that &lt;benefit&gt;
+        </pre>
+        <p>
+            This is not mandatory.
+        </p>
+      </section>
     </section>
 
     <section>
@@ -70,11 +70,30 @@
         <h4>Compatibility with existing libraries</h4>
         <p><a href="https://github.com/json-ld/yaml-ld/issues/5">Submitted Use Case</a></p>
         <p>
-          As a developer of YAML-LD processors. I want to be able to use off-the-shelf libraries for converting between JSON-LD and YAML-LD serialization formats. So that data produced in JSON-LD can be easily represented in YAML-LD and visa-versa.
+          As a developer of YAML-LD processors, I want to be able to use off-the-shelf libraries for converting between JSON-LD and YAML-LD serialization formats. So that data produced in JSON-LD can be easily represented in YAML-LD and visa-versa.
         </p>
         <p class="note">
           There seems to be general compatibility between YAML libraries that produce equivalent results when serializing data originally parsed from JSON. This should be verified, but indicates an easy way of providing a YAML-LD serialization fully round-trippable with JSON-LD.
         </p>
+      </section>
+
+      <section>
+        <h4>Distinguish "plain" YAML-LD from "ideomatic" YAML-LD</h4>
+        <p><a href="https://github.com/json-ld/yaml-ld/issues/6">Submitted Use Case</a></p>
+        <p>As a processor. I want to easily distinguish between "plain" YAML-LD and "ideomatic" YAML-LD based on the use of local tags (or similar) which may require post-parsing processing to be interpreted using the JSON-LD processig algorithms. So that more complicated processing steps can be avoided.</p>
+        <pre class="example">
+          !yaml-ld
+          $context: http://schema.org/
+          $type: Person
+          name: Pierre-Antoine Champin
+        </pre>
+        <div class="note">
+        <p>The previous example uses two such mechanisms:</p>
+        <ul>
+          <li>The use of `$` instead of `@` to denote JSON-LD keywords. (Note, other than for `@context`, this could be done using a standardized context defining appropriate keyword aliases).</li>
+          <li>The hypothetical `!yaml-ld` processing instruction</li>
+        </ul>
+        </div>
       </section>
     </section>
   </body>
