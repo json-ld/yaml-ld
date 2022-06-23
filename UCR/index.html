@@ -66,18 +66,21 @@
     <section>
       <h2>Submitted Use Cases</h2>
 
-      <section>
-        <h4>Compatibility with existing libraries</h4>
-        <p><a href="https://github.com/json-ld/yaml-ld/issues/5">Submitted Use Case</a></p>
-        <p>
-          As a developer of YAML-LD processors, I want to be able to use off-the-shelf libraries for converting between JSON-LD and YAML-LD serialization formats. So that data produced in JSON-LD can be easily represented in YAML-LD and visa-versa.
-        </p>
+      <section data-format="markdown" id="uc-5">
+        #### Compatibility with existing libraries
+
+        [Submitted Use Case](https://github.com/json-ld/yaml-ld/issues/5)
+
+        As a developer of YAML-LD processors.
+        I want to be able to use off-the-shelf libraries for converting between JSON-LD and YAML-LD serialization formats.
+        So that data produced in JSON-LD can be easily represented in YAML-LD and visa-versa.
+
         <p class="note">
           There seems to be general compatibility between YAML libraries that produce equivalent results when serializing data originally parsed from JSON. This should be verified, but indicates an easy way of providing a YAML-LD serialization fully round-trippable with JSON-LD.
         </p>
       </section>
 
-      <section>
+      <section id="uc-6">
         <h4>Distinguish "plain" YAML-LD from "ideomatic" YAML-LD</h4>
         <p><a href="https://github.com/json-ld/yaml-ld/issues/6">Submitted Use Case</a></p>
         <p>As a processor. I want to easily distinguish between "plain" YAML-LD and "ideomatic" YAML-LD based on the use of local tags (or similar) which may require post-parsing processing to be interpreted using the JSON-LD processig algorithms. So that more complicated processing steps can be avoided.</p>
