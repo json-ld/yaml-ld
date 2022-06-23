@@ -265,5 +265,36 @@
 
     <p>FIXME.</p>
   </section>
- </body>
+
+  <section id="sec" class="informative">
+    <h2>Security Considerations</h2>
+
+    <p>See the YAML media type registration.</p>
+  </section>
+
+  <section id="int" class="informative">
+    <h2>Interoperability Considerations</h2>
+
+    <p>
+      For general interoperability considerations on the serialization of
+      JSON documents in YAML, see [[YAML]].
+    </p>
+        
+  </section>
+
+  <section id="int" class="informative">
+    <h2>Fragment identifiers</h2>
+
+    <p>
+      YAML media type support both alias nodes and JSON Pointer [[RFC6905]]
+      as fragment identifiers (see [[I-D.httpapi-yaml-mediatypes]]).
+      Since named anchor are serialization details, when
+      using alias nodes to reference nodes in external documents
+      the implementation needs to be confident that the serialization of
+      the resource is preserved.
+    </p>
+        
+  </section>
+
+</body>
 </html>
