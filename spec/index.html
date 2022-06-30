@@ -362,11 +362,11 @@
         </dl>
       </dd>
       <dt>Encoding considerations:</dt>
-      <dd>See <a href="#int" class="sectionRef"></a>.</dd>
+      <dd>See <a data-cite="RFC8259#section-11">RFC&nbsp;8259, section 11</a>.</dd>
       <dt id="iana-security">Security considerations:</dt>
       <dd>See <a href="#sec" class="sectionRef"></a>.</dd>
       <dt>Interoperability considerations:</dt>
-      <dd></dd>
+      <dd>See <a href="#int" class="sectionRef"></a>.</dd>
       <dt>Published specification:</dt>
       <dd>http://www.w3.org/TR/yaml-ld</dd>
       <dt>Applications that use this media type:</dt>
@@ -392,36 +392,32 @@
       <dt>Restrictions on usage:</dt>
       <dd>N/A</dd>
       <dt>Author(s):</dt>
-      <dd>...</dd>
+      <dd>Roberto Polli, Gregg Kellogg</dd>
       <dt>Change controller:</dt>
       <dd>W3C</dd>
     </dl>
-
-    <section id="iana-examples" class="informative">
-      <h3>Examples</h3>
-      <p class="ednote">FIXME</p>
-    </section>
-  </section>
-
-  <section id="int" class="informative">
-    <h2>Fragment identifiers</h2>
 
     <p>Fragment identifiers used with <a href="#application-ld-yaml">application/ld+yaml</a>
       are treated as in RDF syntaxes, as per
       <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
       [[RDF11-CONCEPTS]].
-      <div class="ednote">Perhaps more on fragment identifiers from <a href="https://github.com/json-ld/yaml-ld/issues/13">Issue 13</a></div>
     </p>
 
     <p>
-      YAML media type support both alias nodes and JSON Pointers [[RFC6905]]
+      The YAML media type supports both alias nodes and JSON Pointers [[RFC6905]]
       as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
       Since named anchors are serialization details, when
       using alias nodes to reference nodes in external documents,
-      the implementation needs to be confident that the serialization of
+      an implementation needs to be confident that the serialization of
       the resource is preserved.
     </p>
-        
+
+    <div class="ednote">Perhaps more on fragment identifiers from <a href="https://github.com/json-ld/yaml-ld/issues/13">Issue 13</a></div>
+
+    <section id="iana-examples" class="informative">
+      <h3>Examples</h3>
+      <p class="ednote">FIXME</p>
+    </section>
   </section>
 
  </body>
