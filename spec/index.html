@@ -397,23 +397,26 @@
       <dd>W3C</dd>
     </dl>
 
-    <p>Fragment identifiers used with <a href="#application-ld-yaml">application/ld+yaml</a>
-      are treated as in RDF syntaxes, as per
-      <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
-      [[RDF11-CONCEPTS]].
-    </p>
+    <section id="frag" class="informative">
+      <h2>Fragment identifiers</h2>
+      <p>Fragment identifiers used with <a href="#application-ld-yaml">application/ld+yaml</a>
+       are treated as in RDF syntaxes, as per
+       <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
+       [[RDF11-CONCEPTS]].
+      </p>
 
-    <p>
-      The YAML media type supports both alias nodes and JSON Pointers [[RFC6905]]
-      as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
-      Since named anchors are serialization details, when
-      using alias nodes to reference nodes in external documents,
-      an implementation needs to be confident that the serialization of
-      the resource is preserved.
-    </p>
+      <p>
+        The YAML media type supports both alias nodes and JSON Pointers [[RFC6905]]
+        as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
+        Since named anchors are serialization details, when
+        using alias nodes to reference nodes in external documents,
+        an implementation needs to be confident that the serialization of
+        the resource is preserved.
+      </p>
 
-    <div class="ednote">Perhaps more on fragment identifiers from <a href="https://github.com/json-ld/yaml-ld/issues/13">Issue 13</a></div>
+      <div class="ednote">Perhaps more on fragment identifiers from <a href="https://github.com/json-ld/yaml-ld/issues/13">Issue 13</a></div>
 
+    </section>
     <section id="iana-examples" class="informative">
       <h3>Examples</h3>
       <p class="ednote">FIXME</p>
