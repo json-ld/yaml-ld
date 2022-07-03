@@ -252,7 +252,26 @@
   <section id="conformance">
     <p>A <a>YAML-LD document</a> complies with this specification if ...</p>
     <p class="ednote">Define <dfn>YAML-LD document</dfn> somewhere.</p>
-
+    <p>
+      The term media type is imported from [[RFC6838]].
+    </p>
+    <p>
+      The terms JSON, "JSON document", "JSON string" are imported from [[JSON]].
+    </p>
+    <p>
+      The terms YAML, "YAML document", "YAML representation graph",
+      "node", "scalar",
+      "named anchor" and "alias nodes" are imported from [[YAML]].
+    </p>
+    <p>
+      The term "content negotiation" is imported from [[RFC9110]].
+    </p>
+    <p>
+      The terms "fragment" and "fragment identifier" in this document are to be interpreted as in [[URI]].
+    </p>
+    <p>
+      The term "Linked Data" is imported from [[JSON-LD]].
+    </p>
     <p>This specification makes use of the following namespace prefixes:</p>
     <table class="simple">
       <thead><tr>
@@ -277,7 +296,8 @@
 
     <p>These are used within this document as part of a <a data-cite="JSON-LD11#dfn-compact-iri">compact IRI</a>
       as a shorthand for the resulting <a data-cite="rfc3987#section-2">IRI</a>, such as <code>dcterms:title</code>
-      used to represent <code>http://purl.org/dc/terms/title</code>.</p>
+      used to represent <code>http://purl.org/dc/terms/title</code>.
+    </p>
   </section>
 
   <section id="basic-concepts" class="informative">
@@ -309,6 +329,9 @@
 
     <p>This section has been submitted to the Internet Engineering Steering
       Group (IESG) for review, approval, and registration with IANA.</p>
+    <p>
+      This section describes the information required to register the above media type according to [[RFC6838]]
+    </p>
 
     <h3>application/ld+yaml</h3>
     <dl>
