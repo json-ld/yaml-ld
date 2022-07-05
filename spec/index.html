@@ -443,52 +443,51 @@
     <section id="best-practices" class="informative">
       <h2>Best Practices</h2>
 
-      <p>In this section, we list a few recommendations to YAML-LD users which, although optional, might contain one or more useful thoughts.</p>
+      <p>Here, we propose to YAML-LD users a bit of advice which, although optional, might suggest one or two useful thoughts.</p>
 
        <div class="practice">
           <p class="practicedesc">
             <span id="use-json-ld-best-practices" class="practicelab">Follow JSON-LD best practices</span>
-            …in order to achieve a greater level of reusability, performance, and human friendliness of YAML-LD aware systems, follow [[json-ld-bp]] document that is as applicable to YAML-LD as it is to [[JSON-LD]].
+            …in order to achieve a greater level of reusability, performance, and human friendliness of YAML-LD aware systems. The [[json-ld-bp]] document is relevant to YAML-LD no less than it is to [[JSON-LD]].
           </p>
        </div>
 
       <div class="practice">
         <p class="practicedesc">
-          <span id="conceal-context" class="practicelab">Conceal JSON-LD Context if possible</span>
+          <span id="prebuilt-contexts" class="practicelab">Do not force users to author contexts</span>
 
-          A YAML-LD aware system which consumes YAML-LD data should not require the document author to specify an explicit context if the system is capable of inferring the proper context itself.
+          Instead, provide pre-built contexts that the user can reference by URL for majority of common use cases.
         </p>
       </div>
 
-      <p>YAML-LD is intended to simplify authoring of Linked Data for a wide range of domain experts: its target audience is not comprised solely of IT professionals. YAML is chosen as a medium to minimize syntactic noise, keep the authored documents concise and clear.</p>
+      <p>YAML-LD is intended to simplify authoring of Linked Data for a wide range of domain experts: its target audience is not comprised solely of IT professionals. YAML is chosen as a medium to minimize syntactic noise, to keep the authored documents concise and clear. [[JSON-LD]] (and hence YAML-LD) Context comprises a special language of its own. A requirement to <i>author</i> such a context would make the domain expert's job much harder, — which we, as system architects and developers, should try to avoid.</p>
 
-      <p>To that end, it is recommended that YAML-LD aware applications do not require the users to specify contexts.</p>
+      <div class="practice">
+        <p class="practicedesc">
+          <span id="conceal-contexts" class="practicelab">Use a default context</span>
+        </p>
 
-      <ul>
-        <li>JSON-LD (and hence YAML-LD) Context comprises a special language of its own. A requirement to author such a context would make the job of the domain expert much more difficult, which we usually are trying to avoid;</li>
-        <li>Alternatively, if the user has to specify the URL of the context, for them it will become a technical incantation of unclear meaning which they will have to copy-paste from one document to another.</li>
-      </ul>
+        If most, or all, of a user's documents are based on one particular context, try to make it the default in order to rescue the user from copy-pasting the same technical incantation from one document to another.
+      </div>
 
-      <p>In both cases, possibility of an error is increasing. Therefore, if feasible, — it is recommended that YAML-LD aware applications automatically infer the particular context they will use to interpret the document authored by a domain expert.</p>
-
-      <p>JSON-LD processors allow for that by accepting a <code>context</code> argument <STRONG>TODO LINK!!</STRONG> when expanding, collapsing, framing a JSON-LD document, or converting it to an RDF graph.</p>
+      <p>For instance, according to [[json-ld-api]], `expand()` function of a JSON-LD processor accepts an `expandContext` argument which can be used to provide a default system context.</p>
 
       <div class="practice">
         <p class="practicedesc">
           <span id="alias-keywords" class="practicelab">Alias JSON-LD keywords</span>
 
-          If possible, map JSON-LD keywords containing the `@` character to words that do not contain it.
+          If possible, map JSON-LD keywords containing the `@` character to keywords that do not contain it.
         </p>
       </div>
 
-      <p>Example of quotation:</p>
+      <p>The `@` character is reserved as per [[YAML]] specification and thus requires quoting, as in the following example:</p>
 
       <aside class="example" data-transform="updateExample"
              title="Example YAML-LD document without Convenience Context">
         <pre class="yaml" data-include="code/without-convenience-context.yaml" data-include-format="text"></pre>
       </aside>
 
-      <p>The need to quote the keywords has to be learnt, and introduces a little irregularity to the life of the document author. Besides, on most keyboard layouts typing quotes will require pressing `Shift` — which, albeit slightly, but does reduce typing speed.</p>
+      <p>The need to quote these keywords has to be learnt, and introduces one more little irregularity to the document author's life. Besides, on most keyboard layouts typing quotes will require `Shift` — which albeit slightly but does reduce typing speed.</p>
 
       <p>In order to avoid this, the context might introduce custom mappings for the necessary keywords. For instance, [[schema-org]] context redefines `@id` as just `id` — which seems to be much more convenient to type, and no more difficult to remember.</p>
 
@@ -507,13 +506,13 @@
       </aside>
 
       <p>The convenience context contains an alias to every JSON-LD keyword which can be aliased as per JSON-LD 1.1
-        specification, — which means all the keywords except <code>@context</code>. The reserved `@` character is replaced by `$`, which is not reserved and therefore does not require quoting. Consider example 123 reformatted using the convenience context:</p>
+        specification, — which means all the keywords except <code>@context</code>. The reserved `@` character is replaced by `$`, which is not reserved and therefore does not require quoting. Consider <strong>Example 1</strong> reformatted using the convenience context:</p>
 
       <aside class="example" data-transform="updateExample" title="Example YAML-LD document with Convenience Context">
         <pre class="yaml" data-include="code/with-convenience-context.yaml" data-include-format="text"></pre>
       </aside>
 
-      <p>The applicability of this context depends on the domain.</p>
+      <p>The applicability of this context depends on the domain and is left to the architect's best judgement.</p>
   </section>
 
  </body>
