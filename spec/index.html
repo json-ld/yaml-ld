@@ -221,7 +221,7 @@
         to represent information serialized as JSON,
         including Linked Data.
         This document defines how to serialize linked data
-        in YAML documents.
+        in YAML.
         Moreover, it registers the application/ld+yaml media type.
       </p>
     </section>
@@ -244,15 +244,12 @@
         Since YAML is more expressive than JSON,
         both in the available data types and in the document structure
         (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
-        this document identifies constraints on YAML documents
-        such that they can be used to represent JSON-LD documents.
+        this document identifies constraints on YAML
+        such that it can be used to represent JSON-LD documents.
       </p>
     </section>
 
   <section id="conformance">
-    <p>A <a>YAML-LD document</a> complies with this specification if ...</p>
-    <p class="ednote">Define <dfn>YAML-LD document</dfn> somewhere.</p>
-
     <p>This specification makes use of the following namespace prefixes:</p>
     <table class="simple">
       <thead><tr>
@@ -301,6 +298,11 @@
         <li>YAML supports more data types than JSON.</li>
         <li>the structure of a YAML document &mdash; that is, a named YAML representation graph &mdash;
         is a rooted, directed graph that can have cycles.</li>
+        <li>YAML has the concept of stream, which is a sequence of documents.
+            While a stream usually contains one document,
+            streams with multiple documents are used to aggregate multiple,
+            related, documents into a single file or network stream.
+        </li>
 
     <p>
       The first goal of this specification is to allow a JSON-LD document to be
@@ -353,14 +355,22 @@
     <h2>Core Requirements</h2>
 
     <p>
-      A YAML-LD document is a [[YAML]] document that can be interpreted as Linked Data [[LINKED-DATA]].
+      A YAML-LD stream is a YAML stream of YAML-LD documents.
+      Note that each document in a stream is independent
+      from the others:
+      each one has its own context, YAML directives,
+      named anchors and so on.
+    </p>
+    <p>
+      A YAML-LD document is a [[YAML]] document
+      that can be interpreted as Linked Data [[LINKED-DATA]].
     </p>
     <p>
       It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]]. 
     </p>
     <p>
       Comments in YAML-LD documents
-      are treated as white space
+      are treated as white space.
       This behavior is consistent with other
       Linked Data serializations like [[TURTLE]].
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
@@ -381,7 +391,7 @@
     </p>
     <p data-format="markdown">
       Example: The following YAML-LD document
-      contains alias nodes for the `{"@id": "country:ITA"}` object:
+      contains alias nodes for the `{"@id": "countries:ITA"}` object:
 
       ```yaml
       %YAML 1.2
