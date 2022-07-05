@@ -1,0 +1,13 @@
+"@context":
+  - https://prefix.cc/context
+  - https://yaml-ld.dev/context
+  - ex: https://example.org/
+    name:
+      $id: rdfs:label
+      $container: $language
+$id: ex:Ray
+$type: ex:Cat
+name:
+  en: Ray
+  ua: Промiнчик
+  ru: Лучик

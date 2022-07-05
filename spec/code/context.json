@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "$base": "@base",
+    "$container": "@container",
+    "$direction": "@direction",
+    "$graph": "@graph",
+    "$id": "@id",
+    "$import": "@import",
+    "$included": "@included",
+    "$index": "@index",
+    "$json": "@json",
+    "$language": "@language",
+    "$list": "@list",
+    "$nest": "@nest",
+    "$none": "@none",
+    "$prefix": "@prefix",
+    "$propagate": "@propagate",
+    "$protected": "@protected",
+    "$reverse": "@reverse",
+    "$set": "@set",
+    "$type": "@type",
+    "$value": "@value",
+    "$version": "@version",
+    "$vocab": "@vocab"
+  }
+}
