@@ -449,8 +449,8 @@
        <div class="practice">
           <p class="practicedesc">
             <span id="use-json-ld-best-practices" class="practicelab">Follow JSON-LD best practices</span>
-            …in order to achieve a greater level of reusability, performance, and human friendliness of YAML-LD aware
-            systems. The [[json-ld-bp]] document is relevant to YAML-LD no less than it is to [[JSON-LD]].
+            …in order to achieve a greater level of reusability, performance, and human friendliness among YAML-LD aware
+            systems. The [[json-ld-bp]] document is as relevant to YAML-LD as it is to [[JSON-LD]].
           </p>
        </div>
 
@@ -458,15 +458,15 @@
         <p class="practicedesc">
           <span id="prebuilt-contexts" class="practicelab">Do not force users to author contexts</span>
 
-          Instead, provide pre-built contexts that the user can reference by URL for majority of common use cases.
+          Instead, provide pre-built contexts that the user can reference by URL for a majority of common use cases.
         </p>
       </div>
 
-      <p>YAML-LD is intended to simplify authoring of Linked Data for a wide range of domain experts: its target
+      <p>YAML-LD is intended to simplify the authoring of Linked Data for a wide range of domain experts; its target
         audience is not comprised solely of IT professionals. YAML is chosen as a medium to minimize syntactic noise,
-        to keep the authored documents concise and clear. [[JSON-LD]] (and hence YAML-LD) Context comprises a special
+        and to keep the authored documents concise and clear. [[JSON-LD]] (and hence YAML-LD) Context comprises a special
         language of its own. A requirement to <i>author</i> such a context would make the domain expert's job much
-        harder, — which we, as system architects and developers, should try to avoid.</p>
+        harder &mdash; which we, as system architects and developers, should try to avoid.</p>
 
       <div class="practice">
         <p class="practicedesc">
@@ -488,7 +488,7 @@
         </p>
       </div>
 
-      <p>The `@` character is reserved as per [[YAML]] specification and thus requires quoting, as in the following
+      <p>The `@` character is reserved in [[YAML]], and thus requires quoting (or escaping), as in the following
         example:</p>
 
       <aside class="example" data-transform="updateExample"
@@ -497,8 +497,8 @@
       </aside>
 
       <p>The need to quote these keywords has to be learnt, and introduces one more little irregularity to the document
-        author's life. Besides, on most keyboard layouts typing quotes will require `Shift` — which albeit slightly but
-        does reduce typing speed.</p>
+        author's life. Further, on most keyboard layouts, typing quotes will require `Shift`, which reduces typing speed,
+        albeit slightly.</p>
 
       <p>In order to avoid this, the context might introduce custom mappings for the necessary keywords. For instance,
         [[schema-org]] context redefines `@id` as just `id` — which seems to be much more convenient to type, and
@@ -521,8 +521,8 @@
         <pre class="json" data-include="code/context.json" data-include-format="text"></pre>
       </aside>
 
-      <p>The convenience context contains an alias to every JSON-LD keyword which can be aliased as per JSON-LD 1.1
-        specification, — which means all the keywords except <code>@context</code>. The reserved `@` character is
+      <p>The convenience context contains an alias to every JSON-LD keyword which the JSON-LD 1.1
+        specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
         replaced by `$`, which is not reserved and therefore does not require quoting. Consider
         <strong>Example 1</strong> reformatted using the convenience context:</p>
 
