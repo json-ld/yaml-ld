@@ -799,8 +799,7 @@
           <p class="practicedesc">
             <span id="convenience-context" class="practicelab">Use YAML-LD Convenience Context</span>
             <p>YAML-LD users may use a JSON-LD context provided as part of this specification, henceforth known as the
-         <dfn>convenience
-          context</dfn>, which defines a standardized mapping of every `@`-keyword to a `$`-keyword, except `@context`.
+         <dfn>convenience context</dfn>, which defines a standardized mapping of every `@`-keyword to a `$`-keyword, except `@context`.
        </p>
          </p>
        </div>
@@ -812,10 +811,10 @@
         <pre class="json" data-include="code/context.json" data-include-format="text"></pre>
       </aside>
 
-      <p>The convenience context contains an alias to every JSON-LD keyword which the JSON-LD 1.1
+      <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
         specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
         replaced by `$`, which is not reserved and therefore does not require quoting. Consider
-        <strong>Example 1</strong> reformatted using the convenience context:</p>
+        <strong>Example 1</strong> reformatted using the <a>convenience context</a>:</p>
 
       <aside class="example" data-transform="updateExample" title="Example YAML-LD document with Convenience Context">
         <pre class="yaml" data-include="code/with-convenience-context.yaml" data-include-format="text"></pre>
