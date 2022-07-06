@@ -4,6 +4,7 @@
 <title>YAML-LD</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+<script src="../common/common.js" class="remove" defer></script>
 <script class='remove'>
   var respecConfig = {
     specStatus: "CG-DRAFT",
@@ -356,42 +357,52 @@
       JSON encoding is UTF-8.
     </p>
 
-    <p data-format="markdown>Example: the JSON-LD document below
+    <p>Example: The JSON-LD document below</p>
+    <pre class="example json"
+         data-transform="updateExample"
+         data-result-for="Basic YAML-LD document"
+         data-content-type="application/ld+json"
+         title="Basic JSON-LD document">
+      <!--
+      {
+        "@context": "http://example.org/context.jsonld",
+        "@graph": [
+          {"@id": "http://example.org/1", "title": "Example 1"},
+          {"@id": "http://example.org/2", "title": "Example 2"},
+          {"@id": "http://example.org/3", "title": "Example 3"}
+        ]
+      }
+      -->
+    </pre>
 
-    ```
-    {
-      "@context": "http://example.org/context.jsonld",
-      "@graph": [
-        {"@id": "http://example.org/1", "title": "Example 1"},
-        {"@id": "http://example.org/2", "title": "Example 2"},
-        {"@id": "http://example.org/3", "title": "Example 3"}
-      ]
-    }
-    ```
-
-    can be serialized as YAML as follows.
-    Note that entries 
-    starting with  `@` need to be enclosed in quotes or escaped because
-    `@` is a reserved character in YAML.
-
-    ```yaml
-    %YAML 1.2
-    ---
-    "@context": http://example.org/context.jsonld
-    \@graph:
-      -
-        "@id": http://example.org/1
-        title: Example 1
-      -
-        \@id: http://example.org/2
-        title: Example 2
-      -
-        '@id': http://example.org/3
-        title: Example 3
-    ```
-
-
+    <p>
+      Can be serialized as YAML as follows.
+      Note that entries
+      starting with  `@` need to be enclosed in quotes or escaped because
+      `@` is a reserved character in YAML.
     </p>
+
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-content-type="application/ld+yaml"
+         title="Basic YAML-LD document">
+      <!--
+      %YAML 1.2
+      ---
+      "@context": http://example.org/context.jsonld
+      \@graph:
+        -
+          "@id": http://example.org/1
+          title: Example 1
+        -
+          \@id: http://example.org/2
+          title: Example 2
+        -
+          '@id': http://example.org/3
+          title: Example 3
+      -->
+    </pre>
+
     <p>
       This document is based on YAML 1.2.2,
       but YAML-LD is not tied to a specific version of [[YAML]].
@@ -417,7 +428,7 @@
       that can be interpreted as Linked Data [[LINKED-DATA]].
     </p>
     <p>
-      It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]]. 
+      It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
     <p>
       Comments in YAML-LD documents
@@ -434,65 +445,77 @@
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
-    <p> 
-      A YAML-LD document MAY contain named anchors and alias nodes, 
+    <p>
+      A YAML-LD document MAY contain named anchors and alias nodes,
       but its representation graph MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
-    <p data-format="markdown">
+
+    <div data-format="markdown">
       Example: The following YAML-LD document
       contains alias nodes for the `{"@id": "countries:ITA"}` object:
 
-      ```yaml
-      %YAML 1.2
-      ---
-      "@context":
-        "@vocab": "http://schema.org/"
-        "countries": "http://publication.europa.eu/resource/authority/country/"
-      "@graph":
-      - &ITA
-        "@id": countries:ITA
-      - "@id": http://people.example/Homer
-        name: Homer Simpson
-        nationality: *ITA
-      - "@id": http://people.example/Lisa
-        name: Lisa Simpson
-        nationality: *ITA
-      ```
+      <pre class="example yaml"
+           data-transform="updateExample"
+           data-content-type="application/ld+yaml"
+           title="YAML-LD with named anchors">
+         <!--
+          %YAML 1.2
+          ---
+          "@context":
+            "@vocab": "http://schema.org/"
+            "countries": "http://publication.europa.eu/resource/authority/country/"
+          "@graph":
+          - &ITA
+            "@id": countries:ITA
+          - "@id": http://people.example/Homer
+            name: Homer Simpson
+            nationality: *ITA
+          - "@id": http://people.example/Lisa
+            name: Lisa Simpson
+            nationality: *ITA
+        -->
+      </pre>
 
       While the representation graph (and eventually the in-memory representation
       of the data structure, e.g., a Python dictionary or a Java hashmap) will still
       contain references between nodes, the JSON-LD serialization will not.
 
-      ```json
-      {
-        "@context": {
-          "@vocab": "http://schema.org/",
-          "countries": "http://publication.europa.eu/resource/authority/country/"
-        },
-        "@graph": [
-          {
-            "@id": "countries:ITA"
+      <pre class="example json"
+           data-transform="updateExample"
+           data-result-for="YAML-LD with named anchors"
+           data-content-type="application/ld+json"
+           title="JSON-LD resulting from YAML with named anchors">
+        <!--
+        {
+          "@context": {
+            "@vocab": "http://schema.org/",
+            "countries": "http://publication.europa.eu/resource/authority/country/"
           },
-          {
-            "@id": "http://people.example/Homer",
-            "full_name": "Homer Simpson",
-            "country": {
+          "@graph": [
+            {
               "@id": "countries:ITA"
+            },
+            {
+              "@id": "http://people.example/Homer",
+              "full_name": "Homer Simpson",
+              "country": {
+                "@id": "countries:ITA"
+              }
+            },
+            {
+              "@id": "http://people.example/Lisa",
+              "full_name": "Lisa Simpson",
+              "country": {
+                "@id": "countries:ITA"
+              }
             }
-          },
-          {
-            "@id": "http://people.example/Lisa",
-            "full_name": "Lisa Simpson",
-            "country": {
-              "@id": "countries:ITA"
-            }
-          }
-        ]
-      }
-      ```
-    </p>
+          ]
+        }
+        -->
+      </pre>
+    </div>
   </section>
   <section id="sec" class="informative">
     <h2>Security Considerations</h2>
@@ -647,7 +670,7 @@
     <h3>FAQ</h3>
 
     #### Why does YAML-LD not preserve comments?
-    <p class="ednote">
+    <div class="ednote">
     [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
     and other Linked Data serialization formats
     that support comments (such as [[TURTLE]])
@@ -664,27 +687,38 @@
     This specification does not provide a means for preserving
     YAML comments after a JSON serialization.
 
-    ```yaml
-    # First comment
-    "@context": "http://schema.org"
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-content-type="application/ld+yaml"
+         title="YAML-LD with comments">
+      <!--
+      # First comment
+      "@context": "http://schema.org"
 
-    # Second comment
-    givenName: John
-    ```
-    
+      # Second comment
+      givenName: John
+      -->
+    </pre>
+
     Transforming the above entry into a JSON-LD document
     results in:
-    
-    ```json
-    {
-      "@context": "http://schema.org",
-      "givenName": "John"
-    }
-    ```
 
-    
+    <pre class="example json"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with comments"
+         data-content-type="application/ld+json"
+         title="Result of parsing YAML-LD with comments to JSON-LD">
+      <!--
+      {
+        "@context": "http://schema.org",
+        "givenName": "John"
+      }
+      -->
+    </pre>
+    </div>
+
     #### Why does YAML-LD not extend the JSON-LD data model ?
-    <p class="ednote">
+    <div class="ednote">
     [[JSON]] only represents simple trees while [[YAML]] can support
     rooted, directed graphs with references and cycles.
 
@@ -698,38 +732,49 @@
     In the following example, `&value` references the value
     of the keyword `value`.
 
-    ```yaml
-    value: &value 100
-    valve1:
-      temperature: &temp100C
-        value: *value
-        unit: degC
-    valve2:
-      temperature: *temp100C
-    ```
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-content-type="application/ld+yaml"
+         title="YAML-LD with references">
+      <!--
+      value: &value 100
+      valve1:
+        temperature: &temp100C
+          value: *value
+          unit: degC
+      valve2:
+        temperature: *temp100C
+      -->
+    </pre>
 
     Processing this entry in Python, I get the following
     structure that preserve the references to
     mutable objects (e.g., the `temperature` dict)
     but not to scalars (e.g., the `value` keyword).
 
-    ```python
-    temperature = { "value": 100, "unit": "degC" }
-    document = {
-      "value": 100,
-      "valve1": { "temperature": temperature },
-      "valve2": { "temperature": temperature }
-    }
-    ```
+    <pre class="example python"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with references"
+         data-content-type="text/x-python"
+         title="Result of parsing YAML-LD with references to Python">
+      <!--
+      temperature = { "value": 100, "unit": "degC" }
+      document = {
+        "value": 100,
+        "valve1": { "temperature": temperature },
+        "valve2": { "temperature": temperature }
+      }
+      -->
+    </pre>
 
-    Since all these implementations pre-date this 
+    Since all these implementations pre-date this
     specification, some more interoperable choices include the following:
-    
+
     * forbidding cycles in YAML-LD documents
-    * considering all references in YAML-LD as static, 
+    * considering all references in YAML-LD as static,
       i.e., a shorthand way to repeat specific patterns
 
-    </p>
+    </div>
   </section>
     <section id="best-practices" class="informative">
       <h2>Best Practices</h2>
@@ -782,10 +827,25 @@
       <p>The `@` character is reserved in [[YAML]], and thus requires quoting (or escaping), as in the following
         example:</p>
 
-      <aside class="example" data-transform="updateExample"
-             title="Example YAML-LD document without Convenience Context">
-        <pre class="yaml" data-include="code/without-convenience-context.yaml" data-include-format="text"></pre>
-      </aside>
+      <pre class="example json"
+          data-transform="updateExample"
+          data-content-type="application/ld+yaml"
+          title="Example YAML-LD document without Convenience Context">
+        <!--
+        "@context":
+          - https://prefix.cc/context
+          - ex: https://example.org/
+            name:
+              "@id": rdfs:label
+              "@container": "@language"
+        "@id": ex:Ray
+        "@type": ex:Cat
+        name:
+          en: Ray
+          ua: Промiнчик
+          ru: Лучик
+        -->
+      </pre>
 
       <p>The need to quote these keywords has to be learnt, and introduces one more little irregularity to the document
         author's life. Further, on most keyboard layouts, typing quotes will require `Shift`, which reduces typing speed,
@@ -800,25 +860,74 @@
             <span id="convenience-context" class="practicelab">Use YAML-LD Convenience Context</span>
             <p>YAML-LD users may use a JSON-LD context provided as part of this specification, henceforth known as the
          <dfn>convenience context</dfn>, which defines a standardized mapping of every `@`-keyword to a `$`-keyword, except `@context`.
-       </p>
          </p>
        </div>
 
-      <aside class="example" data-transform="updateExample" title="Convenience Context">
+      <aside class="example" title="Convenience Context">
         <p>Code of the <a>convenience context</a>. Available as:
           <a href="https://yaml-ld.dev/context">https://yaml-ld.dev/context</a>.
         </p>
-        <pre class="json" data-include="code/context.json" data-include-format="text"></pre>
+        <p class="ednote">Other contexts go in https://json-ld.org/contexts, we should probably continue to use that</p>
+        <pre class="json"
+             data-format="application/ld+json"
+             data-transform="updateExample">
+        <!--
+        {
+          "@context": {
+            "$base": "@base",
+            "$container": "@container",
+            "$direction": "@direction",
+            "$graph": "@graph",
+            "$id": "@id",
+            "$import": "@import",
+            "$included": "@included",
+            "$index": "@index",
+            "$json": "@json",
+            "$language": "@language",
+            "$list": "@list",
+            "$nest": "@nest",
+            "$none": "@none",
+            "$prefix": "@prefix",
+            "$propagate": "@propagate",
+            "$protected": "@protected",
+            "$reverse": "@reverse",
+            "$set": "@set",
+            "$type": "@type",
+            "$value": "@value",
+            "$version": "@version",
+            "$vocab": "@vocab"
+          }
+        }
+        -->
+        </pre>
       </aside>
 
       <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
         specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
         replaced by `$`, which is not reserved and therefore does not require quoting. Consider
-        <strong>Example 1</strong> reformatted using the <a>convenience context</a>:</p>
+        <a href="#example-example-yaml-ld-document-without-convenience-context"></a>
+         reformatted using the <a>convenience context</a>:</p>
 
-      <aside class="example" data-transform="updateExample" title="Example YAML-LD document with Convenience Context">
-        <pre class="yaml" data-include="code/with-convenience-context.yaml" data-include-format="text"></pre>
-      </aside>
+        <pre class="example json"
+             data-format="application/ld+json"
+             data-transform="updateExample"
+             title="Example YAML-LD document with Convenience Context">
+        <!--
+        "@context":
+          - https://prefix.cc/context
+          - https://yaml-ld.dev/context
+          - ex: https://example.org/
+            name:
+              $id: rdfs:label
+              $container: $language
+        $id: ex:Ray
+        $type: ex:Cat
+        name:
+          en: Ray
+          ua: Промiнчик
+          ru: Лучик
+        -->
+      </pre>
 
       <p>The applicability of this context depends on the domain and is left to the architect's best judgement.</p>
   </section>
