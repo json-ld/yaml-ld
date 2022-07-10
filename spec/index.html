@@ -378,7 +378,7 @@
     <p>
       Can be serialized as YAML as follows.
       Note that entries
-      starting with  `@` need to be enclosed in quotes or escaped because
+      starting with  `@` need to be enclosed in quotes because
       `@` is a reserved character in YAML.
     </p>
 
@@ -389,13 +389,13 @@
       <!--
       %YAML 1.2
       ---
-      "@context": http://example.org/context.jsonld
-      \@graph:
+      '@context': http://example.org/context.jsonld
+      '@graph':
         -
-          "@id": http://example.org/1
+          '@id': http://example.org/1
           title: Example 1
         -
-          \@id: http://example.org/2
+          '@id': http://example.org/2
           title: Example 2
         -
           '@id': http://example.org/3
