@@ -240,7 +240,7 @@
         including Linked Data.
         This document defines how to serialize linked data
         in YAML.
-        Moreover, it registers the application/ld+yaml media type.
+        Moreover, it registers the `application/ld+yaml` media type.
       </p>
     </section>
 
@@ -263,15 +263,27 @@
         both in the available data types and in the document structure
         (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
         this document identifies constraints on YAML
-        such that it can be used to represent JSON-LD documents.
+        such that any <a>YAML-LD document</a> can be represented in JSON-LD.
       </p>
     </section>
 
   <section id="conformance">
-    <p>A <a>YAML-LD document</a> complies with this specification if ...</p>
-    <p class="ednote">Define <dfn>YAML-LD document</dfn> somewhere.</p>
+    <h2>YAML-LD document</h2>
+
+    <p>A <dfn>YAML-LD document</dfn> complies with this specification if, and only if:</p>
+
+    <ul>
+      <li>it is a valid document as per [[YAML]] specification;</li>
+      <li>
+        and a straightforward conversion of this document to [[JSON]] as per ??? returns a valid [[JSON-LD]] document
+        as per corresponding specification.
+      </li>
+    </ul>
+
+    <h2>Terms</h2>
+
     <p>
-      The term media type is imported from [[RFC6838]].
+      The term `media type` is imported from [[RFC6838]].
     </p>
     <p>
       The terms JSON, "JSON document", and "JSON string" are imported from [[JSON]].
@@ -291,6 +303,9 @@
     <p>
       The term "Linked Data" is imported from [[JSON-LD]].
     </p>
+
+    <h2>Namespace Prefixes</h2>
+
     <p>This specification makes use of the following namespace prefixes:</p>
     <table class="simple">
       <thead><tr>
@@ -391,14 +406,11 @@
       ---
       '@context': http://example.org/context.jsonld
       '@graph':
-        -
-          '@id': http://example.org/1
+        - '@id': http://example.org/1
           title: Example 1
-        -
-          '@id': http://example.org/2
+        - '@id': http://example.org/2
           title: Example 2
-        -
-          '@id': http://example.org/3
+        - '@id': http://example.org/3
           title: Example 3
       -->
     </pre>
@@ -417,21 +429,21 @@
     <h2>Core Requirements</h2>
 
     <p>
-      A YAML-LD stream is a YAML stream of YAML-LD documents.
+      A YAML-LD stream is a YAML stream of <a>YAML-LD document</a>s.
       Note that each document in a stream is independent
       from the others;
       each one has its own context, YAML directives,
       named anchors, and so on.
     </p>
     <p>
-      A YAML-LD document is a [[YAML]] document
+      A <a>YAML-LD document</a> is a [[YAML]] document
       that can be interpreted as Linked Data [[LINKED-DATA]].
     </p>
     <p>
       It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
     <p>
-      Comments in YAML-LD documents
+      Comments in <a>YAML-LD document</a>s
       are treated as white space.
       This behavior is consistent with other
       Linked Data serializations like [[TURTLE]].
@@ -446,14 +458,14 @@
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
     <p>
-      A YAML-LD document MAY contain named anchors and alias nodes,
+      A <a>YAML-LD document</a> MAY contain named anchors and alias nodes,
       but its representation graph MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
 
     <div data-format="markdown">
-      Example: The following YAML-LD document
+      Example: The following <a>YAML-LD document</a>
       contains alias nodes for the `{"@id": "countries:ITA"}` object:
 
       <pre class="example yaml"
@@ -565,7 +577,7 @@
           <dt><code>profile</code></dt>
           <dd>
             <p>A non-empty list of space-separated URIs identifying specific
-              constraints or conventions that apply to a YAML-LD document according to [[RFC6906]].
+              constraints or conventions that apply to a <a>YAML-LD document</a> according to [[RFC6906]].
               A profile does not change the semantics of the resource representation
               when processed without profile knowledge, so that clients both with
               and without knowledge of a profiled resource can safely use the same
@@ -582,10 +594,10 @@
             </p>
             <dl>
               <dt><code>http://www.w3.org/ns/json-ld#extended</code></dt>
-              <dd>To request or specify <a data-lt="extended document form">extended YAML-LD document form</a>.
+              <dd>To request or specify <a data-lt="extended document form">extended <a>YAML-LD document</a> form</a>.
                 <div class="ednote">
                   This is a placeholder for specifying something like an
-                  <dfn data-lt="extended-document-form">extended YAML-LD document form</dfn>
+                  <dfn data-lt="extended-document-form">extended <a>YAML-LD document</a> form</dfn>
                   making use of YAML-specific features.
                 </div></dd>
             </dl>
@@ -770,7 +782,7 @@
     Since all these implementations pre-date this
     specification, some more interoperable choices include the following:
 
-    * forbidding cycles in YAML-LD documents
+    * forbidding cycles in <a>YAML-LD document</a>s
     * considering all references in YAML-LD as static,
       i.e., a shorthand way to repeat specific patterns
 
