@@ -235,12 +235,12 @@
   <body>
     <section id='abstract'>
       <p>
-        In recent years, YAML emerged as a more concise format
-        to represent information serialized as JSON,
+        In recent years, [[YAML]] emerged as a more concise format
+        to represent information that had been serialized as JSON,
         including Linked Data.
         This document defines how to serialize linked data
         in YAML.
-        Moreover, it registers the application/ld+yaml media type.
+        Moreover, it registers the `application/ld+yaml` media type.
       </p>
     </section>
 
@@ -253,9 +253,9 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        JSON-LD is a JSON-based format to serialize Linked Data.
-        In recent years, YAML emerged as a more concise format
-        to represent information serialized as JSON,
+        [[JSON-LD]] is a JSON-based format to serialize Linked Data.
+        In recent years, [[YAML]] emerged as a more concise format
+        to represent information serialized as [[JSON]],
         including API specification, data schemas, and Linked Data.
       </p>
       <p>
@@ -263,15 +263,33 @@
         both in the available data types and in the document structure
         (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
         this document identifies constraints on YAML
-        such that it can be used to represent JSON-LD documents.
+        such that any <a>YAML-LD document</a> can be represented in JSON-LD.
       </p>
     </section>
 
   <section id="conformance">
-    <p>A <a>YAML-LD document</a> complies with this specification if ...</p>
-    <p class="ednote">Define <dfn>YAML-LD document</dfn> somewhere.</p>
+    <h2>YAML-LD stream</h2>
+
     <p>
-      The term media type is imported from [[RFC6838]].
+      <dfn>YAML-LD stream</dfn> is a <a href="https://yaml.org/spec/1.2.2/#92-streams">YAML stream</a>
+      of <a>YAML-LD documents</a>.
+    </p>
+
+    <p class="note" title="Documents in the stream are independent of each other">
+        Each document in a stream has its own context, [[YAML]] directives, named anchors, and so on.
+    </p>
+
+    <h2>YAML-LD document</h2>
+
+    <p>
+      Under a <dfn>YAML-LD document</dfn>, we understand any [[YAML]] document that, after a conversion to [[JSON]],
+      is a valid [[JSON-LD]] document and can be interpreted as [[LINKED-DATA]].
+    </p>
+
+    <h2>Terms</h2>
+
+    <p>
+      The term "media type" is imported from [[RFC6838]].
     </p>
     <p>
       The terms JSON, "JSON document", and "JSON string" are imported from [[JSON]].
@@ -291,6 +309,9 @@
     <p>
       The term "Linked Data" is imported from [[JSON-LD]].
     </p>
+
+    <h2>Namespace Prefixes</h2>
+
     <p>This specification makes use of the following namespace prefixes:</p>
     <table class="simple">
       <thead><tr>
@@ -324,7 +345,7 @@
 
     <p>
       To ease writing and collaborating on JSON-LD documents, it is a common practice
-      to serialize them as YAML.
+      to serialize them as [[YAML]].
       This requires a registered media type, not only to enable content negotiation
       of linked data documents in YAML, but also to define the expected behavior of
       applications that process these documents, including fragment identifiers and
@@ -393,21 +414,18 @@
       ---
       '@context': http://example.org/context.jsonld
       '@graph':
-        -
-          '@id': http://example.org/1
+        - '@id': http://example.org/1
           title: Example 1
-        -
-          '@id': http://example.org/2
+        - '@id': http://example.org/2
           title: Example 2
-        -
-          '@id': http://example.org/3
+        - '@id': http://example.org/3
           title: Example 3
       -->
     </pre>
 
     <p>
       This document is based on YAML 1.2.2,
-      but YAML-LD is not tied to a specific version of [[YAML]].
+      but YAML-LD is not tied to a specific version of YAML.
       Implementers concerned about features related to a specific YAML version
       can specify it in documents using the `%YAML` directive
       (see <a href="#int" class="sectionRef"></a>).
@@ -415,48 +433,42 @@
 
     <p>FIXME.</p>
   </section>
+
   <section id="specifications" class="normative">
     <h2>Core Requirements</h2>
 
+    <h2>Encoding</h2>
+
     <p>
-      A YAML-LD stream is a YAML stream of YAML-LD documents.
-      Note that each document in a stream is independent
-      from the others;
-      each one has its own context, YAML directives,
-      named anchors, and so on.
+      A <a>YAML-LD document</a> MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
+
+    <h2>Comments</h2>
     <p>
-      A YAML-LD document is a [[YAML]] document
-      that can be interpreted as Linked Data [[LINKED-DATA]].
-    </p>
-    <p>
-      It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
-    </p>
-    <p>
-      Comments in YAML-LD documents
-      are treated as white space.
-      This behavior is consistent with other
-      Linked Data serializations like [[TURTLE]].
+      Comments in <a>YAML-LD documents</a> are treated as white space.
+      This behavior is consistent with other Linked Data serializations like [[TURTLE]].
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
       for more details.
     </p>
+
+    <h2>Anchors and aliases</h2>
     <p>
-      Since named anchors are a serialization detail,
-      such names
+      Since named anchors are a serialization detail, such names
       MUST NOT be used to convey relevant information,
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
     <p>
-      A YAML-LD document MAY contain named anchors and alias nodes,
+      A <a>YAML-LD document</a> MAY contain named anchors and alias nodes,
       but its representation graph MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
 
-    <div data-format="markdown">
-      Example: The following YAML-LD document
+    <p>
+      The <a>YAML-LD document</a> at the following example
       contains alias nodes for the `{"@id": "countries:ITA"}` object:
+    </p>
 
       <pre class="example yaml"
            data-transform="updateExample"
@@ -480,9 +492,12 @@
         -->
       </pre>
 
-      While the representation graph (and eventually the in-memory representation
-      of the data structure, e.g., a Python dictionary or a Java hashmap) will still
-      contain references between nodes, the JSON-LD serialization will not.
+      <p>
+        While the representation graph (and eventually the in-memory representation
+        of the data structure, e.g., a Python dictionary or a Java hashmap) will still
+        contain references between nodes, the JSON-LD serialization will not, as shown
+        below:
+      </p>
 
       <pre class="example json"
            data-transform="updateExample"
@@ -519,6 +534,7 @@
       </pre>
     </div>
   </section>
+
   <section id="sec" class="informative">
     <h2>Security Considerations</h2>
 
@@ -531,7 +547,7 @@
 
     <p>
       For general interoperability considerations on the serialization of
-      JSON documents in YAML, see [[YAML]]
+      JSON documents in [[YAML]], see YAML
       and the Interoperability consideration of application/yaml [[I-D.ietf-httpapi-yaml-mediatypes]]..
     </p>
     <p>
@@ -567,7 +583,7 @@
           <dt><code>profile</code></dt>
           <dd>
             <p>A non-empty list of space-separated URIs identifying specific
-              constraints or conventions that apply to a YAML-LD document according to [[RFC6906]].
+              constraints or conventions that apply to a <a>YAML-LD document</a> according to [[RFC6906]].
               A profile does not change the semantics of the resource representation
               when processed without profile knowledge, so that clients both with
               and without knowledge of a profiled resource can safely use the same
@@ -584,10 +600,10 @@
             </p>
             <dl>
               <dt><code>http://www.w3.org/ns/json-ld#extended</code></dt>
-              <dd>To request or specify <a data-lt="extended document form">extended YAML-LD document form</a>.
+              <dd>To request or specify <a data-lt="extended document form">extended <a>YAML-LD document</a> form</a>.
                 <div class="ednote">
                   This is a placeholder for specifying something like an
-                  <dfn data-lt="extended-document-form">extended YAML-LD document form</dfn>
+                  <dfn data-lt="extended-document-form">extended <a>YAML-LD document</a> form</dfn>
                   making use of YAML-specific features.
                 </div></dd>
             </dl>
@@ -687,7 +703,7 @@
     the order of keywords is not preserved in JSON, so the
     comments could be displaced.
     This specification does not provide a means for preserving
-    YAML comments after a JSON serialization.
+    [[YAML]] comments after a JSON serialization.
 
     <pre class="example yaml"
          data-transform="updateExample"
@@ -772,7 +788,7 @@
     Since all these implementations pre-date this
     specification, some more interoperable choices include the following:
 
-    * forbidding cycles in YAML-LD documents
+    * forbidding cycles in <a>YAML-LD documents</a>
     * considering all references in YAML-LD as static,
       i.e., a shorthand way to repeat specific patterns
 
@@ -801,7 +817,7 @@
       </div>
 
       <p>YAML-LD is intended to simplify the authoring of Linked Data for a wide range of domain experts; its target
-        audience is not comprised solely of IT professionals. YAML is chosen as a medium to minimize syntactic noise,
+        audience is not comprised solely of IT professionals. [[YAML]] is chosen as a medium to minimize syntactic noise,
         and to keep the authored documents concise and clear. [[JSON-LD]] (and hence YAML-LD) Context comprises a special
         language of its own. A requirement to <i>author</i> such a context would make the domain expert's job much
         harder &mdash; which we, as system architects and developers, should try to avoid.</p>
@@ -826,7 +842,7 @@
         </p>
       </div>
 
-      <p>The `@` character is reserved in [[YAML]], and thus requires quoting (or escaping), as in the following
+      <p>The `@` character is reserved in YAML, and thus requires quoting (or escaping), as in the following
         example:</p>
 
       <pre class="example json"
