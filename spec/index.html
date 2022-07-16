@@ -239,7 +239,7 @@
         to represent information serialized as JSON,
         including Linked Data.
         This document defines how to serialize linked data
-        in [[YAML]].
+        in YAML.
         Moreover, it registers the `application/ld+yaml` media type.
       </p>
     </section>
@@ -259,7 +259,7 @@
         including API specification, data schemas, and Linked Data.
       </p>
       <p>
-        Since [[YAML]] is more expressive than JSON,
+        Since YAML is more expressive than JSON,
         both in the available data types and in the document structure
         (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
         this document identifies constraints on YAML
@@ -275,7 +275,7 @@
     <ul>
       <li>it is a valid document as per [[YAML]] specification;</li>
       <li>
-        and a straightforward conversion of this document to [[JSON]] as per ??? returns a valid [[JSON-LD]] document
+        and a straightforward conversion of this document to [[JSON]] returns a valid [[JSON-LD]] document
         as per corresponding specification.
       </li>
     </ul>
@@ -347,13 +347,13 @@
     </p>
 
     <p>
-      This is because [[YAML]] is more flexible than JSON:
+      This is because YAML is more flexible than JSON:
     </p>
 
     <ul>
       <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32.</li>
       <li>YAML supports more native data types than JSON.</li>
-      <li>the structure of a [[YAML]] document &mdash; that is, a named [[YAML]] representation graph &mdash;
+      <li>the structure of a YAML document &mdash; that is, a named YAML representation graph &mdash;
       is a rooted, directed graph that can have cycles.</li>
       <li>YAML has the concept of stream, which is a sequence of documents.
           While a stream usually contains one document,
@@ -367,7 +367,7 @@
       processed and serialized into YAML, and then back into JSON-LD, without
       losing any information.
 
-      This is always possible, because a [[YAML]] representation graph can always represent
+      This is always possible, because a YAML representation graph can always represent
       a tree, because JSON data types are a subset of YAML's, and because
       JSON encoding is UTF-8.
     </p>
@@ -391,10 +391,10 @@
     </pre>
 
     <p>
-      Can be serialized as [[YAML]] as follows.
+      Can be serialized as YAML as follows.
       Note that entries
       starting with  `@` need to be enclosed in quotes because
-      `@` is a reserved character in [[YAML]].
+      `@` is a reserved character in YAML.
     </p>
 
     <pre class="example yaml"
@@ -416,9 +416,9 @@
     </pre>
 
     <p>
-      This document is based on [[YAML]] 1.2.2,
-      but YAML-LD is not tied to a specific version of [[YAML]].
-      Implementers concerned about features related to a specific [[YAML]] version
+      This document is based on YAML 1.2.2,
+      but YAML-LD is not tied to a specific version of YAML.
+      Implementers concerned about features related to a specific YAML version
       can specify it in documents using the `%YAML` directive
       (see <a href="#int" class="sectionRef"></a>).
     </p>
@@ -429,21 +429,21 @@
     <h2>Core Requirements</h2>
 
     <p>
-      A YAML-LD stream is a [[YAML]] stream of <a>YAML-LD document</a>s.
+      A YAML-LD stream is a [[YAML]] stream of <a>YAML-LD documents</a>.
       Note that each document in a stream is independent
       from the others;
-      each one has its own context, [[YAML]] directives,
+      each one has its own context, YAML directives,
       named anchors, and so on.
     </p>
     <p>
-      A <a>YAML-LD document</a> is a [[YAML]] document
+      A <a>YAML-LD document</a> is a YAML document
       that can be interpreted as Linked Data [[LINKED-DATA]].
     </p>
     <p>
       It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
     <p>
-      Comments in <a>YAML-LD document</a>s
+      Comments in <a>YAML-LD documents</a>
       are treated as white space.
       This behavior is consistent with other
       Linked Data serializations like [[TURTLE]].
@@ -498,7 +498,7 @@
            data-transform="updateExample"
            data-result-for="YAML-LD with named anchors"
            data-content-type="application/ld+json"
-           title="JSON-LD resulting from [[YAML]] with named anchors">
+           title="JSON-LD resulting from YAML with named anchors">
         <!--
         {
           "@context": {
@@ -533,7 +533,7 @@
     <h2>Security Considerations</h2>
 
     <p>See <a data-cite="JSON-LD11##iana-security">Security considerations in JSON-LD 1.1</a>.
-      Also, see the [[YAML]] media type registration.</p>
+      Also, see the YAML media type registration.</p>
   </section>
 
   <section id="int" class="informative">
@@ -541,16 +541,16 @@
 
     <p>
       For general interoperability considerations on the serialization of
-      JSON documents in YAML, see [[YAML]]
+      JSON documents in [[YAML]], see YAML
       and the Interoperability consideration of application/yaml [[I-D.ietf-httpapi-yaml-mediatypes]]..
     </p>
     <p>
       The YAML-LD format and the media type registration are not restricted to a specific
       version of YAML,
-      but implementers that want to use YAML-LD with [[YAML]] versions
+      but implementers that want to use YAML-LD with YAML versions
       other than 1.2.2 need to be aware that the considerations and analysis provided
       here, including interoperability and security considerations, are based
-      on the [[YAML]] 1.2.2 specification.
+      on the YAML 1.2.2 specification.
     </p>
   </section>
 
@@ -659,7 +659,7 @@
       </p>
 
       <p>
-        The [[YAML]] media type supports both alias nodes and JSON Pointers [[RFC6905]]
+        The YAML media type supports both alias nodes and JSON Pointers [[RFC6905]]
         as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
         Since named anchors are serialization details, when
         using alias nodes to reference nodes in external documents,
@@ -739,7 +739,7 @@
     will fail.
 
     Programming languages such as Java and Python already support
-    [[YAML]] representation graphs, but these implementations may behave
+    YAML representation graphs, but these implementations may behave
     differently.
     In the following example, `&value` references the value
     of the keyword `value`.
@@ -782,7 +782,7 @@
     Since all these implementations pre-date this
     specification, some more interoperable choices include the following:
 
-    * forbidding cycles in <a>YAML-LD document</a>s
+    * forbidding cycles in <a>YAML-LD documents</a>
     * considering all references in YAML-LD as static,
       i.e., a shorthand way to repeat specific patterns
 
@@ -836,7 +836,7 @@
         </p>
       </div>
 
-      <p>The `@` character is reserved in [[YAML]], and thus requires quoting (or escaping), as in the following
+      <p>The `@` character is reserved in YAML, and thus requires quoting (or escaping), as in the following
         example:</p>
 
       <pre class="example json"
