@@ -253,9 +253,9 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        JSON-LD is a JSON-based format to serialize Linked Data.
+        [[JSON-LD]] is a JSON-based format to serialize Linked Data.
         In recent years, [[YAML]] emerged as a more concise format
-        to represent information serialized as JSON,
+        to represent information serialized as [[JSON]],
         including API specification, data schemas, and Linked Data.
       </p>
       <p>
@@ -268,22 +268,28 @@
     </section>
 
   <section id="conformance">
+    <h2>YAML-LD stream</h2>
+
+    <p>
+      <dfn>YAML-LD stream</dfn> is a <a href="https://yaml.org/spec/1.2.2/#92-streams">YAML stream</a>
+      of <a>YAML-LD documents</a>.
+    </p>
+
+    <p class="note" title="Documents in the stream are independent of each other">
+        Each document in a stream has its own context, [[YAML]] directives, named anchors, and so on.
+    </p>
+
     <h2>YAML-LD document</h2>
 
-    <p>A <dfn>YAML-LD document</dfn> complies with this specification if, and only if:</p>
-
-    <ul>
-      <li>it is a valid document as per [[YAML]] specification;</li>
-      <li>
-        and a straightforward conversion of this document to [[JSON]] returns a valid [[JSON-LD]] document
-        as per corresponding specification.
-      </li>
-    </ul>
+    <p>
+      Under a <dfn>YAML-LD document</dfn>, we understand any [[YAML]] document that, after a conversion to [[JSON]],
+      is a valid [[JSON-LD]] document and can be interpreted as [[LINKED-DATA]].
+    </p>
 
     <h2>Terms</h2>
 
     <p>
-      The term `media type` is imported from [[RFC6838]].
+      The term "media type" is imported from [[RFC6838]].
     </p>
     <p>
       The terms JSON, "JSON document", and "JSON string" are imported from [[JSON]].
@@ -425,34 +431,27 @@
 
     <p>FIXME.</p>
   </section>
+
   <section id="specifications" class="normative">
     <h2>Core Requirements</h2>
 
+    <h2>Encoding</h2>
+
     <p>
-      A YAML-LD stream is a [[YAML]] stream of <a>YAML-LD documents</a>.
-      Note that each document in a stream is independent
-      from the others;
-      each one has its own context, YAML directives,
-      named anchors, and so on.
+      A <a>YAML-LD document</a> MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
+
+    <h2>Comments</h2>
     <p>
-      A <a>YAML-LD document</a> is a YAML document
-      that can be interpreted as Linked Data [[LINKED-DATA]].
-    </p>
-    <p>
-      It MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
-    </p>
-    <p>
-      Comments in <a>YAML-LD documents</a>
-      are treated as white space.
-      This behavior is consistent with other
-      Linked Data serializations like [[TURTLE]].
+      Comments in <a>YAML-LD documents</a> are treated as white space.
+      This behavior is consistent with other Linked Data serializations like [[TURTLE]].
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
       for more details.
     </p>
+
+    <h2>Anchors and aliases</h2>
     <p>
-      Since named anchors are a serialization detail,
-      such names
+      Since named anchors are a serialization detail, such names
       MUST NOT be used to convey relevant information,
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
@@ -464,9 +463,10 @@
       alias nodes MUST be resolved by value to their target nodes.
     </p>
 
-    <div data-format="markdown">
-      Example: The following <a>YAML-LD document</a>
+    <p>
+      The <a>YAML-LD document</a> at the following example
       contains alias nodes for the `{"@id": "countries:ITA"}` object:
+    </p>
 
       <pre class="example yaml"
            data-transform="updateExample"
@@ -490,9 +490,12 @@
         -->
       </pre>
 
-      While the representation graph (and eventually the in-memory representation
-      of the data structure, e.g., a Python dictionary or a Java hashmap) will still
-      contain references between nodes, the JSON-LD serialization will not.
+      <p>
+        While the representation graph (and eventually the in-memory representation
+        of the data structure, e.g., a Python dictionary or a Java hashmap) will still
+        contain references between nodes, the JSON-LD serialization will not, as shown
+        below:
+      </p>
 
       <pre class="example json"
            data-transform="updateExample"
@@ -529,6 +532,7 @@
       </pre>
     </div>
   </section>
+
   <section id="sec" class="informative">
     <h2>Security Considerations</h2>
 
