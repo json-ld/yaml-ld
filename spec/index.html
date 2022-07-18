@@ -271,7 +271,7 @@
     <h2>YAML-LD stream</h2>
 
     <p>
-      <dfn>YAML-LD stream</dfn> is a <a href="https://yaml.org/spec/1.2.2/#92-streams">YAML stream</a>
+      A <dfn>YAML-LD stream</dfn> is a <a>YAML stream</a>
       of <a>YAML-LD documents</a>.
     </p>
 
@@ -289,25 +289,48 @@
     <h2>Terms</h2>
 
     <p>
-      The term "media type" is imported from [[RFC6838]].
-    </p>
+      The term <dfn data-cite="RFC6838#" data-no-xref="">media type</dfn> is imported from [[RFC6838]].</p>
     <p>
-      The terms JSON, "JSON document", and "JSON string" are imported from [[JSON]].
-    </p>
+      The term
+      <dfn data-cite="JSON#section-2" data-no-xref="">JSON</dfn> is imported from [[JSON]]</p>
+    <p>The term
+      <dfn data-cite="INFRA#javascript-string" data-no-xref="">JSON string</dfn> is imported
+      from [[INFRA]] as a Javascript String.</p>
+    <p>The term
+      <dfn data-no-xref="">JSON document</dfn> represents a serialization of a resource
+      conforming to the [[JSON]] grammar.</p>
+
     <p>
-      The terms YAML, "YAML document", "YAML representation graph",
-      "YAML stream", "YAML directive",
-      "node", "scalar",
-      "named anchor", and "alias nodes" are imported from [[YAML]].
-    </p>
+      The terms <dfn data-cite="YAML#" data-no-xref="">YAML</dfn>,
+      <dfn data-cite="YAML#321-representation-graph" data-no-xref="">YAML representation graph</dfn>,
+      <dfn data-cite="YAML#92-streams" data-no-xref="">YAML stream</dfn>,
+      <dfn data-cite="YAML#3234-directives" data-no-xref="">YAML directive</dfn>,
+      <dfn data-cite="YAML#3211-nodes" data-no-xref="">node</dfn>,
+      <dfn data-cite="YAML#3211-nodes" data-no-xref="">scalar</dfn>,
+      <dfn data-cite="YAML#3222-anchors-and-aliases" data-no-xref="">named anchor</dfn>,
+      <span class="ednote">(should this be <a data-cite="YAML#named-handles" data-no-xref="">named handle</a>?)</span>
+      and <dfn data-cite="YAML#71-alias-nodes" data-no-xref="">alias nodes</dfn>,
+      are imported from [[YAML]].</p>
+
+    <p>The term
+      <dfn>YAML document</dfn> represents a serialization of a resource
+      conforming to the [[YAML]] grammar.</p>
+
     <p>
-      The term "content negotiation" is imported from [[RFC9110]].
+      The term
+      <dfn data-cite="RFC9110#content.negotiation" data-no-xref="">content negotiation</dfn>
+      is imported from [[RFC9110]].
     </p>
+
     <p>
-      The terms "fragment" and "fragment identifier" in this document are to be interpreted as in [[URI]].
+      The terms
+      <dfn data-cite="URI#section-3.5" data-no-xref="">fragment</dfn> and
+      <dfn data-cite="URI#section-3.5" data-no-xref="">fragment identifier</dfn>
+      in this document are to be interpreted as in [[URI]].
     </p>
+
     <p>
-      The term "Linked Data" is imported from [[JSON-LD]].
+      The term <dfn data-cite="LINKED-DATA" data-no-xref="">Linked Data</dfn> is imported from [[LINKED-DATA]].
     </p>
 
     <h2>Namespace Prefixes</h2>
@@ -361,7 +384,7 @@
       <li>YAML supports more native data types than JSON.</li>
       <li>the structure of a YAML document &mdash; that is, a named YAML representation graph &mdash;
       is a rooted, directed graph that can have cycles.</li>
-      <li>YAML has the concept of stream, which is a sequence of documents.
+      <li>YAML has the concept of a <a data-lt="yaml stream">stream</a>, which is a sequence of documents.
           While a stream usually contains one document,
           streams with multiple documents are used to aggregate multiple,
           related, documents into a single file or network stream.
@@ -437,12 +460,15 @@
   <section id="specifications" class="normative">
     <h2>Core Requirements</h2>
 
+    <section>
     <h2>Encoding</h2>
 
     <p>
       A <a>YAML-LD document</a> MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
     </p>
+    </section>
 
+    <section>
     <h2>Comments</h2>
     <p>
       Comments in <a>YAML-LD documents</a> are treated as white space.
@@ -450,7 +476,9 @@
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
       for more details.
     </p>
+    </section>
 
+    <section>
     <h2>Anchors and aliases</h2>
     <p>
       Since named anchors are a serialization detail, such names
@@ -470,69 +498,69 @@
       contains alias nodes for the `{"@id": "countries:ITA"}` object:
     </p>
 
-      <pre class="example yaml"
-           data-transform="updateExample"
-           data-content-type="application/ld+yaml"
-           title="YAML-LD with named anchors">
-         <!--
-          %YAML 1.2
-          ---
-          "@context":
-            "@vocab": "http://schema.org/"
-            "countries": "http://publication.europa.eu/resource/authority/country/"
-          "@graph":
-          - &ITA
-            "@id": countries:ITA
-          - "@id": http://people.example/Homer
-            name: Homer Simpson
-            nationality: *ITA
-          - "@id": http://people.example/Lisa
-            name: Lisa Simpson
-            nationality: *ITA
-        -->
-      </pre>
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-content-type="application/ld+yaml"
+         title="YAML-LD with named anchors">
+       <!--
+        %YAML 1.2
+        ---
+        "@context":
+          "@vocab": "http://schema.org/"
+          "countries": "http://publication.europa.eu/resource/authority/country/"
+        "@graph":
+        - &ITA
+          "@id": countries:ITA
+        - "@id": http://people.example/Homer
+          name: Homer Simpson
+          nationality: *ITA
+        - "@id": http://people.example/Lisa
+          name: Lisa Simpson
+          nationality: *ITA
+      -->
+    </pre>
 
-      <p>
-        While the representation graph (and eventually the in-memory representation
-        of the data structure, e.g., a Python dictionary or a Java hashmap) will still
-        contain references between nodes, the JSON-LD serialization will not, as shown
-        below:
-      </p>
+    <p>
+      While the representation graph (and eventually the in-memory representation
+      of the data structure, e.g., a Python dictionary or a Java hashmap) will still
+      contain references between nodes, the JSON-LD serialization will not, as shown
+      below:
+    </p>
 
-      <pre class="example json"
-           data-transform="updateExample"
-           data-result-for="YAML-LD with named anchors"
-           data-content-type="application/ld+json"
-           title="JSON-LD resulting from YAML with named anchors">
-        <!--
-        {
-          "@context": {
-            "@vocab": "http://schema.org/",
-            "countries": "http://publication.europa.eu/resource/authority/country/"
+    <pre class="example json"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with named anchors"
+         data-content-type="application/ld+json"
+         title="JSON-LD resulting from YAML with named anchors">
+      <!--
+      {
+        "@context": {
+          "@vocab": "http://schema.org/",
+          "countries": "http://publication.europa.eu/resource/authority/country/"
+        },
+        "@graph": [
+          {
+            "@id": "countries:ITA"
           },
-          "@graph": [
-            {
+          {
+            "@id": "http://people.example/Homer",
+            "full_name": "Homer Simpson",
+            "country": {
               "@id": "countries:ITA"
-            },
-            {
-              "@id": "http://people.example/Homer",
-              "full_name": "Homer Simpson",
-              "country": {
-                "@id": "countries:ITA"
-              }
-            },
-            {
-              "@id": "http://people.example/Lisa",
-              "full_name": "Lisa Simpson",
-              "country": {
-                "@id": "countries:ITA"
-              }
             }
-          ]
-        }
-        -->
-      </pre>
-    </div>
+          },
+          {
+            "@id": "http://people.example/Lisa",
+            "full_name": "Lisa Simpson",
+            "country": {
+              "@id": "countries:ITA"
+            }
+          }
+        ]
+      }
+      -->
+    </pre>
+    </section>
   </section>
 
   <section id="sec" class="informative">
@@ -600,10 +628,10 @@
             </p>
             <dl>
               <dt><code>http://www.w3.org/ns/json-ld#extended</code></dt>
-              <dd>To request or specify <a data-lt="extended document form">extended <a>YAML-LD document</a> form</a>.
+              <dd>To request or specify <a data-lt="extended document form">extended</a> <a>YAML-LD document</a> form.
                 <div class="ednote">
                   This is a placeholder for specifying something like an
-                  <dfn data-lt="extended-document-form">extended <a>YAML-LD document</a> form</dfn>
+                  <dfn data-lt="extended document form">extended <a>YAML-LD document</a> form</dfn>
                   making use of YAML-specific features.
                 </div></dd>
             </dl>
