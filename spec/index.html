@@ -258,6 +258,13 @@
         to represent information serialized as [[JSON]],
         including API specification, data schemas, and Linked Data.
       </p>
+
+      <p>
+        This document defines YAML-LD as a set of conventions
+        on top of YAML which specify how to serialize Linked Data [[LINKED DATA]] as YAML
+        based on JSON-LD syntax, semantics, and APIs.
+      </p>
+
       <p>
         Since YAML is more expressive than JSON,
         both in the available data types and in the document structure
@@ -271,7 +278,7 @@
     <h2>YAML-LD stream</h2>
 
     <p>
-      A <dfn>YAML-LD stream</dfn> is a <a>YAML stream</a>
+      A <dfn>YAML-LD stream</dfn> is a <a data-cite="YAML#92-streams" data-no-xref="">YAML stream</a>
       of <a>YAML-LD documents</a>.
     </p>
 
@@ -282,8 +289,8 @@
     <h2>YAML-LD document</h2>
 
     <p>
-      Under a <dfn>YAML-LD document</dfn>, we understand any [[YAML]] document that, after a conversion to [[JSON]],
-      is a valid [[JSON-LD]] document and can be interpreted as [[LINKED-DATA]].
+      Under a <dfn>YAML-LD document</dfn>, we understand any <a>YAML document</a> that, after a conversion to [[JSON]],
+      is a valid <a>JSON-LD document</a> and can be interpreted as [[LINKED-DATA]].
     </p>
 
     <h2>Terms</h2>
@@ -299,6 +306,10 @@
     <p>The term
       <dfn data-no-xref="">JSON document</dfn> represents a serialization of a resource
       conforming to the [[JSON]] grammar.</p>
+
+    <p>
+      The term <dfn data-cite="JSON-LD#dfn-json-ld-document">JSON-LD document</dfn> is imported from [[JSON-LD]].
+    </p>
 
     <p>
       The terms <dfn data-cite="YAML#" data-no-xref="">YAML</dfn>,
@@ -367,7 +378,7 @@
     <h2>Basic Concepts</h2>
 
     <p>
-      To ease writing and collaborating on JSON-LD documents, it is a common practice
+      To ease writing and collaborating on [[JSON-LD]] documents, it is a common practice
       to serialize them as [[YAML]].
       This requires a registered media type, not only to enable content negotiation
       of linked data documents in YAML, but also to define the expected behavior of
@@ -376,15 +387,15 @@
     </p>
 
     <p>
-      This is because YAML is more flexible than JSON:
+      This is because YAML is more flexible than [[JSON]]:
     </p>
 
     <ul>
-      <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32.</li>
-      <li>YAML supports more native data types than JSON.</li>
+      <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32;</li>
+      <li>YAML supports more native data types than JSON;</li>
       <li>the structure of a YAML document &mdash; that is, a named YAML representation graph &mdash;
-      is a rooted, directed graph that can have cycles.</li>
-      <li>YAML has the concept of a <a data-lt="yaml stream">stream</a>, which is a sequence of documents.
+      is a rooted, directed graph that can have cycles;</li>
+      <li>YAML has the concept of a <a>YAML stream</a>, which is a sequence of documents.
           While a stream usually contains one document,
           streams with multiple documents are used to aggregate multiple,
           related, documents into a single file or network stream.
@@ -561,6 +572,38 @@
       -->
     </pre>
     </section>
+
+    <section>
+      <h2>Streams</h2>
+
+      <p>
+        A single YAML-LD file might contain multiple <a>YAML-LD documents</a>
+        using the mechanism of <a>YAML-LD streams</a>, as shown in the example below.
+      </p>
+
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with multiple documents"
+         data-content-type="application/ld+json"
+         title="YAML-LD with several documents in one file">
+      <!--
+      "@id": ex:Ray
+        "@type": ex:Cat
+        name:
+          en: Ray
+      ---
+      "@id": ex:Smoke
+        "@type": ex:Cat
+        name:
+          en: Smoke
+      -->
+    </pre>
+    </section>
+
+    <p>
+      Each of the individual <a>YAML documents</a> in the stream has to be converted into a <a>JSON-LD document</a> and
+      processed separately.
+    </p>
   </section>
 
   <section id="sec" class="informative">
@@ -575,7 +618,7 @@
 
     <p>
       For general interoperability considerations on the serialization of
-      JSON documents in [[YAML]], see YAML
+      <a>JSON documents</a> in [[YAML]], see YAML
       and the Interoperability consideration of application/yaml [[I-D.ietf-httpapi-yaml-mediatypes]]..
     </p>
     <p>
