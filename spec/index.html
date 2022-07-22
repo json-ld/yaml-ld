@@ -232,53 +232,53 @@
   }
 </style>
 </head>
-  <body>
-    <section id='abstract'>
-      <p>
-        In recent years, [[YAML]] emerged as a more concise format
-        to represent information that had previously been serialized as JSON,
-        including Linked Data.
-        This document defines how to serialize linked data
-        in YAML.
-        Moreover, it registers the `application/ld+yaml` media type.
-      </p>
-    </section>
+<body>
+  <section id='abstract'>
+    <p>
+      In recent years, [[YAML]] emerged as a more concise format
+      to represent information that had previously been serialized as JSON,
+      including Linked Data.
+      This document defines how to serialize linked data
+      in YAML.
+      Moreover, it registers the `application/ld+yaml` media type.
+    </p>
+  </section>
 
-    <section id='sotd'>
-      <p>
-        This is an unofficial proposal.
-      </p>
-    </section>
+  <section id='sotd'>
+    <p>This document has been developed by the
+      <a href="https://www.w3.org/community/json-ld/">JSON-LD Community Group</a>.</p>
+  </section>
 
-    <section>
-      <h2>Introduction</h2>
-      <p>
-        [[JSON-LD]] is a JSON-based format to serialize Linked Data.
-        In recent years, [[YAML]] emerged as a more concise format
-        to represent information that had previously been serialized as [[JSON]],
-        including API specification, data schemas, and Linked Data.
-      </p>
-
-      <p>
-        This document defines YAML-LD as a set of conventions
-        on top of YAML which specify how to serialize Linked Data [[LINKED DATA]] as YAML
-        based on JSON-LD syntax, semantics, and APIs.
-      </p>
-
-      <p>
-        Since YAML is more expressive than JSON,
-        both in the available data types and in the document structure
-        (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
-        this document identifies constraints on YAML
-        such that any <a>YAML-LD document</a> can be represented in JSON-LD.
-      </p>
-    </section>
-
-  <section id="conformance">
-    <h2>YAML-LD stream</h2>
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      [[JSON-LD]] is a JSON-based format to serialize Linked Data.
+      In recent years, [[YAML]] emerged as a more concise format
+      to represent information that had previously been serialized as [[JSON]],
+      including API specification, data schemas, and Linked Data.
+    </p>
 
     <p>
-      A <dfn>YAML-LD stream</dfn> is a <a data-cite="YAML#92-streams" data-no-xref="">YAML stream</a>
+      This document defines YAML-LD as a set of conventions
+      on top of YAML which specify how to serialize Linked Data [[LINKED-DATA]] as [[YAML]]
+      based on JSON-LD syntax, semantics, and APIs.
+    </p>
+
+    <p>
+      Since YAML is more expressive than JSON,
+      both in the available data types and in the document structure
+      (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
+      this document identifies constraints on YAML
+      such that any <a>YAML-LD document</a> can be represented in JSON-LD.
+    </p>
+
+  <section class="informative">
+    <h2>Terminology</h2>
+
+    <p>This document uses the following terms as defined in external specifications
+      and defines terms specific to JSON-LD.</p>
+
+    <p>A <dfn>YAML-LD stream</dfn> is a <a data-cite="YAML#92-streams" data-no-xref="">YAML stream</a>
       of <a>YAML-LD documents</a>.
     </p>
 
@@ -286,14 +286,10 @@
         Each document in a stream has its own context, [[YAML]] directives, named anchors, and so on.
     </p>
 
-    <h2>YAML-LD document</h2>
-
-    <p>
-      Under a <dfn>YAML-LD document</dfn>, we understand any <a>YAML document</a> that, after a conversion to [[JSON]],
+    <p>A <dfn>YAML-LD document</dfn> is any <a>YAML document</a> that,
+      after a conversion to [[JSON]],
       is a valid <a>JSON-LD document</a> and can be interpreted as [[LINKED-DATA]].
     </p>
-
-    <h2>Terms</h2>
 
     <p>
       The term <dfn data-cite="RFC6838#" data-no-xref="">media type</dfn> is imported from [[RFC6838]].</p>
@@ -309,6 +305,13 @@
 
     <p>
       The term <dfn data-cite="JSON-LD#dfn-json-ld-document">JSON-LD document</dfn> is imported from [[JSON-LD]].
+    </p>
+
+
+    <p>
+      The term
+      <dfn data-cite="JSON-LD-API#dfn-internal-representation">internal representation</dfn>
+      is imported from [[JSON-LD-API]].
     </p>
 
     <p>
@@ -327,23 +330,22 @@
       <dfn>YAML document</dfn> represents a serialization of a resource
       conforming to the [[YAML]] grammar.</p>
 
-    <p>
-      The term
+    <p>The term
       <dfn data-cite="RFC9110#content.negotiation" data-no-xref="">content negotiation</dfn>
       is imported from [[RFC9110]].
     </p>
 
-    <p>
-      The terms
+    <p>The terms
       <dfn data-cite="URI#section-3.5" data-no-xref="">fragment</dfn> and
       <dfn data-cite="URI#section-3.5" data-no-xref="">fragment identifier</dfn>
       in this document are to be interpreted as in [[URI]].
     </p>
 
-    <p>
-      The term <dfn data-cite="LINKED-DATA" data-no-xref="">Linked Data</dfn> is imported from [[LINKED-DATA]].
+    <p>The term <dfn data-cite="LINKED-DATA#" data-no-xref="">Linked Data</dfn> is imported from [[LINKED-DATA]].
     </p>
+  </section>
 
+  #<section class="informative">
     <h2>Namespace Prefixes</h2>
 
     <p>This specification makes use of the following namespace prefixes:</p>
@@ -373,6 +375,15 @@
       used to represent <code>http://purl.org/dc/terms/title</code>.
     </p>
   </section>
+  </section>
+
+<section id="conformance">
+  <p>A <a>YAML-LD document</a> complies with this specification if it follows
+    the normative statements from this specification and
+    can be interpreted as [[JSON-LD]] after transformation into the <a>internal representation</a>.
+    For convenience, normative
+    statements for documents are often phrased as statements on the properties of the document.</p>
+</section>
 
   <section id="basic-concepts" class="informative">
     <h2>Basic Concepts</h2>
@@ -640,6 +651,7 @@
       This section describes the information required to register the above media type according to [[RFC6838]]
     </p>
 
+    <section>
     <h3>application/ld+yaml</h3>
     <dl>
       <dt>Type name:</dt>
@@ -726,9 +738,10 @@
       <dt>Change controller:</dt>
       <dd>W3C</dd>
     </dl>
+    </section>
 
     <section id="frag" class="informative">
-      <h2>Fragment identifiers</h2>
+      <h3>Fragment identifiers</h3>
       <p>Fragment identifiers used with <a href="#application-ld-yaml">application/ld+yaml</a>
        are treated as in RDF syntaxes, as per
        <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
