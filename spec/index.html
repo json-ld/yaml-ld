@@ -310,32 +310,49 @@
       The term
       <dfn data-cite="JSON#section-2" data-no-xref="">JSON</dfn> is imported from [[JSON]]</p>
     <p>The term
-      <dfn data-cite="INFRA#javascript-string" data-no-xref="">JSON string</dfn> is imported
-      from [[INFRA]] as a Javascript String.</p>
-    <p>The term
       <dfn data-no-xref="">JSON document</dfn> represents a serialization of a resource
       conforming to the [[JSON]] grammar.</p>
 
     <p>
-      The term <dfn data-cite="JSON-LD#dfn-json-ld-document">JSON-LD document</dfn> is imported from [[JSON-LD]].
+      The term <dfn data-cite="JSON-LD#dfn-json-ld-document" data-no-xref="">JSON-LD document</dfn> is imported from [[JSON-LD]].
     </p>
 
 
     <p>
       The term
-      <dfn data-cite="JSON-LD-API#dfn-internal-representation">internal representation</dfn>
+      <dfn data-cite="JSON-LD-API#dfn-internal-representation" data-no-xref="">internal representation</dfn>
       is imported from [[JSON-LD-API]].
+    </p>
+
+    <p>The terms
+      <dfn data-cite="INFRA#list" data-no-xref="">array</dfn>,
+      <dfn data-cite="INFRA#boolean" data-no-xref="">boolean</dfn>,
+      <dfn data-cite="INFRA#ordered-map" data-no-xref="">map</dfn>,
+      <dfn data-cite="INFRA#map-entry" data-lt="entry" data-no-xref="">map entry</dfn>,
+      <dfn data-cite="INFRA#nulls" data-no-xref="">null</dfn>, and
+      <dfn data-cite="INFRA#javascript-string" data-no-xref="">string</dfn>
+      are imported from [[INFRA]].</p>
+
+    <p>
+      The term
+      <dfn data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value" data-lt="number|JSON number" data-no-xref="">number</dfn>
+      is imported from [[ECMASCRIPT]].
     </p>
 
     <p>
       The terms <dfn data-cite="YAML#" data-no-xref="">YAML</dfn>,
-      <dfn data-cite="YAML#321-representation-graph" data-no-xref="">YAML representation graph</dfn>,
-      <dfn data-cite="YAML#92-streams" data-no-xref="">YAML stream</dfn>,
-      <dfn data-cite="YAML#3234-directives" data-no-xref="">YAML directive</dfn>,
-      <dfn data-cite="YAML#3211-nodes" data-no-xref="">node</dfn>,
-      <dfn data-cite="YAML#3211-nodes" data-no-xref="">scalar</dfn>,
-      <dfn data-cite="YAML#3222-anchors-and-aliases" data-no-xref="">named anchor</dfn>,
-      and <dfn data-cite="YAML#71-alias-nodes" data-no-xref="">alias node</dfn>,
+      <dfn data-cite="YAML#representation-graph" data-no-xref="">YAML representation graph</dfn>,
+      <dfn data-cite="YAML#streams" data-no-xref="" data-lt="stream">YAML stream</dfn>,
+      <dfn data-cite="YAML#directives" data-no-xref="" data-lt="directive">YAML directive</dfn>,
+      <dfn data-cite="YAML#block-mappings" data-no-xref="" data-lt="YAML block mapping">block mapping</dfn>,
+      <dfn data-cite="YAML#block-sequences" data-no-xref="" data-lt="YAML block sequence">block sequence</dfn>,
+      <dfn data-cite="YAML#flow-mappings" data-no-xref="" data-lt="YAML flow mapping">flow mapping</dfn>,
+      <dfn data-cite="YAML#flow-sequences" data-no-xref="" data-lt="YAML flow sequence">flow sequence</dfn>,
+      <dfn data-cite="YAML#nodes" data-no-xref="" data-lt="YAML node">node</dfn>,
+      <dfn data-cite="YAML#scalar" data-no-xref="" data-lt="YAML scalar">scalar</dfn>,
+      <dfn data-cite="YAML#anchors-and-aliases" data-no-xref="">named anchor</dfn>,
+      <span class="ednote">(should this be <a data-cite="YAML#named-handles" data-no-xref="">named handle</a>?)</span>
+      and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
 
     <p>The term
@@ -357,7 +374,7 @@
     </p>
   </section>
 
-  #<section class="informative">
+  <section class="informative">
     <h2>Namespace Prefixes</h2>
 
     <p>This specification makes use of the following namespace prefixes:</p>
@@ -416,9 +433,9 @@
     <ul>
       <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32.</li>
       <li>YAML supports more native data types than JSON.</li>
-      <li>The structure of a YAML document &mdash; that is, a named YAML representation graph &mdash;
+      <li>The structure of a <a>YAML document</a> &mdash; that is, a named <a>YAML representation graph</a> &mdash;
       is a rooted, directed graph that can have cycles.</li>
-      <li>YAML has the concept of a <a>YAML stream</a>, which is a sequence of documents.
+      <li>YAML has the concept of a <a>YAML stream</a>, which is a sequence of <a>YAML documents</a>.
           While a stream often contains one document,
           streams with multiple documents are used to aggregate multiple,
           related, documents into a single file or network stream.
@@ -431,7 +448,7 @@
       processed and serialized into YAML, and then back into JSON-LD, without
       losing any information.
 
-      This is always possible, because a YAML representation graph can always represent
+      This is always possible, because a <a>YAML representation graph</a> can always represent
       a tree, because JSON data types are a subset of YAML's, and because
       JSON encoding is UTF-8.
     </p>
@@ -633,6 +650,132 @@
 
   </section>
 
+  <section id="conversion">
+    <h2>Conversion to the Internal Representation</h2>
+
+    <p>YAML-LD processing is defined by converting YAML to the
+      <a>internal representation</a> and using [[[JSON-LD11-API]]]
+      to process on that representation,
+      after which the representation is converted back to YAML.
+      As information specific to a given <a>YAML document</a> structure is lost
+      in this transformation, much of the specifics of that
+      original representation are therefore lost in that conversion,
+      limiting the ability to fully round-trip a YAML-LD document back
+      to an equivalent representation.
+      Consequently, round-tripping is intended to preserve the semantic
+      representation of a document,
+      rather than a specific syntactic representation.</p>
+
+    <aside class="example" title="YAML Sequences">
+      <p>For example, YAML has multiple ways to encode an <a>array</a>,
+        YAMl <a>block sequences</a> and <a>flow sequences</a>.
+        Both forms describe the same <a>array</a> of two <a>strings</a>.</p>
+
+      <p>A YAML <a>block sequence</a>:</p>
+      <pre data-transform="updateExample"
+           data-content-type="application/yaml">
+        <!--
+          - one
+          - two
+        -->
+      </pre>
+
+      <p>A YAML <a>flow sequence</a>:</p>
+      <pre data-transform="updateExample"
+           data-content-type="application/yaml">
+        <!--
+          [one, two]
+        -->
+      </pre>
+    </aside>
+
+    <p>The conversion process represented here is compatible with
+      the description of <a data-cite="YAML#constructing-native-data-structures">Constructing Native Data Structures</a> in [[YAML]].</p>
+
+    <section id="convert-stream" class="algorithm">
+      <h3>Converting a <a>YAML stream</a></h3>
+
+      <p>A <a>YAML stream</a> is composed of zero or more <a>YAML documents</a>.</p>
+
+      <p class="issue" data-number="63">
+        <a>YAML streams</a> may correspond more directly to
+        [[[RFC7464]]], which are not presently part of the
+        JSON-LD representation model.
+        The description here more closely aligns with how JSON-LD
+        interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
+      </p>
+      <ol>
+        <li>Set <var>stream content</var> to an empty <a>array</a>.</li>
+        <li>If the <a>stream</a> is empty,
+          set <var>stream content</var> to an empty <a>array</a>.</li>
+        <li>Otherwise, if the <a>stream</a> contains a single <a>YAML document</a>,
+          set <var>stream content</var> the result of
+          <a href="#convert-document" class="sectionRef"></a>.</li>
+        <li>Otherwise: for each <var>document</var> in the <a>stream</a>:
+          <ol>
+            <li>Set <var>doc</var> to the result of <a href="#convert-document" class="sectionRef"></a> for <var>document</var>.</li>
+            <li>If <var>doc</var> is an <a>array</a>,
+              merge it to the end of <var>stream content</var>.</li>
+            <li>Otherwise, append <var>doc</var> to <var>stream content</var></li>
+          </ol>
+        </li>
+        <li>The conversion result is <var>stream content</var>.</li>
+      </ol>
+      <p>Any error reported in a recursive processing step results
+        in the failure of this processing step.</p>
+    </section>
+
+    <section id="convert-document">
+      <h3>Converting a <a>YAML document</a></h3>
+
+      <p>From the <a data-cite="YAML#">YAML grammar</a>,
+        a YAML document MAY be proceeded by a
+        <a data-cite="YAML#rule-l-document-prefix">Document Prefix</a>
+        If a document contains a <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>, it MUST
+        indicate the UTF-8 character encoding.
+        Otherwise a processing error has been found, and processing is aborted.</p>
+
+      <p>If a document includes one or more <a data-cite="YAML#rule-l-directive">directives</a>, these MUST be processed
+        as per [[YAML]].</p>
+
+      <p>A <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>
+        is composed of a single <a>node</a>.
+        The conversion result is the result of processing that <a>node</a>
+        using the appropriate conversion step defined in this section.
+        If that <a>node</a> is not one of the following,
+        a processing error has been found, and processing is aborted.</p>
+
+      <ul>
+        <li><a>YAML block sequence</a>,</li>
+        <li><a>YAML flow sequence</a>,</li>
+        <li><a>YAML block mapping</a>, or</li>
+        <li><a>YAML flow mapping</a>.</li>
+      </ul>
+      <p>Any error reported in a recursive processing step results
+        in the failure of this processing step.</p>
+    </section>
+
+    <section id="convert-block-seq">
+      <h3>Converting a <a>YAML block sequence</a></h3>
+    </section>
+
+    <section id="convert-flow-seq">
+      <h3>Converting a <a>YAML flow sequence</a></h3>
+    </section>
+
+    <section id="convert-block-map">
+      <h3>Converting a <a>YAML block mapping</a></h3>
+    </section>
+
+    <section id="convert-flow-map">
+      <h3>Converting a <a>YAML flow mapping</a></h3>
+    </section>
+
+    <section id="convert-scalar">
+      <h3>Converting a <a>YAML scalar</a></h3>
+    </section>
+  </section>
+
   <section id="sec" class="informative">
     <h2>Security Considerations</h2>
 
@@ -702,7 +845,7 @@
               <dd>To request or specify <a data-lt="extended document form">extended</a> <a>YAML-LD document</a> form.
                 <div class="ednote">
                   This is a placeholder for specifying something like an
-                  <dfn data-lt="extended document form">extended <a>YAML-LD document</a> form</dfn>
+                  <dfn data-lt="extended document form" data-no-xref="">extended <a>YAML-LD document</a> form</dfn>
                   making use of YAML-specific features.
                 </div></dd>
             </dl>
@@ -845,7 +988,7 @@
     will fail.
 
     Programming languages such as Java and Python already support
-    YAML representation graphs, but these implementations may behave
+    <a>YAML representation graphs</a>, but these implementations may behave
     differently.
     In the following example, `&value` references the value
     of the keyword `value`.
