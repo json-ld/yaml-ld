@@ -297,6 +297,8 @@
         Each document in a stream has its own context, [[YAML]] directives, named anchors, and so on.
     </p>
 
+    <p class="note"><a>YAML streams</a> were introduced in YAML 1.2.2, and cannot be used in earlier versions.</p>
+    
     <p>A <dfn>YAML-LD document</dfn> is any <a>YAML document</a> from
       which a conversion to [[JSON]] produces
       a valid <a>JSON-LD document</a> which can be interpreted as [[LINKED-DATA]].
@@ -420,6 +422,7 @@
           While a stream often contains one document,
           streams with multiple documents are used to aggregate multiple,
           related, documents into a single file or network stream.
+          <div class="note"><a>YAML streams</a> were introduced in YAML 1.2.2, and cannot be used in earlier versions.</div>
       </li>
     </ul>
 
@@ -625,6 +628,9 @@
       Each of the individual <a>YAML documents</a> in the stream has to be converted into a <a>JSON-LD document</a> and
       processed separately.
     </p>
+
+    <p class="note">YAML streams were introduced in YAML 1.2.2, and cannot be used in earlier versions.</p>
+
   </section>
 
   <section id="sec" class="informative">
