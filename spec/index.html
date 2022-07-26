@@ -668,7 +668,7 @@
 
     <aside class="example" title="YAML Sequences">
       <p>For example, YAML has multiple ways to encode an <a>array</a>,
-        YAMl <a>block sequences</a> and <a>flow sequences</a>.
+        YAML <a>block sequences</a> and <a>flow sequences</a>.
         Both forms describe the same <a>array</a> of two <a>strings</a>.</p>
 
       <p>A YAML <a>block sequence</a>:</p>
@@ -729,11 +729,11 @@
       <h3>Converting a <a>YAML document</a></h3>
 
       <p>From the <a data-cite="YAML#">YAML grammar</a>,
-        a YAML document MAY be proceeded by a
+        a YAML document MAY be preceded by a
         <a data-cite="YAML#rule-l-document-prefix">Document Prefix</a>
         If a document contains a <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>, it MUST
         indicate the UTF-8 character encoding.
-        Otherwise a processing error has been found, and processing is aborted.</p>
+        Otherwise, a processing error MUST be returned, and processing is aborted.</p>
 
       <p>If a document includes one or more <a data-cite="YAML#rule-l-directive">directives</a>, these MUST be processed
         as per [[YAML]].</p>
@@ -743,7 +743,7 @@
         The conversion result is the result of processing that <a>node</a>
         using the appropriate conversion step defined in this section.
         If that <a>node</a> is not one of the following,
-        a processing error has been found, and processing is aborted.</p>
+        a processing error MUST be returned, and processing aborted.</p>
 
       <ul>
         <li><a>YAML block sequence</a>,</li>
