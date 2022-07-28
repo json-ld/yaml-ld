@@ -344,14 +344,17 @@
       <dfn data-cite="YAML#representation-graph" data-no-xref="">YAML representation graph</dfn>,
       <dfn data-cite="YAML#streams" data-no-xref="" data-lt="stream">YAML stream</dfn>,
       <dfn data-cite="YAML#directives" data-no-xref="" data-lt="directive">YAML directive</dfn>,
-      <dfn data-cite="YAML#block-mappings" data-no-xref="" data-lt="YAML block mapping">block mapping</dfn>,
-      <dfn data-cite="YAML#block-sequences" data-no-xref="" data-lt="YAML block sequence">block sequence</dfn>,
-      <dfn data-cite="YAML#flow-mappings" data-no-xref="" data-lt="YAML flow mapping">flow mapping</dfn>,
-      <dfn data-cite="YAML#flow-sequences" data-no-xref="" data-lt="YAML flow sequence">flow sequence</dfn>,
+      <dfn data-cite="YAML#sequence" data-no-xref="">YAML sequence</dfn>
+      (either
+      <dfn data-cite="YAML#block-sequences" data-no-xref="">block sequence</dfn> or
+      <dfn data-cite="YAML#flow-sequences" data-no-xref="">flow sequence</dfn>),
+      <dfn data-cite="YAML#mapping" data-no-xref="">YAML mapping</dfn>
+      (either
+      <dfn data-cite="YAML#block-mappings" data-no-xref="">block mapping</dfn> or
+      <dfn data-cite="YAML#flow-mappings" data-no-xref="">flow mapping</dfn>),
       <dfn data-cite="YAML#nodes" data-no-xref="" data-lt="YAML node">node</dfn>,
       <dfn data-cite="YAML#scalar" data-no-xref="" data-lt="YAML scalar">scalar</dfn>,
       <dfn data-cite="YAML#anchors-and-aliases" data-no-xref="">named anchor</dfn>,
-      <span class="ednote">(should this be <a data-cite="YAML#named-handles" data-no-xref="">named handle</a>?)</span>
       and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
 
@@ -506,7 +509,7 @@
       (see <a href="#int" class="sectionRef"></a>).
     </p>
 
-    <p>FIXME.</p>
+    <p class="ednote">FIXME.</p>
   </section>
 
   <section id="specifications" class="normative">
@@ -573,10 +576,11 @@
     </pre>
 
     <p>
-      While the representation graph (and eventually the in-memory representation
-      of the data structure, e.g., a Python dictionary or a Java hashmap) will still
-      contain references between nodes, the JSON-LD serialization will not, as shown
-      below:
+      While the representation graph
+      (and eventually the in-memory representation
+      of the data structure, e.g., a Python dictionary or a Java hashmap)
+      will still contain references between nodes,
+      the JSON-LD serialization will not, as shown below:
     </p>
 
     <pre class="example json"
@@ -648,6 +652,9 @@
       processed separately.
     </p>
 
+    <p class="ednote">
+      This is inconsistent with the processing description in <a href="#convert-stream" class="sectionRef"></a>.
+    </p>
   </section>
 
   <section id="conversion">
@@ -668,7 +675,8 @@
 
     <aside class="example" title="YAML Sequences">
       <p>For example, YAML has multiple ways to encode an <a>array</a>,
-        YAML <a>block sequences</a> and <a>flow sequences</a>.
+        YAML <a>block sequences</a> and
+        <a>flow sequences</a>.
         Both forms describe the same <a>array</a> of two <a>strings</a>.</p>
 
       <p>A YAML <a>block sequence</a>:</p>
@@ -721,6 +729,7 @@
         </li>
         <li>The conversion result is <var>stream content</var>.</li>
       </ol>
+
       <p>Any error reported in a recursive processing step results
         in the failure of this processing step.</p>
     </section>
@@ -731,48 +740,158 @@
       <p>From the <a data-cite="YAML#">YAML grammar</a>,
         a YAML document MAY be preceded by a
         <a data-cite="YAML#rule-l-document-prefix">Document Prefix</a>
-        If a document contains a <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>, it MUST
-        indicate the UTF-8 character encoding.
-        Otherwise, a processing error MUST be returned, and processing is aborted.</p>
+        and/or a set of
+        <a data-cite="YAML#rule-l-directive">directives</a>
+        followed by a
+        <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>,
+        which is composed of a single <a>node</a>.
+      </p>
 
-      <p>If a document includes one or more <a data-cite="YAML#rule-l-directive">directives</a>, these MUST be processed
-        as per [[YAML]].</p>
+      <ol>
+        <li>Create an empty may <var>named nodes</var>,
+          used the associate an anchor name with the <a>node</a>
+          on which it is defined.</li>
+        <li>
+          If a document contains a
+          <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>,
+          it MUST indicate the UTF-8 character encoding.
+          Otherwise, a processing error MUST be returned,
+          and processing is aborted.
+        </li>
+        <li>
+          If a document includes one or more
+          <a data-cite="YAML#rule-l-directive">directives</a>,
+          these MUST be processed as per [[YAML]]
+        </li>
+        <li>
+          Set <var>document content</var> to the result
+            of processing the <a>node</a> associated with the
+          <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>,
+          using the appropriate conversion step defined in this section.
+          If that <a>node</a> is not one of the following,
+          a processing error MUST be returned, and processing aborted.
 
-      <p>A <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>
-        is composed of a single <a>node</a>.
-        The conversion result is the result of processing that <a>node</a>
-        using the appropriate conversion step defined in this section.
-        If that <a>node</a> is not one of the following,
-        a processing error MUST be returned, and processing aborted.</p>
+          <ul>
+            <li><a>block sequence</a>,</li>
+            <li><a>block mapping</a>, or</li>
+            <li><a>flow sequence</a>,</li>
+            <li><a>flow mapping</a>, or</li>
+          </ul>
 
-      <ul>
-        <li><a>YAML block sequence</a>,</li>
-        <li><a>YAML flow sequence</a>,</li>
-        <li><a>YAML block mapping</a>, or</li>
-        <li><a>YAML flow mapping</a>.</li>
-      </ul>
+          <div class="note">
+            A <a>node</a> may be of another type, but this is incompatilbe
+            with JSON-LD, where the top-most node must be either an
+            <a>array</a> or <a>map</a>.
+          </div>
+        </li>
+        <li>The conversion result is <var>document content</var>.</li>
+      </ol>
+
       <p>Any error reported in a recursive processing step results
         in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-block-seq">
-      <h3>Converting a <a>YAML block sequence</a></h3>
+    <section id="convert-seq">
+      <h3>Converting a <a>YAML sequence</a></h3>
+
+      <p>Both <a>block sequences</a> and <a>flow sequences</a>
+        are directly aligned with
+        an <a>array</a> in the <a>internal representation</a>.</p>
+
+      <ol>
+        <li>Set <var>sequence content</var> to an empty <a>array</a>.</li>
+        <li>If the <a data-lt="YAML sequence">sequence</a> has a
+          <a data-cite="YAML#node-anchors">node anchor</a></var>
+          add a reference from the anchor name to the
+          <a data-lt="YAML sequence">sequence</a>
+          in the <var>named nodes</var> map.</li>
+        <li>For each <a>node</a> <var>n</var> in the
+          <a data-lt="YAML sequence">sequence</a>:
+          append the result of processing <var>n</var>
+          to <var>sequence content</var>
+          using the appropriate conversion step.</li>
+          <div class="ednote">Ignore <a data-cite="YAML#node-tags">node tags</a>? Otherwise, how can they be used in processing?</div>
+        </li>
+        <li>The conversion result is <var>sequence content</var>.</li>
+      </ol>
+
+      <p>Any error reported in a recursive processing step results
+        in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-flow-seq">
-      <h3>Converting a <a>YAML flow sequence</a></h3>
+    <section id="convert-mapping">
+      <h3>Converting a <a>YAML mapping</a></h3>
+
+      <p>Both <a>block mappings</a> and <a>flow mappings</a>
+        are directly aligned with
+        a <a>map</a> in the <a>internal representation</a>.</p>
+
+      <ol>
+        <li>Set <var>mapping content</var> to an empty <a>map</a>.</li>
+        <li>Otherwise, if the <a data-lt="YAML mapping">mapping</a> has a
+          <a data-cite="YAML#node-anchors">node anchor</a></var>
+          add a reference from the anchor name to
+          the <a data-lt="YAML mapping">mapping</a>
+          in the <var>named nodes</var> map.</li>
+        <li>For each <var>entry</var> in the <a data-lt="YAML mapping">mapping</a>
+          composed of a key/value pair:
+          <ol>
+            <li>Set <var>key</var> and <var>value</var>
+              to the result of processing <var>entry</var>
+              using the appropriate conversion step.</li>
+            <li>If <var>key</var> is not a <a>string</a>,
+              a processing error MUST be returned,
+              and processing is aborted.</li>
+            <li>Add a new <a>entry</a> to
+              <var>mapping content</var> using
+              <var>key</var> and <var>value</var>.</li>
+          </ol>
+          <div class="ednote">Ignore <a data-cite="YAML#node-tags">node tags</a>? Otherwise, how can they be used in processing?</div>
+        </li>
+        <li>The conversion result is <var>mapping content</var>.</li>
+      </ol>
+
+      <p>Any error reported in a recursive processing step results
+        in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-block-map">
-      <h3>Converting a <a>YAML block mapping</a></h3>
-    </section>
+    <section id="convert-alias">
+      <h3>Converting an <a>Alias Node</a></h3>
 
-    <section id="convert-flow-map">
-      <h3>Converting a <a>YAML flow mapping</a></h3>
+      <p>
+        The conversion result is the value of the entry
+        in <var>named nodes</var> having the <a>node</a> entry.
+        If none exist, the document is invalid,
+        and processing MUST end in failure.
+      </p>
     </section>
 
     <section id="convert-scalar">
       <h3>Converting a <a>YAML scalar</a></h3>
+
+      <ol>
+        <li>If <a>node</a> <var>n</var>
+          has a <a data-cite="YAML#node-tags">node tag</a>,
+          the <a>node</a> is always
+          mapped to the
+          <a data-cite="YAML#json-schema">JSON Schema</a>.</li>
+        <li>If <var>n</var> maps to <a>null</a>
+          the conversion result is the value of <var>n</var>.</li>
+        <li>Otherwise, if <var>n</var> maps to a <a>boolean</a>
+          the conversion result is the value of <var>n</var>.</li>
+        <li>Otherwise, if <var>n</var> maps to a <a>number</a>
+          the conversion result is the value of <var>n</var>.
+          <div class="note">Implementations may retain the
+            representation as an <a data-cite="YAML#integer">YAML Integer</a>,
+            or <a data-cite="YAML#floating-point">YAML Floating Point</a>,
+            but a JSON-LD processor must treat them uniformly
+            as a <a>number</a>, although the specific type of number
+            value SHOULD be retained for round-tripping.</div>
+        </li>
+        <li>Otherwise, if <var>n</var> maps to a <a>string</a>
+          the conversion result is the value of <var>n</var>.
+        </li>
+      </ol>
     </section>
   </section>
 
