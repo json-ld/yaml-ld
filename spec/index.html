@@ -669,7 +669,7 @@
       original representation are therefore lost in that conversion,
       limiting the ability to fully round-trip a YAML-LD document back
       to an equivalent representation.
-      Consequently, round-tripping is intended to preserve the semantic
+      Consequently, round-tripping in this context is limited to preservation of the semantic
       representation of a document,
       rather than a specific syntactic representation.</p>
 
@@ -748,7 +748,7 @@
       </p>
 
       <ol>
-        <li>Create an empty may <var>named nodes</var>,
+        <li>Create an empty <a>map</a> <var>named nodes</var>,
           used the associate an anchor name with the <a>node</a>
           on which it is defined.</li>
         <li>
@@ -756,7 +756,7 @@
           <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>,
           it MUST indicate the UTF-8 character encoding.
           Otherwise, a processing error MUST be returned,
-          and processing is aborted.
+          and processing aborted.
         </li>
         <li>
           If a document includes one or more
@@ -801,12 +801,12 @@
       <ol>
         <li>Set <var>sequence content</var> to an empty <a>array</a>.</li>
         <li>If the <a data-lt="YAML sequence">sequence</a> has a
-          <a data-cite="YAML#node-anchors">node anchor</a></var>
+          <a data-cite="YAML#node-anchors">node anchor</a></var>,
           add a reference from the anchor name to the
           <a data-lt="YAML sequence">sequence</a>
           in the <var>named nodes</var> map.</li>
         <li>For each <a>node</a> <var>n</var> in the
-          <a data-lt="YAML sequence">sequence</a>:
+          <a data-lt="YAML sequence">sequence</a>,
           append the result of processing <var>n</var>
           to <var>sequence content</var>
           using the appropriate conversion step.</li>
@@ -829,7 +829,7 @@
       <ol>
         <li>Set <var>mapping content</var> to an empty <a>map</a>.</li>
         <li>Otherwise, if the <a data-lt="YAML mapping">mapping</a> has a
-          <a data-cite="YAML#node-anchors">node anchor</a></var>
+          <a data-cite="YAML#node-anchors">node anchor</a></var>,
           add a reference from the anchor name to
           the <a data-lt="YAML mapping">mapping</a>
           in the <var>named nodes</var> map.</li>
@@ -841,7 +841,7 @@
               using the appropriate conversion step.</li>
             <li>If <var>key</var> is not a <a>string</a>,
               a processing error MUST be returned,
-              and processing is aborted.</li>
+              and processing aborted.</li>
             <li>Add a new <a>entry</a> to
               <var>mapping content</var> using
               <var>key</var> and <var>value</var>.</li>
@@ -868,6 +868,18 @@
 
     <section id="convert-scalar">
       <h3>Converting a <a>YAML scalar</a></h3>
+      
+      <ul>
+        <li>A `null` scalar is kept as-is;</li>
+        <li>An `integer` scalar is kept as-is;</li>
+        <li>
+        A string scalar is surrounded by double quotes, unless
+            <ul>
+              <li>it has been surrounded by double quotes already, in which case they are kept as-is,
+              <li>it has been surrounded by singular quotes, in which case they are replaced by double quotes, and any double quotes in the scalar itself are escaped with the backslash `\` character.</li>
+            </ul>
+        </li>
+      </ul>
 
       <ol>
         <li>If <a>node</a> <var>n</var>
