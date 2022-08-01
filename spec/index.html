@@ -748,7 +748,7 @@
       </p>
 
       <ol>
-        <li>Create an empty <a>map</a> <var>named nodes</var>,
+        <li>Create an empty <a>map</a> <var>named nodes dictionary</var>,
           used the associate an anchor name with the <a>node</a>
           on which it is defined.</li>
         <li>
@@ -804,7 +804,7 @@
           <a data-cite="YAML#node-anchors">node anchor</a></var>,
           add a reference from the anchor name to the
           <a data-lt="YAML sequence">sequence</a>
-          in the <var>named nodes</var> map.</li>
+          in <var>named nodes dictionary</var>.</li>
         <li>For each <a>node</a> <var>n</var> in the
           <a data-lt="YAML sequence">sequence</a>,
           append the result of processing <var>n</var>
@@ -832,7 +832,7 @@
           <a data-cite="YAML#node-anchors">node anchor</a></var>,
           add a reference from the anchor name to
           the <a data-lt="YAML mapping">mapping</a>
-          in the <var>named nodes</var> map.</li>
+          in <var>named nodes dictionary</var>.</li>
         <li>For each <var>entry</var> in the <a data-lt="YAML mapping">mapping</a>
           composed of a key/value pair:
           <ol>
@@ -860,7 +860,7 @@
 
       <p>
         The conversion result is the value of the entry
-        in <var>named nodes</var> having the <a>node</a> entry.
+        in <var>named nodes dictionary</var> having the <a>node</a> entry.
         If none exist, the document is invalid,
         and processing MUST end in failure.
       </p>
