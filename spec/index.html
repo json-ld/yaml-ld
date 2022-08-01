@@ -864,6 +864,12 @@
         If none exist, the document is invalid,
         and processing MUST end in failure.
       </p>
+
+      <p class="note">An invalid YAML document may have
+        an <a>alias node</a> used within the
+        <a>node anchor</a> definition which it references.
+        In some implemenentations, this may lead to a processing error.
+      </p>
     </section>
 
     <section id="convert-scalar">
