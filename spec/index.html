@@ -868,18 +868,6 @@
 
     <section id="convert-scalar">
       <h3>Converting a <a>YAML scalar</a></h3>
-      
-      <ul>
-        <li>A `null` scalar is kept as-is;</li>
-        <li>An `integer` scalar is kept as-is;</li>
-        <li>
-        A string scalar is surrounded by double quotes, unless
-            <ul>
-              <li>it has been surrounded by double quotes already, in which case they are kept as-is,
-              <li>it has been surrounded by singular quotes, in which case they are replaced by double quotes, and any double quotes in the scalar itself are escaped with the backslash `\` character.</li>
-            </ul>
-        </li>
-      </ul>
 
       <ol>
         <li>If <a>node</a> <var>n</var>
