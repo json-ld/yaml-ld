@@ -23,9 +23,9 @@
     localBiblio: {
       "I-D.ietf-httpapi-yaml-mediatypes": {
         title: "YAML Media Type",
-        href: "https://datatracker.ietf.org/doc/draft-ietf-httpapi-yaml-mediatypes/",
+        href: "https://www.ietf.org/archive/id/draft-ietf-httpapi-yaml-mediatypes-03.html",
         publisher: "IETF",
-        date: "2022-06-23",
+        date: "2022-08-05",
         status: "WG Document",
         authors: [
           "Roberto Polli",
@@ -293,11 +293,10 @@
       of <a>YAML-LD documents</a>.
     </p>
 
-    <p class="note" title="Documents in the stream are independent of each other">
-        Each document in a stream has its own context, [[YAML]] directives, <a>node anchors</a>, and so on.
+    <p class="note" title="Interoperability considerations on YAML streams">
+        For interoperability considerations on YAML streams,
+        see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
     </p>
-
-    <p class="note"><a>YAML streams</a> were introduced in YAML 1.2.2, and cannot be used in earlier versions.</p>
     
     <p>A <dfn>YAML-LD document</dfn> is any <a>YAML document</a> from
       which a conversion to [[JSON]] produces
@@ -344,6 +343,7 @@
       <dfn data-cite="YAML#representation-graph" data-no-xref="">YAML representation graph</dfn>,
       <dfn data-cite="YAML#streams" data-no-xref="" data-lt="stream">YAML stream</dfn>,
       <dfn data-cite="YAML#directives" data-no-xref="" data-lt="directive">YAML directive</dfn>,
+      <dfn data-cite="YAML#documents" data-no-xref="" data-lt="documents">YAML document</dfn>,
       <dfn data-cite="YAML#sequence" data-no-xref="">YAML sequence</dfn>
       (either
       <dfn data-cite="YAML#block-sequences" data-no-xref="">block sequence</dfn> or
@@ -357,10 +357,6 @@
       <dfn data-cite="YAML#node-anchors" data-lt="anchor name|anchored nodes" data-no-xref="">node anchor</dfn>,
       and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
-
-    <p>The term
-      <dfn>YAML document</dfn> represents a serialization of a resource
-      conforming to the [[YAML]] grammar.</p>
 
     <p>The term
       <dfn data-cite="RFC9110#content.negotiation" data-no-xref="">content negotiation</dfn>
@@ -436,13 +432,12 @@
     <ul>
       <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32.</li>
       <li>YAML supports more native data types than JSON.</li>
-      <li>The structure of a <a>YAML document</a> &mdash; that is, a named <a>YAML representation graph</a> &mdash;
+      <li>The structure of a <a>YAML document</a> &mdash; that is, a <a>YAML representation graph</a> &mdash;
       is a rooted, directed graph that can have cycles.</li>
-      <li>YAML (1.2.2 and later) has the concept of a <a>YAML stream</a>, which is a sequence of <a>YAML documents</a>.
+      <li>YAML is serialized as a <a>YAML stream</a>, which is a sequence of <a>YAML documents</a>.
           While a stream often contains one document,
           streams with multiple documents are used to aggregate multiple,
           related, documents into a single file or network stream.
-          <div class="note"><a>YAML streams</a> were introduced in YAML 1.2.2, and cannot be used in earlier versions.</div>
       </li>
     </ul>
 
@@ -479,7 +474,6 @@
       Note that entries
       starting with  `@` need to be enclosed in quotes
       (as shown in this example),
-      or the `@` needs to be escaped,
       because `@` is a reserved character in YAML.
     </p>
 
@@ -621,11 +615,11 @@
     <section>
       <h2>Streams</h2>
 
-      <p class="note">YAML streams were introduced in YAML 1.2.2, and cannot be used in earlier versions.</p>
 
       <p>
-        A single YAML-LD file might contain multiple <a>YAML-LD documents</a>
-        using the mechanism of <a>YAML-LD streams</a>, as shown in the example below.
+        Every YAML-LD file is a <a>YAML-LD stream</a>
+        and might contain multiple <a>YAML-LD documents</a>,
+        as shown in the example below.
       </p>
 
     <pre class="example yaml"
@@ -648,7 +642,8 @@
     </section>
 
     <p>
-      Each of the individual <a>YAML documents</a> in the stream has to be converted into a <a>JSON-LD document</a> and
+      Each of the individual <a>YAML documents</a> in the stream
+      has to be converted into a separated <a>JSON-LD document</a> and
       processed separately.
     </p>
 
@@ -915,7 +910,7 @@
     <p>
       For general interoperability considerations on the serialization of
       <a>JSON documents</a> in [[YAML]], see YAML
-      and the Interoperability consideration of application/yaml [[I-D.ietf-httpapi-yaml-mediatypes]]..
+      and the Interoperability consideration of application/yaml [[I-D.ietf-httpapi-yaml-mediatypes]].
     </p>
     <p>
       The YAML-LD format and the media type registration are not restricted to a specific
@@ -1031,17 +1026,10 @@
        are treated as in RDF syntaxes, as per
        <a data-cite="RDF11-CONCEPTS#section-fragID">RDF 1.1 Concepts and Abstract Syntax</a>
        [[RDF11-CONCEPTS]].
+       and do not follow the process defined for application/yaml.
       </p>
 
-      <p>
-        The YAML media type supports both <a>alias nodes</a> and JSON Pointers [[RFC6905]]
-        as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
-        Since <a>anchor names</a> are serialization details, when
-        using alias nodes to reference nodes in external documents,
-        an implementation needs to be confident that the serialization of
-        the resource is preserved.
-      </p>
-
+      
       <div class="ednote">Perhaps more on fragment identifiers from <a href="https://github.com/json-ld/yaml-ld/issues/13">Issue 13</a></div>
 
     </section>
@@ -1058,6 +1046,10 @@
 
     #### Why does YAML-LD not preserve comments?
     <div class="ednote">
+    According to [[YAML]], information that does not reflect
+    into the representation graph (e.g. comments, directives, mapping keys order, 
+    anchor names, ...) must not be used to convey application level information.
+    Moreover
     [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
     and other Linked Data serialization formats
     that support comments (such as [[TURTLE]])
