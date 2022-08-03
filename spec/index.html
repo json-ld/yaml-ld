@@ -294,7 +294,7 @@
     </p>
 
     <p class="note" title="Documents in the stream are independent of each other">
-        Each document in a stream has its own context, [[YAML]] directives, named anchors, and so on.
+        Each document in a stream has its own context, [[YAML]] directives, <a>node anchors</a>, and so on.
     </p>
 
     <p class="note"><a>YAML streams</a> were introduced in YAML 1.2.2, and cannot be used in earlier versions.</p>
@@ -354,7 +354,7 @@
       <dfn data-cite="YAML#flow-mappings" data-no-xref="">flow mapping</dfn>),
       <dfn data-cite="YAML#nodes" data-no-xref="" data-lt="YAML node">node</dfn>,
       <dfn data-cite="YAML#scalar" data-no-xref="" data-lt="YAML scalar">scalar</dfn>,
-      <dfn data-cite="YAML#anchors-and-aliases" data-no-xref="">named anchor</dfn>,
+      <dfn data-cite="YAML#node-anchors" data-no-xref="">node anchor</dfn>,
       and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
 
@@ -536,13 +536,13 @@
     <section>
     <h2>Anchors and aliases</h2>
     <p>
-      Since named anchors are a serialization detail, such names
+      Since <a>node anchors</a> are a serialization detail, such anchors
       MUST NOT be used to convey relevant information,
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
     <p>
-      A <a>YAML-LD document</a> MAY contain named anchors and alias nodes,
+      A <a>YAML-LD document</a> MAY contain <a>node anchors</a> and <a>alias nodes</a>,
       but its representation graph MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
@@ -556,7 +556,7 @@
     <pre class="example yaml"
          data-transform="updateExample"
          data-content-type="application/ld+yaml"
-         title="YAML-LD with named anchors">
+         title="YAML-LD with node anchors">
        <!--
         %YAML 1.2
         ---
@@ -585,9 +585,9 @@
 
     <pre class="example json"
          data-transform="updateExample"
-         data-result-for="YAML-LD with named anchors"
+         data-result-for="YAML-LD with node anchors"
          data-content-type="application/ld+json"
-         title="JSON-LD resulting from YAML with named anchors">
+         title="JSON-LD resulting from YAML with node anchors">
       <!--
       {
         "@context": {
@@ -751,7 +751,7 @@
         <li>Create an empty <var>named nodes</var> <a>map</a>
           which will be used to associate each <a>alias node</a>
           with the <a>node</a>
-          having the corresponding <a>named anchor</a>.</li>
+          having the corresponding <a>node anchor</a>.</li>
         <li>
           If a document contains a
           <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>,
@@ -802,7 +802,7 @@
       <ol>
         <li>Set <var>sequence content</var> to an empty <a>array</a>.</li>
         <li>If the <a data-lt="YAML sequence">sequence</a> has a
-          <a data-cite="YAML#node-anchors">node anchor</a></var>,
+          <a>node anchor</a></var>,
           add a reference from the anchor name to the
           <a data-lt="YAML sequence">sequence</a>
           in the <var>named nodes</var> <a>map</a>.</li>
@@ -830,7 +830,7 @@
       <ol>
         <li>Set <var>mapping content</var> to an empty <a>map</a>.</li>
         <li>Otherwise, if the <a data-lt="YAML mapping">mapping</a> has a
-          <a data-cite="YAML#node-anchors">node anchor</a></var>,
+          <a>node anchor</a></var>,
           add a reference from the anchor name to
           the <a data-lt="YAML mapping">mapping</a>
           in the <var>named nodes</var> <a>map</a>.</li>
@@ -1034,9 +1034,9 @@
       </p>
 
       <p>
-        The YAML media type supports both alias nodes and JSON Pointers [[RFC6905]]
+        The YAML media type supports both <a>alias nodes</a> and JSON Pointers [[RFC6905]]
         as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
-        Since named anchors are serialization details, when
+        Since <a>node anchors</a> are serialization details, when
         using alias nodes to reference nodes in external documents,
         an implementation needs to be confident that the serialization of
         the resource is preserved.
