@@ -354,7 +354,7 @@
       <dfn data-cite="YAML#flow-mappings" data-no-xref="">flow mapping</dfn>),
       <dfn data-cite="YAML#nodes" data-no-xref="" data-lt="YAML node">node</dfn>,
       <dfn data-cite="YAML#scalar" data-no-xref="" data-lt="YAML scalar">scalar</dfn>,
-      <dfn data-cite="YAML#node-anchors" data-no-xref="">node anchor</dfn>,
+      <dfn data-cite="YAML#node-anchors" data-lt="anchor name|anchored nodes" data-no-xref="">node anchor</dfn>,
       and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
 
@@ -536,13 +536,13 @@
     <section>
     <h2>Anchors and aliases</h2>
     <p>
-      Since <a>node anchors</a> are a serialization detail, such anchors
+      Since <a>anchor names</a> are a serialization detail, such anchors
       MUST NOT be used to convey relevant information,
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
     <p>
-      A <a>YAML-LD document</a> MAY contain <a>node anchors</a> and <a>alias nodes</a>,
+      A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
       but its representation graph MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
@@ -1036,7 +1036,7 @@
       <p>
         The YAML media type supports both <a>alias nodes</a> and JSON Pointers [[RFC6905]]
         as fragment identifiers (see [[I-D.ietf-httpapi-yaml-mediatypes]]).
-        Since <a>node anchors</a> are serialization details, when
+        Since <a>anchor names</a> are serialization details, when
         using alias nodes to reference nodes in external documents,
         an implementation needs to be confident that the serialization of
         the resource is preserved.
