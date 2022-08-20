@@ -8,6 +8,8 @@ as developed by the [JSON for Linking Data Community Group](https://www.w3.org/c
 
 The Use Cases and Requirements document can also be read  [read directly](https://json-ld.github.io/yaml-ld/UCR/).
 
+The YAML-LD Namespace contains a [convenience context](https://www.w3.org/ns/yaml-ld/v1) which can also be [red directly](https://json-ld.github.io/yaml-ld/ns/v1.html).
+
 ## Disclaimer
 
 UNDER THE EXCLUSIVE LICENSE, THIS DOCUMENT AND ALL DOCUMENTS, TESTS AND SOFTWARE THAT LINK THIS STATEMENT ARE PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE; THAT THE CONTENTS OF THE DOCUMENT ARE SUITABLE FOR ANY PURPOSE; NOR THAT THE IMPLEMENTATION OF SUCH CONTENTS WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.

@@ -1,0 +1,87 @@
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>The JSON-LD Vocabulary</title>
+<link href='http://www.w3.org/StyleSheets/TR/W3C-ED' rel='stylesheet'>
+<style>
+  dl.terms dt {
+    float: left;
+    clear: left;
+    width: 17vw;
+  }
+  dl.terms dd:after {
+      content: '';
+      display: block;
+      clear: both;
+      margin-bottom: 5px;
+  }
+  body script {
+    display: block;
+    font-family: monospace;
+    position: fixed;
+    white-space: pre;
+  }
+</style>
+</head>
+<body>
+<h1>The YAML-LD Convenience Context</h1>
+<p><a href='http://www.w3.org/'><img alt='W3C' height='48' src='http://www.w3.org/Icons/w3c_home' width='72'></a></p>
+<p>
+Alternate versions of the vocabulary definition exist in
+<a href='v1.jsonld' rel='alternate'>JSON-LD</a>.
+</p>
+<dl>
+<dt>Published:</dt>
+<dd><time>2022-09-01</time></dd>
+</dl>
+<section>
+<h2>Introduction</h2>
+<p>
+This document, and the associated documents in alternative formats, defines the YAML-LD Convenience Context.
+This context defines terms that can be used in place of JSON-LD keywords
+to simplify serialization of documents in YAML-LD, within the limitations
+of using aliases of keywords in JSON-LD algorithms.
+</p>
+
+<section>
+  <h2>Context Definition</h2>
+</section>
+<script type="application/ld+json">
+  {
+    "@context": {
+      "$always": "@always",
+      "$base": "@base",
+      "$container": "@container",
+      "$direction": "@direction",
+      "$embed": "@embed",
+      "$explicit": "@explicit",
+      "$graph": "@graph",
+      "$id": "@id",
+      "$import": "@import",
+      "$included": "@included",
+      "$index": "@index",
+      "$json": "@json",
+      "$language": "@language",
+      "$list": "@list",
+      "$nest": "@nest",
+      "$never": "@never",
+      "$none": "@none",
+      "$null": "@null",
+      "$omitDefault": "@omitDefault",
+      "$once": "@once",
+      "$prefix": "@prefix",
+      "$propagate": "@propagate",
+      "$protected": "@protected",
+      "$requireAll": "@requireAll",
+      "$reverse": "@reverse",
+      "$set": "@set",
+      "$type": "@type",
+      "$value": "@value",
+      "$version": "@version",
+      "$vocab": "@vocab"
+    }
+  }
+</script>
+</section>
+</body>
+</html>
