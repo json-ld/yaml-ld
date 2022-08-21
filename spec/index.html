@@ -283,6 +283,18 @@
       such that any <a>YAML-LD document</a> can be represented in JSON-LD.
     </p>
 
+    <p>
+      In order to take fuller advantage of the greater expresitivity of YAML,
+      this document also defines a means of extending the
+      JSON-LD <a>internal representation</a> to allow a fuller expression of native
+      data types within YAML-LD and allows the use of the full set of
+      the [[[JSON-LD11-API]]] [[JSON-LD11-API]]
+      <a data-cite="JSON-LD11-API#the-application-programming-interface">
+        Application Programming Interface
+      </a>
+      for manipulating extended YAML-LD documents.
+    </p>
+
   <section class="informative">
     <h2>Terminology</h2>
 
@@ -313,7 +325,10 @@
       conforming to the [[JSON]] grammar.</p>
 
     <p>
-      The term <dfn data-cite="JSON-LD#dfn-json-ld-document" data-no-xref="">JSON-LD document</dfn> is imported from [[JSON-LD]].
+      The terms
+      <dfn data-cite="JSON-LD11#dfn-json-ld-document" data-no-xref="">JSON-LD document</dfn>, and
+      <dfn data-cite="JSON-LD11#dfn-value-object" data-no-xref="">value object</dfn>
+      are imported from [[JSON-LD11]].
     </p>
 
 
@@ -340,9 +355,10 @@
 
     <p>
       The terms <dfn data-cite="YAML#" data-no-xref="">YAML</dfn>,
-      <dfn data-cite="YAML#representation-graph" data-no-xref="">YAML representation graph</dfn>,
+      <dfn data-cite="YAML#representation-graph" data-lt="representation graph" data-no-xref="">YAML representation graph</dfn>,
       <dfn data-cite="YAML#streams" data-no-xref="" data-lt="stream">YAML stream</dfn>,
       <dfn data-cite="YAML#directives" data-no-xref="" data-lt="directive">YAML directive</dfn>,
+      <dfn data-cite="YAML#tag-directives" data-no-xref="">TAG directive</dfn>,
       <dfn data-cite="YAML#documents" data-no-xref="" data-lt="documents">YAML document</dfn>,
       <dfn data-cite="YAML#sequence" data-no-xref="">YAML sequence</dfn>
       (either
@@ -361,6 +377,14 @@
     <p>The term
       <dfn data-cite="RFC9110#content.negotiation" data-no-xref="">content negotiation</dfn>
       is imported from [[RFC9110]].
+    </p>
+
+    <p>
+      The terms
+      <dfn data-cite="RDF11-CONCEPTS#dfn-literal" data-no-xref="">RDF literal</dfn>,
+      <dfn data-cite="RDF11-CONCEPTS#dfn-typed-value" data-no-xref="">typed value</dfn>, and
+      <dfn data-cite="RDF11-CONCEPTS#dfn-language-tagged-string" data-no-xref="">language-tagged string</dfn>
+      are imported from [[RDF11-CONCEPTS]].
     </p>
 
     <p>The terms
@@ -388,8 +412,12 @@
           <td>http://example.org/</td>
         </tr>
         <tr>
-          <td>rdf</td>
+          <td>i18n</td>
           <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+        </tr>
+        <tr>
+          <td>rdf</td>
+          <td>https://www.w3.org/ns/i18n#</td>
         </tr>
         <tr>
           <td>xsd</td>
@@ -406,18 +434,32 @@
   </section>
 
 <section id="conformance">
-  <p>A <a>YAML-LD document</a> complies with this specification if it follows
+  <p>
+    A <a>YAML-LD document</a> complies with this specification if it follows
     the normative statements from this specification and
     can be interpreted as [[JSON-LD]] after transformation into the <a>internal representation</a>.
     For convenience, normative
     statements for documents are often phrased as statements on the properties of the document.</p>
-  
-  <p>A <a>YAML-LD document</a> complies with the YAML-LD-JSON profile of this specification if it follows
-    the normative statements from this specification and can be transformed into a JSON-LD
-    representation, then back to a conforming YAML-LD document, without loss of semantic information.
-    </p>
 
-  
+  <p>
+    A <a>YAML-LD document</a> complies with
+    the <a>YAML-LD JSON profile</a> of this specification
+    if it follows the normative statements from this specification
+    and can be transformed into a JSON-LD representation,
+    then back to a conforming YAML-LD document,
+    without loss of semantic information.
+  </p>
+
+  <p>
+    A <a>YAML-LD document</a> complies with
+    the <a>YAML-LD extended profile</a> of this specification
+    if it follows the normative statements from this specification
+    and can be transformed into the
+    <a>JSON-LD extended internal representation</a>,
+    then back to a conforming YAML-LD document,
+    without loss of semantic information.
+  </p>
+
 </section>
 
   <section id="basic-concepts" class="informative">
@@ -449,7 +491,7 @@
     </ul>
 
     <p>
-      The first goal of this specification is to allow a JSON-LD document to be
+      The first goal of this specification is to allow a <a>JSON-LD document</a> to be
       processed and serialized into YAML, and then back into JSON-LD, without
       losing any semantic information.</p>
     <p>
@@ -458,8 +500,9 @@
       JSON encoding is UTF-8.
     </p>
     <p>
-      The subset of YAML-LD which supports serialisation of JSON-LD documents is defined as
-      the <em>YAML-LD-JSON profile</em> of YAML-LD.
+      The subset of YAML-LD which supports serialisation of
+      <a>JSON-LD documents</a> is defined as
+      the <a>YAML-LD JSON profile</a> of YAML-LD.
     </p>
 
     <p>Example: The JSON-LD document below</p>
@@ -548,7 +591,7 @@
     </p>
     <p>
       A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
-      but its representation graph MUST NOT contain cycles.
+      but its <a>representation graph</a> MUST NOT contain cycles.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
@@ -581,7 +624,7 @@
     </pre>
 
     <p>
-      While the representation graph
+      While the <a>representation graph</a>
       (and eventually the in-memory representation
       of the data structure, e.g., a Python dictionary or a Java hashmap)
       will still contain references between nodes,
@@ -679,6 +722,11 @@
       representation of a document,
       rather than a specific syntactic representation.</p>
 
+    <p>
+      If the `extendedYAML` API flag is `true`, the processing result
+      will be in the <a>extended internal representation</a>.
+    </p>
+
     <aside class="example" title="YAML Sequences">
       <p>For example, YAML has multiple ways to encode an <a>array</a>,
         YAML <a>block sequences</a> and
@@ -704,7 +752,12 @@
     </aside>
 
     <p>The conversion process represented here is compatible with
-      the description of <a data-cite="YAML#constructing-native-data-structures">Constructing Native Data Structures</a> in [[YAML]].</p>
+      the description of
+      "Composing the Representation Graph" from the
+      <a data-cite="YAML#load">3.1.2 Load</a> section of [[YAML]].
+      The steps described below for converting to the
+      <a>internal representation</a> operate upon that
+      <a data-cite="YAML#representation-graph"></a>.</p>
 
     <section id="convert-stream" class="algorithm">
       <h3>Converting a <a>YAML stream</a></h3>
@@ -758,18 +811,6 @@
           which will be used to associate each <a>alias node</a>
           with the <a>node</a>
           having the corresponding <a>node anchor</a>.</li>
-        <li>
-          If a document contains a
-          <a data-cite="YAML#rule-c-byte-order-mark">byte order mark</a>,
-          it MUST indicate the UTF-8 character encoding.
-          Otherwise, a processing error MUST be returned,
-          and processing aborted.
-        </li>
-        <li>
-          If a document includes one or more
-          <a data-cite="YAML#rule-l-directive">directives</a>,
-          these MUST be processed as per [[YAML]]
-        </li>
         <li>
           Set <var>document content</var> to the result
             of processing the <a>node</a> associated with the
@@ -906,6 +947,221 @@
         </li>
       </ol>
     </section>
+  </section>
+
+  <section id="convert-to">
+    <h2>Converstion to YAML</h2>
+
+    <p>The conversion process from the <a>internal representation</a>
+      involves turning that representation back into a YAML
+      <a data-cite="YAML#representation-graph"></a>
+      and relies on the descripition of
+      "Serializing the Representation Graph" from the
+      <a data-cite="YAML#dump">3.1.1 Dump</a> section of [[YAML]]
+      for the final transformation to serialized YAML.
+    </p>
+
+    <p>
+      As the <a>internal representation</a> is rooted by either
+      an <a>array</a> or a <a>map</a>,
+      the process of transforming the <a>internal representation</a>
+      to YAML begins by preparing an empty <a>representation graph</a>
+      which will rooted with either a
+      <a>YAML mapping</a> or <a>YAML sequence</a>.
+      Although outside of the scope of this specification,
+      processors MAY use
+      <a>YAML directives</a> including <a>TAG directives</a>, and
+      <a data-cite="YAML#document-markers">Document markers</a>
+      as appropriate for best serialization results.
+      Specifically, if the `extendedYAML` API flag is `true`,
+      the document SHOULD use the `%YAML` directive with
+      version set to at least `1.2`
+      and a `%TAG` directive appropriate for each
+      `RDF literal` having a datatype
+      (or `i18n` for <a>language-tagged strings</a>).
+    </p>
+
+    <section id="convert-array">
+      <h4>Converting an <a>Array</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-map">
+      <h4>Converting a <a>Map</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-map">
+      <h4>Converting a <a>Number</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-boolean">
+      <h4>Converting a <a>Boolean</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-null">
+      <h4>Converting <a>Null</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-string">
+      <h4>Converting <a>Null</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+
+    <section id="convert-literal">
+      <h4>Converting an <a>RDF Literal</a></h4>
+      <p class="ednote">TODO</p>
+    </section>
+  </section>
+
+  <section id="profiles">
+    <h2>Application Profiles</h2>
+
+    <p>This section identifies two application profiles for operating with
+      YAML-LD:</p>
+    <ul>
+      <li>the <a>YAML-LD JSON profile</a>, and</li>
+      <li>the <a>YAML-LD extended profile</a>.</li>
+    </ul>
+
+    <p>Application profiles allow publishers to use YAML-LD
+      either for maximum interoperability,
+      or for maximum expresivity.
+      The <a>YAML-LD JSON profile</a> provides for complete round-tripping
+      between YAML-LD documents and JSON-LD documents.
+      The <a>YAML-LD extended profile</a></p>
+
+    <section id="yaml-ld-json-profile">
+      <h3>YAML-LD JSON Profile</h3>
+
+      <p>
+        The <dfn>YAML-LD JSON profile</dfn> ...
+      </p>
+    </section>
+
+    <section id="yaml-ld-extended-profile">
+      <h3>YAML-LD Extended Profile</h3>
+
+      <p>
+        The <dfn>YAML-LD extended profile</dfn> ...
+      </p>
+
+      <section id="extended-internal-representation">
+        <h4>The JSON-LD Extended Internal Representation</h4>
+
+        <p>
+          This specification defines an extension
+          of the JSON-LD <a>internal representation</a>,
+          the <dfn data-lt="extended internal representation">
+            JSON-LD extended internal representation
+          </dfn>.
+        </p>
+
+        <p>
+          In addition to <a>maps</a>, <a>arrays</a> and <a>strings</a>,
+          the <a>internal representation</a> allows the native representation
+          of <a>numbers</a>, <a>boolean</a> values, and <a>null</a>.
+          The <a>extended internal representation</a> allows for the native
+          representation of <a>RDF literals</a>, both <a>typed values</a>
+          and <a>language-tagged strings</a>.
+        </p>
+
+        <p>
+          When transforming from the <a>extended internal representation</a>
+          to the <a>internal representation</a>,
+          for example when serializing to JSON,
+          or to the <a>YAML-LD JSON profile</a>,
+          implementations MUST transform <a>RDF literals</a> to the closest
+          native representation of the <a>internal representation</a>:
+        </p>
+
+        <ul>
+          <li>
+            Literals with datatype
+            <a data-cite="xmlschema11-2#boolean">xsd:boolean</a>
+            are transformed to either `true` or `false`,
+          </li>
+          <li>
+            Literals with datatype
+            <a data-cite="xmlschema11-2#decimal">xsd:decimal</a>
+            are transformed a native <a>number</a>,
+          </li>
+          <li>
+            Literals with datatype
+            <a data-cite="xmlschema11-2#decimal">xsd:decimal</a>,
+            <a data-cite="xmlschema11-2#decimal">xsd:double</a>,
+            <a data-cite="xmlschema11-2#decimal">xsd:float</a>,
+            or derived datatypes,
+            are transformed a native <a>number</a>,
+          </li>
+          <li>
+            All other literals a transformed to a native <a>string</a>.
+          </li>
+        </ul>
+
+        <p class="ednote">
+          An alternative would be to transform such literals to
+          JSON-LD <a>value objects</a>,
+          and me way want to provide a means of transforming between
+          the <a>internal representation</a>
+          and <a>extended internal representation</a>
+          using <a>value objects</a>,
+          but this treatment is consistent with
+          [[YAML]] <a data-cite="YAML#json-schema">JSON Schema</a>
+          <a data-cite="YAML#1022-tag-resolution">Tag Resolution</a>.
+        </p>
+      </section>
+    </section>
+  </section>
+
+  <section id="api">
+    <h2>The Application Programming Interface</h2>
+
+    <p>
+      This specification extends the [[[JSON-LD11-API]]] [[JSON-LD11-API]]
+      <a data-cite="JSON-LD11-API#the-application-programming-interface">
+        Application Programming Interface
+      </a>
+      to manage the serialization and deserialization of [[YAML]]
+      and to allow for an option for setting the
+      <a>YAML-LD extended profile</a>.
+    </p>
+
+    <ul class="ednote">
+      <li>Update the {{JsonLdOptions}} Type to add `extendedYAML = false`.</li>
+      <li>Extend the {{documentLoader}} to handle `application/ld+yaml`
+        and transform to either the <a>internal representation</a> or
+        <a>extended internal representation</a>.</li>
+      <li>Update the last (serializing) step of
+        {{JsonLdProcessor/compact()}},
+        {{JsonLdProcessor/expand()}},
+        {{JsonLdProcessor/flatten()}},
+        {{JsonLdProcessor/frame()}}, and
+        {{JsonLdProcessor/fromRdf()}}
+        to serialize as [[YAML]] according to the description
+        in <a href="#convert-to" class="sectionRef"></a>.</li>
+      <li>Update the
+        <a data-cite="JSON-LD11-API#object-to-rdf-conversion">Object to RDF Conversion</a> algorithm
+        after <a data-cite="JSON-LD11-API#alg-obj2rdf-double">step 10</a>
+        to pass through <a>RDF literals</a> from the
+        <a>extended internal representation</a> (does not depend
+        on the `extendedYAML` flag).
+      </li>
+      <li>
+        Update the
+        <a data-cite="JSON-LD11-API#rdf-to-object-conversion">RDF to Object Conversion</a> algorithm
+        before step 2.6 so that if
+        the {{JsonLdOptions/useNativeTypes}} flag is `true`,
+        and the `extendedYAML` flag is `true`,
+        to directly represent the <a>RDF literal</a> in the
+        <a>extended internal representation</a>,
+        which includes expressing <a>language-tagged strings</a>
+        using the `i18n` datatype.
+      </li>
+    </ul>
   </section>
 
   <section id="sec" class="informative">
@@ -1058,7 +1314,7 @@
     #### Why does YAML-LD not preserve comments?
     <div class="ednote">
     According to [[YAML]], information that does not reflect
-    into the representation graph (e.g. comments, directives, mapping keys order, 
+    into the <a>representation graph</a> (e.g. comments, directives, mapping keys order, 
     anchor names, ...) must not be used to convey application level information.
     Moreover
     [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
