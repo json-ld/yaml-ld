@@ -263,7 +263,7 @@
   <section>
     <h2>Introduction</h2>
     <p>
-      [[JSON-LD]] is a JSON-based format to serialize Linked Data.
+      [[JSON-LD11]] is a JSON-based format to serialize Linked Data.
       In recent years, [[YAML]] has emerged as a more concise format
       to represent information that had previously been serialized as [[JSON]],
       including API specifications, data schemas, and Linked Data.
@@ -333,9 +333,10 @@
 
 
     <p>
-      The term
-      <dfn data-cite="JSON-LD-API#dfn-internal-representation" data-no-xref="">internal representation</dfn>
-      is imported from [[JSON-LD-API]].
+      The terms
+      <dfn data-cite="JSON-LD11-API#dfn-internal-representation" data-no-xref="">internal representation</dfn>, and
+      <dfn data-cite="JSON-LD11#dom-jsonldoptions-documentloader">documentLoader</dfn>
+      are imported from [[JSON-LD11-API]].
     </p>
 
     <p>The terms
@@ -437,7 +438,7 @@
   <p>
     A <a>YAML-LD document</a> complies with this specification if it follows
     the normative statements from this specification and
-    can be interpreted as [[JSON-LD]] after transformation into the <a>internal representation</a>.
+    can be interpreted as [[JSON-LD11]] after transformation into the <a>internal representation</a>.
     For convenience, normative
     statements for documents are often phrased as statements on the properties of the document.</p>
 
@@ -466,7 +467,7 @@
     <h2>Basic Concepts</h2>
 
     <p>
-      To ease writing and collaborating on [[JSON-LD]] documents, it is becoming common practice
+      To ease writing and collaborating on [[JSON-LD11]] documents, it is becoming common practice
       to serialize them as [[YAML]].
       This requires a registered media type, not only to enable content negotiation
       of linked data documents in YAML, but also to define the expected behavior of
@@ -560,10 +561,10 @@
     <p class="ednote">FIXME.</p>
   </section>
 
-  <section id="specifications" class="normative">
+  <section id="core-requirements" class="normative">
     <h2>Core Requirements</h2>
 
-    <section>
+    <section id="encoding">
     <h2>Encoding</h2>
 
     <p>
@@ -571,7 +572,7 @@
     </p>
     </section>
 
-    <section>
+    <section id="comments">
     <h2>Comments</h2>
     <p>
       Comments in <a>YAML-LD documents</a> are treated as white space.
@@ -581,7 +582,7 @@
     </p>
     </section>
 
-    <section>
+    <section id="anchors-aliases">
     <h2>Anchors and aliases</h2>
     <p>
       Since <a>anchor names</a> are a serialization detail, such anchors
@@ -666,7 +667,7 @@
     </pre>
     </section>
 
-    <section>
+    <section id="streams">
       <h2>Streams</h2>
 
 
@@ -693,7 +694,6 @@
           en: Smoke
       -->
     </pre>
-    </section>
 
     <p>
       Each of the individual <a>YAML documents</a> in the stream
@@ -704,6 +704,7 @@
     <p class="ednote">
       This is inconsistent with the processing description in <a href="#convert-stream" class="sectionRef"></a>.
     </p>
+    </section>
   </section>
 
   <section id="conversion">
@@ -1015,7 +1016,7 @@
       <p class="ednote">TODO</p>
     </section>
 
-    <section id="convert-map">
+    <section id="convert-number">
       <h4>Converting a <a>Number</a></h4>
       <p class="ednote">TODO</p>
     </section>
@@ -1056,7 +1057,7 @@
       or for maximum expresivity.
       The <a>YAML-LD JSON profile</a> provides for complete round-tripping
       between YAML-LD documents and JSON-LD documents.
-      The <a>YAML-LD extended profile</a></p>
+      The <a>YAML-LD extended profile</a> FIXME.</p>
 
     <section id="yaml-ld-json-profile">
       <h3>YAML-LD JSON Profile</h3>
@@ -1454,15 +1455,15 @@
 
        <div class="practice">
           <p class="practicedesc">
-            <span id="use-json-ld-best-practices" class="practicelab">Follow JSON-LD best practices</span>
+            <span id="bp-use-json-ld-best-practices" class="practicelab">Follow JSON-LD best practices</span>
             …in order to achieve a greater level of reusability, performance, and human friendliness among YAML-LD aware
-            systems. The [[json-ld-bp]] document is as relevant to YAML-LD as it is to [[JSON-LD]].
+            systems. The [[json-ld-bp]] document is as relevant to YAML-LD as it is to [[JSON-LD11]].
           </p>
        </div>
 
       <div class="practice">
         <p class="practicedesc">
-          <span id="prebuilt-contexts" class="practicelab">Do not force users to author contexts</span>
+          <span id="bp-prebuilt-contexts" class="practicelab">Do not force users to author contexts</span>
 
           Instead, provide pre-built contexts that the user can reference by URL for a majority of common use cases.
         </p>
@@ -1470,25 +1471,25 @@
 
       <p>YAML-LD is intended to simplify the authoring of Linked Data for a wide range of domain experts; its target
         audience is not comprised solely of IT professionals. [[YAML]] is chosen as a medium to minimize syntactic noise,
-        and to keep the authored documents concise and clear. [[JSON-LD]] (and hence YAML-LD) Context comprises a special
+        and to keep the authored documents concise and clear. [[JSON-LD11]] (and hence YAML-LD) Context comprises a special
         language of its own. A requirement to <i>author</i> such a context would make the domain expert's job much
         harder &mdash; which we, as system architects and developers, should try to avoid.</p>
 
       <div class="practice">
         <p class="practicedesc">
-          <span id="conceal-contexts" class="practicelab">Use a default context</span>
+          <span id="bp-conceal-contexts" class="practicelab">Use a default context</span>
         </p>
 
         If most, or all, of a user's documents are based on one particular context, try to make it the default in order
         to rescue the user from copy-pasting the same technical incantation from one document to another.
       </div>
 
-      <p>For instance, according to [[json-ld-api]], the `expand()` method of a JSON-LD processor accepts an
+      <p>For instance, according to [[JSON-LD11-API]], the `expand()` method of a JSON-LD processor accepts an
         `expandContext` argument which can be used to provide a default system context.</p>
 
       <div class="practice">
         <p class="practicedesc">
-          <span id="alias-keywords" class="practicelab">Alias JSON-LD keywords</span>
+          <span id="bp-alias-keywords" class="practicelab">Alias JSON-LD keywords</span>
 
           If possible, map JSON-LD keywords containing the `@` character to keywords that do not contain it.
         </p>
@@ -1527,7 +1528,7 @@
 
        <div class="practice">
           <p class="practicedesc">
-            <span id="convenience-context" class="practicelab">Use YAML-LD Convenience Context</span>
+            <span id="bp-convenience-context" class="practicelab">Use YAML-LD Convenience Context</span>
             <p>YAML-LD users may use a JSON-LD context provided as part of this specification, henceforth known as the
          <dfn>convenience context</dfn>, which defines a standardized mapping of every `@`-keyword to a `$`-keyword, except `@context`.
          </p>
