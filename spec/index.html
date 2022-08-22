@@ -523,8 +523,9 @@
         keywords.</p>
 
       <p>
-        For convenience, a <dfn>convenience context</dfn> is available
-        at `https://www.w3.org/ns/yaml-ld/v1`, which pre-defines these aliases:
+        To make this easier, a <dfn>convenience context</dfn> which pre-defines
+        these aliases is available at `https://www.w3.org/ns/yaml-ld/v1`, and
+        partially shown below:
       </p>
 
       <pre data-transform="updateExample">
@@ -567,7 +568,7 @@
       </pre>
 
       <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
-        specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
+        specification permits to be aliased &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
         replaced by `$`, which is not reserved and therefore does not require quoting. Consider
         <a href="#example-example-yaml-ld-document-without-convenience-context"></a>
          reformatted using the <a>convenience context</a>:</p>
@@ -743,9 +744,9 @@
 
   <section id="pre-loaded-contexts">
     <h3>Pre-loaded Contexts</h3>
-    <p>In order to reduce the demand for loading static documents,
+    <p>To reduce the demand for loading static documents,
       implementations SHOULD maintain a locally cached version of the following
-      documents the be satisfied by the default <a>documentLoader</a>.</p>
+      documents that will be satisfied by the default <a>documentLoader</a>.</p>
 
     <ul>
       <li>`https://www.w3.org/ns/yaml-ld/v1`</li>
