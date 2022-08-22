@@ -284,15 +284,15 @@
     </p>
 
     <p>
-      In order to take fuller advantage of the greater expresitivity of YAML,
+      To take better advantage of the broader expressivity of YAML,
       this document also defines a means of extending the
-      JSON-LD <a>internal representation</a> to allow a fuller expression of native
-      data types within YAML-LD and allows the use of the full set of
-      the [[[JSON-LD11-API]]] [[JSON-LD11-API]]
+      JSON-LD <a>internal representation</a> to allow a more complete expression
+      of native data types within YAML-LD, and allows use of the complete
+      [[[JSON-LD11-API]]] [[JSON-LD11-API]]
       <a data-cite="JSON-LD11-API#the-application-programming-interface">
         Application Programming Interface
       </a>
-      for manipulating extended YAML-LD documents.
+      to manipulate extended YAML-LD documents.
     </p>
 
   <section class="informative">
@@ -950,7 +950,7 @@
   </section>
 
   <section id="convert-to">
-    <h2>Converstion to YAML</h2>
+    <h2>Conversion to YAML</h2>
 
     <p>The conversion process from the <a>internal representation</a>
       involves turning that representation back into a YAML
@@ -966,12 +966,12 @@
       an <a>array</a> or a <a>map</a>,
       the process of transforming the <a>internal representation</a>
       to YAML begins by preparing an empty <a>representation graph</a>
-      which will rooted with either a
+      which will be rooted with either a
       <a>YAML mapping</a> or <a>YAML sequence</a>.
       Although outside of the scope of this specification,
       processors MAY use
-      <a>YAML directives</a> including <a>TAG directives</a>, and
-      <a data-cite="YAML#document-markers">Document markers</a>
+      <a>YAML directives</a>, including <a>TAG directives</a>, and
+      <a data-cite="YAML#document-markers">Document markers</a>,
       as appropriate for best serialization results.
       Specifically, if the `extendedYAML` API flag is `true`,
       the document SHOULD use the `%YAML` directive with
@@ -1053,27 +1053,27 @@
         <h4>The JSON-LD Extended Internal Representation</h4>
 
         <p>
-          This specification defines an extension
-          of the JSON-LD <a>internal representation</a>,
+          This specification defines
           the <dfn data-lt="extended internal representation">
             JSON-LD extended internal representation
-          </dfn>.
+          </dfn>, an extension
+          of the JSON-LD <a>internal representation</a>.
         </p>
 
         <p>
-          In addition to <a>maps</a>, <a>arrays</a> and <a>strings</a>,
-          the <a>internal representation</a> allows the native representation
-          of <a>numbers</a>, <a>boolean</a> values, and <a>null</a>.
-          The <a>extended internal representation</a> allows for the native
+          In addition to <a>maps</a>, <a>arrays</a>, and <a>strings</a>,
+          the <a>internal representation</a> allows native representation
+          of <a>numbers</a>, <a>boolean</a> values, and <a>nulls</a>.
+          The <a>extended internal representation</a> allows for native
           representation of <a>RDF literals</a>, both <a>typed values</a>
           and <a>language-tagged strings</a>.
         </p>
 
         <p>
           When transforming from the <a>extended internal representation</a>
-          to the <a>internal representation</a>,
-          for example when serializing to JSON,
-          or to the <a>YAML-LD JSON profile</a>,
+          to the <a>internal representation</a> &mdash;
+          for example when serializing to JSON
+          or to the <a>YAML-LD JSON profile</a> &mdash;
           implementations MUST transform <a>RDF literals</a> to the closest
           native representation of the <a>internal representation</a>:
         </p>
@@ -1081,19 +1081,19 @@
         <ul>
           <li>
             Literals with datatype
-            <a data-cite="xmlschema11-2#boolean">xsd:boolean</a>
+            <a data-cite="xmlschema11-2#boolean">`xsd:boolean`</a>
             are transformed to either `true` or `false`,
           </li>
           <li>
             Literals with datatype
-            <a data-cite="xmlschema11-2#decimal">xsd:decimal</a>
+            <a data-cite="xmlschema11-2#decimal">`xsd:decimal`</a>
             are transformed a native <a>number</a>,
           </li>
           <li>
             Literals with datatype
-            <a data-cite="xmlschema11-2#decimal">xsd:decimal</a>,
-            <a data-cite="xmlschema11-2#decimal">xsd:double</a>,
-            <a data-cite="xmlschema11-2#decimal">xsd:float</a>,
+            <a data-cite="xmlschema11-2#decimal">`xsd:decimal`</a>,
+            <a data-cite="xmlschema11-2#decimal">`xsd:double`</a>,
+            <a data-cite="xmlschema11-2#decimal">`xsd:float`</a>,
             or derived datatypes,
             are transformed a native <a>number</a>,
           </li>
@@ -1105,7 +1105,7 @@
         <p class="ednote">
           An alternative would be to transform such literals to
           JSON-LD <a>value objects</a>,
-          and me way want to provide a means of transforming between
+          and we way want to provide a means of transforming between
           the <a>internal representation</a>
           and <a>extended internal representation</a>
           using <a>value objects</a>,
@@ -1126,7 +1126,7 @@
         Application Programming Interface
       </a>
       to manage the serialization and deserialization of [[YAML]]
-      and to allow for an option for setting the
+      and to enable an option for setting the
       <a>YAML-LD extended profile</a>.
     </p>
 
@@ -1146,7 +1146,7 @@
       <li>Update the
         <a data-cite="JSON-LD11-API#object-to-rdf-conversion">Object to RDF Conversion</a> algorithm
         after <a data-cite="JSON-LD11-API#alg-obj2rdf-double">step 10</a>
-        to pass through <a>RDF literals</a> from the
+        to pass <a>RDF literals</a> through from the
         <a>extended internal representation</a> (does not depend
         on the `extendedYAML` flag).
       </li>
@@ -1314,7 +1314,7 @@
     #### Why does YAML-LD not preserve comments?
     <div class="ednote">
     According to [[YAML]], information that does not reflect
-    into the <a>representation graph</a> (e.g. comments, directives, mapping keys order, 
+    into the <a>representation graph</a> (e.g., comments, directives, mapping keys order, 
     anchor names, ...) must not be used to convey application level information.
     Moreover
     [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
