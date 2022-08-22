@@ -567,13 +567,18 @@
         -->
       </pre>
 
-      <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
-        specification permits to be aliased &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
-        replaced by `$`, which is not reserved and therefore does not require quoting. Consider
-        <a href="#example-example-yaml-ld-document-without-convenience-context"></a>
-         reformatted using the <a>convenience context</a>:</p>
+      <p>The <a>convenience context</a> contains an alias for every JSON-LD keyword
+        the JSON-LD 1.1 specifications permit to be aliased &mdash;
+        JSON-LD does not allow `@context` to be aliased.
+        This allows YAML-LD to be created with minimal use of quoted keys.
+        The YAML-reserved "`@`" character is replaced by "`$`",
+        which is not reserved and therefore does not require quoting.
+      </p>
 
-    <p>This allows YAML-LD to be created with minimal use of <a>map</a> quoted keys (Note that the `@context` keyword cannot be aliased):</p>
+      <p>
+        Consider <a href="#example-example-yaml-ld-document-without-convenience-context"></a>
+        reformatted using the <a>convenience context</a>:
+      </p>
 
     <pre class="example yaml"
          data-transform="updateExample"
