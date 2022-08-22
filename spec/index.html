@@ -954,11 +954,11 @@
 
     <p>The conversion process from the <a>internal representation</a>
       involves turning that representation back into a YAML
-      <a data-cite="YAML#representation-graph"></a>
+      <a>representation graph</a>
       and relies on the descripition of
       "Serializing the Representation Graph" from the
       <a data-cite="YAML#dump">3.1.1 Dump</a> section of [[YAML]]
-      for the final transformation to serialized YAML.
+      for the final serialization.
     </p>
 
     <p>
@@ -972,13 +972,37 @@
       processors MAY use
       <a>YAML directives</a>, including <a>TAG directives</a>, and
       <a data-cite="YAML#document-markers">Document markers</a>,
-      as appropriate for best serialization results.
+      as appropriate for best results.
       Specifically, if the `extendedYAML` API flag is `true`,
       the document SHOULD use the `%YAML` directive with
       version set to at least `1.2`
       and a `%TAG` directive appropriate for each
-      `RDF literal` having a datatype
-      (or `i18n` for <a>language-tagged strings</a>).
+      `RDF literal`.
+    </p>
+
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with multiple documents"
+         data-content-type="application/ld+json"
+         title="Serialized representation of the extended internal representation">
+    <!--
+    %YAML 1.2
+    %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
+    ---
+    "@context":
+      "@vocab": http://xmlns.com/foaf/0.1/
+    name: !xsd!string Gregg Kellogg
+    homepage: https://greggkellogg.net/
+    depiction: http://www.gravatar.com/avatar/42f948####...####
+    date: !xsd!date "2022-08-08"
+    -->
+    </pre>
+
+    <p class="note">
+      Although allowed within the YAML Grammar, some current YAML parsers
+      do not allow the use of "`#`" within a tag URI &mdash; substituting
+      the "`%23`" escape is a workaround for this problem, that will
+      hopefully become unnecessary as implementations are updated.
     </p>
 
     <section id="convert-array">
