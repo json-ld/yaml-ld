@@ -64,7 +64,7 @@
     },
 
     // Cross-reference definitions
-    xref: ["json-ld11", "json-ld11-api", "json-ld11-framing"],
+    xref: ["json-ld11", "json-ld11-api"],
 
     group: "cg/json-ld",
     wgPublicList: "public-linked-json",
@@ -372,6 +372,7 @@
       <dfn data-cite="YAML#nodes" data-no-xref="" data-lt="YAML node">node</dfn>,
       <dfn data-cite="YAML#scalar" data-no-xref="" data-lt="YAML scalar">scalar</dfn>,
       <dfn data-cite="YAML#node-anchors" data-lt="anchor name|anchored nodes" data-no-xref="">node anchor</dfn>,
+      <dfn data-cite="YAML#node-tags" data-no-xref="">node tags</dfn>,
       and <dfn data-cite="YAML#alias-nodes" data-no-xref="">alias node</dfn>,
       are imported from [[YAML]].</p>
 
@@ -707,7 +708,7 @@
     </section>
   </section>
 
-  <section id="conversion">
+  <section id="conversion-to-ir">
     <h2>Conversion to the Internal Representation</h2>
 
     <p>YAML-LD processing is defined by converting YAML to the
@@ -724,7 +725,7 @@
       rather than a specific syntactic representation.</p>
 
     <p>
-      If the `extendedYAML` API flag is `true`, the processing result
+      If the {{JsonLdOptions/extendedYAML}} API flag is set, the processing result
       will be in the <a>extended internal representation</a>.
     </p>
 
@@ -859,7 +860,7 @@
           append the result of processing <var>n</var>
           to <var>sequence content</var>
           using the appropriate conversion step.
-          <div class="ednote">Ignore <a data-cite="YAML#node-tags">node tags</a>? Otherwise, how can they be used in processing?</div>
+          <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
         <li>The conversion result is <var>sequence content</var>.</li>
       </ol>
@@ -895,7 +896,7 @@
               <var>mapping content</var> using
               <var>key</var> and <var>value</var>.</li>
           </ol>
-          <div class="ednote">Ignore <a data-cite="YAML#node-tags">node tags</a>? Otherwise, how can they be used in processing?</div>
+          <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
         <li>The conversion result is <var>mapping content</var>.</li>
       </ol>
@@ -950,7 +951,7 @@
     </section>
   </section>
 
-  <section id="convert-to">
+  <section id="conversion-to-yaml">
     <h2>Conversion to YAML</h2>
 
     <p>The conversion process from the <a>internal representation</a>
@@ -974,7 +975,7 @@
       <a>YAML directives</a>, including <a>TAG directives</a>, and
       <a data-cite="YAML#document-markers">Document markers</a>,
       as appropriate for best results.
-      Specifically, if the `extendedYAML` API flag is `true`,
+      Specifically, if the {{JsonLdOptions/extendedYAML}} API flag is set,
       the document SHOULD use the `%YAML` directive with
       version set to at least `1.2`
       and a `%TAG` directive appropriate for each
@@ -1057,7 +1058,7 @@
       or for maximum expresivity.
       The <a>YAML-LD JSON profile</a> provides for complete round-tripping
       between YAML-LD documents and JSON-LD documents.
-      The <a>YAML-LD extended profile</a> FIXME.</p>
+      The <a>YAML-LD extended profile</a> <span class="ednote">FIXME</span>.</p>
 
     <section id="yaml-ld-json-profile">
       <h3>YAML-LD JSON Profile</h3>
@@ -1150,43 +1151,220 @@
       <a data-cite="JSON-LD11-API#the-application-programming-interface">
         Application Programming Interface
       </a>
+      and the [[[JSON-LD11-FRAMING]]] [[JSON-LD11-FRAMING]]
+      <a data-cite="JSON-LD11-API#the-application-programming-interface">
+        Application Programming Interface
+      </a>
       to manage the serialization and deserialization of [[YAML]]
       and to enable an option for setting the
       <a>YAML-LD extended profile</a>.
     </p>
 
-    <ul class="ednote">
-      <li>Update the {{JsonLdOptions}} Type to add `extendedYAML = false`.</li>
-      <li>Extend the {{documentLoader}} to handle `application/ld+yaml`
-        and transform to either the <a>internal representation</a> or
-        <a>extended internal representation</a>.</li>
-      <li>Update the last (serializing) step of
-        {{JsonLdProcessor/compact()}},
-        {{JsonLdProcessor/expand()}},
-        {{JsonLdProcessor/flatten()}},
-        {{JsonLdProcessor/frame()}}, and
-        {{JsonLdProcessor/fromRdf()}}
-        to serialize as [[YAML]] according to the description
-        in <a href="#convert-to" class="sectionRef"></a>.</li>
-      <li>Update the
-        <a data-cite="JSON-LD11-API#object-to-rdf-conversion">Object to RDF Conversion</a> algorithm
-        after <a data-cite="JSON-LD11-API#alg-obj2rdf-double">step 10</a>
-        to pass <a>RDF literals</a> through from the
-        <a>extended internal representation</a> (does not depend
-        on the `extendedYAML` flag).
-      </li>
-      <li>
-        Update the
+    <section id="jsonldprocessor">
+      <h3>JsonLdProcessor</h3>
+
+      <p>
+        The
+        <a data-cite="JSON-LD11-API#dfn-json-ld-processor">JSON-LD Processor</a>
+        interface is the high-level programming structure that developers
+        use to access the JSON-LD transformation methods.
+        The updates below is an experimental
+        extension of the {{JsonLdProcessor}} interface defined in the
+        JSON-LD 1.1 API [[JSON-LD11-API]]
+        to serialize output as YAML rather than JSON.
+      </p>
+
+      <dl data-sort>
+        <dt>{{JsonLdProcessor/compact()}}</dt>
+        <dd>
+          Updates step 10 of the {{JsonLdProcessor/compact()}} algorithm
+          to serialize the the result as YAML rather than JSON
+          as defined in <a href="#conversion-to-yaml" class="sectionRef"></a>.
+        </dd>
+        <dt>{{JsonLdProcessor/expand()}}</dt>
+        <dd>
+          Updates step 9 of the {{JsonLdProcessor/expand()}} algorithm
+          to serialize the the result as YAML rather than JSON
+          as defined in <a href="#conversion-to-yaml" class="sectionRef"></a>.
+        </dd>
+        <dt>{{JsonLdProcessor/flatten()}}</dt>
+        <dd>
+          Updates step 7 of the {{JsonLdProcessor/flatten()}} algorithm
+          to serialize the the result as YAML rather than JSON
+          as defined in <a href="#conversion-to-yaml" class="sectionRef"></a>.
+        </dd>
+        <dd>
+          Updates step 22 of the
+          <a data-cite="JSON-LD11-FRAMING#dom-jsonldprocessor-frame">frame()</a>
+          algorithm to serialize the the result as YAML rather than JSON
+          as defined in <a href="#conversion-to-yaml" class="sectionRef"></a>.
+        </dd>
+        <dt>{{JsonLdProcessor/fromRdf()}}</dt>
+        <dd>
+          Updates step 3 of the {{JsonLdProcessor/fromRdf()}} algorithm
+          to serialize the the result as YAML rather than JSON
+          as defined in <a href="#conversion-to-yaml" class="sectionRef"></a>.
+        </dd>
+        <dd>
+        Updates the
         <a data-cite="JSON-LD11-API#rdf-to-object-conversion">RDF to Object Conversion</a> algorithm
-        before step 2.6 so that if
-        the {{JsonLdOptions/useNativeTypes}} flag is `true`,
-        and the `extendedYAML` flag is `true`,
-        to directly represent the <a>RDF literal</a> in the
-        <a>extended internal representation</a>,
-        which includes expressing <a>language-tagged strings</a>
-        using the `i18n` datatype.
-      </li>
-    </ul>
+        before step 2.6 as follows:
+        <blockquote>
+          Otherwise, if both the {{JsonLdOptions/useNativeTypes}}
+          and {{JsonLdOptions/extendedYAML}} flags are set
+          and the
+          <a data-cite="RDF11-CONCEPTS#dfn-datatype-iri">datatype IRI</a>
+          of <var>value</var> is not `xsd:string`:
+          <ol>
+            <li>
+              If <var>value</var> is a <a>language-tagged string</a>
+              set <var>converted value</var> to a new <a>RDF literal</a>
+              composed of the
+              <a data-cite="RDF11-CONCEPTS#dfn-lexical-form">lexical form</a>
+              of <var>value</var> and
+              <a data-cite="RDF11-CONCEPTS#dfn-datatype-iri">datatype IRI</a>
+              composed of `https://www.w3.org/ns/i18n#` followed by
+              the
+              <a data-cite="RDF11-CONCEPTS#dfn-language-tag">language tag</a>
+              of <var>value</var>.
+            </li>
+            <li>
+              Otherwise, et <var>converted value</var> to <var>value</var>.
+            </li>
+          </ol>
+        </blockquote>
+      </dd>
+        <dt>{{JsonLdProcessor/toRdf()}}</dt>
+        <dd>
+          Updates the
+          <a data-cite="JSON-LD11-API#object-to-rdf-conversion">Object to RDF Conversion</a> algorithm
+          before step 10 as follows:
+          <blockquote>
+            <ol>
+              <li>
+                Otherwise, if <var>value</var> is an <a>RDF literal</a>,
+                <var>value</var> is left unmodified.
+                <span class="note">
+                  This will only be the case when processing a value from an
+                  <a>extended internal representation</a>.
+                </span>
+              </li>
+            </ol>
+          </blockquote>
+        </dd>
+      </dl>
+    </section>
+
+    <section id="jsonldoptions">
+      <h3>JsonLdOptions</h3>
+      <p>The {{JsonLdOptions}} type is used to pass various options to the
+        {{JsonLdProcessor}} methods.</p>
+
+      <pre class="idl">
+        dictionary JsonLdOptions {
+          boolean extendedYAML = false;
+        };
+      </pre>
+
+      <p>
+        In addition to those options defined in the
+        JSON-LD 1.1 API [[JSON-LD11-API]]
+        and JSON-LD 1.1 Framing [[JSON-LD11-FRAMING]],
+        this specification defines these additional options:
+      </p>
+
+      <dl data-sort>
+        <dt><dfn data-dfn-for="JsonLdOptions">extendedYAML</dfn></dt>
+        <dd>
+          When used for serializing the <a>internal representation</a>
+          (or <a>extended internal representation</a>)
+          into a <a>YAML representation graph</a>:
+
+          <ul>
+            <li>
+              If set, allows the use of <a>node tags</a>
+              when serializing <a>RDF literal</a> values
+              having datatypes other than `xsd:string`
+              or <a>language-tagged strings</a>
+              as <a>scalar</a> values.
+            </li>
+            <li>
+              Otherwise, it serializes <a>RDF literal</a> values
+              to the closest <a>scalar</a> representation
+              from the <a data-cite="YAML#json-schema">YAML JSON schema</a>.
+            </li>
+          </ul>
+        </dd>
+        <dd>
+          When used for the {{documentLoader}},
+          it causes documents of type `application/ld+yaml`
+          to be parsed into a <a>YAML representation graph</a>
+          and generates an <a>internal representation</a>
+          (or <a>extended internal representation</a>):
+
+          <ul>
+            <li>
+              If set, it creates an <a>extended internal representation</a>
+              and transforms <a>YAML scalar</a> values
+              having <a>node tags</a>
+              &mdash; outside those allowed for the
+              <a data-cite="YAML#json-schema">YAML JSON schema</a> &mdash;
+              to <a>RDF literals</a>.
+            </li>
+            <li>
+              Otherwise, it drops any <a>node tags</a>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="documentLoader">
+      <h3>Remote Document and Context Retrieval</h3>
+
+      <p>This section describes an update to the
+        built-in {{LoadDocumentCallback}}
+        to load <a>YAML streams</a> and <a>documents</a>
+        into the <a>internal representation</a>,
+        or into the <a>extended internal representation</a>
+        if the {{JsonLdOptions/extendedYAML}} API flag is set.</p>
+
+      <p>
+        The {{LoadDocumentCallback}} algorithm in [[JSON-LD11-API]]
+        is updated as follows:
+      </p>
+
+      <ul>
+        <li>
+          <a data-cite="JSON-LD11-API#LoadDocumentCallback-step-2">Step 2</a>
+          is updated to prefer
+          <a data-cite="rfc2045#section-5">Content-Type</a> `application/ld+yaml`,
+          followed by `application/yaml`,
+          followed by the other specified
+          <a data-cite="rfc2045#section-5">Content-Types</a>.
+        </li>
+        <li>
+          After <a href="-LD11-API#LoadDocumentCallback-step-5">step 5</a>,
+          add the following processing step:
+          Otherwise, if the retrieved resource's
+          <a data-cite="rfc2045#section-5">Content-Type</a>
+          is either `application/yaml`
+          or any media type with a `+yaml` suffix as defined in [[RFC6839]]
+          transform <var>document</var> to the <a>internal representation</a>
+          (or <a>extended internal representation</a>)
+          as described in <a href="#conversion-to-ir" class="sectionRef"></a>.
+          Additionally, if the {{RemoteDocument/profile}} parameter
+          includes `http://www.w3.org/ns/json-ld#extended`, set the {{JsonLdOptions/extendedYAML}} option to `true`.
+        </li>
+      </ul>
+
+      <p class="note">
+        These updates are intended to be compatible with other updates
+        to the {{LoadDocumentCallback}}, such as
+        <a data-cite="JSON-LD11-API#process-html">Process HTML</a>
+        as defined in [[JSON-LD11-API]].
+      </p>
+    </section>
   </section>
 
   <section id="sec" class="informative">
