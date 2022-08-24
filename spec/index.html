@@ -1077,18 +1077,18 @@
         <li>If the <a>datatype IRI</a>
           of the <a>RDF literal</a> <var>l</var>
           is `xsd:string`,
-          the conversion is a <a>YAML scalar</a></li>
+          the conversion is a <a>YAML scalar</a>
           with the value taken from that value of <var>l</var>.
         </li>
         <li>Otherwise, if <var>l</var> is a <a>language-tagged string</a>,
-          the conversion is a <a>YAML scalar</a></li>
+          the conversion is a <a>YAML scalar</a>
           with the value taken from that value of <var>l</var>
           and a <a>node tag</a> constructed by appending
           that <a>language tag</a> to
           `https://www.w3.org/ns/i18n#`.
         </li>
         <li>
-          Otherwise, the conversion is a <a>YAML scalar</a></li>
+          Otherwise, the conversion is a <a>YAML scalar</a>
           with the value taken from that value of <var>l</var>
           and a <a>node tag</a> taken from the
           <a>datatype IRI</a> of <var>l</var>.
