@@ -515,12 +515,10 @@
          title="Basic JSON-LD document">
       <!--
       {
-        "@context": "http://example.org/context.jsonld",
-        "@graph": [
-          {"@id": "http://example.org/1", "title": "Example 1"},
-          {"@id": "http://example.org/2", "title": "Example 2"},
-          {"@id": "http://example.org/3", "title": "Example 3"}
-        ]
+        "@context": "https://json-ld.org/contexts/person.jsonld",
+        "name": "Joe Hacker",
+        "homepage": "https://example.org/joe.hacker/",
+        "image": "https://example.org/joe.hacker/image.png"
       }
       -->
     </pre>
@@ -540,14 +538,10 @@
       <!--
       %YAML 1.2
       ---
-      '@context': http://example.org/context.jsonld
-      '@graph':
-        - '@id': http://example.org/1
-          title: Example 1
-        - '@id': http://example.org/2
-          title: Example 2
-        - '@id': http://example.org/3
-          title: Example 3
+      '@context': https://json-ld.org/contexts/person.jsonld
+      name:     Joe Hacker
+      homepage: https://example.org/joe.hacker/
+      image:    https://example.org/joe.hacker/image.png
       -->
     </pre>
 
@@ -558,8 +552,6 @@
       can specify it in documents using the `%YAML` directive
       (see <a href="#int" class="sectionRef"></a>).
     </p>
-
-    <p class="ednote">FIXME.</p>
   </section>
 
   <section id="core-requirements" class="normative">
