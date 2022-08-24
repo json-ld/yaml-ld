@@ -387,8 +387,9 @@
     <p>
       The terms
       <dfn data-cite="RDF11-CONCEPTS#dfn-literal" data-no-xref="">RDF literal</dfn>,
-      <dfn data-cite="RDF11-CONCEPTS#dfn-typed-value" data-no-xref="">typed value</dfn>, and
-      <dfn data-cite="RDF11-CONCEPTS#dfn-language-tagged-string" data-no-xref="">language-tagged string</dfn>
+      <dfn data-cite="RDF11-CONCEPTS#dfn-language-tagged-string" data-no-xref="">language-tagged string</dfn>,
+      <dfn data-cite="RDF11-CONCEPTS#dfn-datatype-iri" data-no-xref="">datatype IRI</dfn>, and
+      <dfn data-cite="RDF11-CONCEPTS#dfn-language-tag" data-no-xref="">language tag</dfn>
       are imported from [[RDF11-CONCEPTS]].
     </p>
 
@@ -418,11 +419,11 @@
         </tr>
         <tr>
           <td>i18n</td>
-          <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+          <td>https://www.w3.org/ns/i18n#</td>
         </tr>
         <tr>
           <td>rdf</td>
-          <td>https://www.w3.org/ns/i18n#</td>
+          <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
         </tr>
         <tr>
           <td>xsd</td>
@@ -592,6 +593,13 @@
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
+    <p>
+      When processing using the <a>YAML-LD JSON profile</a>,
+      documents MUST NOT contain <a>alias nodes</a>.
+      The <a>YAML-LD extended profile</a> allows full use of
+      <a>anchor names</a> and <a>alias nodes</a> subject to
+      the requirements described above in this section.
+    </p>
 
     <p>
       The <a>YAML-LD document</a> in the following example
@@ -720,7 +728,7 @@
       rather than a specific syntactic representation.</p>
 
     <p>
-      If the {{JsonLdOptions/extendedYAML}} API flag is set, the processing result
+      If the {{JsonLdOptions/extendedYAML}} API flag is `true`, the processing result
       will be in the <a>extended internal representation</a>.
     </p>
 
@@ -754,7 +762,20 @@
       <a data-cite="YAML#load">3.1.2 Load</a> section of [[YAML]].
       The steps described below for converting to the
       <a>internal representation</a> operate upon that
-      <a data-cite="YAML#representation-graph"></a>.</p>
+      <a data-cite="YAML#representation-graph"></a>.
+    </p>
+
+    <p>When operating using the <a>YAML-LD JSON profile</a>,
+      it is intended that the common feature provided by most
+      YAML libraries of transforming YAML directly to JSON
+      satisfies the requirements for parsing a YAML-LD file.
+    </p>
+
+    <p class="issue" data-number="12">
+      As a developer,
+      I want to be able to convert JSON-LD documents to YAML-LD by simply serializing the document using any standard YAML library,
+      So that the resulting YAML is valid YAML-LD, resolving to the same graph as the original JSON-LD.
+    </p>
 
     <section id="convert-stream" class="algorithm">
       <h3>Converting a <a>YAML stream</a></h3>
@@ -768,6 +789,7 @@
         The description here more closely aligns with how JSON-LD
         interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
       </p>
+
       <ol>
         <li>Set <var>stream content</var> to an empty <a>array</a>.</li>
         <li>If the <a>stream</a> is empty,
@@ -790,7 +812,7 @@
         in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-document">
+    <section id="convert-document" class="algorithm">
       <h3>Converting a <a>YAML document</a></h3>
 
       <p>From the <a data-cite="YAML#">YAML grammar</a>,
@@ -836,7 +858,7 @@
         in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-seq">
+    <section id="convert-seq" class="algorithm">
       <h3>Converting a <a>YAML sequence</a></h3>
 
       <p>Both <a>block sequences</a> and <a>flow sequences</a>
@@ -864,7 +886,7 @@
         in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-mapping">
+    <section id="convert-mapping" class="algorithm">
       <h3>Converting a <a>YAML mapping</a></h3>
 
       <p>Both <a>block mappings</a> and <a>flow mappings</a>
@@ -900,8 +922,56 @@
         in the failure of this processing step.</p>
     </section>
 
-    <section id="convert-alias">
-      <h3>Converting an <a>Alias Node</a></h3>
+    <section id="convert-scalar" class="algorithm">
+      <h3>Converting a <a>YAML scalar</a></h3>
+
+      <ol>
+        <li>If the {{JsonLdOptions/extendedYAML}} flag is `true`,
+          and <a>node</a> <var>n</var>
+          has a <a>node tags</a>,
+          <var>n</var> is mapped as follows:
+          <ol>
+            <li>If <a>node tag</a> <var>t</var> resolves
+              with a prefix of `tag:yaml.org.2002:`,
+              the conversion result is mapped through the
+              <a data-cite="YAML#core-schema">YAML Core Schema</a>.
+            </li>
+            <li>Otherwise, if <var>t</var> resolves
+              with a prefix of `https://www.w3.org/ns/i18n#`,
+              and the suffix <strong>does not</strong> contain
+              an underscore (`"_"`),
+              the conversion result is a <a>language-tagged string</a>
+              with value taken from <var>n</var>,
+              ane a <a>language tag</a> taken from the suffix of <var>t</var>.
+            </li>
+            <li>Otherwise, the conversion result is an
+              <a>RDF literal</a> with value taken from <var>n</var>
+              and <a>datatype IRI</a> taken from <var>t</var>.
+            </li>
+          </ol>
+        </li>
+        <li>If the {{JsonLdOptions/extendedYAML}} flag is `false`,
+          and <var>n</var>
+          has a <a>node tag</a>,
+          the conversion result is mapped through the
+          <a data-cite="YAML#core-schema">YAML Core Schema</a>
+        </li>
+        <li>Otherwise, the conversion result is mapped through the
+              <a data-cite="YAML#core-schema">YAML Core Schema</a></li>
+      </ol>
+
+      <p class="note">
+        Implementations may retain the
+        representation as an <a data-cite="YAML#integer">YAML Integer</a>,
+        or <a data-cite="YAML#floating-point">YAML Floating Point</a>,
+        but a JSON-LD processor must treat them uniformly
+        as a <a>number</a>, although the specific type of number
+        value SHOULD be retained for round-tripping.
+      </p>
+    </section>
+
+    <section id="convert-alias" class="algorithm">
+      <h3>Converting a YAML <a>alias node</a></h3>
 
       <p>
         The conversion result is the value of the entry
@@ -910,39 +980,20 @@
         and processing MUST end in failure.
       </p>
 
-      <p class="note">An invalid YAML document may have
-        an <a>alias node</a> used within the
-        <a>node anchor</a> definition which it references.
-        In some implemenentations, this may lead to a processing error.
+      <p>
+        If an <a>alias node</a> is encountered when processing the
+        <a>YAML representation graph</a>
+        and the {{JsonLdOptions/extendedYAML}} flag is `false`,
+        the <a>YAML-LD JSON profile</a> has been selected.
+        A processing error MUST be returned,
+        and processing aborted. 
       </p>
-    </section>
 
-    <section id="convert-scalar">
-      <h3>Converting a <a>YAML scalar</a></h3>
-
-      <ol>
-        <li>If <a>node</a> <var>n</var>
-          has a <a data-cite="YAML#node-tags">node tag</a>,
-          the <a>node</a> is always
-          mapped to the
-          <a data-cite="YAML#json-schema">JSON Schema</a>.</li>
-        <li>If <var>n</var> maps to <a>null</a>
-          the conversion result is the value of <var>n</var>.</li>
-        <li>Otherwise, if <var>n</var> maps to a <a>boolean</a>
-          the conversion result is the value of <var>n</var>.</li>
-        <li>Otherwise, if <var>n</var> maps to a <a>number</a>
-          the conversion result is the value of <var>n</var>.
-          <div class="note">Implementations may retain the
-            representation as an <a data-cite="YAML#integer">YAML Integer</a>,
-            or <a data-cite="YAML#floating-point">YAML Floating Point</a>,
-            but a JSON-LD processor must treat them uniformly
-            as a <a>number</a>, although the specific type of number
-            value SHOULD be retained for round-tripping.</div>
-        </li>
-        <li>Otherwise, if <var>n</var> maps to a <a>string</a>
-          the conversion result is the value of <var>n</var>.
-        </li>
-      </ol>
+      <p>
+        If a cycle is detected,
+        a processing error MUST be returned,
+        and processing aborted. 
+      </p>
     </section>
   </section>
 
@@ -970,7 +1021,7 @@
       <a>YAML directives</a>, including <a>TAG directives</a>, and
       <a data-cite="YAML#document-markers">Document markers</a>,
       as appropriate for best results.
-      Specifically, if the {{JsonLdOptions/extendedYAML}} API flag is set,
+      Specifically, if the {{JsonLdOptions/extendedYAML}} API flag is `true`,
       the document SHOULD use the `%YAML` directive with
       version set to at least `1.2`
       and a `%TAG` directive appropriate for each
@@ -997,44 +1048,85 @@
 
     <p class="note">
       Although allowed within the YAML Grammar, some current YAML parsers
-      do not allow the use of "`#`" within a tag URI &mdash; substituting
-      the "`%23`" escape is a workaround for this problem, that will
+      do not allow the use of `"#"` within a tag URI &mdash; substituting
+      the `"%23"` escape is a workaround for this problem, that will
       hopefully become unnecessary as implementations are updated.
     </p>
 
-    <section id="convert-array">
-      <h4>Converting an <a>Array</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-array" class="algorithm">
+      <h4>Converting an <a>array</a></h4>
+      <p>
+        The conversion result is a <a>YAML sequence</a>
+        with child nodes of the sequence taken by converting
+        value of the <a>array</a> using the appropriate conversion step.
+      </p>
     </section>
 
-    <section id="convert-map">
-      <h4>Converting a <a>Map</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-map" class="algorithm">
+      <h4>Converting a <a>map</a></h4>
+      <p>
+        The conversion result is a <a>YAML mapping</a>
+        with keys and values taken by converting
+        key/value pair of the <a>map</a> using the appropriate conversion step.
+      </p>
     </section>
 
-    <section id="convert-number">
-      <h4>Converting a <a>Number</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-literal" class="algorithm">
+      <h4>Converting an <a>RDF literal</a></h4>
+      <ol>
+        <li>If the <a>datatype IRI</a>
+          of the <a>RDF literal</a> <var>l</var>
+          is `xsd:string`,
+          the conversion is a <a>YAML scalar</a></li>
+          with the value taken from that value of <var>l</var>.
+        </li>
+        <li>Otherwise, if <var>l</var> is a <a>language-tagged string</a>,
+          the conversion is a <a>YAML scalar</a></li>
+          with the value taken from that value of <var>l</var>
+          and a <a>node tag</a> constructed by appending
+          that <a>language tag</a> to
+          `https://www.w3.org/ns/i18n#`.
+        </li>
+        <li>
+          Otherwise, the conversion is a <a>YAML scalar</a></li>
+          with the value taken from that value of <var>l</var>
+          and a <a>node tag</a> taken from the
+          <a>datatype IRI</a> of <var>l</var>.
+        </li>
+      </ol>
     </section>
 
-    <section id="convert-boolean">
-      <h4>Converting a <a>Boolean</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-number" class="algorithm">
+      <h4>Converting a <a>number</a></h4>
+      <p>
+        The conversion result is a <a>YAML scalar</a>
+        with the value taken from that <a>number</a>.
+      </p>
     </section>
 
-    <section id="convert-null">
-      <h4>Converting <a>Null</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-boolean" class="algorithm">
+      <h4>Converting a <a>boolean</a></h4>
+      <p>
+        The conversion result is a <a>YAML scalar</a>
+        with the value either `true` or `false`
+        based on the value of the <a>boolean</a>.
+      </p>
     </section>
 
-    <section id="convert-string">
-      <h4>Converting <a>Null</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-null" class="algorithm">
+      <h4>Converting <a>null</a></h4>
+      <p>
+        The conversion result is a <a>YAML scalar</a>
+        with the value `null`.
+      </p>
     </section>
 
-    <section id="convert-literal">
-      <h4>Converting an <a>RDF Literal</a></h4>
-      <p class="ednote">TODO</p>
+    <section id="convert-string" class="algorithm">
+      <h4>Converting <a>string</a></h4>
+      <p>
+        The conversion result is a <a>YAML scalar</a>
+        with the value taken from that <a>string</a>.
+      </p>
     </section>
   </section>
 
@@ -1059,7 +1151,15 @@
       <h3>YAML-LD JSON Profile</h3>
 
       <p>
-        The <dfn>YAML-LD JSON profile</dfn> ...
+        The <dfn>YAML-LD JSON profile</dfn> <span class="ednote">
+          FIXME:
+          restricts encoding to UTF-8,
+          restricts the document to use the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
+          restricts a <a>YAML mapping</a> to use only <a>string</a> keys,
+          prohibits the use of <a>alias nodes</a>,
+          prohibits the use of <a>node tags</a> (or simply ignores them),
+          prohibits <a>YAML streams</a> having more than one <a>document</a>.
+        </span>
       </p>
     </section>
 
@@ -1067,7 +1167,15 @@
       <h3>YAML-LD Extended Profile</h3>
 
       <p>
-        The <dfn>YAML-LD extended profile</dfn> ...
+        The <dfn>YAML-LD extended profile</dfn> <span class="ednote">
+          FIXME:
+          restricts encoding to UTF-8,
+          restricts the document to use the <a data-cite="YAML#core-schema">YAML Core Schema</a> (allowing <a>node tags</a> to specifying <a>RDF literals</a>),
+          restricts a <a>YAML mapping</a> to use only <a>string</a> keys,
+          allows the use of <a>alias nodes</a>,
+          allows the use of <a>node tags</a> for specifying <a>RDF literals</a>,
+          prohibits <a>YAML streams</a> having more than one <a>document</a>,
+        </span>.
       </p>
 
       <section id="extended-internal-representation">
@@ -1086,7 +1194,8 @@
           the <a>internal representation</a> allows native representation
           of <a>numbers</a>, <a>boolean</a> values, and <a>nulls</a>.
           The <a>extended internal representation</a> allows for native
-          representation of <a>RDF literals</a>, both <a>typed values</a>
+          representation of <a>RDF literals</a>, both
+          with a <a>datatype IRI</a>,
           and <a>language-tagged strings</a>.
         </p>
 
@@ -1131,7 +1240,7 @@
           and <a>extended internal representation</a>
           using <a>value objects</a>,
           but this treatment is consistent with
-          [[YAML]] <a data-cite="YAML#json-schema">JSON Schema</a>
+          [[YAML]] <a data-cite="YAML#core-schema">Core Schema</a>
           <a data-cite="YAML#1022-tag-resolution">Tag Resolution</a>.
         </p>
       </section>
@@ -1208,7 +1317,7 @@
           Otherwise, if both the {{JsonLdOptions/useNativeTypes}}
           and {{JsonLdOptions/extendedYAML}} flags are set
           and the
-          <a data-cite="RDF11-CONCEPTS#dfn-datatype-iri">datatype IRI</a>
+          <a>datatype IRI</a>
           of <var>value</var> is not `xsd:string`:
           <ol>
             <li>
@@ -1217,10 +1326,10 @@
               composed of the
               <a data-cite="RDF11-CONCEPTS#dfn-lexical-form">lexical form</a>
               of <var>value</var> and
-              <a data-cite="RDF11-CONCEPTS#dfn-datatype-iri">datatype IRI</a>
+              <a>datatype IRI</a>
               composed of `https://www.w3.org/ns/i18n#` followed by
               the
-              <a data-cite="RDF11-CONCEPTS#dfn-language-tag">language tag</a>
+              <a>language tag</a>
               of <var>value</var>.
             </li>
             <li>
@@ -1286,7 +1395,7 @@
             <li>
               Otherwise, it serializes <a>RDF literal</a> values
               to the closest <a>scalar</a> representation
-              from the <a data-cite="YAML#json-schema">YAML JSON schema</a>.
+              from the <a data-cite="YAML#core-schema">YAML Core Schema</a>.
             </li>
           </ul>
         </dd>
@@ -1303,7 +1412,7 @@
               and transforms <a>YAML scalar</a> values
               having <a>node tags</a>
               &mdash; outside those allowed for the
-              <a data-cite="YAML#json-schema">YAML JSON schema</a> &mdash;
+              <a data-cite="YAML#core-schema">YAML Core Schema</a> &mdash;
               to <a>RDF literals</a>.
             </li>
             <li>
@@ -1322,7 +1431,7 @@
         to load <a>YAML streams</a> and <a>documents</a>
         into the <a>internal representation</a>,
         or into the <a>extended internal representation</a>
-        if the {{JsonLdOptions/extendedYAML}} API flag is set.</p>
+        if the {{JsonLdOptions/extendedYAML}} API flag is `true`.</p>
 
       <p>
         The {{LoadDocumentCallback}} algorithm in [[JSON-LD11-API]]
