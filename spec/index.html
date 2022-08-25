@@ -289,7 +289,7 @@
     <p>
       To take better advantage of the broader expressivity of YAML,
       this document also defines a means of extending the
-      JSON-LD <a>internal representation</a> to allow a more complete expression
+      <a>JSON-LD internal representation</a> to allow a more complete expression
       of native data types within YAML-LD, and allows use of the complete
       [[[JSON-LD11-API]]] [[JSON-LD11-API]]
       <a data-cite="JSON-LD11-API#the-application-programming-interface">
@@ -337,7 +337,7 @@
 
     <p>
       The terms
-      <dfn data-cite="JSON-LD11-API#dfn-internal-representation" data-no-xref="">internal representation</dfn>, and
+      <dfn data-cite="JSON-LD11-API#dfn-internal-representation" data-lt="JSON-LD internal representation" data-no-xref="">internal representation</dfn>, and
       <dfn data-cite="JSON-LD11#dom-jsonldoptions-documentloader">documentLoader</dfn>
       are imported from [[JSON-LD11-API]].
     </p>
@@ -701,14 +701,16 @@
 
     <p>
       Each of the individual <a>YAML documents</a> in the stream
-      has to be converted into a separated <a>JSON-LD document</a> and
+      is converted into a separated <a>JSON-LD document</a> and
       processed separately.
     </p>
-
-    <p class="ednote">
+    <p class="issue" data-number="63">
+      The current text does not support this, and only supports
+      a single <a>YAML document</a>.
       This is inconsistent with the processing description in <a href="#convert-stream" class="sectionRef"></a>.
     </p>
-    </section>
+
+  </section>
   </section>
 
   <section id="conversion-to-ir">
@@ -877,7 +879,6 @@
           append the result of processing |n|
           to |sequence content|
           using the appropriate conversion step.
-          <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
         <li>The conversion result is |sequence content|.</li>
       </ol>
@@ -913,7 +914,6 @@
               |mapping content| using
               |key| and |value|.</li>
           </ol>
-          <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
         <li>The conversion result is |mapping content|.</li>
       </ol>
@@ -928,10 +928,10 @@
       <ol>
         <li>If the {{JsonLdOptions/extendedYAML}} flag is `true`,
           and <a>node</a> |n|
-          has a <a>node tags</a>,
+          has a <a>node tag</a> |t|,
           |n| is mapped as follows:
           <ol>
-            <li>If <a>node tag</a> |t| resolves
+            <li>If |t| resolves
               with a prefix of `tag:yaml.org.2002:`,
               the conversion result is mapped through the
               <a data-cite="YAML#core-schema">YAML Core Schema</a>.
@@ -943,6 +943,15 @@
               the conversion result is a <a>language-tagged string</a>
               with value taken from |n|,
               ane a <a>language tag</a> taken from the suffix of |t|.
+              <div class="note">
+                <a>Node tags</a> including an underscore (`"_"`),
+                such as `i18n:ar-eg_rtl` describe a combination
+                of language and text direction.
+                See <a data-cite="JSON-LD11##the-i18n-namespace">
+                  The `i18n` Namespace
+                </a>
+                in [[JSON-LD11]].
+              </div>
             </li>
             <li>Otherwise, the conversion result is an
               <a>RDF literal</a> with value taken from |n|
@@ -1027,6 +1036,23 @@
       and a `%TAG` directive appropriate for each
       `RDF literal`.
     </p>
+
+    <div class="issue markdown" data-number="6">
+      <p>A concrete proposal in that direction would be to use a tag at the top-level of any "idiomatic" YAML-LD document, applying to the whole object/array that makes the document.</p>
+
+      <p>It might also include a version
+        to identify the specification that it relates to, allowing
+        for version announcement that could be used for future-proofing.</p>
+
+      <p>E.g.</p>
+
+      <pre>
+      !yaml-ld
+      $context: http://schema.org/
+      $type: Person
+      name: Pierre-Antoine Champin
+      </pre>
+    </div>
 
     <pre class="example yaml"
          data-transform="updateExample"
@@ -1139,21 +1165,49 @@
       or for maximum expresivity.
       The <a>YAML-LD JSON profile</a> provides for complete round-tripping
       between YAML-LD documents and JSON-LD documents.
-      The <a>YAML-LD extended profile</a> <span class="ednote">FIXME</span>.</p>
+      The <a>YAML-LD extended profile</a> allows for the
+      fuller use of YAML features to enhance the ability to
+      represent a greater amount of native datatypes
+      and reduce document redundancy.</p>
+
+
+    <p>Application profiles can be set using the {{JsonLdProcessor}}
+      API interface, as well as an HTTP request profile (see <a href="#iana" class="sectionRef"></a>).</p>
 
     <section id="yaml-ld-json-profile">
       <h3>YAML-LD JSON Profile</h3>
 
       <p>
-        The <dfn>YAML-LD JSON profile</dfn> <span class="ednote">
-          FIXME:
-          restricts encoding to UTF-8,
-          restricts the document to use the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
-          restricts a <a>YAML mapping</a> to use only <a>string</a> keys,
-          prohibits the use of <a>alias nodes</a>,
-          prohibits the use of <a>node tags</a> (or simply ignores them),
-          prohibits <a>YAML streams</a> having more than one <a>document</a>.
-        </span>
+        The <dfn>YAML-LD JSON profile</dfn>
+        is based on the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
+        which interprets only a limited set of <a>node tags</a>.
+        <a>YAML scalars</a> with <a>node tags</a> outside of the defined range
+        SHOULD be avoided and MUST be converted to the closest
+        scalar type from the <a data-cite="YAML#core-schema">YAML Core Schema</a>
+        if found.
+        See <a href="#convert-scalar" class="sectionRef"></a>
+        for specifics.
+      </p>
+
+      <p>
+        Although YAML supports a greater range of encodings,
+        YAML-LD documents in the <a>YAML-LD JSON Profile</a>
+        MUST NOT use encodings other than UTF-8.
+      </p>
+
+      <p>
+        Keys used in a <a>YAML mapping</a> MUST be <a>strings</a>.
+      </p>
+
+      <p>
+        Although YAML-LD documents MAY include <a>node anchors</a>,
+        documents MUST NOT use <a>alias nodes</a>.
+      </p>
+
+      <p>
+        A <a>YAML stream</a> MUST include a single <a>YAML document</a>,
+        as the <a>JSON-LD internal representation</a> supports
+        only a single document model.
       </p>
     </section>
 
@@ -1161,15 +1215,38 @@
       <h3>YAML-LD Extended Profile</h3>
 
       <p>
-        The <dfn>YAML-LD extended profile</dfn> <span class="ednote">
-          FIXME:
-          restricts encoding to UTF-8,
-          restricts the document to use the <a data-cite="YAML#core-schema">YAML Core Schema</a> (allowing <a>node tags</a> to specifying <a>RDF literals</a>),
-          restricts a <a>YAML mapping</a> to use only <a>string</a> keys,
-          allows the use of <a>alias nodes</a>,
-          allows the use of <a>node tags</a> for specifying <a>RDF literals</a>,
-          prohibits <a>YAML streams</a> having more than one <a>document</a>,
-        </span>.
+        The <dfn>YAML-LD extended profile</dfn>
+        extends the <a data-cite="YAML#core-schema">YAML Core Schema</a>
+        allowing <a>node tags</a> to specify <a>RDF literals</a>
+        by using an <a>JSON-LD extended internal representation</a> capable
+        of representing <a>RDF literals</a> directly.
+      </p>
+
+      <p>
+        As with the <a>YAML-LD JSON profile</a>,
+        YAML-LD documents in the <a>YAML-LD extended profile</a>
+        MUST NOT use encodings other than UTF-8.
+      </p>
+
+      <p>
+        As with the <a>YAML-LD JSON profile</a>,
+        keys used in a <a>YAML mapping</a> MUST be <a>strings</a>.
+      </p>
+
+      <p>
+        YAML-LD docucments MAY use <a>alias nodes</a>,
+        as long as dereferencing these aliases does not result in a loop.
+      </p>
+
+      <p>
+        As with the <a>YAML-LD JSON profile</a>,
+        a <a>YAML stream</a> MUST include a single <a>YAML document</a>,
+        as the <a>JSON-LD extended internal representation</a> supports
+        only a single document model.
+      </p>
+
+      <p class="issue" data-number="79">
+        Consier something like `!id` as a local tag to denote IRIs.
       </p>
 
       <section id="extended-internal-representation">
