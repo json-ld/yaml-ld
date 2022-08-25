@@ -791,21 +791,21 @@
       </p>
 
       <ol>
-        <li>Set <var>stream content</var> to an empty <a>array</a>.</li>
+        <li>Set |stream content| to an empty <a>array</a>.</li>
         <li>If the <a>stream</a> is empty,
-          set <var>stream content</var> to an empty <a>array</a>.</li>
+          set |stream content| to an empty <a>array</a>.</li>
         <li>Otherwise, if the <a>stream</a> contains a single <a>YAML document</a>,
-          set <var>stream content</var> the result of
+          set |stream content| the result of
           <a href="#convert-document" class="sectionRef"></a>.</li>
-        <li>Otherwise: for each <var>document</var> in the <a>stream</a>:
+        <li>Otherwise: for each |document| in the <a>stream</a>:
           <ol>
-            <li>Set <var>doc</var> to the result of <a href="#convert-document" class="sectionRef"></a> for <var>document</var>.</li>
-            <li>If <var>doc</var> is an <a>array</a>,
-              merge it to the end of <var>stream content</var>.</li>
-            <li>Otherwise, append <var>doc</var> to <var>stream content</var></li>
+            <li>Set |doc| to the result of <a href="#convert-document" class="sectionRef"></a> for |document|.</li>
+            <li>If |doc| is an <a>array</a>,
+              merge it to the end of |stream content|.</li>
+            <li>Otherwise, append |doc| to |stream content|</li>
           </ol>
         </li>
-        <li>The conversion result is <var>stream content</var>.</li>
+        <li>The conversion result is |stream content|.</li>
       </ol>
 
       <p>Any error reported in a recursive processing step results
@@ -826,12 +826,12 @@
       </p>
 
       <ol>
-        <li>Create an empty <var>named nodes</var> <a>map</a>
+        <li>Create an empty |named nodes| <a>map</a>
           which will be used to associate each <a>alias node</a>
           with the <a>node</a>
           having the corresponding <a>node anchor</a>.</li>
         <li>
-          Set <var>document content</var> to the result
+          Set |document content| to the result
             of processing the <a>node</a> associated with the
           <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>,
           using the appropriate conversion step defined in this section.
@@ -851,7 +851,7 @@
             <a>array</a> or <a>map</a>.
           </div>
         </li>
-        <li>The conversion result is <var>document content</var>.</li>
+        <li>The conversion result is |document content|.</li>
       </ol>
 
       <p>Any error reported in a recursive processing step results
@@ -866,20 +866,20 @@
         an <a>array</a> in the <a>internal representation</a>.</p>
 
       <ol>
-        <li>Set <var>sequence content</var> to an empty <a>array</a>.</li>
+        <li>Set |sequence content| to an empty <a>array</a>.</li>
         <li>If the <a data-lt="YAML sequence">sequence</a> has a
           <a>node anchor</a>,
           add a reference from the anchor name to the
           <a data-lt="YAML sequence">sequence</a>
-          in the <var>named nodes</var> <a>map</a>.</li>
-        <li>For each <a>node</a> <var>n</var> in the
+          in the |named nodes| <a>map</a>.</li>
+        <li>For each <a>node</a> |n| in the
           <a data-lt="YAML sequence">sequence</a>,
-          append the result of processing <var>n</var>
-          to <var>sequence content</var>
+          append the result of processing |n|
+          to |sequence content|
           using the appropriate conversion step.
           <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
-        <li>The conversion result is <var>sequence content</var>.</li>
+        <li>The conversion result is |sequence content|.</li>
       </ol>
 
       <p>Any error reported in a recursive processing step results
@@ -894,28 +894,28 @@
         a <a>map</a> in the <a>internal representation</a>.</p>
 
       <ol>
-        <li>Set <var>mapping content</var> to an empty <a>map</a>.</li>
+        <li>Set |mapping content| to an empty <a>map</a>.</li>
         <li>Otherwise, if the <a data-lt="YAML mapping">mapping</a> has a
           <a>node anchor</a>,
           add a reference from the anchor name to
           the <a data-lt="YAML mapping">mapping</a>
-          in the <var>named nodes</var> <a>map</a>.</li>
-        <li>For each <var>entry</var> in the <a data-lt="YAML mapping">mapping</a>
+          in the |named nodes| <a>map</a>.</li>
+        <li>For each |entry| in the <a data-lt="YAML mapping">mapping</a>
           composed of a key/value pair:
           <ol>
-            <li>Set <var>key</var> and <var>value</var>
-              to the result of processing <var>entry</var>
+            <li>Set |key| and |value|
+              to the result of processing |entry|
               using the appropriate conversion step.</li>
-            <li>If <var>key</var> is not a <a>string</a>,
+            <li>If |key| is not a <a>string</a>,
               a processing error MUST be returned,
               and processing aborted.</li>
             <li>Add a new <a>entry</a> to
-              <var>mapping content</var> using
-              <var>key</var> and <var>value</var>.</li>
+              |mapping content| using
+              |key| and |value|.</li>
           </ol>
           <div class="ednote">Ignore <a>node tags</a>? Otherwise, how can they be used in processing?</div>
         </li>
-        <li>The conversion result is <var>mapping content</var>.</li>
+        <li>The conversion result is |mapping content|.</li>
       </ol>
 
       <p>Any error reported in a recursive processing step results
@@ -927,31 +927,31 @@
 
       <ol>
         <li>If the {{JsonLdOptions/extendedYAML}} flag is `true`,
-          and <a>node</a> <var>n</var>
+          and <a>node</a> |n|
           has a <a>node tags</a>,
-          <var>n</var> is mapped as follows:
+          |n| is mapped as follows:
           <ol>
-            <li>If <a>node tag</a> <var>t</var> resolves
+            <li>If <a>node tag</a> |t| resolves
               with a prefix of `tag:yaml.org.2002:`,
               the conversion result is mapped through the
               <a data-cite="YAML#core-schema">YAML Core Schema</a>.
             </li>
-            <li>Otherwise, if <var>t</var> resolves
+            <li>Otherwise, if |t| resolves
               with a prefix of `https://www.w3.org/ns/i18n#`,
               and the suffix <strong>does not</strong> contain
               an underscore (`"_"`),
               the conversion result is a <a>language-tagged string</a>
-              with value taken from <var>n</var>,
-              ane a <a>language tag</a> taken from the suffix of <var>t</var>.
+              with value taken from |n|,
+              ane a <a>language tag</a> taken from the suffix of |t|.
             </li>
             <li>Otherwise, the conversion result is an
-              <a>RDF literal</a> with value taken from <var>n</var>
-              and <a>datatype IRI</a> taken from <var>t</var>.
+              <a>RDF literal</a> with value taken from |n|
+              and <a>datatype IRI</a> taken from |t|.
             </li>
           </ol>
         </li>
         <li>If the {{JsonLdOptions/extendedYAML}} flag is `false`,
-          and <var>n</var>
+          and |n|
           has a <a>node tag</a>,
           the conversion result is mapped through the
           <a data-cite="YAML#core-schema">YAML Core Schema</a>
@@ -975,7 +975,7 @@
 
       <p>
         The conversion result is the value of the entry
-        in the <var>named nodes</var> <a>map</a> having the <a>node</a> entry.
+        in the |named nodes| <a>map</a> having the <a>node</a> entry.
         If none exist, the document is invalid,
         and processing MUST end in failure.
       </p>
@@ -1053,80 +1053,74 @@
       hopefully become unnecessary as implementations are updated.
     </p>
 
-    <section id="convert-array" class="algorithm">
-      <h4>Converting an <a>array</a></h4>
-      <p>
-        The conversion result is a <a>YAML sequence</a>
-        with child nodes of the sequence taken by converting
-        value of the <a>array</a> using the appropriate conversion step.
-      </p>
-    </section>
+    <section id="convert-ir" class="algorithm">
+      <h3>Converting From the Internal Representation</h3>
 
-    <section id="convert-map" class="algorithm">
-      <h4>Converting a <a>map</a></h4>
       <p>
-        The conversion result is a <a>YAML mapping</a>
-        with keys and values taken by converting
-        key/value pair of the <a>map</a> using the appropriate conversion step.
+        This algorithm describes the steps to convert
+        each element from the <a>internal representation</a>
+        into corresponding <a>YAML nodes</a> by recursively
+        processing each element |n|.
       </p>
-    </section>
 
-    <section id="convert-literal" class="algorithm">
-      <h4>Converting an <a>RDF literal</a></h4>
       <ol>
-        <li>If the <a>datatype IRI</a>
-          of the <a>RDF literal</a> <var>l</var>
-          is `xsd:string`,
-          the conversion is a <a>YAML scalar</a>
-          with the value taken from that value of <var>l</var>.
+        <li id="convert-array">
+          If |n| is an <a>array</a>,
+          the conversion result is a <a>YAML sequence</a>
+          with child nodes of the sequence taken by converting
+          each value of |n| using this algorithm.
         </li>
-        <li>Otherwise, if <var>l</var> is a <a>language-tagged string</a>,
-          the conversion is a <a>YAML scalar</a>
-          with the value taken from that value of <var>l</var>
-          and a <a>node tag</a> constructed by appending
-          that <a>language tag</a> to
-          `https://www.w3.org/ns/i18n#`.
+        <li id="convert-map">
+          Otherwise, if |n| is an <a>map</a>,
+          the conversion result is a <a>YAML mapping</a>
+          with keys and values taken by converting each
+          key/value pair of |n| using this algorithm.
         </li>
-        <li>
-          Otherwise, the conversion is a <a>YAML scalar</a>
-          with the value taken from that value of <var>l</var>
-          and a <a>node tag</a> taken from the
-          <a>datatype IRI</a> of <var>l</var>.
+        <li id="convert-literal">
+          Otherwise, if |n| is an <a>RDF literal</a>:
+          <ol>
+            <li>
+              If the <a>datatype IRI</a>
+              of |n| is `xsd:string`,
+              the conversion is a <a>YAML scalar</a>
+              with the value taken from that value of |n|.
+            </li>
+            <li>Otherwise, if |n| is a <a>language-tagged string</a>,
+              the conversion is a <a>YAML scalar</a>
+              with the value taken from that value of |n|
+              and a <a>node tag</a> constructed by appending
+              that <a>language tag</a> to
+              `https://www.w3.org/ns/i18n#`.
+            </li>
+            <li>
+              Otherwise, the conversion is a <a>YAML scalar</a>
+              with the value taken from that value of |n|
+              and a <a>node tag</a> taken from the
+              <a>datatype IRI</a> of |n|.
+            </li>
+          </ol>
+        </li>
+        <li id="convert-number">
+          Otherwise, if |n| is a <a>number</a>,
+          the conversion result is a <a>YAML scalar</a>
+          with the value taken from |n|.
+        </li>
+        <li id="convert-boolean">
+          Otherwise, if |n| is a <a>boolean</a>,
+          the conversion result is a <a>YAML scalar</a>
+          with the value either `true` or `false`
+          based on the value of |n|.
+        </li>
+        <li id="convert-null">
+          Otherwise, if |n| is <a>null</a>,
+          the conversion result is a <a>YAML scalar</a>
+          with the value `null`.
+        </li>
+        <li id="convert-string">
+          Otherwise, conversion result is a <a>YAML scalar</a>
+          with the value taken from |n|.
         </li>
       </ol>
-    </section>
-
-    <section id="convert-number" class="algorithm">
-      <h4>Converting a <a>number</a></h4>
-      <p>
-        The conversion result is a <a>YAML scalar</a>
-        with the value taken from that <a>number</a>.
-      </p>
-    </section>
-
-    <section id="convert-boolean" class="algorithm">
-      <h4>Converting a <a>boolean</a></h4>
-      <p>
-        The conversion result is a <a>YAML scalar</a>
-        with the value either `true` or `false`
-        based on the value of the <a>boolean</a>.
-      </p>
-    </section>
-
-    <section id="convert-null" class="algorithm">
-      <h4>Converting <a>null</a></h4>
-      <p>
-        The conversion result is a <a>YAML scalar</a>
-        with the value `null`.
-      </p>
-    </section>
-
-    <section id="convert-string" class="algorithm">
-      <h4>Converting <a>string</a></h4>
-      <p>
-        The conversion result is a <a>YAML scalar</a>
-        with the value taken from that <a>string</a>.
-      </p>
     </section>
   </section>
 
@@ -1318,22 +1312,22 @@
           and {{JsonLdOptions/extendedYAML}} flags are set
           and the
           <a>datatype IRI</a>
-          of <var>value</var> is not `xsd:string`:
+          of |value| is not `xsd:string`:
           <ol>
             <li>
-              If <var>value</var> is a <a>language-tagged string</a>
-              set <var>converted value</var> to a new <a>RDF literal</a>
+              If |value| is a <a>language-tagged string</a>
+              set |converted value| to a new <a>RDF literal</a>
               composed of the
               <a data-cite="RDF11-CONCEPTS#dfn-lexical-form">lexical form</a>
-              of <var>value</var> and
+              of |value| and
               <a>datatype IRI</a>
               composed of `https://www.w3.org/ns/i18n#` followed by
               the
               <a>language tag</a>
-              of <var>value</var>.
+              of |value|.
             </li>
             <li>
-              Otherwise, et <var>converted value</var> to <var>value</var>.
+              Otherwise, et |converted value| to |value|.
             </li>
           </ol>
         </blockquote>
@@ -1346,8 +1340,8 @@
           <blockquote>
             <ol>
               <li>
-                Otherwise, if <var>value</var> is an <a>RDF literal</a>,
-                <var>value</var> is left unmodified.
+                Otherwise, if |value| is an <a>RDF literal</a>,
+                |value| is left unmodified.
                 <span class="note">
                   This will only be the case when processing a value from an
                   <a>extended internal representation</a>.
@@ -1454,7 +1448,7 @@
           <a data-cite="rfc2045#section-5">Content-Type</a>
           is either `application/yaml`
           or any media type with a `+yaml` suffix as defined in [[RFC6839]]
-          transform <var>document</var> to the <a>internal representation</a>
+          transform |document| to the <a>internal representation</a>
           (or <a>extended internal representation</a>)
           as described in <a href="#conversion-to-ir" class="sectionRef"></a>.
           Additionally, if the {{RemoteDocument/profile}} parameter
