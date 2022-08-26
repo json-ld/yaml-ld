@@ -701,7 +701,7 @@
 
     <p>
       Each of the individual <a>YAML documents</a> in the stream
-      is converted into a separated <a>JSON-LD document</a> and
+      is converted into a separate <a>JSON-LD document</a> and
       processed separately.
     </p>
     <p class="issue" data-number="63">
@@ -1012,7 +1012,7 @@
     <p>The conversion process from the <a>internal representation</a>
       involves turning that representation back into a YAML
       <a>representation graph</a>
-      and relies on the descripition of
+      and relies on the description of
       "Serializing the Representation Graph" from the
       <a data-cite="YAML#dump">3.1.1 Dump</a> section of [[YAML]]
       for the final serialization.
@@ -1038,7 +1038,9 @@
     </p>
 
     <div class="issue markdown" data-number="6">
-      <p>A concrete proposal in that direction would be to use a tag at the top-level of any "idiomatic" YAML-LD document, applying to the whole object/array that makes the document.</p>
+      <p>A concrete proposal in that direction would be to use a tag at the
+         top-level of any "idiomatic" YAML-LD document, applying to the whole
+         object/array that makes the document.</p>
 
       <p>It might also include a version
         to identify the specification that it relates to, allowing
@@ -1162,12 +1164,12 @@
 
     <p>Application profiles allow publishers to use YAML-LD
       either for maximum interoperability,
-      or for maximum expresivity.
+      or for maximum expressivity.
       The <a>YAML-LD JSON profile</a> provides for complete round-tripping
       between YAML-LD documents and JSON-LD documents.
-      The <a>YAML-LD extended profile</a> allows for the
+      The <a>YAML-LD extended profile</a> allows for
       fuller use of YAML features to enhance the ability to
-      represent a greater amount of native datatypes
+      represent a larger number of native datatypes
       and reduce document redundancy.</p>
 
 
@@ -1183,7 +1185,7 @@
         which interprets only a limited set of <a>node tags</a>.
         <a>YAML scalars</a> with <a>node tags</a> outside of the defined range
         SHOULD be avoided and MUST be converted to the closest
-        scalar type from the <a data-cite="YAML#core-schema">YAML Core Schema</a>
+        scalar type from the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
         if found.
         See <a href="#convert-scalar" class="sectionRef"></a>
         for specifics.
@@ -1205,9 +1207,9 @@
       </p>
 
       <p>
-        A <a>YAML stream</a> MUST include a single <a>YAML document</a>,
-        as the <a>JSON-LD internal representation</a> supports
-        only a single document model.
+        A <a>YAML stream</a> MUST include only a single <a>YAML document</a>,
+        as the <a>JSON-LD internal representation</a> only supports
+        a single document model.
       </p>
     </section>
 
@@ -1216,10 +1218,10 @@
 
       <p>
         The <dfn>YAML-LD extended profile</dfn>
-        extends the <a data-cite="YAML#core-schema">YAML Core Schema</a>
+        extends the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
         allowing <a>node tags</a> to specify <a>RDF literals</a>
-        by using an <a>JSON-LD extended internal representation</a> capable
-        of representing <a>RDF literals</a> directly.
+        by using a <a>JSON-LD extended internal representation</a> capable
+        of directly representing <a>RDF literals</a>.
       </p>
 
       <p>
@@ -1240,9 +1242,9 @@
 
       <p>
         As with the <a>YAML-LD JSON profile</a>,
-        a <a>YAML stream</a> MUST include a single <a>YAML document</a>,
-        as the <a>JSON-LD extended internal representation</a> supports
-        only a single document model.
+        a <a>YAML stream</a> MUST include only a single <a>YAML document</a>,
+        as the <a>JSON-LD extended internal representation</a> only supports
+        a single document model.
       </p>
 
       <p class="issue" data-number="79">
@@ -1296,10 +1298,10 @@
             <a data-cite="xmlschema11-2#decimal">`xsd:double`</a>,
             <a data-cite="xmlschema11-2#decimal">`xsd:float`</a>,
             or derived datatypes,
-            are transformed a native <a>number</a>,
+            are transformed to a native <a>number</a>,
           </li>
           <li>
-            All other literals a transformed to a native <a>string</a>.
+            All other literals are transformed to a native <a>string</a>.
           </li>
         </ul>
 
