@@ -299,6 +299,62 @@
     </p>
 
   <section class="informative">
+    <h2>How to read this document</h2>
+
+    <p>
+      To understand the basics of this specification, one must be familiar with:
+      <ul>
+        <li>[[YAML]] data markup langauge, which is the underlying syntax for YAML-LD,</li>
+        <li>and basic Linked Data [[LINKED-DATA]] principles.</li>
+      </ul>
+    </p>
+
+    <p>This document is intended primarily for the following two main audiences.</p>
+
+    <p>
+      <ul>
+        <li>
+          <strong>Software developers</strong> who want to:
+          <ul>
+            <li>encode Linked Data in a variety of programming languages which can use YAML,</li>
+            <li>convert existing YAML to YAML-LD,</li>
+            <li>understand the design decisions and language syntax for YAML-LD,</li>
+            <li>implement processors and APIs for YAML-LD,</li>
+            <li>generate or consume Linked Data, an RDF Graph, or an RDF Dataset in a YAML syntax.</li>
+          </ul>
+
+          <p>Among related technologies,</p>
+
+          <ul>
+            <li>JSON-LD familiarity would be in most cases required to build YAML-LD capable applications,</li>
+            <li>
+              whereas RDF familiarity is only required when it is desired to convert YAML-LD to RDF graphs,
+              or vice versa.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>
+            <strong>IT and non-IT professionals</strong> who want to read and/or produce Linked Data documents
+            in YAML-LD format. Such documents can be:
+
+            <ul>
+              <li>consumed by programming systems capable of understanding YAML-LD,</li>
+              <li>transformed with JSON-LD framing algorithms,</li>
+              <li>published on the Web for human and machine consumption.</li>
+            </ul>
+          </p>
+          <p>
+            For these users, familiarity with JSON-LD is not required, but understanding of Linked Data principles
+            might be beneficial. <a href="#primer">YAML-LD Primer</a> is meant as a gentle introduction
+            to the essential information necessary to use YAML-LD in practice.
+          </p>
+        </li>
+      </ul>
+    </p>
+  </section>
+
+  <section class="informative">
     <h2>Terminology</h2>
 
     <p>This document uses the following terms as defined in external specifications
@@ -1951,6 +2007,22 @@
       </pre>
 
       <p>The applicability of this context depends on the domain and is left to the architect's best judgement.</p>
+  </section>
+
+  <section id="primer" class="informative">
+    <h2>YAML-LD Primer</h2>
+
+    <section id="primer-introduction">
+      <h2>Introduction</h2>
+
+      <p>
+        This document is meant as a gentle introduction to YAML-LD for not just software developers and IT
+        professionals but also for the general audience of professionals in domains other than
+        computer science.
+      </p>
+    </section>
+
+
   </section>
  </body>
 </html>
