@@ -243,8 +243,79 @@
   }
   code {
     color:#c63501
-  }  
+  }
+
+  #cytoscape {
+    width: 300px;
+  }
 </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.22.1/cytoscape.min.js"></script>
+  <script>
+    window.onload = (function() {
+      if (location.port == 3000) {
+        // FIXME The purpose of this is to run Cytoscape only when rendering the spec document in the user's browser.
+        //   If Cytoscape is invoked while ReSpec is building the document, the rendered graph is broken.
+        //   Port 3000 is what ReSpec uses while rendering the document in a sandbox browser. A better method of
+        //   detecting a running ReSpec is advisable.
+        return;
+      }
+
+      var cy = cytoscape({
+        container: document.getElementById('cytoscape'),
+        elements: [
+          {data: {id: '_', label: '👨‍💻'}},
+          {data: {id: '_name', label: 'Joe Hacker', literal: true}},
+          {data: {id: '_homepage', label: '🌐', link: 'https://example.org/joe.hacker/'}},
+          {data: {id: '_image', label: '🖼️', link: 'https://example.org/joe.hacker/image.png'}},
+
+          {data: {id: '_has_name', source: '_', target: '_name', label: 'foaf:name'}},
+          {data: {id: '_has_homepage', source: '_', target: '_homepage', label: 'foaf:homepage'}},
+          {data: {id: '_has_image', source: '_', target: '_image', label: 'foaf:img'}},
+        ],
+
+        style: [ // the stylesheet for the graph
+            {
+              selector: 'node',
+              style: {
+                'background-color': '#666',
+                // 'label': 'data(label)',
+                'content': 'data(label)',
+                "text-valign": "center",
+                "text-halign": "center",
+              }
+            },
+
+            {
+              selector: 'node[literal]',
+              style: {
+                shape: 'round-rectangle',
+                width: 96,
+                color: 'white',
+              },
+            },
+
+            {
+              selector: 'edge',
+              style: {
+                'width': 3,
+                'line-color': '#ccc',
+                'target-arrow-color': '#ccc',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier',
+                'content': 'data(label)',
+              }
+            }
+          ],
+
+          layout: {
+            name: 'breadthfirst',
+            rows: 1,
+          }
+      });
+    })
+  </script>
+
 </head>
 <body>
   <section id='abstract'>
@@ -2018,7 +2089,28 @@
       </p>
     </section>
 
+    <section id="primer-example">
+      <h2>Primer Examples</h2>
+
+      <aside class="example">
+          <pre class="yaml"
+             data-transform="updateExample"
+             data-result-for="YAML-LD → Graph"
+             data-content-type="application/ld+json"
+             title="YAML-LD → Graph"
+          >
+            <!--
+              '@context': https://json-ld.org/contexts/person.jsonld
+              name: Joe Hacker
+              homepage: https://example.org/joe.hacker/
+              image: https://example.org/joe.hacker/image.png
+            -->
+          </pre>
+          <div id="cytoscape" style="height: 300px; width: 100%"></div>
+      </aside>
+    </section>
+
 
   </section>
- </body>
+  </body>
 </html>
