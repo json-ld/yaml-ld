@@ -573,7 +573,7 @@
     <h2>Comments</h2>
     <p>
       Comments in <a>YAML-LD documents</a> are treated as white space.
-      This behavior is consistent with other Linked Data serializations like [[TURTLE]].
+      This behavior is consistent with other Linked Data serializations like [[?TURTLE]].
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
       for more details.
     </p>
@@ -1025,6 +1025,8 @@
       to YAML begins by preparing an empty <a>representation graph</a>
       which will be rooted with either a
       <a>YAML mapping</a> or <a>YAML sequence</a>.
+    </p>
+    <p>
       Although outside of the scope of this specification,
       processors MAY use
       <a>YAML directives</a>, including <a>TAG directives</a>, and
@@ -1032,29 +1034,19 @@
       as appropriate for best results.
       Specifically, if the {{JsonLdOptions/extendedYAML}} API flag is `true`,
       the document SHOULD use the `%YAML` directive with
-      version set to at least `1.2`
-      and a `%TAG` directive appropriate for each
-      `RDF literal`.
+      version set to at least `1.2`.
+      To improve readability and reduce document size,
+      the document MAY use a `%TAG` directive appropriate for
+      <a>RDF literals</a> contained within the representation.
     </p>
 
-    <div class="issue markdown" data-number="6">
-      <p>A concrete proposal in that direction would be to use a tag at the
-         top-level of any "idiomatic" YAML-LD document, applying to the whole
-         object/array that makes the document.</p>
-
-      <p>It might also include a version
-        to identify the specification that it relates to, allowing
-        for version announcement that could be used for future-proofing.</p>
-
-      <p>E.g.</p>
-
-      <pre>
-      !yaml-ld
-      $context: http://schema.org/
-      $type: Person
-      name: Pierre-Antoine Champin
-      </pre>
-    </div>
+    <p class="note">
+      The use of `%TAG` directives in YAML-LD is similar to the use
+      of the `PREFIX` directive in [[?Turtle]]
+       or the general use of terms as prefixes to create
+       <a data-cite="JSON-LD11#dfn-compact-iri">Compact IRIs</a> in [[JSON-LD11]]:
+      they not change  the meaning of the encoded scalars.
+    </p>
 
     <pre class="example yaml"
          data-transform="updateExample"
@@ -1080,6 +1072,27 @@
       the `"%23"` escape is a workaround for this problem, that will
       hopefully become unnecessary as implementations are updated.
     </p>
+
+    <div class="issue markdown" data-number="6">
+      <p>A concrete proposal in that direction would be to use a tag at the
+         top-level of any "idiomatic" YAML-LD document, applying to the whole
+         object/array that makes the document.</p>
+
+      <p>It might also include a version
+        to identify the specification that it relates to, allowing
+        for version announcement that could be used for future-proofing.</p>
+
+      <p>E.g.</p>
+
+      <pre>
+      !yaml-ld
+      $context: http://schema.org/
+      $type: Person
+      name: Pierre-Antoine Champin
+      </pre>
+    </div>
+
+    <p>See <a href="#example-serialized-representation-of-the-extended-internal-representation"></a> for an example of serializing the extended internal representation.</p>
 
     <section id="convert-ir" class="algorithm">
       <h3>Converting From the Internal Representation</h3>
@@ -1694,7 +1707,7 @@
     Moreover
     [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
     and other Linked Data serialization formats
-    that support comments (such as [[TURTLE]])
+    that support comments (such as [[?TURTLE]])
     do not provide a means to preserve them
     when processing and serializing the document
     in other formats.
