@@ -6,6 +6,16 @@
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
 <script src="../common/common.js" class="remove" defer></script>
 <script class='remove'>
+  // Use fragment identifer of test as name.
+  function data_test_display() {
+      const test_references = document.querySelectorAll('details.respec-tests-details a');
+      for( const a of test_references ) {
+          const href = a.href;
+          const test_reference = href.split('#')[1];
+          a.textContent = test_reference;
+      }    
+  }
+
   var respecConfig = {
     specStatus: "CG-DRAFT",
     copyrightStart:    "2020",
@@ -65,6 +75,8 @@
 
     // Cross-reference definitions
     xref: ["json-ld11", "json-ld11-api"],
+    testSuiteURI: "https://json-ld.github.io/yaml-ld/tests/",
+    postProcess: [data_test_display],
 
     group: "cg/json-ld",
     wgPublicList: "public-linked-json",
@@ -618,16 +630,22 @@
     <section id="encoding">
     <h2>Encoding</h2>
 
-    <p>
-      A <a>YAML-LD document</a> MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].
+    <p id="cr-utf8" data-tests="
+      basic-manifest.html#cr-utf8-positive-1,
+      basic-manifest.html#cr-utf8-negative-1">
+      A <a>YAML-LD document</a> MUST be encoded in UTF-8,
+      to ensure interoperability with [[JSON]],
+      otherwise an
+      <a data-link-for="YamlLdErrorCode">invalid-encoding</a>
+      error has been detected and processing is aborted.
     </p>
     </section>
 
     <section id="comments">
     <h2>Comments</h2>
-    <p>
+    <p id="cr-comments" data-tests="basic-manifest.html#cr-comments-positive-1">
       Comments in <a>YAML-LD documents</a> are treated as white space.
-      This behavior is consistent with other Linked Data serializations like [[?TURTLE]].
+      This behavior is consistent with other Linked Data serializations such as [[?TURTLE]].
       See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
       for more details.
     </p>
@@ -1258,7 +1276,9 @@
         for specifics.
       </p>
 
-      <p>
+      <p id="jp-utf8" data-tests="
+        basic-manifest.html#cr-utf8-positive-1,
+        basic-manifest.html#cr-utf8-negative-1">
         Although YAML supports several additional encodings,
         YAML-LD documents in the <a>YAML-LD JSON Profile</a>
         MUST NOT use encodings other than UTF-8.
@@ -1291,7 +1311,9 @@
         of directly representing <a>RDF literals</a>.
       </p>
 
-      <p>
+      <p id="ep-utf8" data-tests="
+        basic-manifest.html#cr-utf8-positive-1,
+        basic-manifest.html#cr-utf8-negative-1">
         As with the <a>YAML-LD JSON profile</a>,
         YAML-LD documents in the <a>YAML-LD extended profile</a>
         MUST NOT use encodings other than UTF-8.
@@ -1603,6 +1625,22 @@
         <a data-cite="JSON-LD11-API#process-html">Process HTML</a>
         as defined in [[JSON-LD11-API]].
       </p>
+    </section>
+
+    <section>
+      <h4>YamlLdErrorCode</h4>
+      <p>The <dfn>YamlLdErrorCode</dfn> represents the collection of valid YAML-LD error codes,
+        which extends the {{JsonLdErrorCode}} definitions.</p>
+
+      <pre class="idl">
+        enum YamlLdErrorCode {
+          "invalid-encoding"
+        };
+      </pre>
+
+      <dl data-dfn-for="YamlLdErrorCode" data-sort>
+        <dt><dfn>invalid-encoding</dfn></dt>
+        <dd>The character encoding of an input is invalid.</dd>
     </section>
   </section>
 
