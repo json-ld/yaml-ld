@@ -1,0 +1,34 @@
+{
+  "@context": ["context.jsonld", {"@base": "basic-manifest"}],
+  "@id": "",
+  "@type": "mf:Manifest",
+  "name": "Tests using YAML-LD JSON Profile",
+  "description": "These tests implement the requirements for the [YAML-LD JSON Profile](https://json-ld.github.io/yaml-ld/spec/#yaml-ld-json-profile).",
+  "baseIri": "https://json-ld.github.io/yaml-ld/tests/",
+  "sequence": [
+    {
+      "@id": "#cr-utf8-positive-1",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "UTF-8 BOM",
+      "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
+      "input": "basic/cr-utf8-positive-1-in.yamlld",
+      "expect": "basic/cr-utf8-positive-1-out.yamlld"
+    },
+    {
+      "@id": "#cr-utf8-negative-1",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "UTF-6 BOM",
+      "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
+      "input": "basic/cr-utf8-negative-1-in.yamlld",
+      "expectErrorCode": "invalid encoding"
+    },
+    {
+      "@id": "#cr-comments-positive-1",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Various comment forms",
+      "purpose": "Comments are white space.",
+      "input": "basic/cr-comments-positive-1-in.yamlld",
+      "expect": "basic/cr-comments-positive-1-out.yamlld"
+    }
+  ]
+}
