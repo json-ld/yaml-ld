@@ -1,0 +1,26 @@
+{
+  "name": "yaml-ld-tests",
+  "version": "0.0.1",
+  "description": "Supports YAML-LD site building",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "generate": "./tests/generate_index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/json-ld/yaml-ld.git"
+  },
+  "author": "Gregg Kellogg",
+  "license": "W3C-20150513",
+  "bugs": {
+    "url": "https://github.com/json-ld/yaml-ld/issues"
+  },
+  "homepage": "https://json-ld.github.io/yaml-ld",
+  "dependencies": {
+    "jsdom": "^20.0.0",
+    "marked": "^4.1.0"
+  }
+}
