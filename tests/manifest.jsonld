@@ -1,0 +1,11 @@
+{
+  "@context": ["context.jsonld", {"@base": "manifest"}],
+  "@id": "",
+  "@type": "mf:Manifest",
+  "name": "YAML-LD Test Suite",
+  "description": "This manifest loads additional manifests for specific behavior tests for [YAML-LD](https://json-ld.github.io/yaml-ld/)",
+  "sequence": [
+    "basic-manifest.jsonld",
+    "extended-manifest.jsonld"
+  ]
+}
