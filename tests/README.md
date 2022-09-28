@@ -17,11 +17,11 @@ Tests driven from a top-level [manifest](manifest.jsonld) and are defined into [
 Tests may have a `expandContext` option, which is treated
   as an IRI relative to the manifest.
 
-The _expected_ results with file extension ".jsonld" or ".yamlld" can be compared using [YAML-LD object comparison](#yaml-ld-object-comparison) with the processor output. Additionally, if the `ordered` option is not set, result should be expanded and compared with the expanded _expected_ document also using [YAML-LD object comparison](#yaml-ld-object-comparison).
+The _expected_ results with file extension `.jsonld` or `.yamlld` can be compared using [YAML-LD object comparison](#yaml-ld-object-comparison) with the processor output. Additionally, if the `ordered` option is not set, the result should be expanded and compared with the expanded _expected_ document also using [YAML-LD object comparison](#yaml-ld-object-comparison).
 
 Test results that include a context input presume that the context is provided locally, and not from the referenced location, thus the results will include the content of the context file, rather than a reference.
 
-For tests of type `jld:ToRDFTest` have an _expected_ file extension of `.nq` The results can be compared using [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism).
+Tests of type `jld:ToRDFTest` have an _expected_ file extension of `.nq`. Their results can be compared using [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism).
 
 A **PositiveSyntaxTest** looks specifically for syntax-related issues. A **PositiveSyntaxTest** succeeds when no error is found when processing.
 
@@ -33,12 +33,12 @@ A **NegativeEvaluationTests** looks for a string value in _expectedErrorCode_, r
 
 If algorithms are invoked with the `ordered` flag set to `true`, simple JSON Object comparison may be used, as the order of all arrays will be preserved (except for _fromRdf_, unless the input quads are also ordered). If `ordered` is `false`, then the following algorithm will ensure arrays other than values of `@list` are compared without regard to order.
 
-YAML-LD object comparison compares JSON objects, arrays, and values recursively for equality.
+YAML-LD object comparison recursively compares JSON objects, arrays, and values for equality.
 
 * JSON objects are compared member by member without regard to the ordering of members within the object. Each member must have a corresponding member in the object being compared to. Values are compared recursively.
-* JSON arrays are generally compared without regard to order (the lone exception being if the referencing key is `@list`). Each item within the array must be equivalent to an item in the array being compared to by using the comparison algorithm recursively. For values of `@list`, the order of these items is significant.
+* JSON arrays are generally compared without regard to order (the lone exception being if the referencing key is `@list`). Each item within the array must be equivalent to an item in the array being compared to by recursively using the comparison algorithm. For values of `@list`, the order of these items is significant.
 * JSON values are compared using strict equality.
-* Values of `@language`, and other places where language tags may be used are specified in lowercase in the test results. Implementations should either normalize language tags for testing purposes, or compare language tags in a case-independent way.
+* Values of `@language`, and other places where language tags may be used, are specified in lowercase in the test results. Implementations should either normalize language tags for testing purposes, or compare language tags in a case-independent way.
 
 Note that some tests require re-expansion and comparison, as list values may exist as values of properties that have `@container: @list` and the comparison algorithm will not consider ordering significant.
 
@@ -53,15 +53,15 @@ Implementations create their own infrastructure for running the test suite. In p
   * `application/ld+yaml` for `.yamlld`
   * `application/n-quads` for `.nq`
 * The media type for the file associated with the _input_ property can be overridden using the `contentType` option.
-* Some algorithms, particularly _fromRdf_, may not preserve the order of statements listed in the input document, and provision should be taken for performing unordered array comparison, for arrays other than values of `@list`. (This may be difficult for compacted results, where array value ordering is dependent on the associated term definition).
+* Some algorithms, particularly _fromRdf_, may not preserve the order of statements listed in the input document, and provision should be made to perform unordered array comparison, for arrays other than values of `@list`. (This may be difficult for compacted results, where array value ordering is dependent on the associated term definition).
 * Some _toRdf_ tests require the use of [JSON Canonicalization Scheme](https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05) to properly generate RDF Literals from JSON literal values. This algorithm is to be used to properly compare results using [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism). These tests are marked using the `useJCS` option.
-* Some _toRdf_ tests may generate results as [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf), specifically having a blank node predicate. Technically, these are in an invalid N-Quads format; provisions must be taken to be able to parse and recognize quads having a blank node predicate.
+* Some _toRdf_ tests may generate results as [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf), specifically having a blank node predicate. Technically, these are in an invalid N-Quads format; provision must be made to parse and recognize quads having a blank node predicate.
 * When comparing documents after flattening, framing or generating RDF, blank node identifiers may not be predictable. Implementations should take this into consideration. (One way to do this may be to reduce both results and _expected_ to datasets to extract a bijective mapping of blank node labels between the two datasets as described in [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism)).
 * Some tests may have a `requires` property, indicating some optional behavior described by a test vocabulary term.
 
 # Building HTML Manifests
 
-The HTML versions of the test manifests are built using the Node action `npm run generate`, which also cross indexes tests with references from the specification.
+The HTML versions of the test manifests are built using the Node action `npm run generate`, which also cross-indexes tests with references from the specification.
 
 # Contributing
 
