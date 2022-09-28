@@ -27,7 +27,6 @@ A **PositiveSyntaxTest** looks specifically for syntax-related issues. A **Posit
 
 A **NegativeEvaluationTests** looks for a string value in _expectedErrorCode_, representing the error code resulting from running the test.
 
-
 ## YAML-LD object comparison
 
 **TODO**: Similar to JSON-LD object comparison, but uses the (Expanded) Internal Representation.
@@ -59,6 +58,10 @@ Implementations create their own infrastructure for running the test suite. In p
 * Some _toRdf_ tests may generate results as [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf), specifically having a blank node predicate. Technically, these are in an invalid N-Quads format; provisions must be taken to be able to parse and recognize quads having a blank node predicate.
 * When comparing documents after flattening, framing or generating RDF, blank node identifiers may not be predictable. Implementations should take this into consideration. (One way to do this may be to reduce both results and _expected_ to datasets to extract a bijective mapping of blank node labels between the two datasets as described in [RDF Dataset Isomorphism](https://www.w3.org/TR/rdf11-concepts/#dfn-dataset-isomorphism)).
 * Some tests may have a `requires` property, indicating some optional behavior described by a test vocabulary term.
+
+# Building HTML Manifests
+
+The HTML versions of the test manifests are built using the Node action `npm run generate`, which also cross indexes tests with references from the specification.
 
 # Contributing
 
