@@ -1,0 +1,175 @@
+
+<!doctype html>
+<!-- This template is used for generating the HTML representation of the test suite manifests. -->
+<html>
+  <head>
+    <title>Tests using YAML-LD JSON Profile</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="alternate" href="undefined" />
+    <link rel="styesheet" href="https://www.w3.org/StyleSheets/TR/base" />
+    <style>
+      dl.entry dt { font-weight: bold}
+    </style
+  </head>
+  <body>
+    <p>
+      <a href="http://www.w3.org/">
+        <img src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48" width="72" />
+      </a>
+    </p>
+    <section>
+      <h1>Tests using YAML-LD JSON Profile</h1>
+
+      <p>These tests implement the requirements for the <a href="https://json-ld.github.io/yaml-ld/spec/#yaml-ld-json-profile">YAML-LD JSON Profile</a>.</p>
+
+
+      <p>
+        This is an HTML version of a test manifest. The JSON-LD version of this manifest may be found at
+        <a href="basic-manifest.jsonld.jsonld">basic-manifest.jsonld.jsonld</a>.
+        The manifest vocabulary is described in the
+        <a href="https://w3c.github.io/json-ld-api/tests/vocab.html">JSON-LD Test Vocabulary</a> (
+        <a href="https://w3c.github.io/json-ld-api/tests/vocab.jsonld">JSON-LD</a>,
+        <a href="https://w3c.github.io/json-ld-api/tests/vocab.ttl">Turtle</a>
+        )
+        and is based on the
+        <a href="http://www.w3.org/TR/2014/NOTE-rdf11-testcases-20140225/">RDF Test Vocabulary</a>.
+      </p>
+
+      <p>
+        The YAML-LD Test Suite is a set of tests that can
+        be used to verify YAML-LD Processor conformance to the set of specifications
+        that constitute YAML-LD. The goal of the suite is to provide an easy and
+        comprehensive YAML-LD testing solution for developers creating YAML-LD Processors.
+      </p>
+
+      <section>
+        <h2>General instructions for running the YAML-LD Test suite</h2>
+        <p>Described in the <a href="README.md">README</a>.</p>
+      </section>
+
+      <section>
+        <h2>Contributing Tests</h2>
+        <p>If you would like to contribute a new test
+          or a fix to an existing test,
+          please follow these steps:
+        </p>
+
+        <ol>
+          <li>Notify the JSON-LD mailing list,
+            <a href="mailto:public-json-ld-wg@w3.org">
+              public-json-ld-wg@w3.org
+            </a>,
+            that you will be creating a new test or fix and the purpose of the
+            change.
+          </li>
+          <li>Clone the git repository:
+            <a href="git://github.com/w3c/json-ld-api.git">
+              git://github.com/w3c/json-ld-api.git
+            </a>.
+          </li>
+          <li>
+            In a separate branch, make your changes and submit them via a GitHub Pull Request.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Distribution</h2>
+        <p>Distributed under the
+          <a href="http://www.w3.org/Consortium/Legal/2008/04-testsuite-license">
+            W3C Test Suite License
+          </a>.
+          To contribute to a W3C Test Suite, see the 
+          <a href="http://www.w3.org/2004/10/27-testcases">
+            policies and contribution forms
+          </a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Disclaimer</h2>
+        <p>
+          UNDER THE EXCLUSIVE LICENSE, THIS DOCUMENT AND ALL DOCUMENTS, TESTS
+          AND SOFTWARE THAT LINK THIS STATEMENT ARE PROVIDED "AS IS," AND
+          COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR
+          IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT,
+          OR TITLE; THAT THE CONTENTS OF THE DOCUMENT ARE SUITABLE FOR ANY
+          PURPOSE; NOR THAT THE IMPLEMENTATION OF SUCH CONTENTS WILL NOT
+          INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER
+          RIGHTS.
+        </p>
+
+        <p>
+          COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT,
+          SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE
+          DOCUMENT OR THE PERFORMANCE OR IMPLEMENTATION OF THE CONTENTS THEREOF.
+        </p>
+      </section>
+    </section>
+
+    <section>
+      <h1>Test Definitions</h1>
+      <dl class="entry"><dt>baseIri</dt><dd>https://json-ld.github.io/yaml-ld/tests/</dd></dl>
+      <dl class="entry">
+      
+              <dt id="cr-utf8-positive-1">
+                Test cr-utf8-positive-1 UTF-8 BOM
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cr-utf8-positive-1</dd></dt>
+                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>UTF-8 BOM</dd></dt>
+                  <dt>Purpose</dt><dd>A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-utf8-positive-1-in.yamlld">basic/cr-utf8-positive-1-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-utf8">1</a>) (<a href="../spec/index.html#jp-utf8">2</a>) (<a href="../spec/index.html#ep-utf8">3</a>)</dd></dt>
+                  
+                  
+                  <dt>Expect</dt><dd><a href="basic/cr-utf8-positive-1-out.yamlld">basic/cr-utf8-positive-1-out.yamlld</a></dd>
+                  
+                  
+                </dl>
+              </dd>
+
+              <dt id="cr-utf8-negative-1">
+                Test cr-utf8-negative-1 UTF-6 BOM
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cr-utf8-negative-1</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>UTF-6 BOM</dd></dt>
+                  <dt>Purpose</dt><dd>A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-utf8-negative-1-in.yamlld">basic/cr-utf8-negative-1-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-utf8">1</a>) (<a href="../spec/index.html#jp-utf8">2</a>) (<a href="../spec/index.html#ep-utf8">3</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>invalid encoding</dd>
+                  
+                </dl>
+              </dd>
+
+              <dt id="cr-comments-positive-1">
+                Test cr-comments-positive-1 Various comment forms
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cr-comments-positive-1</dd></dt>
+                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Various comment forms</dd></dt>
+                  <dt>Purpose</dt><dd>Comments are white space.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-comments-positive-1-in.yamlld">basic/cr-comments-positive-1-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-comments">1</a>)</dd></dt>
+                  
+                  
+                  <dt>Expect</dt><dd><a href="basic/cr-comments-positive-1-out.yamlld">basic/cr-comments-positive-1-out.yamlld</a></dd>
+                  
+                  
+                </dl>
+              </dd>
+      </dl>
+    </section>
+  </body>
+</html>
