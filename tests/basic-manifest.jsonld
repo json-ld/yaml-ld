@@ -17,7 +17,7 @@
     {
       "@id": "#cr-utf8-negative-1",
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
-      "name": "UTF-6 BOM",
+      "name": "UTF-16 BOM",
       "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
       "input": "basic/cr-utf8-negative-1-in.yamlld",
       "expectErrorCode": "invalid encoding"

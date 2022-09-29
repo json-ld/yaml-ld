@@ -72,8 +72,8 @@ please follow these steps:
    that you will be creating a new test or fix and the purpose of the
    change.
 2. Clone the git repository: git://github.com/json-ld/yaml-ld-wg.git
-3. Make your changes and submit them via github, or via a 'git format-patch'
-   to the [JSON-LD Working Group mailing list](mailto:public-linked-json@w3.org).
+3. Make your changes and submit them via [github](https://github.com/json-ld/yaml-ld/pulls), or via a 'git format-patch'
+   to the [JSON-LD Community Group mailing list](mailto:public-linked-json@w3.org).
 
 # Distribution
   Distributed under the [W3C Test Suite License](http://www.w3.org/Consortium/Legal/2008/04-testsuite-license). To contribute to a W3C Test Suite, see the [policies and contribution forms](http://www.w3.org/2004/10/27-testcases).
