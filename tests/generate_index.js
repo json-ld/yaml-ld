@@ -73,7 +73,7 @@ async function generateHtml(jsonld, manifest, hpath) {
   const html = `
 <!doctype html>
 <!-- This template is used for generating the HTML representation of the test suite manifests. -->
-<html>
+<html lang="en">
   <head>
     <title>${manifest.name}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -81,7 +81,7 @@ async function generateHtml(jsonld, manifest, hpath) {
     <link rel="styesheet" href="https://www.w3.org/StyleSheets/TR/base" />
     <style>
       dl.entry dt { font-weight: bold}
-    </style
+    </style>
   </head>
   <body>
     <p>
@@ -126,12 +126,12 @@ async function generateHtml(jsonld, manifest, hpath) {
         </p>
 
         <ol>
-          <li>Notify the JSON-LD mailing list,
+          <li>Notify the JSON-LD Community Group mailing list,
             <a href="mailto:public-json-ld-wg@w3.org">
               public-json-ld-wg@w3.org
             </a>,
-            that you will be creating a new test or fix and the purpose of the
-            change.
+          that you will be creating a new test or fix and the purpose of the change,
+          or <a href="https://github.com/json-ld/yaml-ld/issues">create an issue</a>.
           </li>
           <li>Clone the git repository:
             <a href="git://github.com/w3c/json-ld-api.git">
@@ -139,7 +139,12 @@ async function generateHtml(jsonld, manifest, hpath) {
             </a>.
           </li>
           <li>
-            In a separate branch, make your changes and submit them via a GitHub Pull Request.
+            Make your changes on a separate branch and submit them via a
+              <a href="https://github.com/json-ld/yaml-ld/pulls">GitHub Pull Request</a>,
+              or via a 'git format-patch'
+              to the <a href="mailto:public-linked-json@w3.org">
+               JSON-LD Community Group mailing list
+              </a>.
           </li>
         </ol>
       </section>
