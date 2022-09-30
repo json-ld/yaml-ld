@@ -132,7 +132,7 @@ async function generateHtml(jsonld, manifest, hpath) {
             creating a new test or fix and the purpose of the change
             by <a href="https://github.com/json-ld/yaml-ld/issues">creating an issue</a>
             on the <a href="https://github.com/json-ld/yaml-ld">GitHub Repository</a>,
-            or send a message to the group mailing list,
+            or by sending a message to the group mailing list,
             <a href="mailto:public-linked-json@w3.org">public-linked-json@w3.org</a>.
           </li>
           <li>Clone the git repository:

@@ -69,9 +69,9 @@ If you would like to contribute a new test or a fix to an existing test,
 please follow these steps:
 
 1. Notify the JSON-LD Community Group that you will be creating
-  a new test or fix and the purpose of the change
-  by [creating an issue](https://github.com/json-ld/yaml-ld/issues) on the [GitHub Repository](https://github.com/json-ld/yaml-ld),
-  or send a message to the group mailing list, [public-linked-json@w3.org](mailto:public-linked-json@w3.org).
+   a new test or fix and the purpose of the change
+   by [creating an issue](https://github.com/json-ld/yaml-ld/issues) on the [GitHub Repository](https://github.com/json-ld/yaml-ld),
+   or by sending a message to the group mailing list, [public-linked-json@w3.org](mailto:public-linked-json@w3.org).
 2. Clone the git repository: git://github.com/json-ld/yaml-ld-wg.git
 3. Make your changes on a separate branch and submit them via a [GitHub Pull Request](https://github.com/json-ld/yaml-ld/pulls), or via a 'git format-patch'
    to the [JSON-LD Community Group mailing list](mailto:public-linked-json@w3.org).
