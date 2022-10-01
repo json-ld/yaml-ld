@@ -912,7 +912,13 @@
         <li>The conversion result is |stream content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step MUST result
+      <p id="cir-stream" data-tests="
+        basic-manifest.html#aa-json-aliases-1-negative,
+        basic-manifest.html#cr-utf8-2-negative,
+        basic-manifest.html#cr-well-formed-2-negative,
+        extended-manifest.html#aa-cycles-2-negative,
+        extended-manifest.html#cr-well-formed-3-negative">
+        Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -958,7 +964,13 @@
         <li>The conversion result is |document content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step results
+      <p id="cir-document" data-tests="
+        basic-manifest.html#aa-json-aliases-1-negative,
+        basic-manifest.html#cr-utf8-2-negative,
+        basic-manifest.html#cr-well-formed-2-negative,
+        extended-manifest.html#aa-cycles-2-negative,
+        extended-manifest.html#cr-well-formed-3-negative">
+        Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -985,7 +997,7 @@
         <li>The conversion result is |sequence content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step results
+      <p>Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -1020,7 +1032,13 @@
         <li>The conversion result is |mapping content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step results
+      <p id="cir-mapping" data-tests="
+        basic-manifest.html#aa-json-aliases-1-negative,
+        basic-manifest.html#cr-utf8-2-negative,
+        basic-manifest.html#cr-well-formed-2-negative,
+        extended-manifest.html#aa-cycles-2-negative,
+        extended-manifest.html#cr-well-formed-3-negative">
+        Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -1091,7 +1109,9 @@
         and processing MUST end in failure.
       </p>
 
-      <p>
+      <p id="cir-alias-json" data-tests="
+        basic-manifest.html#cr-well-formed-1-positive,
+        basic-manifest.html#cr-well-formed-2-negative">
         If an <a>alias node</a> is encountered when processing the
         <a>YAML representation graph</a>
         and the {{JsonLdOptions/extendedYAML}} flag is `false`,
@@ -1100,7 +1120,10 @@
         and processing aborted. 
       </p>
 
-      <p>
+      <p id="cir-alias-cycles" data-tests="
+        extended-manifest.html#aa-cycles-1-positive,
+        extended-manifest.html#aa-cycles-2-negative,
+        extended-manifest.html#aa-cycles-3-positive">
         If a cycle is detected,
         a processing error MUST be returned,
         and processing aborted. 
