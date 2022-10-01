@@ -15,27 +15,27 @@
       "expectErrorCode": "profile-error"
     },
     {
-      "@id": "#cr-comments-positive-1",
+      "@id": "#cr-comments-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Various comment forms",
       "purpose": "Comments are white space.",
-      "input": "basic/cr-comments-positive-1-in.yamlld",
-      "expect": "basic/cr-comments-positive-1-out.yamlld"
+      "input": "basic/cr-comments-1-positive-in.yamlld",
+      "expect": "basic/cr-comments-1-positive-out.yamlld"
     },
     {
-      "@id": "#cr-utf8-positive-1",
+      "@id": "#cr-utf8-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "UTF-8 BOM",
       "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
-      "input": "basic/cr-utf8-positive-1-in.yamlld",
-      "expect": "basic/cr-utf8-positive-1-out.yamlld"
+      "input": "basic/cr-utf8-1-positive-in.yamlld",
+      "expect": "basic/cr-utf8-1-positive-out.yamlld"
     },
     {
-      "@id": "#cr-utf8-negative-1",
+      "@id": "#cr-utf8-2-negative",
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
       "name": "UTF-16 BOM",
       "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
-      "input": "basic/cr-utf8-negative-1-in.yamlld",
+      "input": "basic/cr-utf8-2-negative-in.yamlld",
       "expectErrorCode": "invalid encoding"
     },
     {
