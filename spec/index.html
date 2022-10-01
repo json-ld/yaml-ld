@@ -627,6 +627,22 @@
   <section id="core-requirements" class="normative">
     <h2>Core Requirements</h2>
 
+    <p id="cr-well-formed" data-tests="
+      basic-manifest.html#cr-well-formed-1-positive,
+      basic-manifest.html#cr-well-formed-2-negative,
+      extended-manifest.html#cr-well-formed-3-negative">
+      As [[YAML]] has well-defined representation requirements,
+      all YAML-LD streams MUST form a
+      <a data-cite="YAML#well-formed-streams-and-identified-aliases">
+        well-formed stream
+      </a>
+      and use <a>node aliases</a> defined by a previous <a>node</a>
+      with a corresponding <a data-lt="node anchor">anchor</a>,
+      otherwise a
+      <a data-link-for="JsonLdErrorCode">loading document failed</a>
+      error has been detected and processing is aborted.
+    </p>
+
     <section id="encoding">
     <h2>Encoding</h2>
 
@@ -653,21 +669,36 @@
 
     <section id="anchors-aliases">
     <h2>Anchors and aliases</h2>
-    <p>
+    <p id="aa-information" data-tests="">
       Since <a>anchor names</a> are a serialization detail, such anchors
       MUST NOT be used to convey relevant information,
       MAY be altered when processing the document,
       and MAY be dropped when interpreting the document as JSON-LD.
     </p>
-    <p>
+    <p class="ednote">
+      Not sure how to test that anchors are not used to convey information.
+      As the Internal Representation has does not have a way of expressing anchors, also not sure how to test for this.
+    </p>
+    <p id="aa-cycles" data-tests="
+      extended-manifest.html#aa-cycles-1-positive,
+      extended-manifest.html#aa-cycles-2-negative,
+      extended-manifest.html#aa-cycles-3-positive">
       A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
-      but its <a>representation graph</a> MUST NOT contain cycles.
+      but its <a>representation graph</a> MUST NOT contain cycles,
+      otherwise an
+      <a data-link-for="JsonLdErrorCode">loading document failed</a>
+      error has been detected and processing is aborted.
       When interpreting the document as JSON-LD,
       alias nodes MUST be resolved by value to their target nodes.
     </p>
-    <p>
+    <p id="aa-json-aliases" data-tests="
+      basic-manifest.html#aa-json-aliases-1-negative,
+      extended-manifest.html#aa-cycles-1-positive">
       When processing using the <a>YAML-LD JSON profile</a>,
-      documents MUST NOT contain <a>alias nodes</a>.
+      documents MUST NOT contain <a>alias nodes</a>,
+      otherwise an
+      <a data-link-for="YamlLdErrorCode">profile-error</a>
+      error has been detected and processing is aborted.
       The <a>YAML-LD extended profile</a> allows full use of
       <a>anchor names</a> and <a>alias nodes</a> subject to
       the requirements described above in this section.
@@ -746,7 +777,6 @@
     <section id="streams">
       <h2>Streams</h2>
 
-
       <p>
         Every YAML-LD file is a <a>YAML-LD stream</a>
         and might contain multiple <a>YAML-LD documents</a>,
@@ -801,7 +831,7 @@
       representation of a document,
       rather than a specific syntactic representation.</p>
 
-    <p>
+    <p id="cir-extended" data-tests="">
       If the {{JsonLdOptions/extendedYAML}} API flag is `true`, the processing result
       will be in the <a>extended internal representation</a>.
     </p>
@@ -882,7 +912,7 @@
         <li>The conversion result is |stream content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step results
+      <p>Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -1634,13 +1664,17 @@
 
       <pre class="idl">
         enum YamlLdErrorCode {
-          "invalid-encoding"
+          "invalid-encoding",
+          "profile-error"
         };
       </pre>
 
       <dl data-dfn-for="YamlLdErrorCode" data-sort>
         <dt><dfn>invalid-encoding</dfn></dt>
         <dd>The character encoding of an input is invalid.</dd>
+        <dt><dfn>profile-error</dfn></dt>
+        <dd>The parsed YAML document contains features incompatible with the specified
+          profile.</dd>
     </section>
   </section>
 

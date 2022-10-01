@@ -5,5 +5,42 @@
   "name": "Tests using YAML-LD Extended Profile",
   "description": "These tests implement the requirements for the [YAML-LD Extended Profile](https://json-ld.github.io/yaml-ld/spec/#yaml-ld-extended-profile).",
   "baseIri": "https://json-ld.github.io/yaml-ld/tests/",
-  "sequence": []
+  "sequence": [
+    {
+      "@id": "#aa-cycles-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Use of anchors and aliases",
+      "purpose": "A YAML-LD document MAY contain anchored nodes and alias nodes.",
+      "option": {"extendedYAML": true},
+      "input": "extended/aa-cycles-1-positive-in.yamlld",
+      "expect": "extended/aa-cycles-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#aa-cycles-2-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Anchors and aliases with cycles",
+      "purpose": "A YAML-LD document ... MUST NOT contain cycles.",
+      "option": {"extendedYAML": true},
+      "input": "extended/aa-cycles-2-negative-in.yamlld",
+      "expectErrorCode": "loading document failed"
+    },
+    {
+      "@id": "#aa-cycles-3-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Alias node resolution",
+      "purpose": "Alias nodes MUST be resolved by value to their target nodes.",
+      "option": {"extendedYAML": true},
+      "input": "extended/aa-cycles-3-positive-in.yamlld",
+      "expect": "extended/aa-cycles-3-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-well-formed-3-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Undefined alias",
+      "purpose": "All document MUST use node aliases defined by a previous node.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cr-well-formed-3-negative-in.yamlld",
+      "expectErrorCode": "loading document failed"
+    }
+  ]
 }

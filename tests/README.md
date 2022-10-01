@@ -42,6 +42,13 @@ YAML-LD object comparison recursively compares JSON objects, arrays, and values 
 
 Note that some tests require re-expansion and comparison, as list values may exist as values of properties that have `@container: @list` and the comparison algorithm will not consider ordering significant.
 
+## Updates to the JSON-LD Test Vocabulary
+
+The following properties are treated as if they are defined in the [JSON-LD Test Vocabulary](https://w3c.github.io/json-ld-api/tests/vocab), but are not yet defined.
+
+* `expectRE`: One or more regular expressions used on a `PositiveSyntax`. In addition to parsing properly, the result must match all listed [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet).
+* `req`: The type of requirement, one of **must**, **should**, or **may**. If unspecified, the normative statement being tested is taken as **must**.
+
 # Running tests
 
 The top-level [manifest](manifest.jsonld) references the specific test manifests, which in turn reference each test associated with a particular type of behavior.

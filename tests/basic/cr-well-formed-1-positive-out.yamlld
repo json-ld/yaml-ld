@@ -1,0 +1,5 @@
+%YAML 1.2
+---
+- "@id": http://example.org/test#example
+  "@type":
+    - http://example.com/t1
