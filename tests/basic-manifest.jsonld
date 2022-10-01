@@ -7,6 +7,22 @@
   "baseIri": "https://json-ld.github.io/yaml-ld/tests/",
   "sequence": [
     {
+      "@id": "#aa-json-aliases-1-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Use of alias node",
+      "purpose": "When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.",
+      "input": "basic/aa-json-aliases-1-negative-in.yamlld",
+      "expectErrorCode": "profile-error"
+    },
+    {
+      "@id": "#cr-comments-positive-1",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Various comment forms",
+      "purpose": "Comments are white space.",
+      "input": "basic/cr-comments-positive-1-in.yamlld",
+      "expect": "basic/cr-comments-positive-1-out.yamlld"
+    },
+    {
       "@id": "#cr-utf8-positive-1",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "UTF-8 BOM",
@@ -23,12 +39,20 @@
       "expectErrorCode": "invalid encoding"
     },
     {
-      "@id": "#cr-comments-positive-1",
+      "@id": "#cr-well-formed-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "Various comment forms",
-      "purpose": "Comments are white space.",
-      "input": "basic/cr-comments-positive-1-in.yamlld",
-      "expect": "basic/cr-comments-positive-1-out.yamlld"
+      "name": "Load a well-formed document",
+      "purpose": "All YAML-LD streams MUST form a well-formed stream.",
+      "input": "basic/cr-well-formed-1-positive-in.yamlld",
+      "expect": "basic/cr-well-formed-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-well-formed-2-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Fail to load a non-well-formed stream",
+      "purpose": "All YAML-LD streams MUST form a well-formed stream.",
+      "input": "basic/cr-well-formed-2-negative-in.yamlld",
+      "expectErrorCode": "loading document failed"
     }
   ]
 }

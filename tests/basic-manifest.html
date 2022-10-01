@@ -119,6 +119,44 @@
       <dl class="entry"><dt>baseIri</dt><dd>https://json-ld.github.io/yaml-ld/tests/</dd></dl>
       <dl class="entry">
       
+              <dt id="aa-json-aliases-1-negative">
+                Test aa-json-aliases-1-negative Use of alias node
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#aa-json-aliases-1-negative</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Use of alias node</dd></dt>
+                  <dt>Purpose</dt><dd>When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/aa-json-aliases-1-negative-in.yamlld">basic/aa-json-aliases-1-negative-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#aa-json-aliases">1</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>profile-error</dd>
+                  
+                </dl>
+              </dd>
+
+              <dt id="cr-comments-positive-1">
+                Test cr-comments-positive-1 Various comment forms
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cr-comments-positive-1</dd></dt>
+                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Various comment forms</dd></dt>
+                  <dt>Purpose</dt><dd>Comments are white space.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-comments-positive-1-in.yamlld">basic/cr-comments-positive-1-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-comments">1</a>)</dd></dt>
+                  
+                  
+                  <dt>Expect</dt><dd><a href="basic/cr-comments-positive-1-out.yamlld">basic/cr-comments-positive-1-out.yamlld</a></dd>
+                  
+                  
+                </dl>
+              </dd>
+
               <dt id="cr-utf8-positive-1">
                 Test cr-utf8-positive-1 UTF-8 BOM
               </dt>
@@ -157,21 +195,40 @@
                 </dl>
               </dd>
 
-              <dt id="cr-comments-positive-1">
-                Test cr-comments-positive-1 Various comment forms
+              <dt id="cr-well-formed-1-positive">
+                Test cr-well-formed-1-positive Load a well-formed document
               </dt>
               <dd>
                 <dl class="entry">
-                  <dt>ID</dt><dd>#cr-comments-positive-1</dd></dt>
+                  <dt>ID</dt><dd>#cr-well-formed-1-positive</dd></dt>
                   <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>Various comment forms</dd></dt>
-                  <dt>Purpose</dt><dd>Comments are white space.</dd></dt>
-                  <dt>Input</dt><dd><a href="basic/cr-comments-positive-1-in.yamlld">basic/cr-comments-positive-1-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-comments">1</a>)</dd></dt>
+                  <dt>Name</dt><dd>Load a well-formed document</dd></dt>
+                  <dt>Purpose</dt><dd>All YAML-LD streams MUST form a well-formed stream.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-well-formed-1-positive-in.yamlld">basic/cr-well-formed-1-positive-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-well-formed">1</a>)</dd></dt>
                   
                   
-                  <dt>Expect</dt><dd><a href="basic/cr-comments-positive-1-out.yamlld">basic/cr-comments-positive-1-out.yamlld</a></dd>
+                  <dt>Expect</dt><dd><a href="basic/cr-well-formed-1-positive-out.yamlld">basic/cr-well-formed-1-positive-out.yamlld</a></dd>
                   
+                  
+                </dl>
+              </dd>
+
+              <dt id="cr-well-formed-2-negative">
+                Test cr-well-formed-2-negative Fail to load a non-well-formed stream
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cr-well-formed-2-negative</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Fail to load a non-well-formed stream</dd></dt>
+                  <dt>Purpose</dt><dd>All YAML-LD streams MUST form a well-formed stream.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cr-well-formed-2-negative-in.yamlld">basic/cr-well-formed-2-negative-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cr-well-formed">1</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>loading document failed</dd>
                   
                 </dl>
               </dd>
