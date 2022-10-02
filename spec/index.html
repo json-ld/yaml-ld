@@ -684,8 +684,8 @@
       extended-manifest.html#aa-cycles-2-negative,
       extended-manifest.html#aa-cycles-3-positive">
       A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
-      but its <a>representation graph</a> MUST NOT contain cycles,
-      otherwise an
+      but its <a>representation graph</a> MUST NOT contain cycles;
+      otherwise, an
       <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-loading-document-failed">loading-document-failed</a>
       error has been detected and processing is aborted.
       When interpreting the document as JSON-LD,
@@ -695,8 +695,8 @@
       basic-manifest.html#aa-json-aliases-1-negative,
       extended-manifest.html#aa-cycles-1-positive">
       When processing using the <a>YAML-LD JSON profile</a>,
-      documents MUST NOT contain <a>alias nodes</a>,
-      otherwise an
+      documents MUST NOT contain <a>alias nodes</a>;
+      otherwise, an
       <a data-link-for="YamlLdErrorCode">profile-error</a>
       error has been detected and processing is aborted.
       The <a>YAML-LD extended profile</a> allows full use of
