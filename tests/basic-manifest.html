@@ -138,6 +138,63 @@
                 </dl>
               </dd>
 
+              <dt id="aa-json-aliases-2-negative">
+                Test aa-json-aliases-2-negative Use of alias node (in array)
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#aa-json-aliases-2-negative</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Use of alias node (in array)</dd></dt>
+                  <dt>Purpose</dt><dd>When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/aa-json-aliases-2-negative-in.yamlld">basic/aa-json-aliases-2-negative-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#aa-json-aliases">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-seq">4</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>profile-error</dd>
+                  
+                </dl>
+              </dd>
+
+              <dt id="cir-document-content-1-negative">
+                Test cir-document-content-1-negative Document with scalar content.
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cir-document-content-1-negative</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Document with scalar content.</dd></dt>
+                  <dt>Purpose</dt><dd>Document content MUST be sequence or mapping.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cir-document-content-1-negative-in.yamlld">basic/cir-document-content-1-negative-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-document-content">1</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>loading document failed</dd>
+                  
+                </dl>
+              </dd>
+
+              <dt id="cir-mapping-key-1-negative">
+                Test cir-mapping-key-1-negative Mapping with integer key.
+              </dt>
+              <dd>
+                <dl class="entry">
+                  <dt>ID</dt><dd>#cir-mapping-key-1-negative</dd></dt>
+                  <dt>Type</dt><dd>jld:NegativeEvaluationTest,jld:ExpandTest</dd>
+                  <dt>Name</dt><dd>Mapping with integer key.</dd></dt>
+                  <dt>Purpose</dt><dd>A mapping key MUST be a string.</dd></dt>
+                  <dt>Input</dt><dd><a href="basic/cir-mapping-key-1-negative-in.yamlld">basic/cir-mapping-key-1-negative-in.yamlld</a></dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-mapping-key">1</a>)</dd></dt>
+                  
+                  
+                  
+                  <dt>Expect Error Code</dt><dd>mapping-key-error</dd>
+                  
+                </dl>
+              </dd>
+
               <dt id="cr-comments-1-positive">
                 Test cr-comments-1-positive Various comment forms
               </dt>

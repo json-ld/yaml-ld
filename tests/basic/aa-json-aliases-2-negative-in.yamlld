@@ -1,0 +1,21 @@
+%YAML 1.2
+# Use of alias node (in array)
+---
+"@context":
+  "@vocab": "http://schema.org/"
+  "countries": "http://publication.europa.eu/resource/authority/country/"
+"@graph":
+- &ITA
+  "@id": countries:ITA
+- &IRL
+  "@id": countries:IRL
+- "@id": http://people.example/Homer
+  name: Homer Simpson
+  nationality:
+    - *ITA
+    - *IR
+- "@id": http://people.example/Lisa
+  name: Lisa Simpson
+  nationality:
+    - *ITA
+    - *IR

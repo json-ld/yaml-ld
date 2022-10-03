@@ -637,8 +637,8 @@
         well-formed stream
       </a>
       and use <a>alias node</a> defined by a previous <a>node</a>
-      with a corresponding <a data-lt="node anchor">anchor</a>,
-      otherwise a
+      with a corresponding <a data-lt="node anchor">anchor</a>;
+      otherwise, a
       <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-loading-document-failed">loading-document-failed</a>
       error has been detected and processing is aborted.
     </p>
@@ -650,8 +650,8 @@
       basic-manifest.html#cr-utf8-1-positive,
       basic-manifest.html#cr-utf8-2-negative">
       A <a>YAML-LD document</a> MUST be encoded in UTF-8,
-      to ensure interoperability with [[JSON]],
-      otherwise an
+      to ensure interoperability with [[JSON]];
+      otherwise, an
       <a data-link-for="YamlLdErrorCode">invalid-encoding</a>
       error has been detected and processing is aborted.
     </p>
@@ -685,7 +685,7 @@
       extended-manifest.html#aa-cycles-3-positive">
       A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
       but its <a>representation graph</a> MUST NOT contain cycles;
-      otherwise, an
+      otherwise, a
       <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-loading-document-failed">loading-document-failed</a>
       error has been detected and processing is aborted.
       When interpreting the document as JSON-LD,
@@ -693,10 +693,11 @@
     </p>
     <p id="aa-json-aliases" data-tests="
       basic-manifest.html#aa-json-aliases-1-negative,
+      basic-manifest.html#aa-json-aliases-2-negative,
       extended-manifest.html#aa-cycles-1-positive">
       When processing using the <a>YAML-LD JSON profile</a>,
       documents MUST NOT contain <a>alias nodes</a>;
-      otherwise, an
+      otherwise, a
       <a data-link-for="YamlLdErrorCode">profile-error</a>
       error has been detected and processing is aborted.
       The <a>YAML-LD extended profile</a> allows full use of
@@ -908,12 +909,20 @@
               merge it to the end of |stream content|.</li>
             <li>Otherwise, append |doc| to |stream content|</li>
           </ol>
+          <div class="ednote">
+            This step is inconsistent with other statements about processing each
+            document separately, resulting in some other stream of JSON-LD output
+            (i.e., something like <em>NDJSOND-LD</em>).
+            Also, presumably an empty stream would result in either
+            an empty <em>NDJSON-LD</em> document, or an empty [[JSON-LD]] document.
+          </div>
         </li>
         <li>The conversion result is |stream content|.</li>
       </ol>
 
       <p id="cir-stream" data-tests="
         basic-manifest.html#aa-json-aliases-1-negative,
+        basic-manifest.html#aa-json-aliases-2-negative,
         basic-manifest.html#cr-utf8-2-negative,
         basic-manifest.html#cr-well-formed-2-negative,
         extended-manifest.html#aa-cycles-2-negative,
@@ -940,13 +949,14 @@
           which will be used to associate each <a>alias node</a>
           with the <a>node</a>
           having the corresponding <a>node anchor</a>.</li>
-        <li>
+        <li id="cir-document-content" data-tests="basic-manifest.html#cir-document-content-1-negative">
           Set |document content| to the result
-            of processing the <a>node</a> associated with the
+          of processing the <a>node</a> associated with the
           <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>,
           using the appropriate conversion step defined in this section.
-          If that <a>node</a> is not one of the following,
-          a processing error MUST be returned, and processing aborted.
+          If that <a>node</a> is not one of the following, a
+          <a data-cite="JSON-LD11-API#dom-jsonlderrorcode-loading-document-failed">loading-document-failed</a>
+          error has been detected and processing is aborted.
 
           <ul>
             <li><a>block sequence</a>,</li>
@@ -966,6 +976,7 @@
 
       <p id="cir-document" data-tests="
         basic-manifest.html#aa-json-aliases-1-negative,
+        basic-manifest.html#aa-json-aliases-2-negative,
         basic-manifest.html#cr-utf8-2-negative,
         basic-manifest.html#cr-well-formed-2-negative,
         extended-manifest.html#aa-cycles-2-negative,
@@ -997,7 +1008,8 @@
         <li>The conversion result is |sequence content|.</li>
       </ol>
 
-      <p>Any error reported in a recursive processing step MUST result
+      <p id="cir-seq" data-tests="basic-manifest.html#aa-json-aliases-2-negative">
+        Any error reported in a recursive processing step MUST result
         in the failure of this processing step.</p>
     </section>
 
@@ -1021,9 +1033,10 @@
             <li>Set |key| and |value|
               to the result of processing |entry|
               using the appropriate conversion step.</li>
-            <li>If |key| is not a <a>string</a>,
-              a processing error MUST be returned,
-              and processing aborted.</li>
+            <li id ="cir-mapping-key" data-tests="basic-manifest.html#cir-mapping-key-1-negative">
+              If |key| is not a <a>string</a>,
+              a <a data-link-for="YamlLdErrorCode">mapping-key-error</a>
+              error has been detected and processing MUST be aborted.</li>
             <li>Add a new <a>entry</a> to
               |mapping content| using
               |key| and |value|.</li>
@@ -1051,18 +1064,22 @@
           has a <a>node tag</a> |t|,
           |n| is mapped as follows:
           <ol>
-            <li>If |t| resolves
-              with a prefix of `tag:yaml.org.2002:`,
+            <li id="cir-scalar-core" data-tests="
+              extended-manifest.html#cir-scalar-core-1-positive,
+              extended-manifest.html#cir-scalar-core-2-positive">
+              If |t| resolves with a prefix of `tag:yaml.org.2002:`,
               the conversion result is mapped through the
               <a data-cite="YAML#core-schema">YAML Core Schema</a>.
             </li>
-            <li>Otherwise, if |t| resolves
-              with a prefix of `https://www.w3.org/ns/i18n#`,
+            <li id="cir-scalar-i18n" data-tests="
+              extended-manifest.html#cir-scalar-i18n-1-positive,
+              extended-manifest.html#cir-scalar-i18n-2-positive">
+              Otherwise, if |t| resolves with a prefix of `https://www.w3.org/ns/i18n#`,
               and the suffix <strong>does not</strong> contain
               an underscore (`"_"`),
               the conversion result is a <a>language-tagged string</a>
               with value taken from |n|,
-              ane a <a>language tag</a> taken from the suffix of |t|.
+              and a <a>language tag</a> taken from the suffix of |t|.
               <div class="note">
                 <a>Node tags</a> including an underscore (`"_"`),
                 such as `i18n:ar-eg_rtl` describe a combination
@@ -1073,20 +1090,17 @@
                 in [[JSON-LD11]].
               </div>
             </li>
-            <li>Otherwise, the conversion result is an
+            <li id="cir-scalar-other" data-tests="
+              extended-manifest.html#cir-scalar-other-1-positive,
+              extended-manifest.html#cir-scalar-other-2-positive">
+              Otherwise, the conversion result is an
               <a>RDF literal</a> with value taken from |n|
               and <a>datatype IRI</a> taken from |t|.
             </li>
           </ol>
         </li>
-        <li>If the {{JsonLdOptions/extendedYAML}} flag is `false`,
-          and |n|
-          has a <a>node tag</a>,
-          the conversion result is mapped through the
-          <a data-cite="YAML#core-schema">YAML Core Schema</a>
-        </li>
         <li>Otherwise, the conversion result is mapped through the
-              <a data-cite="YAML#core-schema">YAML Core Schema</a></li>
+          <a data-cite="YAML#core-schema">YAML Core Schema</a></li>
       </ol>
 
       <p class="note">
@@ -1116,8 +1130,8 @@
         <a>YAML representation graph</a>
         and the {{JsonLdOptions/extendedYAML}} flag is `false`,
         the <a>YAML-LD JSON profile</a> has been selected.
-        A processing error MUST be returned,
-        and processing aborted. 
+        A <a data-link-for="YamlLdErrorCode">profile-error</a>
+        error has been detected and processing MUST be aborted.
       </p>
 
       <p id="cir-alias-cycles" data-tests="
@@ -1688,6 +1702,7 @@
       <pre class="idl">
         enum YamlLdErrorCode {
           "invalid-encoding",
+          "mapping-key-error",
           "profile-error"
         };
       </pre>
@@ -1695,9 +1710,11 @@
       <dl data-dfn-for="YamlLdErrorCode" data-sort>
         <dt><dfn>invalid-encoding</dfn></dt>
         <dd>The character encoding of an input is invalid.</dd>
+        <dt><dfn>mapping-key-error</dfn></dt>
+        <dd>A <a>YAML mapping</a> key was found that was not a <a>string</a>.</dd>
         <dt><dfn>profile-error</dfn></dt>
-        <dd>The parsed YAML document contains features incompatible with the specified
-          profile.</dd>
+        <dd>The parsed YAML document contains features incompatible with the specified profile.</dd>
+      </dl>
     </section>
   </section>
 

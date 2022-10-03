@@ -34,6 +34,60 @@
       "expect": "extended/aa-cycles-3-positive-out.yamlld"
     },
     {
+      "@id": "#cir-scalar-core-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "tag:yaml.org.2002 scalars",
+      "purpose": "If t resolves with a prefix of `tag:yaml.org.2002:`, the conversion result is mapped through the YAML Core Schema.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-core-1-positive-in.yamlld",
+      "expect": "extended/cir-scalar-core-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-core-2-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
+      "name": "tag:yaml.org.2002 scalars (RDF)",
+      "purpose": "If t resolves with a prefix of `tag:yaml.org.2002:`, the conversion result is mapped through the YAML Core Schema.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-core-2-positive-in.yamlld",
+      "expect": "extended/cir-scalar-core-2-positive-out.nq"
+    },
+    {
+      "@id": "#cir-scalar-i18n-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "language-tagged string with i18n",
+      "purpose": "If t resolves with a prefix of `https://www.w3.org/ns/i18n#`, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-i18n-1-positive-in.yamlld",
+      "expect": "extended/cir-scalar-i18n-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-i18n-2-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
+      "name": "language-tagged string with i18n (RDF)",
+      "purpose": "If t resolves with a prefix of `https://www.w3.org/ns/i18n#`, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-i18n-2-positive-in.yamlld",
+      "expect": "extended/cir-scalar-i18n-2-positive-out.nq"
+    },
+    {
+      "@id": "#cir-scalar-other-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Scalars with other node tags",
+      "purpose": "Otherwise, the conversion result is an RDF literal.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-other-1-positive-in.yamlld",
+      "expect": "extended/cir-scalar-other-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-other-2-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
+      "name": "Scalars with other node tags (RDF)",
+      "purpose": "Otherwise, the conversion result is an RDF literal.",
+      "option": {"extendedYAML": true},
+      "input": "extended/cir-scalar-other-2-positive-in.yamlld",
+      "expect": "extended/cir-scalar-other-2-positive-out.nq"
+    },
+    {
       "@id": "#cr-well-formed-3-negative",
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
       "name": "Undefined alias",
