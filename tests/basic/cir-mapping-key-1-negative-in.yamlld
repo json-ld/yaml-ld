@@ -1,0 +1,9 @@
+%YAML 1.1
+# Mapping with integer key
+# A mapping key MUST be a string.
+---
+"@context":
+  "@vocab": http://example.com/
+"@id": http://example.org/test#example
+"@type": t1
+1: an integer key
