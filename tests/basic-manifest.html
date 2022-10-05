@@ -130,6 +130,7 @@
                   <dt>Purpose</dt><dd>When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/aa-json-aliases-1-negative-in.yamlld">basic/aa-json-aliases-1-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#aa-json-aliases">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-mapping">4</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -149,6 +150,7 @@
                   <dt>Purpose</dt><dd>When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/aa-json-aliases-2-negative-in.yamlld">basic/aa-json-aliases-2-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#aa-json-aliases">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-seq">4</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -168,6 +170,7 @@
                   <dt>Purpose</dt><dd>Document content MUST be sequence or mapping.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cir-document-content-1-negative-in.yamlld">basic/cir-document-content-1-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-document-content">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -187,6 +190,7 @@
                   <dt>Purpose</dt><dd>A mapping key MUST be a string.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cir-mapping-key-1-negative-in.yamlld">basic/cir-mapping-key-1-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-mapping-key">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -205,7 +209,8 @@
                   <dt>Name</dt><dd>tag:yaml.org.2002 scalars</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cir-scalar-core-1-positive-in.yamlld">basic/cir-scalar-core-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>)</dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-json">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cir-scalar-core-1-positive-out.yamlld">basic/cir-scalar-core-1-positive-out.yamlld</a></dd>
@@ -224,7 +229,8 @@
                   <dt>Name</dt><dd>language-tagged string with i18n</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cir-scalar-i18n-1-positive-in.yamlld">basic/cir-scalar-i18n-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>)</dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-json">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cir-scalar-i18n-1-positive-out.yamlld">basic/cir-scalar-i18n-1-positive-out.yamlld</a></dd>
@@ -243,7 +249,8 @@
                   <dt>Name</dt><dd>Scalars with other node tags</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cir-scalar-other-1-positive-in.yamlld">basic/cir-scalar-other-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>)</dd></dt>
+                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-json">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cir-scalar-other-1-positive-out.yamlld">basic/cir-scalar-other-1-positive-out.yamlld</a></dd>
@@ -263,6 +270,7 @@
                   <dt>Purpose</dt><dd>Comments are white space.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cr-comments-1-positive-in.yamlld">basic/cr-comments-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-comments">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cr-comments-1-positive-out.yamlld">basic/cr-comments-1-positive-out.yamlld</a></dd>
@@ -282,6 +290,7 @@
                   <dt>Purpose</dt><dd>A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cr-utf8-1-positive-in.yamlld">basic/cr-utf8-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-utf8">1</a>) (<a href="../spec/index.html#jp-utf8">2</a>) (<a href="../spec/index.html#ep-utf8">3</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cr-utf8-1-positive-out.yamlld">basic/cr-utf8-1-positive-out.yamlld</a></dd>
@@ -301,6 +310,7 @@
                   <dt>Purpose</dt><dd>A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cr-utf8-2-negative-in.yamlld">basic/cr-utf8-2-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-utf8">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-mapping">4</a>) (<a href="../spec/index.html#jp-utf8">5</a>) (<a href="../spec/index.html#ep-utf8">6</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -320,6 +330,7 @@
                   <dt>Purpose</dt><dd>All YAML-LD streams MUST form a well-formed stream.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cr-well-formed-1-positive-in.yamlld">basic/cr-well-formed-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-well-formed">1</a>) (<a href="../spec/index.html#cir-alias-json">2</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="basic/cr-well-formed-1-positive-out.yamlld">basic/cr-well-formed-1-positive-out.yamlld</a></dd>
@@ -339,6 +350,7 @@
                   <dt>Purpose</dt><dd>All YAML-LD streams MUST form a well-formed stream.</dd></dt>
                   <dt>Input</dt><dd><a href="basic/cr-well-formed-2-negative-in.yamlld">basic/cr-well-formed-2-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-well-formed">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-mapping">4</a>) (<a href="../spec/index.html#cir-alias-json">5</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   

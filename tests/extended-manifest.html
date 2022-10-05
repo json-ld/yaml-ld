@@ -130,6 +130,7 @@
                   <dt>Purpose</dt><dd>A YAML-LD document MAY contain anchored nodes and alias nodes.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/aa-cycles-1-positive-in.yamlld">extended/aa-cycles-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#aa-cycles">1</a>) (<a href="../spec/index.html#aa-json-aliases">2</a>) (<a href="../spec/index.html#cir-alias-cycles">3</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>may</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/aa-cycles-1-positive-out.yamlld">extended/aa-cycles-1-positive-out.yamlld</a></dd>
@@ -152,6 +153,7 @@
                   <dt>Purpose</dt><dd>A YAML-LD document ... MUST NOT contain cycles.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/aa-cycles-2-negative-in.yamlld">extended/aa-cycles-2-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#aa-cycles">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-mapping">4</a>) (<a href="../spec/index.html#cir-alias-cycles">5</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   
@@ -174,6 +176,7 @@
                   <dt>Purpose</dt><dd>Alias nodes MUST be resolved by value to their target nodes.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/aa-cycles-3-positive-in.yamlld">extended/aa-cycles-3-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#aa-cycles">1</a>) (<a href="../spec/index.html#cir-alias-cycles">2</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/aa-cycles-3-positive-out.yamlld">extended/aa-cycles-3-positive-out.yamlld</a></dd>
@@ -196,6 +199,7 @@
                   <dt>Purpose</dt><dd>If t resolves with a prefix of <code>tag:yaml.org.2002:</code>, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-core-1-positive-in.yamlld">extended/cir-scalar-core-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-core-1-positive-out.yamlld">extended/cir-scalar-core-1-positive-out.yamlld</a></dd>
@@ -218,6 +222,7 @@
                   <dt>Purpose</dt><dd>If t resolves with a prefix of <code>tag:yaml.org.2002:</code>, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-core-2-positive-in.yamlld">extended/cir-scalar-core-2-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-core-2-positive-out.nq">extended/cir-scalar-core-2-positive-out.nq</a></dd>
@@ -240,6 +245,7 @@
                   <dt>Purpose</dt><dd>If t resolves with a prefix of <code>https://www.w3.org/ns/i18n#</code>, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-i18n-1-positive-in.yamlld">extended/cir-scalar-i18n-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-i18n">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-i18n-1-positive-out.yamlld">extended/cir-scalar-i18n-1-positive-out.yamlld</a></dd>
@@ -262,6 +268,7 @@
                   <dt>Purpose</dt><dd>If t resolves with a prefix of <code>https://www.w3.org/ns/i18n#</code>, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-i18n-2-positive-in.yamlld">extended/cir-scalar-i18n-2-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-i18n">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-i18n-2-positive-out.nq">extended/cir-scalar-i18n-2-positive-out.nq</a></dd>
@@ -284,6 +291,7 @@
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is an RDF literal.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-other-1-positive-in.yamlld">extended/cir-scalar-other-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-other">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-other-1-positive-out.yamlld">extended/cir-scalar-other-1-positive-out.yamlld</a></dd>
@@ -306,6 +314,7 @@
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is an RDF literal.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cir-scalar-other-2-positive-in.yamlld">extended/cir-scalar-other-2-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-other">1</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="extended/cir-scalar-other-2-positive-out.nq">extended/cir-scalar-other-2-positive-out.nq</a></dd>
@@ -328,6 +337,7 @@
                   <dt>Purpose</dt><dd>All document MUST use node aliases defined by a previous node.</dd></dt>
                   <dt>Input</dt><dd><a href="extended/cr-well-formed-3-negative-in.yamlld">extended/cr-well-formed-3-negative-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cr-well-formed">1</a>) (<a href="../spec/index.html#cir-stream">2</a>) (<a href="../spec/index.html#cir-document">3</a>) (<a href="../spec/index.html#cir-mapping">4</a>)</dd></dt>
+                  <dt>Requirement</dt><dd><strong>must</strong></dd>
                   
                   
                   

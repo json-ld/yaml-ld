@@ -213,6 +213,7 @@ async function generateHtml(jsonld, manifest, hpath) {
                   <dt>References</dt><dd>${
                     entry.specRefs.map((r, ndx) => `(<a href="../spec/index.html#${r}">${ndx + 1}</a>)`).join(' ')
                   }</dd></dt>
+                  <dt>Requirement</dt><dd><strong>${entry.req || 'must'}</strong></dd>
                   ${entry.context ? `<dt>Context</dt><dd><a href="${entry.context}">${entry.context}</a></dd>` : ''}
                   ${entry.frame ? `<dt>Frame</dt><dd><a href="${entry.frame}">${entry.frame}</a></dd>` : ''}
                   ${entry.expect ? `<dt>Expect</dt><dd><a href="${entry.expect}">${entry.expect}</a></dd>` : ''}

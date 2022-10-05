@@ -11,6 +11,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Use of anchors and aliases",
       "purpose": "A YAML-LD document MAY contain anchored nodes and alias nodes.",
+      "req": "may",
       "option": {"extendedYAML": true},
       "input": "extended/aa-cycles-1-positive-in.yamlld",
       "expect": "extended/aa-cycles-1-positive-out.yamlld"
@@ -20,6 +21,7 @@
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
       "name": "Anchors and aliases with cycles",
       "purpose": "A YAML-LD document ... MUST NOT contain cycles.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/aa-cycles-2-negative-in.yamlld",
       "expectErrorCode": "loading document failed"
@@ -29,6 +31,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Alias node resolution",
       "purpose": "Alias nodes MUST be resolved by value to their target nodes.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/aa-cycles-3-positive-in.yamlld",
       "expect": "extended/aa-cycles-3-positive-out.yamlld"
@@ -38,6 +41,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "tag:yaml.org.2002 scalars",
       "purpose": "If t resolves with a prefix of `tag:yaml.org.2002:`, the conversion result is mapped through the YAML Core Schema.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-core-1-positive-in.yamlld",
       "expect": "extended/cir-scalar-core-1-positive-out.yamlld"
@@ -47,6 +51,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
       "name": "tag:yaml.org.2002 scalars (RDF)",
       "purpose": "If t resolves with a prefix of `tag:yaml.org.2002:`, the conversion result is mapped through the YAML Core Schema.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-core-2-positive-in.yamlld",
       "expect": "extended/cir-scalar-core-2-positive-out.nq"
@@ -56,6 +61,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "language-tagged string with i18n",
       "purpose": "If t resolves with a prefix of `https://www.w3.org/ns/i18n#`, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-i18n-1-positive-in.yamlld",
       "expect": "extended/cir-scalar-i18n-1-positive-out.yamlld"
@@ -65,6 +71,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
       "name": "language-tagged string with i18n (RDF)",
       "purpose": "If t resolves with a prefix of `https://www.w3.org/ns/i18n#`, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-i18n-2-positive-in.yamlld",
       "expect": "extended/cir-scalar-i18n-2-positive-out.nq"
@@ -74,6 +81,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Scalars with other node tags",
       "purpose": "Otherwise, the conversion result is an RDF literal.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-other-1-positive-in.yamlld",
       "expect": "extended/cir-scalar-other-1-positive-out.yamlld"
@@ -83,6 +91,7 @@
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
       "name": "Scalars with other node tags (RDF)",
       "purpose": "Otherwise, the conversion result is an RDF literal.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cir-scalar-other-2-positive-in.yamlld",
       "expect": "extended/cir-scalar-other-2-positive-out.nq"
@@ -92,6 +101,7 @@
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
       "name": "Undefined alias",
       "purpose": "All document MUST use node aliases defined by a previous node.",
+      "req": "must",
       "option": {"extendedYAML": true},
       "input": "extended/cr-well-formed-3-negative-in.yamlld",
       "expectErrorCode": "loading document failed"
