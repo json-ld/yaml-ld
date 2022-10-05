@@ -39,6 +39,30 @@
       "expectErrorCode": "mapping-key-error"
     },
     {
+      "@id": "#cir-scalar-core-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "tag:yaml.org.2002 scalars",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "input": "basic/cir-scalar-core-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-core-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-i18n-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "language-tagged string with i18n",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "input": "basic/cir-scalar-i18n-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-i18n-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-other-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Scalars with other node tags",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "input": "basic/cir-scalar-other-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-other-1-positive-out.yamlld"
+    },
+    {
       "@id": "#cr-comments-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Various comment forms",
