@@ -6,14 +6,14 @@
 <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
 <script src="../common/common.js" class="remove" defer></script>
 <script class='remove'>
-  // Use fragment identifer of test as name.
+  // Use fragment identifier of test as name.
   function data_test_display() {
       const test_references = document.querySelectorAll('details.respec-tests-details a');
       for( const a of test_references ) {
           const href = a.href;
           const test_reference = href.split('#')[1];
           a.textContent = test_reference;
-      }    
+      }
   }
 
   var respecConfig = {
@@ -533,21 +533,102 @@
       interoperability considerations.
     </p>
 
-    <p>
-      This is because YAML is more flexible than [[JSON]]:
-    </p>
+    <section id="json-vs-yaml">
+      <h3>JSON vs YAML comparison</h3>
 
-    <ul>
-      <li>YAML supports different encodings, including UTF-8, UTF-16, and UTF-32.</li>
-      <li>YAML supports more native data types than JSON.</li>
-      <li>The structure of a <a>YAML document</a> &mdash; that is, a <a>YAML representation graph</a> &mdash;
-      is a rooted, directed graph that can have cycles.</li>
-      <li>YAML is serialized as a <a>YAML stream</a>, which is a sequence of <a>YAML documents</a>.
-          While a stream often contains one document,
-          streams with multiple documents are used to aggregate multiple,
-          related, documents into a single file or network stream.
-      </li>
-    </ul>
+      <p>YAML is more flexible than JSON, as illustrated by comparison table below.</p>
+
+      <table class="simple">
+        <thead>
+        <tr>
+          <th>Features</th>
+          <th>[[JSON]]</th>
+          <th>[[YAML]]</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th colspan="3">Allowed encodings</th>
+        </tr>
+
+        <tr>
+          <th>UTF-8</th>
+          <td><a data-cite="JSON#section-8.1">✔️</a></td>
+          <td><a data-cite="YAML#52-character-encodings">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>UTF-16</th>
+          <td><a data-cite="JSON#section-8.1">❌</a></td>
+          <td><a data-cite="YAML#52-character-encodings">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>UTF-32</th>
+          <td><a data-cite="JSON#section-8.1">❌</a></td>
+          <td><a data-cite="YAML#52-character-encodings">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th colspan="3">Native data types</th>
+        </tr>
+
+        <tr>
+          <th><code>{}</code> object</th>
+          <td><a data-cite="JSON#section-4">✔️</a></td>
+          <td><a data-cite="YAML#3211-nodes">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th><code>[]</code> array</th>
+          <td><a data-cite="JSON#section-5">✔️</a></td>
+          <td><a data-cite="YAML#3211-nodes">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>string</th>
+          <td><a data-cite="JSON#section-7">✔️</a></td>
+          <td><a data-cite="YAML#3211-nodes">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>number</th>
+          <td><a data-cite="JSON#section-6">✔️</a></td>
+          <td>✔️<a data-cite="YAML#10213-integer">integer</a> <a data-cite="YAML#10214-floating-point">floating
+            point</a></td>
+        </tr>
+
+        <tr>
+          <th>bool</th>
+          <td><a data-cite="JSON#section-3">✔️</a></td>
+          <td><a data-cite="YAML#10212-boolean">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>null</th>
+          <td><a data-cite="JSON#section-3">✔️</a></td>
+          <td><a data-cite="YAML#10211-null">✔️</a></td>
+        </tr>
+
+        <tr>
+          <th>custom types</th>
+          <td>❌</td>
+          <td>✔️ via <a data-cite="YAML#tags">tags</a></td>
+        </tr>
+
+        <tr>
+          <th>Cycles</th>
+          <td>❌</td>
+          <td><a data-cite="YAML#321-representation-graph">✔️</a></td>
+        </tr>
+        <tr>
+          <th>Documents per file</th>
+          <td>1</td>
+          <td>⩾ 1 via <a>YAML stream</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
 
     <p>
       The first goal of this specification is to allow a <a>JSON-LD document</a> to be
@@ -1192,7 +1273,7 @@
       <h2>Extended YAML-LD Profile</h2>
 
       <p>
-        To take better advantage of the broader expressivity of YAML,
+        To take better advantage of the <a href="#json-vs-yaml">broader expressivity of YAML</a>,
         this document also defines a means of extending the
         <a>JSON-LD internal representation</a> to allow a more complete expression
         of native data types within YAML-LD, and allows use of the complete
