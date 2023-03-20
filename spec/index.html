@@ -1284,8 +1284,65 @@
     <section id="extended-profile" class="informative">
       <h2>Extended YAML-LD Profile</h2>
 
+      <section>
+        <h2>Motivation</h2>
+
+        <p>
+          The YAML-LD specification relies upon YAML to serialize Linked Data to the extent
+          of YAML being compatible with JSON, which simplifies the operation and usage
+          of the data format described. However, the <a href="#json-vs-yaml">more
+          expressive feature set</a> YAML supports invites to try these features to represent
+          Linked Data in a more expressive way.
+        </p>
+
+        <section>
+          <h2>Specify node <code>@type</code></h2>
+
+          <p>In RDF, <code>@type</code> translates to either:</p>
+
+          <ul>
+            <li>an <code>rdf:type</code> edge,</li>
+            <li>or a <code>datatype</code> mark for a Literal node.</li>
+          </ul>
+
+          <p>Conceivable methods to specify it in YAML-LD are:</p>
+
+          <ul>
+            <li>In the <code>@context</code> — only to say that the node is an IRI,</li>
+            <li>Inline using <code>@type</code> keyword,</li>
+            <li>Or using a YAML Tag, as shown below.</li>
+          </ul>
+
+          <pre
+            class="example yaml"
+            data-transform="updateExample"
+            data-result-for="YAML-LD: Tags"
+            data-content-type="application/ld+json"
+            title="YAML-LD with tags"
+          >
+            %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
+            ---
+            "@id": yaml-ld
+            updated-at: !xsd:date 2023-03-21
+          </pre>
+        </section>
+
+        <p>
+          Here, <code>%TAG</code> declares <code>!xsd:</code> prefix for tags used
+          in the document. YAML treats tags as IRIs, which brings it close to the LD family
+          of data formatting tools. Note that directives section must be separated
+          with <code>---</code> from the main document.
+        </p>
+
+        <section>
+          <h2>Reference one node in multiple places</h2>
+
+          …
+        </section>
+      </section>
+
+
       <p>
-        To take better advantage of the <a href="#json-vs-yaml">broader expressivity of YAML</a>,
         this document also defines a means of extending the
         <a>JSON-LD internal representation</a> to allow a more complete expression
         of native data types within YAML-LD, and allows use of the complete
