@@ -1308,7 +1308,11 @@
           <p>Possible ways to specify this in YAML-LD are the following:</p>
 
           <ul>
-            <li>In the <code>@context</code>, only to say that the node is an IRI</li>
+            <li>In the <code>@context</code>, where we can only say that the node is an IRI</li>
+            <li>
+              Using [[RDF-SCHEMA]] and [[OWL2-SYNTAX]] based logical reasoning, for example, via
+              <code>rdfs:domain</code> property
+            </li>
             <li>Inline, using the <code>@type</code> keyword</li>
             <li>Using a YAML Tag, as shown below</li>
           </ul>
@@ -1322,8 +1326,10 @@
           >
             %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
             ---
-            "@id": yaml-ld
-            updated-at: !xsd:date 2023-03-21
+            "@context":
+              schema: https://schema.org/
+            "@id": https://yaml-ld.example
+            schema:dateModified: !xsd:date 2023-03-21
           </pre>
         </section>
 
@@ -1331,16 +1337,43 @@
           Here, <code>%TAG</code> declares the <code>!xsd:</code> prefix for tags used
           in the document. YAML treats tags as IRIs, which brings it close to the LD family
           of data formatting tools. Note that the directives section must be separated
-          from the main document with <code>---</code> (a line containing only three hyphens).
+          from the main document with <code>---</code> (a line containing exactly three hyphens).
         </p>
 
         <section>
-          <h2>Reference one node in multiple places</h2>
+          <h2>Reduce duplication</h2>
 
-          …
+          <p>
+            If a segment of a YAML document has to be repeated more than once, one of the
+            following approaches can be taken:
+          </p>
+
+          <ul>
+            <li>Repeat the segment as many times as necessary</li>
+            <li>If the segment represents a node, use YAML-LD <code>@id</code></li>
+            <li>
+              Use YAML <a data-cite="YAML#3222-anchors-and-aliases">anchors & aliases</a>
+              as shown in the example below
+            </li>
+          </ul>
+
+          <pre
+            class="example yaml"
+            data-transform="updateExample"
+            data-result-for="YAML-LD: Anchors & Aliases"
+            data-content-type="application/ld+json"
+            title="YAML-LD with tags"
+          >
+            "@context":
+              schema: https://schema.org/
+            "@id": https://yaml-ld.example
+            schema:author:
+              - schema:name: Gregg Kellogg
+                schema:url: https://greggkellogg.net/
+              - … TODO: Invent a good example where it would be needed to repeat a fragment ☹
+          </pre>
         </section>
       </section>
-
 
       <p>
         this document also defines a means of extending the
