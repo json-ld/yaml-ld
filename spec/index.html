@@ -1314,23 +1314,24 @@
               <code>rdfs:domain</code> property
             </li>
             <li>Inline, using the <code>@type</code> keyword</li>
-            <li>Using a YAML Tag, as shown below</li>
+            <li>
+              <p>Using a YAML Tag, as shown below:</p>
+              <pre
+                class="example yaml"
+                data-transform="updateExample"
+                data-result-for="YAML-LD: Tags"
+                data-content-type="application/ld+json"
+                title="YAML-LD with tags"
+              >
+                %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
+                ---
+                "@context":
+                  schema: https://schema.org/
+                "@id": https://yaml-ld.example
+                schema:dateModified: !xsd:date 2023-03-21
+              </pre>
+            </li>
           </ul>
-
-          <pre
-            class="example yaml"
-            data-transform="updateExample"
-            data-result-for="YAML-LD: Tags"
-            data-content-type="application/ld+json"
-            title="YAML-LD with tags"
-          >
-            %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
-            ---
-            "@context":
-              schema: https://schema.org/
-            "@id": https://yaml-ld.example
-            schema:dateModified: !xsd:date 2023-03-21
-          </pre>
         </section>
 
         <p>
@@ -1352,26 +1353,27 @@
             <li>Repeat the segment as many times as necessary</li>
             <li>If the segment represents a node, use YAML-LD <code>@id</code></li>
             <li>
-              Use YAML <a data-cite="YAML#3222-anchors-and-aliases">anchors & aliases</a>
-              as shown in the example below
+              <p>
+                Use YAML <a data-cite="YAML#3222-anchors-and-aliases">anchors & aliases</a>
+                as shown in the example below:
+              </p>
+              <pre
+                class="example yaml"
+                data-transform="updateExample"
+                data-result-for="YAML-LD: Anchors & Aliases"
+                data-content-type="application/ld+json"
+                title="YAML-LD: Anchors & Aliases"
+              >
+                "@context":
+                  schema: https://schema.org/
+                "@id": https://yaml-ld.example
+                schema:author:
+                  - schema:name: Gregg Kellogg
+                    schema:url: https://greggkellogg.net/
+                  - … TODO: Invent a good example where it would be needed to repeat a fragment ☹
+              </pre>
             </li>
           </ul>
-
-          <pre
-            class="example yaml"
-            data-transform="updateExample"
-            data-result-for="YAML-LD: Anchors & Aliases"
-            data-content-type="application/ld+json"
-            title="YAML-LD with tags"
-          >
-            "@context":
-              schema: https://schema.org/
-            "@id": https://yaml-ld.example
-            schema:author:
-              - schema:name: Gregg Kellogg
-                schema:url: https://greggkellogg.net/
-              - … TODO: Invent a good example where it would be needed to repeat a fragment ☹
-          </pre>
         </section>
       </section>
 
