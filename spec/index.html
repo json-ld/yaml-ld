@@ -1330,16 +1330,16 @@
                 "@id": https://yaml-ld.example
                 schema:dateModified: !xsd:date 2023-03-21
               </pre>
+
+              <p>
+                Here, <code>%TAG</code> declares the <code>!xsd:</code> prefix for tags used
+                in the document. YAML treats tags as IRIs, which brings it close to the LD family
+                of data formatting tools. Note that the directives section must be separated
+                from the main document with <code>---</code> (a line containing exactly three hyphens).
+              </p>
             </li>
           </ul>
         </section>
-
-        <p>
-          Here, <code>%TAG</code> declares the <code>!xsd:</code> prefix for tags used
-          in the document. YAML treats tags as IRIs, which brings it close to the LD family
-          of data formatting tools. Note that the directives section must be separated
-          from the main document with <code>---</code> (a line containing exactly three hyphens).
-        </p>
 
         <section>
           <h2>Reduce duplication</h2>
@@ -1376,6 +1376,8 @@
           </ul>
         </section>
       </section>
+
+      <p>…</p>
 
       <p>
         this document also defines a means of extending the
