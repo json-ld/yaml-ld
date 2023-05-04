@@ -1390,9 +1390,7 @@
             </li>
           </ul>
         </section>
-      </section>
 
-      <section>
         <p>
           Two alternative approaches have been proposed to implement the Extended profile:
         </p>
@@ -2383,12 +2381,127 @@
           </section>
         </section>
 
+        <section>
+          <h2>Implementations</h2>
+
+          TODO
+        </section>
+
       </section>
 
       <section>
         <h2>Convert Extended YAML-LD to Basic YAML-LD and back</h2>
 
-        TODO
+        <p>
+          This approach is simpler than the Extended Internal Representation because it
+          does not require any changes to the internal structures of existing JSON-LD
+          libraries.
+        </p>
+
+        <p>
+          Instead, we implement two API functions:
+        </p>
+
+        <dl data-sort>
+          <dt><code>extended_to_basic(extended_document: YAML-LD) → YAML-LD</code></dt>
+          <dd>
+            Converts an Extended YAML-LD document to a JSON-LD document that a standard
+            processor can work with
+          </dd>
+
+          <dt><code>basic_to_extended(basic_document: JSON-LD | YAML-LD) → YAML-LD</code></dt>
+          <dd>
+            Converts a basic JSON-LD or YAML-LD document to the Extended form, making
+            use of YAML-LD features to express the document more concisely.
+          </dd>
+        </dl>
+
+        <p>
+          Both of these functions recursively process the source document.
+          Every branch and leaf are copied as is, unless they match one of the following
+          cases.
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th></th>
+              <th><code>extended_to_basic</code></th>
+              <th><code>basic_to_extended</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>YAML Tags</th>
+              <td>
+                <a href="#tags-to-types">Convert</a> YAML <code>!tags</code>
+                → <code>@type</code> JSON-LD keywords
+              </td>
+              <td>(nothing)</td>
+            </tr>
+            <tr>
+              <th>Anchors and aliases</th>
+              <td><a href="#resolve-anchors-aliases">Resolve</a> anchors and aliases</td>
+              <td>(nothing)</td>
+            </tr>
+            <tr>
+              <th>Comments</th>
+              <td colspan="2" style="text-align: center">
+                Keep as-is
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <section id="tags-to-types">
+          <h2>YAML <code>!tags</code> → <code>@type</code> declarations</h2>
+
+          <div style="display: flex">
+              <div>
+                <pre
+                  class="example yaml"
+                  data-transform="updateExample"
+                  data-result-for="YAML-LD: Tags"
+                  data-content-type="application/ld+json"
+                  title="Extended YAML-LD with tags"
+                >
+                  %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
+                  ---
+                  "@context":
+                    schema: https://schema.org/
+                  "@id": https://yaml-ld.example
+                  schema:dateModified: !xsd:date 2023-03-21
+                </pre>
+              </div>
+              <div>
+                <pre
+                  class="example yaml"
+                  data-transform="updateExample"
+                  data-result-for="YAML-LD: Tags"
+                  data-content-type="application/ld+json"
+                  title="Basic YAML-LD"
+                >
+                  "@context":
+                    schema: https://schema.org/
+                    xsd: http://www.w3.org/2001/XMLSchema#
+                  "@id": https://yaml-ld.example
+                  schema:dateModified:
+                    "@type": xsd:date
+                    "@value": "2023-03-21"
+                </pre>
+              </div>
+            </div>
+        </section>
+
+        <section id="resolve-anchors-aliases">
+          <h2><code>&anchors</code> and <code>*aliases</code></h2>
+
+          <p>
+            Substitute every <code>*alias</code> with the content of
+            the <code>&anchor</code> alias references to. This is standard behavior
+            of YAML tools and libraries.
+          </p>
+        </section>
       </section>
 
     </section>
