@@ -2384,7 +2384,9 @@
         <section>
           <h2>Implementations</h2>
 
-          TODO
+          <p>
+            TODO: Implementations for Extended Internal Representation.
+          </p>
         </section>
 
       </section>
@@ -2405,14 +2407,21 @@
         <dl data-sort>
           <dt><code>extended_to_basic(extended_document: YAML-LD) → YAML-LD</code></dt>
           <dd>
-            Converts an Extended YAML-LD document to a YAML-LD document that a standard
-            processor can work with
+            <ul>
+              <li>Performs JSON-LD expansion to the given Extended YAML-LD document</li>
+              <li>Converts it to Basic YAML-LD form</li>
+            </ul>
           </dd>
 
-          <dt><code>basic_to_extended(basic_document: JSON-LD | YAML-LD) → YAML-LD</code></dt>
+          <dt><code>basic_to_extended(basic_document: YAML-LD) → YAML-LD</code></dt>
           <dd>
-            Converts a basic JSON-LD or YAML-LD document to the Extended form, making
-            use of YAML-LD features to express the document more concisely.
+            <ul>
+              <li>Performs JSON-LD expansion to the given Basic YAML-LD document</li>
+              <li>
+                Converts it to the Extended form, making
+                use of YAML-LD features to express the document more concisely.
+              </li>
+            </ul>
           </dd>
         </dl>
 
@@ -2420,6 +2429,25 @@
           Both of these functions recursively process the source document.
           Every branch and leaf are copied as is, unless they match one of the following
           cases.
+        </p>
+
+        <p>Generally, these two equalities <strong>do not</strong> hold:</p>
+
+        <ul>
+          <li><code>extended_to_basic(basic_to_extended(document)) = document</code></li>
+          <li><code>basic_to_extended(extended_to_basic(document)) = document</code></li>
+        </ul>
+
+        <p>
+          When the extended → basic conversion resolves YAML tags
+          we no longer know where the original document used tags and where
+          it used <code>@type</code> calls. Thus, information is lost.
+        </p>
+
+        <p>
+          Both of these functions lose information about anchors and
+          references because they're resolved by the YAML processor
+          underlying the implementation.
         </p>
 
         <table class="simple">
