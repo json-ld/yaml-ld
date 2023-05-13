@@ -2416,7 +2416,9 @@
           <dt><code>basic_to_extended(basic_document: YAML-LD) → YAML-LD</code></dt>
           <dd>
             <ul>
-              <li>Performs JSON-LD expansion to the given Basic YAML-LD document</li>
+              <li>Converts YAML-LD → JSON</li>
+              <li>Performs JSON-LD expansion → the resulting JSON-LD document</li>
+              <li>Converts Expanded JSON-LD document back to YAML-LD</li>
               <li>
                 Converts it to the Extended form, making
                 use of YAML-LD features to express the document more concisely.
@@ -2424,6 +2426,19 @@
             </ul>
           </dd>
         </dl>
+
+        <div class="note">
+          ou won't typically need to perform these steps manually
+          because libraries such as <code>rdflib</code> will take care of them
+          under the covers, but it can help with troubleshooting and
+          optimization to know what's going on. So, you start with YAML,
+          convert it to JSON, perform JSON-LD Expansion, convert that to
+          YAML-LD, and do any necessary basic → extended or extended → basic
+          conversion on the YAML-LD. Alternatively, your library might do
+          YAML-LD expansion directly on the initial YAML document, and then
+          do any necessary basic → extended or extended → basic conversion on
+          the YAML-LD.
+        </div>
 
         <p>
           Both of these functions recursively process the source document.
