@@ -665,10 +665,15 @@
          title="Basic JSON-LD document">
       <!--
       {
-        "@context": "https://json-ld.org/contexts/person.jsonld",
-        "name": "Joe Hacker",
-        "homepage": "https://example.org/joe.hacker/",
-        "image": "https://example.org/joe.hacker/image.png"
+        "@context": "https://schema.org/",
+
+        "@id": "https://w3c.org/yaml-ld/",
+        "@type": "WebContent",
+        "name": "YAML-LD",
+        "author": {
+          "@id": "https://www.w3.org/community/json-ld",
+          "name": "JSON-LD Community Group"
+        }
       }
       -->
     </pre>
@@ -686,12 +691,14 @@
          data-content-type="application/ld+yaml"
          title="Basic YAML-LD document">
       <!--
-      %YAML 1.2
-      ---
-      '@context': https://json-ld.org/contexts/person.jsonld
-      name:     Joe Hacker
-      homepage: https://example.org/joe.hacker/
-      image:    https://example.org/joe.hacker/image.png
+      "@context": https://schema.org/
+
+      "@id": https://w3c.org/yaml-ld/
+      "@type": WebContent
+      name: YAML-LD
+      author:
+        "@id": https://www.w3.org/community/json-ld
+        name: JSON-LD Community Group
       -->
     </pre>
 
@@ -758,28 +765,32 @@
 
     <p>
       The <a>YAML-LD document</a> in the following example
-      contains alias nodes for the `{"@id": "countries:ITA"}` object:
+      contains alias nodes for the `{"@id": "countries:US"}` object:
     </p>
 
     <pre class="example yaml"
          data-transform="updateExample"
          data-content-type="application/ld+yaml"
          title="YAML-LD with node anchors">
-       <!--
-        %YAML 1.2
-        ---
-        "@context":
-          "@vocab": "http://schema.org/"
-          "countries": "http://publication.europa.eu/resource/authority/country/"
-        "@graph":
-        - &ITA
-          "@id": countries:ITA
-        - "@id": http://people.example/Homer
-          name: Homer Simpson
-          nationality: *ITA
-        - "@id": http://people.example/Lisa
-          name: Lisa Simpson
-          nationality: *ITA
+       <!--`
+      "@context":
+        "@import": https://schema.org/
+        country: https://publication.europa.eu/resource/authority/country/
+
+      "@included":
+        - &US
+          "@id": country:US
+        - "@id": https://www.w3.org/community/json-ld
+          "@type": Organization
+          member:
+            - "@id": https://github.com/gkellogg
+              "@type": Person
+              name: Gregg Kellogg
+              country: *US
+            - "@id": https://github.com/BigBlueHat
+              "@type": Person
+              name: Benjamin BigBlueHat
+              country: *US
       -->
     </pre>
 
@@ -797,31 +808,39 @@
          data-content-type="application/ld+json"
          title="JSON-LD resulting from YAML with node anchors">
       <!--
-      {
-        "@context": {
-          "@vocab": "http://schema.org/",
-          "countries": "http://publication.europa.eu/resource/authority/country/"
-        },
-        "@graph": [
-          {
-            "@id": "countries:ITA"
+        {
+          "@context": {
+            "@import": "https://schema.org/",
+            "country": "https://publication.europa.eu/resource/authority/country/"
           },
-          {
-            "@id": "http://people.example/Homer",
-            "full_name": "Homer Simpson",
-            "country": {
-              "@id": "countries:ITA"
+          "@included": [
+            {
+              "@id": "country:US"
+            },
+            {
+              "@id": "https://www.w3.org/community/json-ld",
+              "@type": "Organization",
+              "member": [
+                {
+                  "@id": "https://github.com/gkellogg",
+                  "@type": "Person",
+                  "name": "Gregg Kellogg",
+                  "country": {
+                    "@id": "country:US"
+                  }
+                },
+                {
+                  "@id": "https://github.com/BigBlueHat",
+                  "@type": "Person",
+                  "name": "Benjamin BigBlueHat",
+                  "country": {
+                    "@id": "country:US"
+                  }
+                }
+              ]
             }
-          },
-          {
-            "@id": "http://people.example/Lisa",
-            "full_name": "Lisa Simpson",
-            "country": {
-              "@id": "countries:ITA"
-            }
-          }
-        ]
-      }
+          ]
+        }
       -->
     </pre>
     </section>
@@ -841,15 +860,15 @@
          data-content-type="application/ld+json"
          title="YAML-LD with several documents in one file">
       <!--
-      "@id": ex:Ray
-        "@type": ex:Cat
-        name:
-          en: Ray
+      "@context": https://schema.org/
+      "@id": https://w3c.org/yaml-ld/
+      "@type": WebContent
+      name: YAML-LD
       ---
-      "@id": ex:Smoke
-        "@type": ex:Cat
-        name:
-          en: Smoke
+      "@context": https://schema.org/
+      "@id": https://www.w3.org/TR/json-ld11/
+      "@type": WebContent
+      name: JSON-LD
       -->
     </pre>
 
@@ -1042,7 +1061,7 @@
          title="YAML-LD with comments">
       <!--
       # First comment
-      "@context": "http://schema.org"
+      "@context": "http://schema.org/"
 
       # Second comment
       givenName: John
@@ -1059,7 +1078,7 @@
          title="Result of parsing YAML-LD with comments to JSON-LD">
       <!--
       {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "givenName": "John"
       }
       -->
@@ -1181,18 +1200,9 @@
           data-content-type="application/ld+yaml"
           title="Example YAML-LD document without Convenience Context">
         <!--
-        "@context":
-          - https://prefix.cc/context
-          - ex: https://example.org/
-            name:
-              "@id": rdfs:label
-              "@container": "@language"
-        "@id": ex:Ray
-        "@type": ex:Cat
-        name:
-          en: Ray
-          ua: Промiнчик
-          ru: Лучик
+          "@context": https://schema.org/
+          "@id": https://w3c.org/yaml-ld/
+          "@type": WebContent
         -->
       </pre>
 
@@ -1214,7 +1224,7 @@
 
       <aside class="example" title="Convenience Context">
         <p>Code of the <a>convenience context</a>. Available as:
-          <a href="https://yaml-ld.dev/context">https://yaml-ld.dev/context</a>.
+          <a href="https://github.com/json-ld/convenience-context">https://github.com/json-ld/convenience-context</a>.
         </p>
         <p class="ednote">Other contexts go in https://json-ld.org/contexts, we should probably continue to use that</p>
         <pre class="json"
@@ -1262,19 +1272,12 @@
              data-transform="updateExample"
              title="Example YAML-LD document with Convenience Context">
         <!--
-        "@context":
-          - https://prefix.cc/context
-          - https://yaml-ld.dev/context
-          - ex: https://example.org/
-            name:
-              $id: rdfs:label
-              $container: $language
-        $id: ex:Ray
-        $type: ex:Cat
-        name:
-          en: Ray
-          ua: Промiнчик
-          ru: Лучик
+          "@context":
+            - "@import": https://schema.org/
+            - "@import": https://raw.githubusercontent.com/json-ld/convenience-context/main/context.jsonld
+
+          $id: https://w3c.org/yaml-ld/
+          $type: WebContent
         -->
       </pre>
 
@@ -1335,12 +1338,11 @@
                 data-content-type="application/ld+json"
                 title="YAML-LD with tags"
               >
-                %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
+                %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
                 ---
-                "@context":
-                  schema: https://schema.org/
-                "@id": https://yaml-ld.example
-                schema:dateModified: !xsd:date 2023-03-21
+                "@context": https://schema.org/
+                "@id": https://w3c.org/yaml-ld/
+                dateModified: !xsd:date 2023-05-29
               </pre>
 
               <p>
@@ -1379,17 +1381,30 @@
                 data-content-type="application/ld+json"
                 title="YAML-LD: Anchors & Aliases"
               >
-                "@context":
-                  schema: https://schema.org/
-                "@id": https://yaml-ld.example
-                schema:author:
-                  - schema:name: Gregg Kellogg
-                    schema:url: https://greggkellogg.net/
-                  - … TODO: Invent a good example where it would be needed to repeat a fragment ☹
+      "@context":
+        "@import": https://schema.org/
+        country: https://publication.europa.eu/resource/authority/country/
+
+      "@included":
+        - &US
+          "@id": country:US
+        - "@id": https://www.w3.org/community/json-ld
+          "@type": Organization
+          member:
+            - "@id": https://github.com/gkellogg
+              "@type": Person
+              name: Gregg Kellogg
+              country: *US
+            - "@id": https://github.com/BigBlueHat
+              "@type": Person
+              name: Benjamin BigBlueHat
+              country: *US
               </pre>
             </li>
           </ul>
         </section>
+
+        <!-- fixme: Example above repeats "YAML-LD with node anchors" example. -->
 
         <p>
           Two alternative approaches have been proposed to implement the Extended profile:
@@ -1849,6 +1864,8 @@
             they not change the meaning of the encoded scalars.
           </p>
 
+          <!-- fixme: Identical to "Extended YAML-LD with tags" example -->
+
           <pre class="example yaml"
                data-transform="updateExample"
                data-result-for="YAML-LD with multiple documents"
@@ -1858,12 +1875,11 @@
       %YAML 1.2
       %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
       ---
-      "@context":
-        "@vocab": http://xmlns.com/foaf/0.1/
+      "@context": https://schema.org/
+      "@id": https://github.com/gkellogg
+      "@type": Person
       name: !xsd!string Gregg Kellogg
-      homepage: https://greggkellogg.net/
-      depiction: http://www.gravatar.com/avatar/42f948####...####
-      date: !xsd!date "2022-08-08"
+      birthDate: !xsd!date 1970-01-01
       -->
       </pre>
 
@@ -2506,12 +2522,14 @@
                   data-content-type="application/ld+json"
                   title="Extended YAML-LD with tags"
                 >
-                  %TAG !xsd: http://www.w3.org/2001/XMLSchema%23
-                  ---
-                  "@context":
-                    schema: https://schema.org/
-                  "@id": https://yaml-ld.example
-                  schema:dateModified: !xsd:date 2023-03-21
+              %YAML 1.2
+              %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
+              ---
+              "@context": https://schema.org/
+              "@id": https://github.com/gkellogg
+              "@type": Person
+              name: !xsd!string Gregg Kellogg
+              birthDate: !xsd!date 1970-01-01
                 </pre>
               </div>
               <div>
@@ -2523,12 +2541,14 @@
                   title="Basic YAML-LD"
                 >
                   "@context":
-                    schema: https://schema.org/
-                    xsd: http://www.w3.org/2001/XMLSchema#
-                  "@id": https://yaml-ld.example
-                  schema:dateModified:
+                    - "@import": https://schema.org
+                    - xsd: "http://www.w3.org/2001/XMLSchema#"
+                  "@id": https://github.com/gkellogg
+                  "@type": Person
+                  name: Gregg Kellogg
+                  birthDate:
+                    "@value": 1970-01-01
                     "@type": xsd:date
-                    "@value": "2023-03-21"
                 </pre>
               </div>
             </div>
