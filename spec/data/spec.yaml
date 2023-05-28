@@ -20,7 +20,7 @@ schema:author:
     $id: https://github.com/ioggstream
     $type: schema:Person
 
-  - name: Benjamin …
+  - name: Benjamin BigBlueHat
     $id: https://github.com/BigBlueHat
     $type: schema:Person
 
