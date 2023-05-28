@@ -1,0 +1,18 @@
+$id: JSONOrYAMLFeature
+$reverse:
+  $type:
+    - rdfs:label: UTF-8
+      $type: Encoding
+      json:
+        - prov:value: yes
+          prov:wasDerivedFrom: JSON#section-8.1
+      yaml:
+        - prov:value: yes
+          prov:wasDerivedFrom: YAML#52-character-encodings
+    - rdfs:label: UTF-16
+      json:
+        - prov:value: no
+          prov:wasDerivedFrom: JSON#section-8.1
+      yaml:
+        - prov:value: yes
+          prov:wasDerivedFrom: YAML#52-character-encodings
