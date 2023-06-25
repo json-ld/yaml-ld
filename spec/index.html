@@ -731,13 +731,76 @@
     </section>
 
     <section id="comments">
-    <h2>Comments</h2>
-    <p id="cr-comments" data-tests="basic-manifest.html#cr-comments-1-positive">
-      Comments in <a>YAML-LD documents</a> are treated as white space.
-      This behavior is consistent with other Linked Data serializations such as [[?TURTLE]].
-      See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
-      for more details.
-    </p>
+      <h2>Comments</h2>
+      <p id="cr-comments" data-tests="basic-manifest.html#cr-comments-1-positive">
+        Comments in <a>YAML-LD documents</a> are treated as white space.
+      </p>
+
+      <section>
+        <h2>Consistency</h2>
+
+        <dl>
+          <dt>[[?TURTLE]] and other Linked Data serializations which support comments</dt>
+          <dd>…do not provide a means to preserve them
+            when processing and serializing the document
+            in other formats</dd>
+
+          <dt>YAML</dt>
+          <dd>
+            requires that parts of the document not reflected by
+
+            <a>representation graph</a>, such as
+
+            <ul>
+              <li>comments</li>
+              <li>directives</li>
+              <li>mapping key order</li>
+              <li>anchor names</li>
+            </ul>
+
+            must not be used to convey application level information
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Predictability</h2>
+
+        <p>
+          Theoretically, we could try harvesting YAML comments into
+          JSON-LD documents. We would define a specific predicate, like
+          <code>https://json-ld.org/yaml-ld/comment</code>, and convert
+          every <code># My comment</code> fragment into
+          <code>{"yaml-ld:comment": "My comment"}</code> piece in JSON-LD
+          document.
+        </p>
+
+        <p>
+          This would, however, make implementation:
+        </p>
+
+        <ul>
+          <li>
+            More complicated because most industrially available YAML
+            parsers discard comments on reading YAML data
+          </li>
+          <li>
+            Less predictable because, in JSON, order of keys is not
+            preserved — and therefore, when converting a JSON-LD document
+            back to YAML-LD, comments might be displaced.
+          </li>
+        </ul>
+      </section>
+
+      <p>
+        This specification does not provide a means for preserving
+        [[YAML]] comments after a JSON serialization.
+      </p>
+
+      <p>
+        See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
+        for more details.
+      </p>
     </section>
 
     <section id="anchors-aliases">
@@ -1020,59 +1083,8 @@
 
     <h3>FAQ</h3>
 
-    #### Why does YAML-LD not preserve comments?
-    <div class="ednote">
-    According to [[YAML]], information that does not reflect
-    into the <a>representation graph</a> (e.g., comments, directives, mapping keys order, 
-    anchor names, ...) must not be used to convey application level information.
-    Moreover
-    [[JSON]] (and hence [[JSON-LD11]]) does not support comments,
-    and other Linked Data serialization formats
-    that support comments (such as [[?TURTLE]])
-    do not provide a means to preserve them
-    when processing and serializing the document
-    in other formats.
-    The proposed behavior is thus consistent with
-    other implementations.
-
-    While YAML-LD could define a specific predicate for comments,
-    that is insufficient because, for example,
-    the order of keywords is not preserved in JSON, so the
-    comments could be displaced.
-    This specification does not provide a means for preserving
-    [[YAML]] comments after a JSON serialization.
-
-    <pre class="example yaml"
-         data-transform="updateExample"
-         data-content-type="application/ld+yaml"
-         title="YAML-LD with comments">
-      <!--
-      # First comment
-      "@context": "http://schema.org/"
-
-      # Second comment
-      givenName: John
-      -->
-    </pre>
-
-    Transforming the above entry into a JSON-LD document
-    results in:
-
-    <pre class="example json"
-         data-transform="updateExample"
-         data-result-for="YAML-LD with comments"
-         data-content-type="application/ld+json"
-         title="Result of parsing YAML-LD with comments to JSON-LD">
-      <!--
-      {
-        "@context": "http://schema.org/",
-        "givenName": "John"
-      }
-      -->
-    </pre>
-    </div>
-
     #### Why does YAML-LD not extend the JSON-LD data model ?
+
     <div class="ednote">
     [[JSON]] only represents simple trees while [[YAML]] can support
     rooted, directed graphs with references and cycles.
