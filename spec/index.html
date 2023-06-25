@@ -834,6 +834,7 @@
     </p>
 
     <pre class="example yaml"
+         id="example-with-anchors"
          data-transform="updateExample"
          data-content-type="application/ld+yaml"
          title="YAML-LD with node anchors">
@@ -1130,6 +1131,7 @@
         example:</p>
 
       <pre class="example json"
+          id="quoted-example"
           data-transform="updateExample"
           data-content-type="application/ld+yaml"
           title="Example YAML-LD document with quoted keywords">
@@ -1160,7 +1162,7 @@
         <p>Code of the <a>convenience context</a>. Available as:
           <a href="https://github.com/json-ld/convenience-context">https://github.com/json-ld/convenience-context</a>.
         </p>
-        <p class="ednote">Other contexts go in https://json-ld.org/contexts, we should probably continue to use that</p>
+
         <pre class="json"
              data-format="application/ld+json"
              data-transform="updateExample">
@@ -1198,7 +1200,7 @@
       <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
         specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
         replaced by `$`, which is not reserved and therefore does not require quoting. Consider
-        <a href="#example-example-yaml-ld-document-without-convenience-context"></a>
+        <a href="#quoted-example"></a>
          reformatted using the <a>convenience context</a>:</p>
 
         <pre class="example json"
@@ -1238,6 +1240,15 @@
           <strong>Extended YAML-LD Profile</strong> which will implement all such features.
         </p>
 
+        <div class="ednote">
+          The Extended Profile is out of scope for the normative part
+          of this specification; we leave it for later versions,
+          pending feedback from the community and new knowledge gained
+          from practical experience of using the basic version
+          of YAML-LD that we will henceforth call
+          <strong>JSON-LD Profile of YAML-LD</strong>.
+        </div>
+
         <section>
           <h2>Specify node <code>@type</code></h2>
 
@@ -1276,7 +1287,7 @@
                 ---
                 "@context": https://schema.org/
                 "@id": https://w3.org/yaml-ld/
-                dateModified: !xsd:date 2023-05-29
+                dateModified: !xsd:date 2023-06-26
               </pre>
 
               <p>
@@ -1306,39 +1317,15 @@
             <li>
               <p>
                 Use YAML <a data-cite="YAML#3222-anchors-and-aliases">anchors & aliases</a>
-                as shown in the example below:
+                as shown in <a href="#example-with-anchors"></a>.
               </p>
-              <pre
-                class="example yaml"
-                data-transform="updateExample"
-                data-result-for="YAML-LD: Anchors & Aliases"
-                data-content-type="application/ld+json"
-                title="YAML-LD: Anchors & Aliases"
-              >
-      "@context":
-        "@import": https://schema.org/
-        country: https://publication.europa.eu/resource/authority/country/
-
-      "@included":
-        - &US
-          "@id": country:US
-        - "@id": https://www.w3.org/community/json-ld
-          "@type": Organization
-          member:
-            - "@id": https://github.com/gkellogg
-              "@type": Person
-              name: Gregg Kellogg
-              country: *US
-            - "@id": https://github.com/BigBlueHat
-              "@type": Person
-              name: Benjamin BigBlueHat
-              country: *US
-              </pre>
             </li>
           </ul>
         </section>
+      </section>
 
-        <!-- fixme: Example above repeats "YAML-LD with node anchors" example. -->
+      <section>
+        <h2>Approaches</h2>
 
         <p>
           Two alternative approaches have been proposed to implement the Extended profile:
