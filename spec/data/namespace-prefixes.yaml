@@ -1,0 +1,15 @@
+$id: NamespacePrefix
+$reverse:
+  rdf:type:
+    - prefix: ex
+      iri: https://example.org/
+    - prefix: i18n
+      iri: "https://www.w3.org/ns/i18n#"
+    - prefix: rdf
+      iri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    - prefix: xsd
+      iri: "http://www.w3.org/2001/XMLSchema#"
+    - prefix: schema
+      iri: https://schema.org/
+    - prefix: prov
+      iri: "http://www.w3.org/ns/prov#"
