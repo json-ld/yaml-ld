@@ -668,7 +668,7 @@
          title="Basic JSON-LD document">
       <!--
       {
-        "@context": "https://schema.org/",
+        "@context": "https://schema.org",
 
         "@id": "https://w3.org/yaml-ld/",
         "@type": "WebContent",
@@ -693,7 +693,7 @@
          data-content-type="application/ld+yaml"
          title="Basic YAML-LD document">
       <!--
-      "@context": https://schema.org/
+      "@context": https://schema.org
 
       "@id": https://w3.org/yaml-ld/
       "@type": WebContent
@@ -840,7 +840,7 @@
          title="YAML-LD with node anchors">
        <!--
       "@context":
-        "@import": https://schema.org/
+        "@import": https://schema.org
         country: https://example.org/country/
 
       "@included":
@@ -877,7 +877,7 @@
       <!--
         {
           "@context": {
-            "@import": "https://schema.org/",
+            "@import": "https://schema.org",
             "country": "https://example.org/country/"
           },
           "@included": [
@@ -927,12 +927,12 @@
          data-content-type="application/ld+json"
          title="YAML-LD with several documents in one file">
       <!--
-      "@context": https://schema.org/
+      "@context": https://schema.org
       "@id": https://w3.org/yaml-ld/
       "@type": WebContent
       name: YAML-LD
       ---
-      "@context": https://schema.org/
+      "@context": https://schema.org
       "@id": https://www.w3.org/TR/json-ld11/
       "@type": WebContent
       name: JSON-LD
@@ -1136,7 +1136,7 @@
           data-content-type="application/ld+yaml"
           title="Example YAML-LD document with quoted keywords">
         <!--
-          "@context": https://schema.org/
+          "@context": https://schema.org
           "@id": https://w3.org/yaml-ld/
           "@type": WebContent
         -->
@@ -1209,7 +1209,7 @@
              title="Example YAML-LD document with Convenience Context">
         <!--
           "@context":
-            - "@import": https://schema.org/
+            - "@import": https://schema.org
             - "@import": https://raw.githubusercontent.com/json-ld/convenience-context/main/context.jsonld
 
           $id: https://w3.org/yaml-ld/
@@ -1285,7 +1285,7 @@
               >
                 %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
                 ---
-                "@context": https://schema.org/
+                "@context": https://schema.org
                 "@id": https://w3.org/yaml-ld/
                 dateModified: !xsd:date 2023-06-26
               </pre>
@@ -1796,7 +1796,7 @@
       %YAML 1.2
       %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
       ---
-      "@context": https://schema.org/
+      "@context": https://schema.org
       "@id": https://github.com/gkellogg
       "@type": Person
       name: !xsd!string Gregg Kellogg
@@ -1824,7 +1824,7 @@
 
             <pre>
         !yaml-ld
-        $context: http://schema.org/
+        $context: http://schema.org
         $type: Person
         name: Pierre-Antoine Champin
         </pre>
@@ -2446,7 +2446,7 @@
               %YAML 1.2
               %TAG !xsd! http://www.w3.org/2001/XMLSchema%23
               ---
-              "@context": https://schema.org/
+              "@context": https://schema.org
               "@id": https://github.com/gkellogg
               "@type": Person
               name: !xsd!string Gregg Kellogg
