@@ -733,7 +733,7 @@
         <dd><a href="#comments">Treated as whitespace</a>.</dd>
 
         <dt>Anchors & aliases</dt>
-        <dd>Resolved by YAML-LD parser. Anchors & aliases names are ignored.</dd>
+        <dd>Resolved by YAML parser. Anchors & aliases names are ignored.</dd>
 
         <dt>Cycles defined using anchors & aliases</dt>
         <dd>Not permitted.</dd>
@@ -766,67 +766,6 @@
       <h2>Comments</h2>
       <p id="cr-comments" data-tests="basic-manifest.html#cr-comments-1-positive">
         Comments in <a>YAML-LD documents</a> are treated as white space.
-      </p>
-
-      <section>
-        <h2>Consistency</h2>
-
-        <dl>
-          <dt>[[?TURTLE]] and other Linked Data serializations which support comments</dt>
-          <dd>…do not provide a means to preserve them
-            when processing and serializing the document
-            in other formats</dd>
-
-          <dt>YAML</dt>
-          <dd>
-            requires that parts of the document not reflected by
-
-            <a>representation graph</a>, such as
-
-            <ul>
-              <li>comments</li>
-              <li>directives</li>
-              <li>mapping key order</li>
-              <li>anchor names</li>
-            </ul>
-
-            must not be used to convey application level information
-          </dd>
-        </dl>
-      </section>
-
-      <section>
-        <h2>Predictability</h2>
-
-        <p>
-          Theoretically, we could try harvesting YAML comments into
-          JSON-LD documents. We would define a specific predicate, like
-          <code>https://json-ld.org/yaml-ld/comment</code>, and convert
-          every <code># My comment</code> fragment into
-          <code>{"yaml-ld:comment": "My comment"}</code> piece in JSON-LD
-          document.
-        </p>
-
-        <p>
-          This would, however, make implementation:
-        </p>
-
-        <ul>
-          <li>
-            More complicated because most industrially available YAML
-            parsers discard comments on reading YAML data
-          </li>
-          <li>
-            Less predictable because, in JSON, order of keys is not
-            preserved — and therefore, when converting a JSON-LD document
-            back to YAML-LD, comments might be displaced.
-          </li>
-        </ul>
-      </section>
-
-      <p>
-        This specification does not provide a means for preserving
-        [[YAML]] comments after a JSON serialization.
       </p>
 
       <p>
@@ -1227,6 +1166,67 @@
           $type: WebContent
         -->
       </pre>
+  </section>
+
+  <section id="comments-as-whitespace" class="informative">
+    <h2>Why are comments treated as whitespace?</h2>
+
+    <section>
+      <h2>Consistency</h2>
+
+      <dl>
+        <dt>[[?TURTLE]] and other Linked Data serializations which support comments</dt>
+        <dd>do not provide a means to preserve them
+          when processing and serializing the document
+          in other formats
+        </dd>
+
+        <dt>YAML</dt>
+        <dd>
+          requires that parts of the document not reflected by
+
+          <a>representation graph</a>, such as
+
+          <ul>
+            <li>comments</li>
+            <li>directives</li>
+            <li>mapping key order</li>
+            <li>anchor names</li>
+          </ul>
+
+          must not be used to convey application level information
+        </dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Predictability</h2>
+
+      <p>
+        Theoretically, we could try harvesting YAML comments into
+        JSON-LD documents. We would define a specific predicate, like
+        <code>https://json-ld.org/yaml-ld/comment</code>, and convert
+        every <code># My comment</code> fragment into
+        <code>{"yaml-ld:comment": "My comment"}</code> piece in JSON-LD
+        document.
+      </p>
+
+      <p>
+        This would, however, make implementation:
+      </p>
+
+      <ul>
+        <li>
+          More complicated because most industrially available YAML
+          parsers discard comments on reading YAML data
+        </li>
+        <li>
+          Less predictable because, in JSON, order of keys is not
+          preserved — and therefore, when converting a JSON-LD document
+          back to YAML-LD, comments might be displaced.
+        </li>
+      </ul>
+    </section>
   </section>
 
     <section id="extended-profile" class="informative">
