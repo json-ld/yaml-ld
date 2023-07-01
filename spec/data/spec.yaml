@@ -8,33 +8,33 @@
 
 $id: https://json-ld.github.io/yaml-ld/spec/
 schema:author:
-  - name: Gregg Kellogg
-    $id: https://github.com/gkellogg
-    $type: schema:Person
+  - name: Vladimir Alexiev
+    $id: https://github.com/VladimirAlexiev
+    $type: Person
 
   - name: Pierre-Antoine Champin
     $id: https://github.com/pchampin
+    $type: schema:Person
+
+  - name: Gregg Kellogg
+    $id: https://github.com/gkellogg
     $type: schema:Person
 
   - name: Roberto Polli
     $id: https://github.com/ioggstream
     $type: schema:Person
 
-  - name: Benjamin BigBlueHat
-    $id: https://github.com/BigBlueHat
+  - name: Anatoly Scherbakov
+    country: am
+    $id: https://github.com/anatoly-scherbakov
     $type: schema:Person
 
   - name: Ted Thibodeau Jr
     $id: https://github.com/TallTed
     $type: schema:Person
 
-  - name: Vladimir Alexiev
-    $id: https://github.com/VladimirAlexiev
-    $type: Person
-
-  - name: Anatoly Scherbakov
-    country: am
-    $id: https://github.com/anatoly-scherbakov
+  - name: Benjamin Young
+    $id: https://github.com/BigBlueHat
     $type: schema:Person
 
 license: …
@@ -67,12 +67,9 @@ schema:hasPart:
       - rdfs:label: Fragment identifiers
       - rdfs:label: Examples
 
-  - rdfs:label: FAQ
-    schema:hasPart:
-      - rdfs:label: Why does YAML-LD not preserve comments?
-      - rdfs:label: Why does YAML-LD not extend the JSON-LD data model?
-
   - rdfs:label: Best Practices
+  - rdfs:label: Why are comments treated as whitespace?
+  - rdfs:label: Streams
 
   - rdfs:label: Extended YAML-LD Profile
   - rdfs:label: References
