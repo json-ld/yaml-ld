@@ -882,44 +882,6 @@
       -->
     </pre>
     </section>
-
-    <section id="streams">
-      <h2>Streams</h2>
-
-      <p>
-        Every YAML-LD file is a <a>YAML-LD stream</a>
-        and might contain multiple <a>YAML-LD documents</a>,
-        as shown in the example below.
-      </p>
-
-    <pre class="example yaml"
-         data-transform="updateExample"
-         data-result-for="YAML-LD with multiple documents"
-         data-content-type="application/ld+json"
-         title="YAML-LD with several documents in one file">
-      <!--
-      "@context": https://schema.org
-      "@id": https://w3.org/yaml-ld/
-      "@type": WebContent
-      name: YAML-LD
-      ---
-      "@context": https://schema.org
-      "@id": https://www.w3.org/TR/json-ld11/
-      "@type": WebContent
-      name: JSON-LD
-      -->
-    </pre>
-
-    <p>
-      Current specification does not support this feature.
-      Implementations MAY choose, for example, to:
-    </p>
-
-    <ul>
-      <li>Convert each document into a separate JSON-LD document</li>
-      <li>Or convert whole YAML-LD stream as a single JSON-LD array.</li>
-    </ul>
-  </section>
   </section>
 
   <section id="sec" class="informative">
@@ -1227,6 +1189,44 @@
         </li>
       </ul>
     </section>
+  </section>
+
+  <section id="streams" class="informative">
+    <h2>Streams</h2>
+
+    <p>
+      Every YAML-LD file is a <a>YAML-LD stream</a>
+      and might contain multiple <a>YAML-LD documents</a>,
+      as shown in the example below.
+    </p>
+
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with multiple documents"
+         data-content-type="application/ld+json"
+         title="YAML-LD with several documents in one file">
+      <!--
+      "@context": https://schema.org
+      "@id": https://w3.org/yaml-ld/
+      "@type": WebContent
+      name: YAML-LD
+      ---
+      "@context": https://schema.org
+      "@id": https://www.w3.org/TR/json-ld11/
+      "@type": WebContent
+      name: JSON-LD
+      -->
+    </pre>
+
+    <p>
+      Current specification does not support this feature.
+      Implementations MAY choose, for example, to:
+    </p>
+
+    <ul>
+      <li>Convert each document into a separate JSON-LD document</li>
+      <li>Or convert whole YAML-LD stream as a single JSON-LD array.</li>
+    </ul>
   </section>
 
     <section id="extended-profile" class="informative">
