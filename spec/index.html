@@ -270,12 +270,44 @@
 <body>
   <section id='abstract'>
     <p>
-      In recent years, [[YAML]] has emerged as a more concise format
-      to represent information that had previously been serialized as JSON,
-      including Linked Data.
-      This document defines how to serialize linked data
-      in YAML.
-      Moreover, it registers the `application/ld+yaml` media type.
+      <strong>Objective.</strong>
+      This document defines YAML-LD, a set of conventions built on top
+      of YAML, which outlines how to serialize Linked Data as YAML
+      based on JSON-LD syntax, semantics, and APIs. The emergence of
+      YAML as a more concise format for representing information
+      previously serialized as JSON, including Linked Data, has led to
+      the development of YAML-LD.
+    </p>
+
+    <p>
+      <strong>Methods.</strong>
+      The document defines constraints on YAML so that any YAML-LD
+      document can be represented in JSON-LD. This is because YAML is
+      more expressive than JSON, both in terms of available data types
+      and the document structure. The document also registers the
+      <code>application/ld+yaml</code> media type.
+    </p>
+
+    <p>
+      <strong>Results.</strong>The document provides a clear
+      understanding of how to serialize linked data in YAML. It also
+      describes the basic concepts and core requirements for
+      implementing YAML-LD, including a comparison between JSON and
+      YAML, the supported YAML features, and encoding considerations.
+    </p>
+
+    <p>
+      <strong>Conclusions.</strong>
+      YAML-LD offers an efficient way to encode Linked Data in a
+      variety of programming languages which can use YAML.
+    </p>
+
+    <p>
+      <strong>Limitations.</strong>
+      YAML feature set is richer than that of JSON, and a number of
+      YAML features are not supported in this specification. However,
+      ground is laid for future developments of a version of YAML-LD
+      which will support those — the Extended YAML-LD Profile.
     </p>
   </section>
 
