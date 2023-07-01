@@ -716,6 +716,38 @@
   <section id="core-requirements" class="normative">
     <h2>Core Requirements</h2>
 
+    <section id="supported-yaml-features" class="informative">
+      <h2>YAML features supported by YAML-LD</h2>
+
+      <dl>
+        <dt>Encoding</dt>
+        <dd>UTF-8 <a href="#encoding">only</a>.</dd>
+
+        <dt>Native data types</dt>
+        <dd>Every native data type that the YAML-LD parser supports.</dd>
+
+        <dt>Tags</dt>
+        <dd>Ignored.</dd>
+
+        <dt>Comments</dt>
+        <dd><a href="#comments">Treated as whitespace</a>.</dd>
+
+        <dt>Anchors & aliases</dt>
+        <dd>Resolved by YAML-LD parser. Anchors & aliases names are ignored.</dd>
+
+        <dt>Cycles defined using anchors & aliases</dt>
+        <dd>Not permitted.</dd>
+
+        <dt>YAML Streams</dt>
+        <dd>Not supported.</dd>
+      </dl>
+
+      <p>
+        Perspectives for support of the additional YAML features are analysed in
+        <a href="#extended-profile">Extended Profile</a> informative addendum to this specification.
+      </p>
+    </section>
+
     <section id="encoding">
     <h2>Encoding</h2>
 
