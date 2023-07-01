@@ -1142,66 +1142,45 @@
         -->
       </pre>
 
-      <p>The need to quote these keywords has to be learnt, and introduces one more little irregularity to the document
+      <p>
+        The need to quote these keywords has to be learnt, and introduces one more little irregularity to the document
         author's life. Further, on most keyboard layouts, typing quotes will require `Shift`, which reduces typing speed,
-        albeit slightly.</p>
+        albeit slightly.
+      </p>
 
-      <p>In order to avoid this, the context might introduce custom mappings for the necessary keywords. For instance,
-        [[schema-org]] context redefines `@id` as just `id` — which seems to be much more convenient to type, and
-        no more difficult to remember.</p>
+      <p>
+        In order to avoid this, the context might introduce custom mappings for JSON-LD keywords —
+        to make authoring more convenient. The exact mapping might vary depending on the domain, but we provide two
+        examples, both published at <a href="https://json-ld.org">json-ld.org</a>:
+      </p>
+
+      <ul>
+        <li>
+          <a href="https://json-ld.org/contexts/convenience.jsonld"><code>convenience.jsonld</code></a>
+          maps <code>@id</code> → <code>id</code> and so on, removing the <code>@</code> character
+        </li>
+        <li>
+          <a href="https://json-ld.org/contexts/$convenience.jsonld"><code>$convenience.jsonld</code></a>
+          maps <code>@id</code> → <code>$id</code> and so on, replacing <code>@</code> with <code>$</code>.
+        </li>
+      </ul>
 
        <div class="practice">
           <p class="practicedesc">
-            <span id="bp-convenience-context" class="practicelab">Use YAML-LD Convenience Context</span>
-            <p>YAML-LD users may use a JSON-LD context provided as part of this specification, henceforth known as the
-         <dfn>convenience context</dfn>, which defines a standardized mapping of every `@`-keyword to a `$`-keyword, except `@context`.
+            <span id="bp-convenience-context" class="practicelab">Use a <dfn>Convenience Context</dfn></span>
+            <p>
+              YAML-LD users may use a JSON-LD context provided as part of this specification, or a similar custom context,
+              to improve the authoring experience and readability.
          </p>
        </div>
 
-      <aside class="example" title="Convenience Context">
-        <p>Code of the <a>convenience context</a>. Available as:
-          <a href="https://github.com/json-ld/convenience-context">https://github.com/json-ld/convenience-context</a>.
-        </p>
+      <p>
+        Unfortunately, <code>@context</code> keyword cannot be aliased as per JSON-LD specification and will have
+        to stay as-is.
+      </p>
 
-        <pre class="json"
-             data-format="application/ld+json"
-             data-transform="updateExample">
-        <!--
-        {
-          "@context": {
-            "$base": "@base",
-            "$container": "@container",
-            "$direction": "@direction",
-            "$graph": "@graph",
-            "$id": "@id",
-            "$import": "@import",
-            "$included": "@included",
-            "$index": "@index",
-            "$json": "@json",
-            "$language": "@language",
-            "$list": "@list",
-            "$nest": "@nest",
-            "$none": "@none",
-            "$prefix": "@prefix",
-            "$propagate": "@propagate",
-            "$protected": "@protected",
-            "$reverse": "@reverse",
-            "$set": "@set",
-            "$type": "@type",
-            "$value": "@value",
-            "$version": "@version",
-            "$vocab": "@vocab"
-          }
-        }
-        -->
-        </pre>
-      </aside>
-
-      <p>The <a>convenience context</a> contains an alias to every JSON-LD keyword which the JSON-LD 1.1
-        specification permits aliasing &mdash; which means all the keywords except <code>@context</code>. The reserved `@` character is
-        replaced by `$`, which is not reserved and therefore does not require quoting. Consider
-        <a href="#quoted-example"></a>
-         reformatted using the <a>convenience context</a>:</p>
+      <p>
+        Consider <a href="#quoted-example"></a> reformatted using the <code>$</code>-<a>convenience context</a>:</p>
 
         <pre class="example json"
              data-format="application/ld+json"
@@ -1216,8 +1195,6 @@
           $type: WebContent
         -->
       </pre>
-
-      <p>The applicability of this context depends on the domain and is left to the architect's best judgement.</p>
   </section>
 
     <section id="extended-profile" class="informative">
