@@ -307,6 +307,13 @@
       such that any <a>YAML-LD document</a> can be represented in JSON-LD.
     </p>
 
+    <div class="ednote">
+      See YAML-LD description of this spec at
+      <a href="https://github.com/json-ld/yaml-ld/blob/main/spec/spec.yaml">
+        <code>spec.yaml</code>
+      </a>.
+    </div>
+
   <section class="informative">
     <h2>How to read this document</h2>
 
@@ -369,11 +376,6 @@
 
     <p>A <dfn>YAML-LD stream</dfn> is a <a data-cite="YAML#92-streams" data-no-xref="">YAML stream</a>
       of <a>YAML-LD documents</a>.
-    </p>
-
-    <p class="note" title="Interoperability considerations on YAML streams">
-        For interoperability considerations on YAML streams,
-        see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
     </p>
     
     <p>A <dfn>YAML-LD document</dfn> is any <a>YAML document</a> from
@@ -502,6 +504,13 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="ednote">
+      See YAML-LD version of this table at
+      <a href="https://github.com/json-ld/yaml-ld/blob/main/spec/namespace-prefixes.yaml">
+        <code>namespace-prefixes.yaml</code>
+      </a>.
+    </div>
 
     <p>These are used within this document as part of a <a data-cite="JSON-LD11#dfn-compact-iri">compact IRI</a>
       as a shorthand for the resulting <a data-cite="rfc3987#section-2">IRI</a>, such as <code>schema:url</code>
@@ -645,6 +654,13 @@
         </tr>
         </tbody>
       </table>
+
+      <div class="ednote">
+        See YAML-LD version of this table at
+        <a href="https://github.com/json-ld/yaml-ld/blob/main/spec/json-vs-yaml.yaml">
+          <code>json-vs-yaml.yaml</code>
+        </a>.
+    </div>
     </section>
 
     <p>
@@ -828,6 +844,7 @@
               "@type": Person
               name: Benjamin BigBlueHat
               country: *US
+          # - …
       -->
     </pre>
 
@@ -870,11 +887,12 @@
                 {
                   "@id": "https://github.com/BigBlueHat",
                   "@type": "Person",
-                  "name": "Benjamin BigBlueHat",
+                  "name": "Benjamin Young",
                   "country": {
                     "@id": "country:US"
                   }
-                }
+                },
+                …
               ]
             }
           ]
@@ -1219,6 +1237,14 @@
       -->
     </pre>
 
+    <p class="issue" data-number="63">
+      <a>YAML streams</a> may correspond more directly to
+      [[[RFC7464]]], which are not presently part of the
+      JSON-LD representation model.
+      The description here more closely aligns with how JSON-LD
+      interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
+    </p>
+
     <p>
       Current specification does not support this feature.
       Implementations MAY choose, for example, to do any of the following:
@@ -1228,6 +1254,11 @@
       <li>Convert each document into a separate JSON-LD document</li>
       <li>Convert the whole YAML-LD stream into a single JSON-LD array</li>
     </ul>
+
+    <p class="note" title="Interoperability considerations on YAML streams">
+      For interoperability considerations on YAML streams,
+      see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
+    </p>
   </section>
 
     <section id="extended-profile" class="informative">
@@ -1479,14 +1510,6 @@
             <h3>Converting a <a>YAML stream</a></h3>
 
             <p>A <a>YAML stream</a> is composed of zero or more <a>YAML documents</a>.</p>
-
-            <p class="issue" data-number="63">
-              <a>YAML streams</a> may correspond more directly to
-              [[[RFC7464]]], which are not presently part of the
-              JSON-LD representation model.
-              The description here more closely aligns with how JSON-LD
-              interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
-            </p>
 
             <ol>
               <li>Set |stream content| to an empty <a>array</a>.</li>
