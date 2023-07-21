@@ -1174,18 +1174,19 @@
       </p>
 
       <p>
-        This would, however, make implementation:
+        This would, however, have the following impacts on 
+        implementations:
       </p>
 
       <ul>
         <li>
-          More complicated because most industrially available YAML
-          parsers discard comments on reading YAML data
+          They would be more complicated, because most industrially 
+          available YAML parsers discard comments on reading YAML data
         </li>
         <li>
-          Less predictable because, in JSON, order of keys is not
-          preserved — and therefore, when converting a JSON-LD document
-          back to YAML-LD, comments might be displaced.
+          They would be less predictable, because order of keys is not
+          preserved in JSON — and therefore, when converting a JSON-LD
+          document back to YAML-LD, comments might be displaced.
         </li>
       </ul>
     </section>
