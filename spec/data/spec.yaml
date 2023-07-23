@@ -1,75 +1,73 @@
 "@context":
-  "@base": https://json-ld.github.io/yaml-ld/spec/
-  rdfs: http://www.w3.org/2000/01/rdf-schema#
-  schema: https://schema.org/
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/yaml-ld/spec/
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    schema: https://schema.org/
 
-  $id: "@id"
-  $type: "@type"
+    rdfs:range:
+      "@type": "@id"
 
-$id: https://json-ld.github.io/yaml-ld/spec/
-schema:author:
-  - name: Vladimir Alexiev
-    $id: https://github.com/VladimirAlexiev
-    $type: Person
+$included:
+  - $id: schema:author
+    rdfs:range: schema:Person
 
-  - name: Pierre-Antoine Champin
-    $id: https://github.com/pchampin
-    $type: schema:Person
+  - $id: https://json-ld.github.io/yaml-ld/spec/
+    schema:author:
+      - name: Vladimir Alexiev
+        $id: https://github.com/VladimirAlexiev
 
-  - name: Gregg Kellogg
-    $id: https://github.com/gkellogg
-    $type: schema:Person
+      - name: Pierre-Antoine Champin
+        $id: https://github.com/pchampin
 
-  - name: Roberto Polli
-    $id: https://github.com/ioggstream
-    $type: schema:Person
+      - name: Gregg Kellogg
+        $id: https://github.com/gkellogg
 
-  - name: Anatoly Scherbakov
-    country: am
-    $id: https://github.com/anatoly-scherbakov
-    $type: schema:Person
+      - name: Roberto Polli
+        $id: https://github.com/ioggstream
 
-  - name: Ted Thibodeau Jr
-    $id: https://github.com/TallTed
-    $type: schema:Person
+      - name: Anatoly Scherbakov
+        country: am
+        $id: https://github.com/anatoly-scherbakov
 
-  - name: Benjamin Young
-    $id: https://github.com/BigBlueHat
-    $type: schema:Person
+      - name: Ted Thibodeau Jr
+        $id: https://github.com/TallTed
 
-license: …
+      - name: Benjamin Young
+        $id: https://github.com/BigBlueHat
 
-schema:hasPart:
-  - rdfs:label: Introduction
+    license: …
+
     schema:hasPart:
-      - rdfs:label: How to read this document
-      - rdfs:label: Terminology
-      - rdfs:label: Namespace prefixes
-  - rdfs:label: Conformance
-  - rdfs:label: Basic concepts
-    schema:hasPart:
-      - rdfs:label: JSON vs YAML comparison
-  - rdfs:label: Core requirements
-    $type: NormativeSection
-    schema:hasPart:
-      - rdfs:label: Encoding
-      - rdfs:label: Comments
-      - rdfs:label: Anchors and aliases
+      - rdfs:label: Introduction
+        schema:hasPart:
+          - rdfs:label: How to read this document
+          - rdfs:label: Terminology
+          - rdfs:label: Namespace prefixes
+      - rdfs:label: Conformance
+      - rdfs:label: Basic concepts
+        schema:hasPart:
+          - rdfs:label: JSON vs YAML comparison
+      - rdfs:label: Core requirements
+        $type: NormativeSection
+        schema:hasPart:
+          - rdfs:label: Encoding
+          - rdfs:label: Comments
+          - rdfs:label: Anchors and aliases
+          - rdfs:label: Streams
+
+      - rdfs:label: Security Considerations
+      - rdfs:label: Interoperability Considerations
+
+      - rdfs:label: IANA Considerations
+        $type: NormativeSection
+        schema:hasPart:
+          - rdfs:label: application/ld+yaml
+          - rdfs:label: Fragment identifiers
+          - rdfs:label: Examples
+
+      - rdfs:label: Best Practices
+      - rdfs:label: Why are comments treated as whitespace?
       - rdfs:label: Streams
 
-  - rdfs:label: Security Considerations
-  - rdfs:label: Interoperability Considerations
-
-  - rdfs:label: IANA Considerations
-    $type: NormativeSection
-    schema:hasPart:
-      - rdfs:label: application/ld+yaml
-      - rdfs:label: Fragment identifiers
-      - rdfs:label: Examples
-
-  - rdfs:label: Best Practices
-  - rdfs:label: Why are comments treated as whitespace?
-  - rdfs:label: Streams
-
-  - rdfs:label: Extended YAML-LD Profile
-  - rdfs:label: References
+      - rdfs:label: Extended YAML-LD Profile
+      - rdfs:label: References
