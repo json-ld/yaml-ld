@@ -1,6 +1,13 @@
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    prov: http://www.w3.org/ns/prov#
+
 $id: JSONOrYAMLFeature
 $reverse:
-  $type:
+  rdf:type:
     - rdfs:label: UTF-8
       $type: Encoding
       json:
@@ -27,7 +34,7 @@ $reverse:
           prov:wasDerivedFrom: YAML#52-character-encodings
 
     - rdfs:label: "<code>{}</code> object"
-      $type:
+      rdf:type:
         $id: native-data-types
         rdfs:label: Native data types
       json:
@@ -85,7 +92,7 @@ $reverse:
         prov:wasDerivedFrom: YAML#10211-null
 
     - rdfs:label: Custom types
-      $type:
+      rdf:type:
         $id: features
         rdfs:label: Features
       json: no
