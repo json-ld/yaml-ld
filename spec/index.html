@@ -1149,14 +1149,14 @@
         </li>
       </ul>
 
-       <div class="practice">
-          <p class="practicedesc">
-            <span id="bp-convenience-context" class="practicelab">Use a <dfn>Convenience Context</dfn></span>
-            <p>
-              YAML-LD users may use a JSON-LD context provided as part of this specification, or a similar custom context,
-              to improve the authoring experience and readability.
-         </p>
-       </div>
+      <div class="practice">
+        <p class="practicedesc">
+          <span id="bp-convenience-context" class="practicelab">Use a <dfn>Convenience Context</dfn></span>
+        <p>
+          YAML-LD users may use a JSON-LD context provided as part of this specification, or a similar custom context,
+          to improve the authoring experience and readability.
+        </p>
+      </div>
 
       <p>
         Unfortunately, <code>@context</code> keyword cannot be aliased as per JSON-LD specification and will have
@@ -1172,8 +1172,8 @@
              title="Example YAML-LD document with Convenience Context">
         <!--
           "@context":
-            - "@import": https://schema.org
-            - "@import": https://raw.githubusercontent.com/json-ld/convenience-context/main/context.jsonld
+            - https://json-ld.org/contexts/dollar-convenience.jsonld
+            - https://schema.org
 
           $id: https://w3.org/yaml-ld/
           $type: WebContent
