@@ -35,9 +35,11 @@ $included:
       - name: Benjamin Young
         $id: https://github.com/BigBlueHat
 
-    license: …
+    license: W3C License
 
     schema:hasPart:
+      - rdfs:label: Abstract
+      - rdfs:label: Status of This Document
       - rdfs:label: Introduction
         schema:hasPart:
           - rdfs:label: How to read this document
@@ -50,6 +52,7 @@ $included:
       - rdfs:label: Core requirements
         $type: NormativeSection
         schema:hasPart:
+          - rdfs:label: YAML features supported by YAML-LD
           - rdfs:label: Encoding
           - rdfs:label: Comments
           - rdfs:label: Anchors and aliases
