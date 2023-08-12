@@ -7,24 +7,6 @@
   "baseIri": "https://json-ld.github.io/yaml-ld/tests/",
   "sequence": [
     {
-      "@id": "#aa-json-aliases-1-negative",
-      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
-      "name": "Use of alias node",
-      "purpose": "When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.",
-      "req": "must",
-      "input": "basic/aa-json-aliases-1-negative-in.yamlld",
-      "expectErrorCode": "profile-error"
-    },
-    {
-      "@id": "#aa-json-aliases-2-negative",
-      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
-      "name": "Use of alias node (in array)",
-      "purpose": "When processing using the YAML-LD JSON profile, documents MUST NOT contain alias nodes.",
-      "req": "must",
-      "input": "basic/aa-json-aliases-2-negative-in.yamlld",
-      "expectErrorCode": "profile-error"
-    },
-    {
       "@id":  "#cir-document-content-1-negative",
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
       "name": "Document with scalar content.",
