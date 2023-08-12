@@ -55,8 +55,8 @@ $included:
           - rdfs:label: YAML features supported by YAML-LD
           - rdfs:label: Encoding
           - rdfs:label: Comments
-          - rdfs:label: Anchors and aliases
-          - rdfs:label: Streams
+          - rdfs:label: Anchors and Aliases
+          - rdfs:label: Mapping Key Types
 
       - rdfs:label: Security Considerations
       - rdfs:label: Interoperability Considerations

@@ -685,6 +685,14 @@
           <td>❌</td>
           <td><a data-cite="YAML#3222-anchors-and-aliases">✅</a></td>
         </tr>
+
+        <tr>
+          <th>Mapping key types</th>
+          <td><code>string</code></td>
+          <td>
+            <a data-cite="YAML#3211-nodes">Any type representable in YAML</a>, from strings to mappings
+          </td>
+        </tr>
         </tbody>
       </table>
 
@@ -789,6 +797,9 @@
 
         <dt>YAML Streams</dt>
         <dd>Not supported.</dd>
+
+        <dt>Mapping key types other than <code>string</code></dt>
+        <dd><a href="#mapping-key-types">Not supported.</a></dd>
       </dl>
 
       <p>
@@ -824,7 +835,7 @@
     </section>
 
     <section id="anchors-aliases">
-    <h2>Anchors and aliases</h2>
+    <h2>Anchors and Aliases</h2>
     <p id="aa-information" data-tests="">
       Since <a>anchor names</a> are a serialization detail, such anchors
       MUST NOT be used to convey relevant information,
@@ -932,6 +943,14 @@
         }
       -->
     </pre>
+    </section>
+
+    <section id="mapping-key-types">
+      <h2>Mapping Key Types</h2>
+
+      <p id="aa-mapping-key-types" data-tests="basic-manifest.html#cir-mapping-key-1-negative">
+        Mapping key type MUST be a <code>string</code>. Otherwise, a processing error is raised.
+      </p>
     </section>
   </section>
 

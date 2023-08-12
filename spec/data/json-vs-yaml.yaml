@@ -124,3 +124,9 @@ $reverse:
       yaml:
         prov:value: yes
         prov:wasDerivedFrom: YAML#3222-anchors-and-aliases
+
+    - rdfs:label: Mapping key types
+      json: string
+      yaml:
+        prov:value: Any type representable in YAML, from strings to mappings
+        prov:wasDerivedFrom: YAML#3211-nodes
