@@ -7,6 +7,8 @@
   - "@value": 123.45
   http://example.com/ystring:
   - "@value": string
+  http://example.com/ynull:
+  - "@value": null
   http://example.com/ybool:
   - "@value": true
   http://example.com/integer:
