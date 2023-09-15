@@ -3,8 +3,8 @@
 ---
 "@context":
   "@vocab": http://example.com/
-- &node1 "@id": http://example.org/test#example
-  "@type": t1
-  "ref":
-    *node1
-    
+
+"@graph": &node1
+  - "@id": http://example.org/test#example
+    "@type": t1
+    "ref": *node1
