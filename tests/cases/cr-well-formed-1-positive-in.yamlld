@@ -1,5 +1,5 @@
 %YAML 1.2
-# A basic well-formed YAML document
+# A cases well-formed YAML document
 ---
 "@context":
   "@vocab": http://example.com/
