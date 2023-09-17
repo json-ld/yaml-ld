@@ -1,11 +1,100 @@
 {
-  "@context": ["context.jsonld", {"@base": "manifest"}],
+  "@context": ["context.jsonld", {"@base": "basic-manifest"}],
   "@id": "",
   "@type": "mf:Manifest",
-  "name": "YAML-LD Test Suite",
-  "description": "This manifest loads additional manifests for specific behavior tests for [YAML-LD](https://json-ld.github.io/yaml-ld/)",
+  "name": "Tests using YAML-LD JSON Profile",
+  "description": "These tests implement the requirements for the [YAML-LD JSON Profile](https://json-ld.github.io/yaml-ld/spec/#yaml-ld-json-profile).",
+  "baseIri": "https://json-ld.github.io/yaml-ld/tests/",
   "sequence": [
-    "basic-manifest.jsonld",
-    "extended-manifest.jsonld"
+    {
+      "@id":  "#cir-document-content-1-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Document with scalar content.",
+      "purpose": "Document content MUST be sequence or mapping.",
+      "req": "must",
+      "input": "basic/cir-document-content-1-negative-in.yamlld",
+      "expectErrorCode": "loading document failed"
+    },
+    {
+      "@id":  "#cir-mapping-key-1-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Mapping with integer key.",
+      "purpose": "A mapping key MUST be a string.",
+      "req": "must",
+      "input": "basic/cir-mapping-key-1-negative-in.yamlld",
+      "expectErrorCode": "mapping-key-error"
+    },
+    {
+      "@id": "#cir-scalar-core-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "tag:yaml.org.2002 scalars",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "req": "must",
+      "input": "basic/cir-scalar-core-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-core-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-i18n-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "language-tagged string with i18n",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "req": "must",
+      "input": "basic/cir-scalar-i18n-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-i18n-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cir-scalar-other-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Scalars with other node tags",
+      "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
+      "req": "must",
+      "input": "basic/cir-scalar-other-1-positive-in.yamlld",
+      "expect": "basic/cir-scalar-other-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-comments-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Various comment forms",
+      "purpose": "Comments are white space.",
+      "req": "must",
+      "input": "basic/cr-comments-1-positive-in.yamlld",
+      "expect": "basic/cr-comments-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-utf8-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "UTF-8 BOM",
+      "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
+      "req": "must",
+      "input": "basic/cr-utf8-1-positive-in.yamlld",
+      "expect": "basic/cr-utf8-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-utf8-2-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "UTF-16 BOM",
+      "purpose": "A YAML-LD document MUST be encoded in UTF-8, to ensure interoperability with [[JSON]].",
+      "req": "must",
+      "input": "basic/cr-utf8-2-negative-in.yamlld",
+      "expectErrorCode": "invalid encoding"
+    },
+    {
+      "@id": "#cr-well-formed-1-positive",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Load a well-formed document",
+      "purpose": "All YAML-LD streams MUST form a well-formed stream.",
+      "req": "must",
+      "input": "basic/cr-well-formed-1-positive-in.yamlld",
+      "expect": "basic/cr-well-formed-1-positive-out.yamlld"
+    },
+    {
+      "@id": "#cr-well-formed-2-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Fail to load a non-well-formed stream",
+      "purpose": "All YAML-LD streams MUST form a well-formed stream.",
+      "req": "must",
+      "input": "basic/cr-well-formed-2-negative-in.yamlld",
+      "expectErrorCode": "loading document failed"
+    }
   ]
 }
