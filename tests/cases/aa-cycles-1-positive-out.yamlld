@@ -1,0 +1,12 @@
+%YAML 1.2
+---
+- "@id": http://people.example/Homer
+  http://schema.org/name:
+  - "@value": Homer Simpson
+  http://schema.org/nationality:
+  - "@id": http://publication.europa.eu/resource/authority/country/ITA
+- "@id": http://people.example/Lisa
+  http://schema.org/name:
+  - "@value": Lisa Simpson
+  http://schema.org/nationality:
+  - "@id": http://publication.europa.eu/resource/authority/country/ITA
