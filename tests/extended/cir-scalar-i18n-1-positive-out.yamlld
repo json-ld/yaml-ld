@@ -1,8 +1,0 @@
-%YAML 1.2
----
-- "@id": http://example.org/test#example
-  http://example.com/values:
-  - "@value": Plain String
-  - "@value": !<https://www.w3.org/ns/i18n%23en-US> String in US English
-  - "@value": !<https://www.w3.org/ns/i18n%23en-US_ltr> String in US English and Left to Right
-  - "@value": !<https://www.w3.org/ns/i18n%23_rtl> Plain String Right to Left
