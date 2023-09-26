@@ -1,4 +1,0 @@
-<http://example.org/test#example> <http://example.com/values> "Plain String" .
-<http://example.org/test#example> <http://example.com/values> "String in US English"@en-us .
-<http://example.org/test#example> <http://example.com/values> "String in US English and Left to Right"^^<https://www.w3.org/ns/i18n#en-US_ltr> .
-<http://example.org/test#example> <http://example.com/values> "Plain String Right to Left"^^<https://www.w3.org/ns/i18n#_rtl> .
