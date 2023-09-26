@@ -20,6 +20,6 @@
   http://example.com/date:
   - "@value": 2022-08-08
   http://example.com/time:
-  - "@value": 12:00:00.000
+  - "@value": "12:00:00.000"
   http://example.com/dateTime:
   - "@value": 2022-08-08T12:00:00.000
