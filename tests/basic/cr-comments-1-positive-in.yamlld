@@ -6,7 +6,7 @@
 "@id": http://example.org/test#example
 "@type": t1
 notacomment:
-  - this is#not: a comment
+  - this-is#not: a comment
   -  |
     --- >
     line1
