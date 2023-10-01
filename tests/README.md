@@ -9,7 +9,7 @@ More information and an RDFS definition of the test vocabulary can be found at [
 
 # Design
 
-Tests driven from a top-level [manifest](manifest.jsonld). Tests have _input_, _expected_ and may have _context_ or _frame_ documents.
+Tests are driven from top-level [manifest](manifest.jsonld). Tests have _input_, _expected_ and may have _context_ or _frame_ documents.
 
 Tests may have a `expandContext` option, which is treated
   as an IRI relative to the manifest.
@@ -26,7 +26,7 @@ A **NegativeEvaluationTests** looks for a string value in _expectedErrorCode_, r
 
 ## YAML-LD object comparison
 
-**TODO**: Similar to JSON-LD object comparison, but uses the (Expanded) Internal Representation.
+Similar to JSON-LD object comparison.
 
 If algorithms are invoked with the `ordered` flag set to `true`, simple JSON Object comparison may be used, as the order of all arrays will be preserved (except for _fromRdf_, unless the input quads are also ordered). If `ordered` is `false`, then the following algorithm will ensure arrays other than values of `@list` are compared without regard to order.
 
@@ -48,7 +48,7 @@ The following properties are treated as if they are defined in the [JSON-LD Test
 
 # Running tests
 
-The top-level [manifest](manifest.jsonld) references the specific test manifests, which in turn reference each test associated with a particular type of behavior.
+The top-level [manifest](manifest.jsonld) references each test associated with a particular type of behavior.
 
 Implementations create their own infrastructure for running the test suite. In particular, the following should be considered:
 
