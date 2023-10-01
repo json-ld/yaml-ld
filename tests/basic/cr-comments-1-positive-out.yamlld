@@ -3,7 +3,7 @@
   "@type":
   - http://example.com/t1
   http://example.com/notacomment:
-  - {}  # That is what we get from `this is#not: a comment`. This behavior is confirmed by JSON-LD playground.
+  - http://example.com/this-is#not: a comment
   - "@value": |
       --- >
       line1
