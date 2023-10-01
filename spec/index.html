@@ -812,8 +812,8 @@
     <h2>Encoding</h2>
 
     <p id="cr-utf8" data-tests="
-      basic-manifest.html#cr-utf8-1-positive,
-      basic-manifest.html#cr-utf8-2-negative">
+      manifest.html#cr-utf8-1-positive,
+      manifest.html#cr-utf8-2-negative">
       A <a>YAML-LD document</a> MUST be encoded in UTF-8,
       to ensure interoperability with [[JSON]];
       otherwise, an
@@ -824,7 +824,7 @@
 
     <section id="comments">
       <h2>Comments</h2>
-      <p id="cr-comments" data-tests="basic-manifest.html#cr-comments-1-positive">
+      <p id="cr-comments" data-tests="manifest.html#cr-comments-1-positive">
         Comments in <a>YAML-LD documents</a> are treated as white space.
       </p>
 
@@ -844,9 +844,9 @@
     </p>
 
     <p id="aa-cycles" data-tests="
-      extended-manifest.html#aa-cycles-1-positive,
-      extended-manifest.html#aa-cycles-2-negative,
-      extended-manifest.html#aa-cycles-3-positive">
+      manifest.html#aa-cycles-1-positive,
+      manifest.html#aa-cycles-2-negative,
+      manifest.html#aa-cycles-3-positive">
       A <a>YAML-LD document</a> MAY contain <a>anchored nodes</a> and <a>alias nodes</a>,
       but its <a>representation graph</a> MUST NOT contain cycles;
       otherwise, a
@@ -948,7 +948,7 @@
     <section id="mapping-key-types">
       <h2>Mapping Key Types</h2>
 
-      <p id="aa-mapping-key-types" data-tests="basic-manifest.html#cir-mapping-key-1-negative">
+      <p id="aa-mapping-key-types" data-tests="manifest.html#cir-mapping-key-1-negative">
         Mapping key type MUST be a <code>string</code>. Otherwise, a processing error is raised.
       </p>
     </section>
@@ -1458,9 +1458,9 @@
         </p>
 
         <p id="cr-well-formed" data-tests="
-        basic-manifest.html#cr-well-formed-1-positive,
-        basic-manifest.html#cr-well-formed-2-negative,
-        extended-manifest.html#cr-well-formed-3-negative">
+        manifest.html#cr-well-formed-1-positive,
+        manifest.html#cr-well-formed-2-negative,
+        manifest.html#cr-well-formed-3-negative">
           As [[YAML]] has well-defined representation requirements,
           all YAML-LD streams MUST form a
           <a data-cite="YAML#well-formed-streams-and-identified-aliases">
@@ -1485,9 +1485,9 @@
         </p>
 
         <p id="aa-json-aliases" data-tests="
-        basic-manifest.html#aa-json-aliases-1-negative,
-        basic-manifest.html#aa-json-aliases-2-negative,
-        extended-manifest.html#aa-cycles-1-positive">
+        manifest.html#aa-json-aliases-1-negative,
+        manifest.html#aa-json-aliases-2-negative,
+        manifest.html#aa-cycles-1-positive">
           When processing using the <a>YAML-LD JSON profile</a>,
           documents MUST NOT contain <a>alias nodes</a>;
           otherwise, a
@@ -1592,12 +1592,12 @@
             </ol>
 
             <p id="cir-stream" data-tests="
-          basic-manifest.html#aa-json-aliases-1-negative,
-          basic-manifest.html#aa-json-aliases-2-negative,
-          basic-manifest.html#cr-utf8-2-negative,
-          basic-manifest.html#cr-well-formed-2-negative,
-          extended-manifest.html#aa-cycles-2-negative,
-          extended-manifest.html#cr-well-formed-3-negative">
+          manifest.html#aa-json-aliases-1-negative,
+          manifest.html#aa-json-aliases-2-negative,
+          manifest.html#cr-utf8-2-negative,
+          manifest.html#cr-well-formed-2-negative,
+          manifest.html#aa-cycles-2-negative,
+          manifest.html#cr-well-formed-3-negative">
               Any error reported in a recursive processing step MUST result
               in the failure of this processing step.</p>
           </section>
@@ -1621,7 +1621,7 @@
                 with the <a>node</a>
                 having the corresponding <a>node anchor</a>.
               </li>
-              <li id="cir-document-content" data-tests="basic-manifest.html#cir-document-content-1-negative">
+              <li id="cir-document-content" data-tests="manifest.html#cir-document-content-1-negative">
                 Set |document content| to the result
                 of processing the <a>node</a> associated with the
                 <a data-cite="YAML#rule-l-bare-document">YAML bare document</a>,
@@ -1647,12 +1647,12 @@
             </ol>
 
             <p id="cir-document" data-tests="
-          basic-manifest.html#aa-json-aliases-1-negative,
-          basic-manifest.html#aa-json-aliases-2-negative,
-          basic-manifest.html#cr-utf8-2-negative,
-          basic-manifest.html#cr-well-formed-2-negative,
-          extended-manifest.html#aa-cycles-2-negative,
-          extended-manifest.html#cr-well-formed-3-negative">
+          manifest.html#aa-json-aliases-1-negative,
+          manifest.html#aa-json-aliases-2-negative,
+          manifest.html#cr-utf8-2-negative,
+          manifest.html#cr-well-formed-2-negative,
+          manifest.html#aa-cycles-2-negative,
+          manifest.html#cr-well-formed-3-negative">
               Any error reported in a recursive processing step MUST result
               in the failure of this processing step.</p>
           </section>
@@ -1681,7 +1681,7 @@
               <li>The conversion result is |sequence content|.</li>
             </ol>
 
-            <p id="cir-seq" data-tests="basic-manifest.html#aa-json-aliases-2-negative">
+            <p id="cir-seq" data-tests="manifest.html#aa-json-aliases-2-negative">
               Any error reported in a recursive processing step MUST result
               in the failure of this processing step.</p>
           </section>
@@ -1708,7 +1708,7 @@
                     to the result of processing |entry|
                     using the appropriate conversion step.
                   </li>
-                  <li id="cir-mapping-key" data-tests="basic-manifest.html#cir-mapping-key-1-negative">
+                  <li id="cir-mapping-key" data-tests="manifest.html#cir-mapping-key-1-negative">
                     If |key| is not a <a>string</a>,
                     a <a data-link-for="YamlLdErrorCode">mapping-key-error</a>
                     error has been detected and processing MUST be aborted.
@@ -1723,11 +1723,11 @@
             </ol>
 
             <p id="cir-mapping" data-tests="
-          basic-manifest.html#aa-json-aliases-1-negative,
-          basic-manifest.html#cr-utf8-2-negative,
-          basic-manifest.html#cr-well-formed-2-negative,
-          extended-manifest.html#aa-cycles-2-negative,
-          extended-manifest.html#cr-well-formed-3-negative">
+          manifest.html#aa-json-aliases-1-negative,
+          manifest.html#cr-utf8-2-negative,
+          manifest.html#cr-well-formed-2-negative,
+          manifest.html#aa-cycles-2-negative,
+          manifest.html#cr-well-formed-3-negative">
               Any error reported in a recursive processing step MUST result
               in the failure of this processing step.</p>
           </section>
@@ -1742,8 +1742,8 @@
                 |n| is mapped as follows:
                 <ol>
                   <li id="cir-scalar-core" data-tests="
-                extended-manifest.html#cir-scalar-core-1-positive,
-                extended-manifest.html#cir-scalar-core-2-positive">
+                manifest.html#cir-scalar-core-1-positive,
+                manifest.html#cir-scalar-core-2-positive">
                     If |t| resolves with a prefix of `tag:yaml.org.2002:`,
                     the conversion result is mapped through the
                     <a data-cite="YAML#core-schema">YAML Core Schema</a>.
@@ -1766,8 +1766,8 @@
                     </div>
                   </li>
                   <li id="cir-scalar-other" data-tests="
-                extended-manifest.html#cir-scalar-other-1-positive,
-                extended-manifest.html#cir-scalar-other-2-positive">
+                manifest.html#cir-scalar-other-1-positive,
+                manifest.html#cir-scalar-other-2-positive">
                     Otherwise, the conversion result is an
                     <a>RDF literal</a> with value taken from |n|
                     and <a>datatype IRI</a> taken from |t|.
@@ -1775,9 +1775,9 @@
                 </ol>
               </li>
               <li id="cir-scalar-json" data-tests="
-            basic-manifest.html#cir-scalar-core-1-positive,
-            basic-manifest.html#cir-scalar-i18n-1-positive,
-            basic-manifest.html#cir-scalar-other-1-positive">
+            manifest.html#cir-scalar-core-1-positive,
+            manifest.html#cir-scalar-i18n-1-positive,
+            manifest.html#cir-scalar-other-1-positive">
                 Otherwise, the conversion result is mapped through the
                 <a data-cite="YAML#core-schema">YAML Core Schema</a>.
               </li>
@@ -1804,8 +1804,8 @@
             </p>
 
             <p id="cir-alias-json" data-tests="
-          basic-manifest.html#cr-well-formed-1-positive,
-          basic-manifest.html#cr-well-formed-2-negative">
+          manifest.html#cr-well-formed-1-positive,
+          manifest.html#cr-well-formed-2-negative">
               If an <a>alias node</a> is encountered when processing the
               <a>YAML representation graph</a>
               and the {{JsonLdOptions/extendedYAML}} flag is `false`,
@@ -1815,9 +1815,9 @@
             </p>
 
             <p id="cir-alias-cycles" data-tests="
-          extended-manifest.html#aa-cycles-1-positive,
-          extended-manifest.html#aa-cycles-2-negative,
-          extended-manifest.html#aa-cycles-3-positive">
+          manifest.html#aa-cycles-1-positive,
+          manifest.html#aa-cycles-2-negative,
+          manifest.html#aa-cycles-3-positive">
               If a cycle is detected,
               a processing error MUST be returned,
               and processing aborted.
@@ -2027,8 +2027,8 @@
             </p>
 
             <p id="jp-utf8" data-tests="
-          basic-manifest.html#cr-utf8-1-positive,
-          basic-manifest.html#cr-utf8-2-negative">
+          manifest.html#cr-utf8-1-positive,
+          manifest.html#cr-utf8-2-negative">
               Although YAML supports several additional encodings,
               YAML-LD documents in the <a>YAML-LD JSON Profile</a>
               MUST NOT use encodings other than UTF-8.
@@ -2062,8 +2062,8 @@
             </p>
 
             <p id="ep-utf8" data-tests="
-          basic-manifest.html#cr-utf8-1-positive,
-          basic-manifest.html#cr-utf8-2-negative">
+          manifest.html#cr-utf8-1-positive,
+          manifest.html#cr-utf8-2-negative">
               As with the <a>YAML-LD JSON profile</a>,
               YAML-LD documents in the <a>YAML-LD extended profile</a>
               MUST NOT use encodings other than UTF-8.
