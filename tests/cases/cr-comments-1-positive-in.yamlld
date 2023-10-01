@@ -5,9 +5,9 @@
   "@vocab": http://example.com/
 "@id": http://example.org/test#example
 "@type": t1
+this-is#not: a comment
 notacomment:
-  - this-is#not: a comment
-  -  |
+  - |
     --- >
     line1
     # no comment
