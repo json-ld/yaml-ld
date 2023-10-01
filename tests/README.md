@@ -9,10 +9,7 @@ More information and an RDFS definition of the test vocabulary can be found at [
 
 # Design
 
-Tests driven from a top-level [manifest](manifest.jsonld) and are defined into [basic](manifest.jsonld) and [extended](extended-manifest.jsonld) sections:
-
-* [basic](manifest.jsonld) tests have _input_, _expected_ and may have _context_ or _frame_ documents.
-* [extended](extended-manifest.jsonld) tests have _input_, _expected_ and may have _context_ or _frame_ documents. Additionally, the `extendedYAML` flag is added to API calls.
+Tests driven from a top-level [manifest](manifest.jsonld). Tests have _input_, _expected_ and may have _context_ or _frame_ documents.
 
 Tests may have a `expandContext` option, which is treated
   as an IRI relative to the manifest.

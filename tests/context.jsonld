@@ -24,7 +24,6 @@
     "compactToRelative":    { "@type": "xsd:boolean" },
     "contentType":          { "@type": "xsd:string" },
     "expandContext":        { "@type": "@id" },
-    "extendedYAML":         { "@type": "xsd:boolean" },
     "extractAllScripts":    { "@type": "xsd:boolean" },
     "httpLink":             { "@type": "xsd:string", "@container": "@set" },
     "httpStatus":           { "@type": "xsd:integer" },
