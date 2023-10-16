@@ -1,6 +1,4 @@
-%YAML 1.2
 # A node alias with no corresponding anchor
----
 "@context":
   "@vocab": "http://schema.org/"
   "countries": "http://publication.europa.eu/resource/authority/country/"

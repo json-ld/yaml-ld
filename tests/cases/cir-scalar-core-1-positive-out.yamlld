@@ -1,5 +1,3 @@
-%YAML 1.2
----
 - "@id": http://example.org/test#example
   http://example.com/values:
   - "@list":
