@@ -1,6 +1,4 @@
-%YAML 1.2
 # Fail to load a non-well-formed stream
----
 "@context":
   "@vocab": "http://schema.org/"
   "countries": "http://publication.europa.eu/resource/authority/country/"

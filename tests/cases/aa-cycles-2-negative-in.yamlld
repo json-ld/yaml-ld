@@ -1,6 +1,4 @@
-%YAML 1.2
 # Document with anchor/reference cycle
----
 "@context":
   "@vocab": http://example.com/
 

@@ -1,5 +1,3 @@
-%YAML 1.2
----
 - "@id": http://people.example/Homer
   http://schema.org/name:
   - "@value": Homer Simpson

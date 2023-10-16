@@ -1,6 +1,4 @@
-%YAML 1.2
 # Commends are white space
----
 "@context":
   "@vocab": http://example.com/
 "@id": http://example.org/test#example
