@@ -52,6 +52,15 @@
       "expectErrorCode": "mapping-key-error"
     },
     {
+      "@id":  "#cir-mapping-key-5-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Mapping with a null key.",
+      "purpose": "A mapping key MUST be a string.",
+      "req": "must",
+      "input": "cases/mapping-key-must-be-string/null.yamlld",
+      "expectErrorCode": "mapping-key-error"
+    },
+    {
       "@id": "#cir-scalar-core-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "tag:yaml.org.2002 scalars",
