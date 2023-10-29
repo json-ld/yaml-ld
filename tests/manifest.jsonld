@@ -21,7 +21,7 @@
       "name": "Mapping with integer key.",
       "purpose": "A mapping key MUST be a string.",
       "req": "must",
-      "input": "cases/cir-mapping-key-1-negative-in.yamlld",
+      "input": "cases/mapping-key-must-be-string/integer.yamlld",
       "expectErrorCode": "mapping-key-error"
     },
     {
@@ -36,10 +36,19 @@
     {
       "@id":  "#cir-mapping-key-3-negative",
       "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
-      "name": "Mapping with an object key.",
+      "name": "Mapping with a list key.",
       "purpose": "A mapping key MUST be a string.",
       "req": "must",
       "input": "cases/mapping-key-must-be-string/list.yamlld",
+      "expectErrorCode": "mapping-key-error"
+    },
+    {
+      "@id":  "#cir-mapping-key-4-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Mapping with a float key.",
+      "purpose": "A mapping key MUST be a string.",
+      "req": "must",
+      "input": "cases/mapping-key-must-be-string/float.yamlld",
       "expectErrorCode": "mapping-key-error"
     },
     {
