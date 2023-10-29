@@ -948,7 +948,11 @@
     <section id="mapping-key-types">
       <h2>Mapping Key Types</h2>
 
-      <p id="aa-mapping-key-types" data-tests="manifest.html#cir-mapping-key-1-negative">
+      <p id="aa-mapping-key-types" data-tests="
+        manifest.html#cir-mapping-key-1-negative,
+        manifest.html#cir-mapping-key-2-negative,
+        manifest.html#cir-mapping-key-3-negative
+      ">
         Mapping key type MUST be a <code>string</code>. Otherwise, a processing error is raised.
       </p>
     </section>
@@ -1484,10 +1488,7 @@
           will be in the <a>extended internal representation</a>.
         </p>
 
-        <p id="aa-json-aliases" data-tests="
-        manifest.html#aa-json-aliases-1-negative,
-        manifest.html#aa-json-aliases-2-negative,
-        manifest.html#aa-cycles-1-positive">
+        <p id="aa-json-aliases" data-tests="manifest.html#aa-cycles-1-positive">
           When processing using the <a>YAML-LD JSON profile</a>,
           documents MUST NOT contain <a>alias nodes</a>;
           otherwise, a
@@ -1592,8 +1593,6 @@
             </ol>
 
             <p id="cir-stream" data-tests="
-          manifest.html#aa-json-aliases-1-negative,
-          manifest.html#aa-json-aliases-2-negative,
           manifest.html#cr-utf8-2-negative,
           manifest.html#cr-well-formed-2-negative,
           manifest.html#aa-cycles-2-negative,
@@ -1647,8 +1646,6 @@
             </ol>
 
             <p id="cir-document" data-tests="
-          manifest.html#aa-json-aliases-1-negative,
-          manifest.html#aa-json-aliases-2-negative,
           manifest.html#cr-utf8-2-negative,
           manifest.html#cr-well-formed-2-negative,
           manifest.html#aa-cycles-2-negative,
@@ -1681,7 +1678,7 @@
               <li>The conversion result is |sequence content|.</li>
             </ol>
 
-            <p id="cir-seq" data-tests="manifest.html#aa-json-aliases-2-negative">
+            <p id="cir-seq">
               Any error reported in a recursive processing step MUST result
               in the failure of this processing step.</p>
           </section>
@@ -1723,7 +1720,6 @@
             </ol>
 
             <p id="cir-mapping" data-tests="
-          manifest.html#aa-json-aliases-1-negative,
           manifest.html#cr-utf8-2-negative,
           manifest.html#cr-well-formed-2-negative,
           manifest.html#aa-cycles-2-negative,
