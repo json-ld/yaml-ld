@@ -25,6 +25,24 @@
       "expectErrorCode": "mapping-key-error"
     },
     {
+      "@id":  "#cir-mapping-key-2-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Mapping with an object key.",
+      "purpose": "A mapping key MUST be a string.",
+      "req": "must",
+      "input": "cases/mapping-key-must-be-string/object.yamlld",
+      "expectErrorCode": "mapping-key-error"
+    },
+    {
+      "@id":  "#cir-mapping-key-3-negative",
+      "@type": ["jld:NegativeEvaluationTest", "jld:ExpandTest"],
+      "name": "Mapping with an object key.",
+      "purpose": "A mapping key MUST be a string.",
+      "req": "must",
+      "input": "cases/mapping-key-must-be-string/list.yamlld",
+      "expectErrorCode": "mapping-key-error"
+    },
+    {
       "@id": "#cir-scalar-core-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "tag:yaml.org.2002 scalars",
