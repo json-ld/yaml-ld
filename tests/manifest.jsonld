@@ -72,18 +72,20 @@
     {
       "@id": "#cir-scalar-i18n-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "language-tagged string with i18n",
+      "name": "language-tagged string with i18n (ignored without extendedYAML)",
       "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
       "req": "must",
+      "option": {"extendedYAML": false},
       "input": "cases/cir-scalar-i18n-1-positive-in.yamlld",
       "expect": "cases/cir-scalar-i18n-1-positive-out.yamlld"
     },
     {
       "@id": "#cir-scalar-other-1-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "Scalars with other node tags",
+      "name": "Scalars with other node tags (ignored without extendedYAML)",
       "purpose": "Otherwise, the conversion result is mapped through the YAML Core Schema.",
       "req": "must",
+      "option": {"extendedYAML": false},
       "input": "cases/cir-scalar-other-1-positive-in.yamlld",
       "expect": "cases/cir-scalar-other-1-positive-out.yamlld"
     },
@@ -160,15 +162,6 @@
       "expect": "cases/aa-cycles-3-positive-out.yamlld"
     },
     {
-      "@id": "#cir-scalar-core-1-positive",
-      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "tag:yaml.org.2002 scalars",
-      "purpose": "If t resolves with a prefix of `tag:yaml.org.2002:`, the conversion result is mapped through the YAML Core Schema.",
-      "req": "must",
-      "input": "cases/cir-scalar-core-1-positive-in.yamlld",
-      "expect": "cases/cir-scalar-core-1-positive-out.yamlld"
-    },
-    {
       "@id": "#cir-scalar-core-2-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
       "name": "tag:yaml.org.2002 scalars (RDF)",
@@ -178,29 +171,12 @@
       "expect": "cases/cir-scalar-core-2-positive-out.nq"
     },
     {
-      "@id": "#cir-scalar-i18n-1-positive",
-      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "language-tagged string with i18n",
-      "purpose": "If t resolves with a prefix of `https://www.w3.org/ns/i18n#`, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.",
-      "req": "must",
-      "input": "cases/cir-scalar-i18n-1-positive-in.yamlld",
-      "expect": "cases/cir-scalar-i18n-1-positive-out.yamlld"
-    },
-    {
-      "@id": "#cir-scalar-other-1-positive",
-      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
-      "name": "Scalars with other node tags",
-      "purpose": "Otherwise, the conversion result is an RDF literal.",
-      "req": "must",
-      "input": "cases/cir-scalar-other-1-positive-in.yamlld",
-      "expect": "cases/cir-scalar-other-1-positive-out.yamlld"
-    },
-    {
       "@id": "#cir-scalar-other-2-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
-      "name": "Scalars with other node tags (RDF)",
+      "name": "Scalars with other node tags (RDF) - extended YAML-LD",
       "purpose": "Otherwise, the conversion result is an RDF literal.",
-      "req": "must",
+      "req": "may",
+      "option": {"extendedYAML": true},
       "input": "cases/cir-scalar-other-2-positive-in.yamlld",
       "expect": "cases/cir-scalar-other-2-positive-out.nq"
     },
