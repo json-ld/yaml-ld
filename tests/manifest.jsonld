@@ -173,10 +173,10 @@
     {
       "@id": "#cir-scalar-other-2-positive",
       "@type": ["jld:PositiveEvaluationTest", "jld:ToRDFTest"],
-      "name": "Scalars with other node tags (RDF) - extended YAML-LD",
+      "name": "Scalars with other node tags (RDF)  (ignored without extendedYAML)",
       "purpose": "Otherwise, the conversion result is an RDF literal.",
       "req": "may",
-      "option": {"extendedYAML": true},
+      "option": {"extendedYAML": false},
       "input": "cases/cir-scalar-other-2-positive-in.yamlld",
       "expect": "cases/cir-scalar-other-2-positive-out.nq"
     },
