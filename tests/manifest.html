@@ -260,13 +260,13 @@
               </dd>
 
               <dt id="cir-scalar-i18n-1-positive">
-                Test cir-scalar-i18n-1-positive language-tagged string with i18n
+                Test cir-scalar-i18n-1-positive language-tagged string with i18n (ignored without extendedYAML)
               </dt>
               <dd>
                 <dl class="entry">
                   <dt>ID</dt><dd>#cir-scalar-i18n-1-positive</dd></dt>
                   <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>language-tagged string with i18n</dd></dt>
+                  <dt>Name</dt><dd>language-tagged string with i18n (ignored without extendedYAML)</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="cases/cir-scalar-i18n-1-positive-in.yamlld">cases/cir-scalar-i18n-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-json">1</a>)</dd></dt>
@@ -275,18 +275,21 @@
                   
                   <dt>Expect</dt><dd><a href="cases/cir-scalar-i18n-1-positive-out.yamlld">cases/cir-scalar-i18n-1-positive-out.yamlld</a></dd>
                   
-                  
+                  <dt>Options</dt>
+                    <dd><dl class="options">
+                    <dt>extendedYAML</dt><dd>false</dd>
+                    </dl></dd>
                 </dl>
               </dd>
 
               <dt id="cir-scalar-other-1-positive">
-                Test cir-scalar-other-1-positive Scalars with other node tags
+                Test cir-scalar-other-1-positive Scalars with other node tags (ignored without extendedYAML)
               </dt>
               <dd>
                 <dl class="entry">
                   <dt>ID</dt><dd>#cir-scalar-other-1-positive</dd></dt>
                   <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>Scalars with other node tags</dd></dt>
+                  <dt>Name</dt><dd>Scalars with other node tags (ignored without extendedYAML)</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is mapped through the YAML Core Schema.</dd></dt>
                   <dt>Input</dt><dd><a href="cases/cir-scalar-other-1-positive-in.yamlld">cases/cir-scalar-other-1-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-other">1</a>) (<a href="../spec/index.html#cir-scalar-json">2</a>)</dd></dt>
@@ -295,7 +298,10 @@
                   
                   <dt>Expect</dt><dd><a href="cases/cir-scalar-other-1-positive-out.yamlld">cases/cir-scalar-other-1-positive-out.yamlld</a></dd>
                   
-                  
+                  <dt>Options</dt>
+                    <dd><dl class="options">
+                    <dt>extendedYAML</dt><dd>false</dd>
+                    </dl></dd>
                 </dl>
               </dd>
 
@@ -459,26 +465,6 @@
                 </dl>
               </dd>
 
-              <dt id="cir-scalar-core-1-positive">
-                Test cir-scalar-core-1-positive tag:yaml.org.2002 scalars
-              </dt>
-              <dd>
-                <dl class="entry">
-                  <dt>ID</dt><dd>#cir-scalar-core-1-positive</dd></dt>
-                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>tag:yaml.org.2002 scalars</dd></dt>
-                  <dt>Purpose</dt><dd>If t resolves with a prefix of <code>tag:yaml.org.2002:</code>, the conversion result is mapped through the YAML Core Schema.</dd></dt>
-                  <dt>Input</dt><dd><a href="cases/cir-scalar-core-1-positive-in.yamlld">cases/cir-scalar-core-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-core">1</a>) (<a href="../spec/index.html#cir-scalar-json">2</a>)</dd></dt>
-                  <dt>Requirement</dt><dd><strong>must</strong></dd>
-                  
-                  
-                  <dt>Expect</dt><dd><a href="cases/cir-scalar-core-1-positive-out.yamlld">cases/cir-scalar-core-1-positive-out.yamlld</a></dd>
-                  
-                  
-                </dl>
-              </dd>
-
               <dt id="cir-scalar-core-2-positive">
                 Test cir-scalar-core-2-positive tag:yaml.org.2002 scalars (RDF)
               </dt>
@@ -499,63 +485,26 @@
                 </dl>
               </dd>
 
-              <dt id="cir-scalar-i18n-1-positive">
-                Test cir-scalar-i18n-1-positive language-tagged string with i18n
-              </dt>
-              <dd>
-                <dl class="entry">
-                  <dt>ID</dt><dd>#cir-scalar-i18n-1-positive</dd></dt>
-                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>language-tagged string with i18n</dd></dt>
-                  <dt>Purpose</dt><dd>If t resolves with a prefix of <code>https://www.w3.org/ns/i18n#</code>, and the suffix <strong>does not</strong> contain an underscore, the conversion result is a language-tagged string.</dd></dt>
-                  <dt>Input</dt><dd><a href="cases/cir-scalar-i18n-1-positive-in.yamlld">cases/cir-scalar-i18n-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-json">1</a>)</dd></dt>
-                  <dt>Requirement</dt><dd><strong>must</strong></dd>
-                  
-                  
-                  <dt>Expect</dt><dd><a href="cases/cir-scalar-i18n-1-positive-out.yamlld">cases/cir-scalar-i18n-1-positive-out.yamlld</a></dd>
-                  
-                  
-                </dl>
-              </dd>
-
-              <dt id="cir-scalar-other-1-positive">
-                Test cir-scalar-other-1-positive Scalars with other node tags
-              </dt>
-              <dd>
-                <dl class="entry">
-                  <dt>ID</dt><dd>#cir-scalar-other-1-positive</dd></dt>
-                  <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ExpandTest</dd>
-                  <dt>Name</dt><dd>Scalars with other node tags</dd></dt>
-                  <dt>Purpose</dt><dd>Otherwise, the conversion result is an RDF literal.</dd></dt>
-                  <dt>Input</dt><dd><a href="cases/cir-scalar-other-1-positive-in.yamlld">cases/cir-scalar-other-1-positive-in.yamlld</a></dd></dt>
-                  <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-other">1</a>) (<a href="../spec/index.html#cir-scalar-json">2</a>)</dd></dt>
-                  <dt>Requirement</dt><dd><strong>must</strong></dd>
-                  
-                  
-                  <dt>Expect</dt><dd><a href="cases/cir-scalar-other-1-positive-out.yamlld">cases/cir-scalar-other-1-positive-out.yamlld</a></dd>
-                  
-                  
-                </dl>
-              </dd>
-
               <dt id="cir-scalar-other-2-positive">
-                Test cir-scalar-other-2-positive Scalars with other node tags (RDF)
+                Test cir-scalar-other-2-positive Scalars with other node tags (RDF)  (ignored without extendedYAML)
               </dt>
               <dd>
                 <dl class="entry">
                   <dt>ID</dt><dd>#cir-scalar-other-2-positive</dd></dt>
                   <dt>Type</dt><dd>jld:PositiveEvaluationTest,jld:ToRDFTest</dd>
-                  <dt>Name</dt><dd>Scalars with other node tags (RDF)</dd></dt>
+                  <dt>Name</dt><dd>Scalars with other node tags (RDF)  (ignored without extendedYAML)</dd></dt>
                   <dt>Purpose</dt><dd>Otherwise, the conversion result is an RDF literal.</dd></dt>
                   <dt>Input</dt><dd><a href="cases/cir-scalar-other-2-positive-in.yamlld">cases/cir-scalar-other-2-positive-in.yamlld</a></dd></dt>
                   <dt>References</dt><dd>(<a href="../spec/index.html#cir-scalar-other">1</a>)</dd></dt>
-                  <dt>Requirement</dt><dd><strong>must</strong></dd>
+                  <dt>Requirement</dt><dd><strong>may</strong></dd>
                   
                   
                   <dt>Expect</dt><dd><a href="cases/cir-scalar-other-2-positive-out.nq">cases/cir-scalar-other-2-positive-out.nq</a></dd>
                   
-                  
+                  <dt>Options</dt>
+                    <dd><dl class="options">
+                    <dt>extendedYAML</dt><dd>false</dd>
+                    </dl></dd>
                 </dl>
               </dd>
 
