@@ -7,11 +7,15 @@
     rdfs:range:
       "@type": "@id"
 
+    license:
+      "@type": "@id"
+
 $included:
   - $id: schema:author
     rdfs:range: schema:Person
 
   - $id: https://json-ld.github.io/yaml-ld/spec/
+    rdfs:label: YAML-LD
     schema:author:
       - name: Vladimir Alexiev
         $id: https://github.com/VladimirAlexiev
@@ -35,7 +39,7 @@ $included:
       - name: Benjamin Young
         $id: https://github.com/BigBlueHat
 
-    license: W3C License
+    license: https://spdx.org/licenses/W3C.html
 
     schema:hasPart:
       - rdfs:label: Abstract
