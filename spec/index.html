@@ -301,6 +301,34 @@
       YAML-LD offers an efficient way to encode Linked Data in a
       variety of programming languages which can use YAML.
     </p>
+
+    <p>
+      <strong>An introductory YAML-LD example</strong> is presented below.
+
+      <pre class="example yaml"
+           data-transform="updateExample"
+           data-content-type="application/ld+yaml"
+           title="Basic YAML-LD document">
+        <!--
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/yaml-ld/spec/
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    schema: https://schema.org/
+    license:
+      "@type": "@id"
+
+$id: https://json-ld.github.io/yaml-ld/spec/
+rdfs:label: YAML-LD
+license: https://spdx.org/licenses/W3C.html
+schema:hasPart:
+  - rdfs:label: Abstract
+  - rdfs:label: Status of This Document
+  - rdfs:label: Introduction
+        -->
+      </pre>
+
+    </p>
   </section>
 
   <section id='sotd'>
