@@ -576,7 +576,7 @@ schema:hasPart:
 <section id="conformance">
   <p>
     A <a>YAML-LD document</a> complies with
-    the <a>YAML-LD JSON profile</a> of this specification
+    the <a>YAML-LD Basic profile</a> of this specification
     if it follows the normative statements from this specification
     and can be transformed into a JSON-LD representation,
     then back to a conforming YAML-LD document,
@@ -1366,7 +1366,7 @@ schema:hasPart:
           pending feedback from the community and new knowledge gained
           from practical experience of using the basic version
           of YAML-LD that we will henceforth call
-          <strong>JSON Profile of YAML-LD</strong>.
+          <strong>Basic Profile of YAML-LD</strong>.
         </div>
 
         <section>
@@ -1512,7 +1512,7 @@ schema:hasPart:
         </p>
 
         <p id="aa-json-aliases" data-tests="manifest.html#aa-cycles-1-positive">
-          When processing using the <a>YAML-LD JSON profile</a>,
+          When processing using the <a>YAML-LD Basic profile</a>,
           documents MUST NOT contain <a>alias nodes</a>;
           otherwise, a
           <a data-link-for="YamlLdErrorCode">profile-error</a>
@@ -1569,7 +1569,7 @@ schema:hasPart:
             <a data-cite="YAML#representation-graph"></a>.
           </p>
 
-          <p>When operating using the <a>YAML-LD JSON profile</a>,
+          <p>When operating using the <a>YAML-LD Basic profile</a>,
             it is intended that the common feature provided by most
             YAML libraries of transforming YAML directly to JSON
             satisfies the requirements for parsing a YAML-LD file.
@@ -1828,7 +1828,7 @@ schema:hasPart:
               If an <a>alias node</a> is encountered when processing the
               <a>YAML representation graph</a>
               and the {{JsonLdOptions/extendedYAML}} flag is `false`,
-              the <a>YAML-LD JSON profile</a> has been selected.
+              the <a>YAML-LD Basic profile</a> has been selected.
               A <a data-link-for="YamlLdErrorCode">profile-error</a>
               error has been detected and processing MUST be aborted.
             </p>
@@ -2011,14 +2011,14 @@ schema:hasPart:
           <p>This section identifies two application profiles for operating with
             YAML-LD:</p>
           <ul>
-            <li>the <a>YAML-LD JSON profile</a>, and</li>
-            <li>the <a>YAML-LD extended profile</a>.</li>
+            <li>the <a>YAML-LD Basic profile</a>, and</li>
+            <li>the <a>YAML-LD Extended profile</a>.</li>
           </ul>
 
           <p>Application profiles allow publishers to use YAML-LD
             either for maximum interoperability,
             or for maximum expressivity.
-            The <a>YAML-LD JSON profile</a> provides for complete round-tripping
+            The <a>YAML-LD Basic profile</a> provides for complete round-tripping
             between YAML-LD documents and JSON-LD documents.
             The <a>YAML-LD extended profile</a> allows for
             fuller use of YAML features to enhance the ability to
@@ -2030,10 +2030,10 @@ schema:hasPart:
             API interface, as well as an HTTP request profile (see <a href="#iana" class="sectionRef"></a>).</p>
 
           <section id="yaml-ld-json-profile">
-            <h3>YAML-LD JSON Profile</h3>
+            <h3>YAML-LD Basic Profile</h3>
 
             <p>
-              The <dfn>YAML-LD JSON profile</dfn>
+              The <dfn>YAML-LD Basic profile</dfn>
               is based on the <a data-cite="YAML#core-schema">YAML Core Schema</a>,
               which interprets only a limited set of <a>node tags</a>.
               <a>YAML scalars</a> with <a>node tags</a> outside of the defined range
@@ -2048,7 +2048,7 @@ schema:hasPart:
           manifest.html#cr-utf8-1-positive,
           manifest.html#cr-utf8-2-negative">
               Although YAML supports several additional encodings,
-              YAML-LD documents in the <a>YAML-LD JSON Profile</a>
+              YAML-LD documents in the <a>YAML-LD Basic Profile</a>
               MUST NOT use encodings other than UTF-8.
             </p>
 
@@ -2082,13 +2082,13 @@ schema:hasPart:
             <p id="ep-utf8" data-tests="
           manifest.html#cr-utf8-1-positive,
           manifest.html#cr-utf8-2-negative">
-              As with the <a>YAML-LD JSON profile</a>,
+              As with the <a>YAML-LD Basic profile</a>,
               YAML-LD documents in the <a>YAML-LD extended profile</a>
               MUST NOT use encodings other than UTF-8.
             </p>
 
             <p>
-              As with the <a>YAML-LD JSON profile</a>,
+              As with the <a>YAML-LD Basic profile</a>,
               keys used in a <a>YAML mapping</a> MUST be <a>strings</a>.
             </p>
 
@@ -2098,7 +2098,7 @@ schema:hasPart:
             </p>
 
             <p>
-              As with the <a>YAML-LD JSON profile</a>,
+              As with the <a>YAML-LD Basic profile</a>,
               a <a>YAML stream</a> MUST include only a single <a>YAML document</a>,
               as the <a>JSON-LD extended internal representation</a> only supports
               a single document model.
@@ -2133,7 +2133,7 @@ schema:hasPart:
                 When transforming from the <a>extended internal representation</a>
                 to the <a>internal representation</a> &mdash;
                 for example when serializing to JSON
-                or to the <a>YAML-LD JSON profile</a> &mdash;
+                or to the <a>YAML-LD Basic profile</a> &mdash;
                 implementations MUST transform <a>RDF literals</a> to the closest
                 native representation of the <a>internal representation</a>:
               </p>
