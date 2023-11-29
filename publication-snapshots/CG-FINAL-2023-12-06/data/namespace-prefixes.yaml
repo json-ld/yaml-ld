@@ -1,0 +1,22 @@
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+
+$id: NamespacePrefix
+$reverse:
+  rdf:type:
+    - prefix: ex
+      iri: https://example.org/
+    - prefix: i18n
+      iri: "https://www.w3.org/ns/i18n#"
+    - prefix: rdf
+      iri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    - prefix: rdfs
+      iri: "http://www.w3.org/2000/01/rdf-schema#"
+    - prefix: xsd
+      iri: "http://www.w3.org/2001/XMLSchema#"
+    - prefix: schema
+      iri: https://schema.org/
+    - prefix: prov
+      iri: "http://www.w3.org/ns/prov#"

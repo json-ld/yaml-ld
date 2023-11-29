@@ -1,0 +1,80 @@
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/yaml-ld/spec/
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    schema: https://schema.org/
+
+    rdfs:range:
+      "@type": "@id"
+
+    license:
+      "@type": "@id"
+
+$included:
+  - $id: schema:author
+    rdfs:range: schema:Person
+
+  - $id: https://json-ld.github.io/yaml-ld/spec/
+    rdfs:label: YAML-LD
+    schema:author:
+      - name: Vladimir Alexiev
+        $id: https://github.com/VladimirAlexiev
+
+      - name: Pierre-Antoine Champin
+        $id: https://github.com/pchampin
+
+      - name: Gregg Kellogg
+        $id: https://github.com/gkellogg
+
+      - name: Roberto Polli
+        $id: https://github.com/ioggstream
+
+      - name: Anatoly Scherbakov
+        country: am
+        $id: https://github.com/anatoly-scherbakov
+
+      - name: Ted Thibodeau Jr
+        $id: https://github.com/TallTed
+
+      - name: Benjamin Young
+        $id: https://github.com/BigBlueHat
+
+    license: https://spdx.org/licenses/W3C.html
+
+    schema:hasPart:
+      - rdfs:label: Abstract
+      - rdfs:label: Status of This Document
+      - rdfs:label: Introduction
+        schema:hasPart:
+          - rdfs:label: How to read this document
+          - rdfs:label: Terminology
+          - rdfs:label: Namespace prefixes
+      - rdfs:label: Conformance
+      - rdfs:label: Basic concepts
+        schema:hasPart:
+          - rdfs:label: JSON vs YAML comparison
+      - rdfs:label: Core requirements
+        $type: NormativeSection
+        schema:hasPart:
+          - rdfs:label: YAML features supported by YAML-LD
+          - rdfs:label: Encoding
+          - rdfs:label: Comments
+          - rdfs:label: Anchors and Aliases
+          - rdfs:label: Mapping Key Types
+
+      - rdfs:label: Security Considerations
+      - rdfs:label: Interoperability Considerations
+
+      - rdfs:label: IANA Considerations
+        $type: NormativeSection
+        schema:hasPart:
+          - rdfs:label: application/ld+yaml
+          - rdfs:label: Fragment identifiers
+          - rdfs:label: Examples
+
+      - rdfs:label: Best Practices
+      - rdfs:label: Why are comments treated as whitespace?
+      - rdfs:label: Streams
+
+      - rdfs:label: Extended YAML-LD Profile
+      - rdfs:label: References

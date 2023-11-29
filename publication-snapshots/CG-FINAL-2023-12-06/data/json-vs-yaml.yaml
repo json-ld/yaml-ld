@@ -1,0 +1,132 @@
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    prov: http://www.w3.org/ns/prov#
+
+$id: JSONOrYAMLFeature
+$reverse:
+  rdf:type:
+    - rdfs:label: UTF-8
+      $type: Encoding
+      json:
+        - prov:value: yes
+          prov:wasDerivedFrom: JSON#section-8.1
+      yaml:
+        - prov:value: yes
+          prov:wasDerivedFrom: YAML#52-character-encodings
+
+    - rdfs:label: UTF-16
+      json:
+        - prov:value: no
+          prov:wasDerivedFrom: JSON#section-8.1
+      yaml:
+        - prov:value: yes
+          prov:wasDerivedFrom: YAML#52-character-encodings
+
+    - rdfs:label: UTF-32
+      json:
+        - prov:value: no
+          prov:wasDerivedFrom: JSON#section-8.1
+      yaml:
+        - prov:value: yes
+          prov:wasDerivedFrom: YAML#52-character-encodings
+
+    - rdfs:label: "<code>{}</code> object"
+      rdf:type:
+        $id: native-data-types
+        rdfs:label: Native data types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-4
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#3211-nodes
+
+    - rdfs:label: "<code>[]</code> array"
+      $type: native-data-types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-5
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#3211-nodes
+
+    - rdfs:label: string
+      $type: native-data-types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-7
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#3211-nodes
+
+    - rdfs:label: number
+      $type: native-data-types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-6
+      yaml:
+        - prov:value: integer
+          prov:wasDerivedFrom: YAML#10213-integer
+        - prov:value: floating point
+          prov:wasDerivedFrom: YAML#10214-floating-point
+
+    - rdfs:label: bool
+      $type: native-data-types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-3
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#10212-boolean
+
+    - rdfs:label: null
+      $type: native-data-types
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-3
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#10211-null
+
+    - rdfs:label: Custom types
+      rdf:type:
+        $id: features
+        rdfs:label: Features
+      json: no
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#tags
+
+    - rdfs:label: Cycles
+      $type: features
+      json: no
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#321-representation-graph
+
+    - rdfs:label: Documents per file
+      json: 1
+      yaml:
+        prov:value: ⩾ 1
+        prov:wasDerivedFrom: YAML stream
+
+    - rdfs:label: Comments
+      json: no
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#3233-comments
+
+    - rdfs:label: Anchors & aliases
+      json: no
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#3222-anchors-and-aliases
+
+    - rdfs:label: Mapping key types
+      json: string
+      yaml:
+        prov:value: Any type representable in YAML, from strings to mappings
+        prov:wasDerivedFrom: YAML#3211-nodes
