@@ -1007,6 +1007,39 @@ schema:hasPart:
     </p>
   </section>
 
+  <section id="html">
+    <h2>Embedding YAML-LD in HTML Documents</h2>
+
+    <p>
+      YAML-LD content can be easily embedded in HTML [[HTML]] by placing it
+      in a <code>&lt;script></code> element with the type attribute set to
+      `application/ld+yaml`, as illustrated on an example below.
+    </p>
+
+    <pre class="example yaml"
+     data-transform="updateExample"
+     data-content-type="application/ld+yaml"
+     title="YAML-LD document embedded in HTML">
+    <!--
+    <script type="application/ld+yaml">
+    "@context": https://json-ld.org/contexts/person.jsonld
+    "@id": http://dbpedia.org/resource/John_Lennon
+    name: John Lennon
+    born: 1940-10-09
+    spouse: http://dbpedia.org/resource/Cynthia_Lennon
+    ---
+    "@context": https://json-ld.org/contexts/person.jsonld
+    "@id": http://dbpedia.org/resource/Cynthia_Lennon
+    born: 1939-09-10
+    </script>
+    -->
+    </pre>
+
+    <p data-tests="manifest.html#html-and-yaml-streams">
+      If the YAML-LD <code>&lt;script></code> tag contains a <a>YAML Stream</a> with multiple <a>YAML documents</a>, each of these documents MUST be treated as if it was included in a separate <code>&lt;script></code> tag.
+    </p>
+  </section>
+
   <section id="iana" class="appendix normative">
     <h2>IANA Considerations</h2>
 
