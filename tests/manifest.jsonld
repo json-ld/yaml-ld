@@ -188,6 +188,15 @@
       "req": "must",
       "input": "cases/cr-well-formed-3-negative-in.yamlld",
       "expectErrorCode": "loading document failed"
+    },
+    {
+      "@id": "#html-and-yaml-streams",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html-and-yaml-streams/in.html",
+      "expect": "cases/html-and-yaml-streams/out.yamlld"
     }
   ]
 }
