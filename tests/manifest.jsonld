@@ -195,8 +195,26 @@
       "name": "YAML Stream with multiple documents embedded into HTML.",
       "req": "must",
       "option": {"extractAllScripts": true},
-      "input": "cases/html-and-yaml-streams/in.html",
-      "expect": "cases/html-and-yaml-streams/out.yamlld"
+      "input": "cases/html/stream.html",
+      "expect": "cases/html/stream.yamlld"
+    },
+    {
+      "@id": "#html-dedent-needed",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/dedent-needed.html",
+      "expect": "cases/html/stream.yamlld"
+    },
+    {
+      "@id": "#html-dedent-not-needed",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/dedent-not-needed.html",
+      "expect": "cases/html/stream.yamlld"
     }
   ]
 }

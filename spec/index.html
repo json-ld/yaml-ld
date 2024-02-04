@@ -1035,6 +1035,21 @@ schema:hasPart:
     -->
     </pre>
 
+    <p data-tests="manifest.html#html-dedent-needed,manifest.html#html-dedent-not-needed">
+      YAML syntax is indentation based. Before processing each `&lt;script>` block with YAML-LD content, YAML-LD processor MUST <em>dedent</em> the body of the block using the following procedure:
+    </p>
+
+    <ul>
+      <li>Count the number of <strong>leading spaces</strong> in the first line of the YAML-LD block, and save that to `dedent_count` variable,</li>
+      <li>
+        For each line of the YAML-LD block,
+        <ul>
+          <li>If the number of leading spaces is less than `dedent_count`, keep the line as-is,</li>
+          <li>Otherwise, remove exactly `dedent_count` leading spaces from the line.</li>
+        </ul>
+      </li>
+    </ul>
+
     <p data-tests="manifest.html#html-and-yaml-streams">
       If the YAML-LD <code>&lt;script></code> tag contains a <a>YAML Stream</a> with multiple <a>YAML documents</a>, each of these documents MUST be treated as if it was included in a separate <code>&lt;script></code> tag.
     </p>
