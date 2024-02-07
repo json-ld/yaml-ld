@@ -188,6 +188,33 @@
       "req": "must",
       "input": "cases/cr-well-formed-3-negative-in.yamlld",
       "expectErrorCode": "loading document failed"
+    },
+    {
+      "@id": "#html-and-yaml-streams",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/stream.html",
+      "expect": "cases/html/stream.yamlld"
+    },
+    {
+      "@id": "#html-dedent-needed",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/dedent-needed.html",
+      "expect": "cases/html/stream.yamlld"
+    },
+    {
+      "@id": "#html-dedent-not-needed",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/dedent-not-needed.html",
+      "expect": "cases/html/stream.yamlld"
     }
   ]
 }
