@@ -1055,6 +1055,58 @@ schema:hasPart:
     </p>
   </section>
 
+
+  <section id="streams">
+    <h2>Streams</h2>
+
+    <p>
+      Every YAML-LD file is a <a>YAML-LD stream</a>
+      and might contain multiple <a>YAML-LD documents</a>,
+      as shown in the example below.
+    </p>
+
+    <pre class="example yaml"
+         data-transform="updateExample"
+         data-result-for="YAML-LD with multiple documents"
+         data-content-type="application/ld+json"
+         title="YAML-LD with several documents in one file">
+      <!--
+      "@context": https://schema.org
+      "@id": https://w3.org/yaml-ld/
+      "@type": WebContent
+      name: YAML-LD
+      ---
+      "@context": https://schema.org
+      "@id": https://www.w3.org/TR/json-ld11/
+      "@type": WebContent
+      name: JSON-LD
+      -->
+    </pre>
+
+    <p class="issue" data-number="63">
+      <a>YAML streams</a> may correspond more directly to
+      [[[RFC7464]]], which are not presently part of the
+      <a data-cite="JSON-LD11#dfn-internal-representation">JSON-LD internal representation</a>.
+      The description here more closely aligns with how JSON-LD
+      interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
+    </p>
+
+    <p>
+      Current specification does not support this feature.
+      Implementations MAY choose, for example, to do any of the following:
+    </p>
+
+    <ul>
+      <li>Convert each document into a separate JSON-LD document</li>
+      <li>Convert the whole YAML-LD stream into a single JSON-LD array</li>
+    </ul>
+
+    <p class="note" title="Interoperability considerations on YAML streams">
+      For interoperability considerations on YAML streams,
+      see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
+    </p>
+  </section>
+
   <section id="iana" class="appendix normative">
     <h2>IANA Considerations</h2>
 
@@ -1336,57 +1388,6 @@ schema:hasPart:
         </li>
       </ul>
     </section>
-  </section>
-
-  <section id="streams" class="informative">
-    <h2>Streams</h2>
-
-    <p>
-      Every YAML-LD file is a <a>YAML-LD stream</a>
-      and might contain multiple <a>YAML-LD documents</a>,
-      as shown in the example below.
-    </p>
-
-    <pre class="example yaml"
-         data-transform="updateExample"
-         data-result-for="YAML-LD with multiple documents"
-         data-content-type="application/ld+json"
-         title="YAML-LD with several documents in one file">
-      <!--
-      "@context": https://schema.org
-      "@id": https://w3.org/yaml-ld/
-      "@type": WebContent
-      name: YAML-LD
-      ---
-      "@context": https://schema.org
-      "@id": https://www.w3.org/TR/json-ld11/
-      "@type": WebContent
-      name: JSON-LD
-      -->
-    </pre>
-
-    <p class="issue" data-number="63">
-      <a>YAML streams</a> may correspond more directly to
-      [[[RFC7464]]], which are not presently part of the
-      <a data-cite="JSON-LD11#dfn-internal-representation">JSON-LD internal representation</a>.
-      The description here more closely aligns with how JSON-LD
-      interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
-    </p>
-
-    <p>
-      Current specification does not support this feature.
-      Implementations MAY choose, for example, to do any of the following:
-    </p>
-
-    <ul>
-      <li>Convert each document into a separate JSON-LD document</li>
-      <li>Convert the whole YAML-LD stream into a single JSON-LD array</li>
-    </ul>
-
-    <p class="note" title="Interoperability considerations on YAML streams">
-      For interoperability considerations on YAML streams,
-      see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
-    </p>
   </section>
 
     <section id="extended-profile" class="informative">
