@@ -215,6 +215,24 @@
       "option": {"extractAllScripts": true},
       "input": "cases/html/dedent-not-needed.html",
       "expect": "cases/html/stream.yamlld"
+    },
+    {
+      "@id": "#two-documents-from-stream",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/streams/two-documents-in.yamlld",
+      "expect": "cases/streams/two-documents-out.yamlld"
+    },
+    {
+      "@id": "#one-document-from-stream",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents.",
+      "req": "must",
+      "option": {"extractAllScripts": false},
+      "input": "cases/streams/two-documents-in.yamlld",
+      "expect": "cases/streams/one-document-out.yamlld"
     }
   ]
 }
