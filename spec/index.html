@@ -818,7 +818,7 @@ schema:hasPart:
         <dd>Not permitted.</dd>
 
         <dt>YAML Streams</dt>
-        <dd>Not supported.</dd>
+        <dd>Treated identically to arrays.</dd>
 
         <dt>Mapping key types other than <code>string</code></dt>
         <dd><a href="#mapping-key-types">Not supported.</a></dd>
@@ -1051,7 +1051,7 @@ schema:hasPart:
     </ul>
 
     <p data-tests="manifest.html#html-and-yaml-streams">
-      If the YAML-LD <code>&lt;script></code> tag contains a <a>YAML Stream</a> with multiple <a>YAML documents</a>, each of these documents MUST be treated as if it was included in a separate <code>&lt;script></code> tag.
+      If the YAML-LD <code>&lt;script></code> tag contains a <a>YAML Stream</a> with multiple <a>YAML documents</a>, each of these documents MUST be treated as if it was included in a separate <code>&lt;script></code> tag. See <a href="#streams">Streams</a> for details.
     </p>
   </section>
 
@@ -1083,22 +1083,24 @@ schema:hasPart:
       -->
     </pre>
 
-    <p class="issue" data-number="63">
-      <a>YAML streams</a> may correspond more directly to
-      [[[RFC7464]]], which are not presently part of the
-      <a data-cite="JSON-LD11#dfn-internal-representation">JSON-LD internal representation</a>.
-      The description here more closely aligns with how JSON-LD
-      interprets <a data-cite="JSON-LD11-API#html-content-algorithms">HTML Scripts</a>.
+    <p class="informative">
+      [[JSON-LD11-API]] defines the
+      <a data-cite="JSON-LD11-API#dom-jsonldoptions-extractallscripts">`extractAllScripts`</a> flag, which allows to parse
+      multiple `&lt;script>` tags with YAML-LD content.
     </p>
 
-    <p>
-      Current specification does not support this feature.
-      Implementations MAY choose, for example, to do any of the following:
+    <p data-tests="manifest.html#two-documents-from-stream,manifest.html#one-document-from-stream">
+      A conformant YAML-LD specification MUST also take this flag in account
+      while parsing a normal YAML-LD document.
     </p>
 
     <ul>
-      <li>Convert each document into a separate JSON-LD document</li>
-      <li>Convert the whole YAML-LD stream into a single JSON-LD array</li>
+      <li>
+        If the flag is `true`, the <a>YAML stream</a> is considered an array, and each document in it is an item in that array, even if there is only one document in the stream;
+      </li>
+      <li>
+        If the flag is `false`, only the first document in the stream will be processed.
+      </li>
     </ul>
 
     <p class="note" title="Interoperability considerations on YAML streams">
