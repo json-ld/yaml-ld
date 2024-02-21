@@ -1,0 +1,5 @@
+"@base":
+  - https://schema.org/
+"@id": https://w3.org/yaml-ld/
+"@type":
+  - WebContent
