@@ -596,7 +596,9 @@ schema:hasPart:
     <section id="json-vs-yaml">
       <h3>JSON vs YAML comparison</h3>
 
-      <p>YAML is more flexible than JSON, as illustrated by comparison table below.</p>
+      <p>YAML is a superset of JSON, i.e. every valid JSON document is also a valid YAML document.
+        But YAML offers a number of extra features, chief amongst which is human readability due to the ability to use minimal punctuation.
+        YAML is more flexible than JSON, as illustrated by the comparison table below.</p>
 
       <table class="simple">
         <thead>
@@ -677,6 +679,18 @@ schema:hasPart:
 
         <tr>
           <th colspan="3">Features</th>
+        </tr>
+
+        <tr>
+          <th>Delimited strings, arrays, objects</th>
+          <td><a data-cite="JSON#section-4">✅</a></td>
+          <td><a data-cite="YAML#chapter-7-flow-style-productions">✅</a></td>
+        </tr>
+
+        <tr>
+          <th>Punctuation-free strings, arrays, objects</th>
+          <td>❌</td>
+          <td><a data-cite="YAML#chapter-8-block-style-productions">✅</a></td>
         </tr>
 
         <tr>

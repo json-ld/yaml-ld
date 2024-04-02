@@ -91,10 +91,26 @@ $reverse:
         prov:value: yes
         prov:wasDerivedFrom: YAML#10211-null
 
-    - rdfs:label: Custom types
+    - rdfs:label: Delimited strings, arrays, objects
       rdf:type:
         $id: features
         rdfs:label: Features
+      json:
+        prov:value: yes
+        prov:wasDerivedFrom: JSON#section-4
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#chapter-7-flow-style-productions
+
+    - rdfs:label: Punctuation-free strings, arrays, objects
+      $type: features
+      json: no
+      yaml:
+        prov:value: yes
+        prov:wasDerivedFrom: YAML#chapter-8-block-style-productions
+
+    - rdfs:label: Custom types
+      $type: features
       json: no
       yaml:
         prov:value: yes
