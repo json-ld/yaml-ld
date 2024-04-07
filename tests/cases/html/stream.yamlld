@@ -5,8 +5,8 @@
   http://xmlns.com/foaf/0.1/name:
   - "@value": John Lennon
   http://schema.org/spouse:
-  - "@id": http://dbpedia.org/resource/Cynthia_Lennon
-- "@id": http://dbpedia.org/resource/Cynthia_Lennon
+  - "@id": http://dbpedia.org/resource/Yoko_Ono
+- "@id": http://dbpedia.org/resource/Yoko_Ono
   http://schema.org/birthDate:
   - "@type": http://www.w3.org/2001/XMLSchema#date
-    "@value": 1939-09-10
+    "@value": 1933-02-18
