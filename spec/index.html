@@ -1012,7 +1012,7 @@ schema:hasPart:
 
     <p>
       YAML-LD content can be easily embedded in HTML [[HTML]] by placing it
-      in a <code>&lt;script></code> element with the type attribute set to
+      in a <code>&lt;script></code> element with the `type` attribute set to
       `application/ld+yaml`, as illustrated on an example below.
     </p>
 
@@ -1022,33 +1022,18 @@ schema:hasPart:
      title="YAML-LD document embedded in HTML">
     <!--
     <script type="application/ld+yaml">
-    "@context": https://json-ld.org/contexts/person.jsonld
-    "@id": http://dbpedia.org/resource/John_Lennon
-    name: John Lennon
-    born: 1940-10-09
-    spouse: http://dbpedia.org/resource/Cynthia_Lennon
-    ---
-    "@context": https://json-ld.org/contexts/person.jsonld
-    "@id": http://dbpedia.org/resource/Cynthia_Lennon
-    born: 1939-09-10
+      "@context": https://json-ld.org/contexts/person.jsonld
+      "@id": http://dbpedia.org/resource/John_Lennon
+      name: John Lennon
+      born: 1940-10-09
+      spouse: http://dbpedia.org/resource/Cynthia_Lennon
     </script>
     -->
     </pre>
 
     <p data-tests="manifest.html#html-dedent-needed,manifest.html#html-dedent-not-needed">
-      YAML syntax is indentation based. Before processing each `&lt;script>` block with YAML-LD content, YAML-LD processor MUST <em>dedent</em> the body of the block using the following procedure:
+      YAML syntax is indentation based. When processing each `&lt;script>` block with YAML-LD content, YAML-LD processor MUST <em>preserve</em> all space and newline characters in the block content as they are.
     </p>
-
-    <ul>
-      <li>Count the number of <strong>leading spaces</strong> in the first non-empty line of the YAML-LD block, and save that to `dedent_count` variable.</li>
-      <li>
-        For each line of the YAML-LD block,
-        <ul>
-          <li>If the number of leading spaces is less than `dedent_count`, keep the line as-is,</li>
-          <li>Otherwise, remove exactly `dedent_count` leading spaces from the line.</li>
-        </ul>
-      </li>
-    </ul>
 
     <p data-tests="manifest.html#html-and-yaml-streams">
       If the YAML-LD <code>&lt;script></code> tag contains a <a>YAML Stream</a> with multiple <a>YAML documents</a>, each of these documents MUST be treated as if it was included in a separate <code>&lt;script></code> tag. See <a href="#streams">Streams</a> for details.
@@ -1330,6 +1315,41 @@ schema:hasPart:
           $type: WebContent
         -->
       </pre>
+
+      <div class="practice">
+        <p class="practicedesc">
+          <span id="bp-avoid-streams-in-html-scripts" class="practicelab">
+            Avoid stuffing more than one YAML document into a single `&lt;script>` HTML tag. Create one tag per document instead.
+          </span>
+        </p>
+      </div>
+
+      <p>Consider the following example.</p>
+
+      <pre class="example yaml"
+       data-transform="updateExample"
+       data-content-type="application/ld+yaml"
+       title="YAML-LD document stream embedded in HTML">
+      <!--
+      <script type="application/ld+yaml">
+        "@context": https://json-ld.org/contexts/person.jsonld
+        "@id": http://dbpedia.org/resource/John_Lennon
+        name: John Lennon
+        born: 1940-10-09
+        spouse: http://dbpedia.org/resource/Cynthia_Lennon
+      ---
+        "@context": https://json-ld.org/contexts/person.jsonld
+        "@id": http://dbpedia.org/resource/Cynthia_Lennon
+        born: 1939-09-10
+      </script>
+      -->
+      </pre>
+
+      <p>The YAML specification states in <a data-cite="YAML#912-document-markers">Document Markers</a> section that `---`, the document separator sequence, must be at the root level of the document, which means indentation level of 0.</p>
+
+      <p>Without the document separator, YAML content inside the `&lt;script>` block can be indented however the author of the document pleases; but the strict rule for indentation of the separator defies that apparent clarity.</p>
+
+      <p>It is probably best to avoid nesting YAML streams inside `&lt;script>` blocks; create one such block per document instead.</p>
   </section>
 
   <section id="comments-as-whitespace" class="informative">
@@ -1358,7 +1378,7 @@ schema:hasPart:
             <li>anchor names</li>
           </ul>
 
-          must not be used to convey application level information
+          must not be used to convey application level information.
         </dd>
       </dl>
     </section>
