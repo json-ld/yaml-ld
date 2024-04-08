@@ -1023,10 +1023,12 @@ schema:hasPart:
     <!--
     <script type="application/ld+yaml">
       "@context": https://json-ld.org/contexts/person.jsonld
-      "@id": http://dbpedia.org/resource/John_Lennon
+      "@id": https://dbpedia.org/resource/John_Lennon
       name: John Lennon
-      born: 1933-02-18
-      spouse: http://dbpedia.org/resource/Yoko_Ono
+      born: 1940-10-09
+      spouse:
+        - https://dbpedia.org/resource/Yoko_Ono
+        - https://dbpedia.org/resource/Cynthia_Lennon
     </script>
     -->
     </pre>
@@ -1334,14 +1336,20 @@ schema:hasPart:
       <!--
       <script type="application/ld+yaml">
         "@context": https://json-ld.org/contexts/person.jsonld
-        "@id": http://dbpedia.org/resource/John_Lennon
+        "@id": https://dbpedia.org/resource/John_Lennon
         name: John Lennon
         born: 1940-10-09
-        spouse: http://dbpedia.org/resource/Yoko_Ono
+        spouse:
+          - https://dbpedia.org/resource/Yoko_Ono
+          - https://dbpedia.org/resource/Cynthia_Lennon
       ---
         "@context": https://json-ld.org/contexts/person.jsonld
-        "@id": http://dbpedia.org/resource/Yoko_Ono
+        "@id": https://dbpedia.org/resource/Yoko_Ono
         born: 1933-02-18
+      ---
+        "@context": https://json-ld.org/contexts/person.jsonld
+        "@id": https://dbpedia.org/resource/Cynthia_Lennon
+        born: 1939-09-10
       </script>
       -->
       </pre>
