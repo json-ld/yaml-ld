@@ -1032,7 +1032,8 @@ schema:hasPart:
     </pre>
 
     <p data-tests="manifest.html#html-dedent-needed,manifest.html#html-dedent-not-needed">
-      YAML syntax is indentation based. When processing each `&lt;script>` block with YAML-LD content, YAML-LD processor MUST <em>preserve</em> all space and newline characters in the block content as they are.
+      YAML syntax is indentation based. Therefore, when processing each `&lt;script>` block with YAML-LD content,
+      YAML-LD processor MUST preserve the content of the block for YAML parsing <em>as-is</em>, including whitespace characters.
     </p>
 
     <p data-tests="manifest.html#html-and-yaml-streams">
