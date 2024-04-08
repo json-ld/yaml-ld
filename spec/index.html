@@ -1347,9 +1347,9 @@ schema:hasPart:
 
       <p>The YAML specification states in <a data-cite="YAML#912-document-markers">Document Markers</a> section that `---`, the document separator sequence, must be at the root level of the document, which means indentation level of 0.</p>
 
-      <p>Without the document separator, YAML content inside the `&lt;script>` block can be indented however the author of the document pleases; but the strict rule for indentation of the separator defies that apparent clarity.</p>
+      <p>Aside from the document separator, YAML content inside the `&lt;script>` block can be indented however the author of the document pleases. The strict rule for indentation of the separator is an important exception.</p>
 
-      <p>It is probably best to avoid nesting YAML streams inside `&lt;script>` blocks; create one such block per document instead.</p>
+      <p>It is therefore best to avoid nesting YAML streams inside `&lt;script>` blocks; instead, create one such block per document.</p>
   </section>
 
   <section id="comments-as-whitespace" class="informative">
