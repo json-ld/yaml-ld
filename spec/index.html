@@ -579,7 +579,7 @@ schema:hasPart:
     A <a>YAML-LD document</a> complies with
     the <a>YAML-LD Basic profile</a> of this specification
     if it follows the normative statements from this specification
-    and can be transformed into a JSON-LD representation,
+    and can be transformed into a [[JSON-LD11]] representation,
     then back to a conforming YAML-LD document,
     without loss of semantic information.
   </p>
@@ -588,6 +588,43 @@ schema:hasPart:
     For convenience, normative statements for documents are often phrased
     as statements on the properties of the document.
   </p>
+
+  <section id="v11">
+    <h2>JSON-LD Version</h2>
+
+    <p>YAML-LD supports JSON-LD versions starting from 1.1 [[JSON-LD11]].</p>
+  </section>
+
+  <section id="testing">
+    <h2>Test Suites</h2>
+
+    <p>To be conformant, an implementation MUST satisfy all test cases from the following test suites:</p>
+
+    <ul>
+      <li>
+        <a href="https://json-ld.github.io/yaml-ld/tests/">YAML-LD tests</a>;
+      </li>
+      <li>
+        <a href="https://w3c.github.io/json-ld-api/tests/">JSON-LD API tests</a>;
+      </li>
+      <li>
+        <a href="https://w3c.github.io/json-ld-framing/tests/">JSON-LD Framing tests</a>,
+      </li>
+    </ul>
+
+    <p>...with the exclusion of the test cases where:</p>
+
+    <ul>
+      <li>
+        <a href="#dom-jsonldoptions-processingmode">processingMode</a> option is provided and set to `json-ld-1.0`.
+      </li>
+    </ul>
+
+    <p class="note">
+      Since YAML is a superset of JSON, testing a YAML-LD against
+      tests cases from JSON-LD test suites should be trivial.
+    </p>
+  </section>
 </section>
 
   <section id="basic-concepts" class="informative">
