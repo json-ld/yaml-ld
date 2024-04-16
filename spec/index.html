@@ -2413,41 +2413,63 @@ schema:hasPart:
 
             <dl data-sort>
               <dt><dfn data-dfn-for="JsonLdOptions">processingMode</dfn></dt>
+              <dd>Possible values are detailed in the table below.</dd>
               <dd>
-                <ul>
-                  <li>
-                    Default value, borrowed from the JSON-LD API
-                    specification, is `json-ld-1.1`.
-                  </li>
-                  <li>
-                    If this option has the value of `json-ld-1.0`,
-                    the YAML-LD processor MUST raise a <a data-link-for="YamlLdErrorCode">profile-error</a>, since
-                    YAML-LD does not support that version of JSON-LD
-                    specification;
-                  </li>
-                  <li>
-                    The values starting with `yaml-ld` are reserved for
-                    future versions of this specification;
-                  </li>
-                  <li>
-                    If set to another value, the JSON-LD processor is
-                    allowed to extend or modify the algorithms defined in
-                    this specification to enable application-specific
-                    optimizations. The definition of such optimizations is
-                    beyond the scope of this specification and thus not
-                    defined. Consequently, different implementations may
-                    implement different optimizations.
-                  </li>
-                </ul>
+                <table class="simple">
+                  <thead>
+                    <tr>
+                      <th>Value</th>
+                      <th>Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>json-ld-1.0</code></td>
+                      <td>
+                        Processor MUST raise a <a data-link-for="YamlLdErrorCode">profile-error</a>,
+                        as JSON-LD 1.0 algorithms are not supported
+                        by YAML-LD.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Not Provided, or <code>json-ld-1.1</code></td>
+                      <td>The document conforms to <a>YAML-LD Basic profile</a>.</td>
+                    </tr>
+                    <tr>
+                      <td><code>yaml-ld-extended</code></td>
+                      <td>
+                        The document MUST be processed in conformance with
+                        <a>YAML-LD extended profile</a>.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Other values starting with <code>yaml-ld</code>
+                      </td>
+                      <td>
+                        Reserved for future versions of this specification.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Other Values</td>
+                      <td>
+                        Can be used by YAML-LD processors to enable custom
+                        processing algorithms.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </dd>
               <dd>
-                When used for serializing the <a>internal representation</a>
+                When <a>YAML-LD extended profile</a> is used for
+                serializing the <a>internal representation</a>
                 (or <a>extended internal representation</a>)
                 into a <a>YAML representation graph</a>:
 
                 <ul>
                   <li>
-                    If set, allows the use of <a>node tags</a>
+                    <a>YAML-LD extended profile</a> allows the use
+                    of <a>node tags</a>
                     when serializing <a>RDF literal</a> values
                     having datatypes other than `xsd:string`
                     or <a>language-tagged strings</a>
@@ -2469,7 +2491,8 @@ schema:hasPart:
 
                 <ul>
                   <li>
-                    If set, it creates an <a>extended internal representation</a>
+                    <a>YAML-LD extended profile</a> creates an
+                    <a>extended internal representation</a>
                     and transforms <a>YAML scalar</a> values
                     having <a>node tags</a>
                     &mdash; outside those allowed for the
