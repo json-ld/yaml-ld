@@ -616,7 +616,7 @@ schema:hasPart:
 
     <ul>
       <li>
-        <a href="#dom-jsonldoptions-processingmode">processingMode</a> option is provided and set to `json-ld-1.0`.
+        <a href="#dfn-processingmode">processingMode</a> option is provided and set to `json-ld-1.0`.
       </li>
     </ul>
 
@@ -1627,7 +1627,7 @@ schema:hasPart:
         </p>
 
         <p id="cir-extended" data-tests="">
-          If the {{JsonLdOptions/extendedYAML}} API flag is `true`, the processing result
+          If the {{JsonLdOptions/processingMode}} API parameter is `yaml-ld-extended`, the processing result
           will be in the <a>extended internal representation</a>.
         </p>
 
@@ -1875,7 +1875,7 @@ schema:hasPart:
             <h3>Converting a <a>YAML scalar</a></h3>
 
             <ol>
-              <li>If the {{JsonLdOptions/extendedYAML}} flag is `true`,
+              <li>If the {{JsonLdOptions/processingMode}} option is `yaml-ld-extended`,
                 and <a>node</a> |n|
                 has a <a>node tag</a> |t|,
                 |n| is mapped as follows:
@@ -1947,7 +1947,7 @@ schema:hasPart:
           manifest.html#cr-well-formed-2-negative">
               If an <a>alias node</a> is encountered when processing the
               <a>YAML representation graph</a>
-              and the {{JsonLdOptions/extendedYAML}} flag is `false`,
+              and the {{JsonLdOptions/processingMode}} option is not equal to `yaml-ld-extended`,
               the <a>YAML-LD Basic profile</a> has been selected.
               A <a data-link-for="YamlLdErrorCode">profile-error</a>
               error has been detected and processing MUST be aborted.
@@ -1991,7 +1991,7 @@ schema:hasPart:
             <a>YAML directives</a>, including <a>TAG directives</a>, and
             <a data-cite="YAML#document-markers">Document markers</a>,
             as appropriate for best results.
-            Specifically, if the {{JsonLdOptions/extendedYAML}} API flag is `true`,
+            Specifically, if the {{JsonLdOptions/processingMode}} API parameter is `yaml-ld-extended`,
             the document SHOULD use the `%YAML` directive with
             version set to at least `1.2`.
             To improve readability and reduce document size,
@@ -2359,9 +2359,7 @@ schema:hasPart:
                 <a data-cite="JSON-LD11-API#rdf-to-object-conversion">RDF to Object Conversion</a> algorithm
                 before step 2.6 as follows:
                 <blockquote>
-                  Otherwise, if both the {{JsonLdOptions/useNativeTypes}}
-                  and {{JsonLdOptions/extendedYAML}} flags are set
-                  and the
+                  Otherwise, if both the {{JsonLdOptions/useNativeTypes}} flag is set and {{JsonLdOptions/processingMode}} parameter is `yaml-ld-extended` and the
                   <a>datatype IRI</a>
                   of |value| is not `xsd:string`:
                   <ol>
@@ -2409,21 +2407,39 @@ schema:hasPart:
             <p>The {{JsonLdOptions}} type is used to pass various options to the
               {{JsonLdProcessor}} methods.</p>
 
-            <pre class="idl">
-          partial dictionary JsonLdOptions {
-            boolean extendedYAML = false;
-          };
-        </pre>
-
             <p>
-              In addition to those options defined in the
-              JSON-LD 1.1 API [[JSON-LD11-API]]
-              and JSON-LD 1.1 Framing [[JSON-LD11-FRAMING]],
-              this specification defines these additional options:
+              This specification reuses the following option defined in [[JSON-LD11-API]]:
             </p>
 
             <dl data-sort>
-              <dt><dfn data-dfn-for="JsonLdOptions">extendedYAML</dfn></dt>
+              <dt><dfn data-dfn-for="JsonLdOptions">processingMode</dfn></dt>
+              <dd>
+                <ul>
+                  <li>
+                    Default value, borrowed from the JSON-LD API
+                    specification, is `json-ld-1.1`.
+                  </li>
+                  <li>
+                    If this option has the value of `json-ld-1.0`,
+                    the YAML-LD processor MUST raise an error, since
+                    YAML-LD does not support that version of JSON-LD
+                    specification;
+                  </li>
+                  <li>
+                    The values starting with `yaml-ld` are reserved for
+                    future versions of this specification;
+                  </li>
+                  <li>
+                    If set to another value, the JSON-LD processor is
+                    allowed to extend or modify the algorithms defined in
+                    this specification to enable application-specific
+                    optimizations. The definition of such optimizations is
+                    beyond the scope of this specification and thus not
+                    defined. Consequently, different implementations may
+                    implement different optimizations.
+                  </li>
+                </ul>
+              </dd>
               <dd>
                 When used for serializing the <a>internal representation</a>
                 (or <a>extended internal representation</a>)
@@ -2476,7 +2492,7 @@ schema:hasPart:
               to load <a>YAML streams</a> and <a>documents</a>
               into the <a>internal representation</a>,
               or into the <a>extended internal representation</a>
-              if the {{JsonLdOptions/extendedYAML}} API flag is `true`.</p>
+              if the {{JsonLdOptions/processingMode}} parameter is `yaml-ld-extended`.</p>
 
             <p>
               The {{LoadDocumentCallback}} algorithm in [[JSON-LD11-API]]
@@ -2503,7 +2519,7 @@ schema:hasPart:
                 (or <a>extended internal representation</a>)
                 as described in <a href="#conversion-to-ir" class="sectionRef"></a>.
                 Additionally, if the {{RemoteDocument/profile}} parameter
-                includes `http://www.w3.org/ns/json-ld#extended`, set the {{JsonLdOptions/extendedYAML}} option to `true`.
+                includes `http://www.w3.org/ns/json-ld#extended`, set the {{JsonLdOptions/processingMode}} option to `yaml-ld-extended`.
               </li>
             </ul>
 
