@@ -2359,8 +2359,9 @@ schema:hasPart:
                 <a data-cite="JSON-LD11-API#rdf-to-object-conversion">RDF to Object Conversion</a> algorithm
                 before step 2.6 as follows:
                 <blockquote>
-                  Otherwise, if both the {{JsonLdOptions/useNativeTypes}} flag is set and {{JsonLdOptions/processingMode}} parameter is `yaml-ld-extended` and the
-                  <a>datatype IRI</a>
+                  Otherwise, if the {{JsonLdOptions/useNativeTypes}} flag is set,
+                  the {{JsonLdOptions/processingMode}} parameter is `yaml-ld-extended`,
+                  and the <a>datatype IRI</a>
                   of |value| is not `xsd:string`:
                   <ol>
                     <li>
