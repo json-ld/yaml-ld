@@ -233,6 +233,24 @@
       "option": {"extractAllScripts": false},
       "input": "cases/streams/two-documents-in.yamlld",
       "expect": "cases/streams/one-document-out.yamlld"
+    },
+    {
+      "@id": "#local-json-ld-context",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Load a context from a local file in JSON-LD format.",
+      "req": "must",
+      "option": {"extractAllScripts": false},
+      "input": "cases/local-context/jsonld-in.yamlld",
+      "expect": "cases/local-context/out.yamlld"
+    },
+    {
+      "@id": "#local-yaml-ld-context",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "Load a context from a local file in YAML-LD format.",
+      "req": "must",
+      "option": {"extractAllScripts": false},
+      "input": "cases/local-context/yamlld-in.yamlld",
+      "expect": "cases/local-context/out.yamlld"
     }
   ]
 }
