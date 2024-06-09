@@ -1,0 +1,4 @@
+"@id": https://w3.org
+"@type":
+  "@id": schema:Organization
+"http://www.w3.org/2000/01/rdf-schema#title": The World Wide Web Consortium
