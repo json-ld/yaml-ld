@@ -251,7 +251,7 @@
       "option": {"extractAllScripts": false},
       "input": "cases/local-context/expanded.yamlld",
       "context": "cases/local-context/context.jsonld",
-      "expect": "cases/local-context/compact.yamlld"
+      "expect": "cases/local-context/compacted.yamlld"
     },
     {
       "@id": "#local-yaml-ld-context",
