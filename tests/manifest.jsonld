@@ -250,7 +250,7 @@
       "req": "must",
       "option": {"extractAllScripts": false},
       "input": "cases/local-context/out.yamlld",
-      "expect": "cases/local-context/jsonld-in.yamlld",
+      "expect": "cases/local-context/jsonld-in.yamlld"
     },
     {
       "@id": "#local-yaml-ld-context",
@@ -268,7 +268,7 @@
       "req": "must",
       "option": {"extractAllScripts": false},
       "input": "cases/local-context/out.yamlld",
-      "expect": "cases/local-context/yamlld-in.yamlld",
+      "expect": "cases/local-context/yamlld-in.yamlld"
     }
   ]
 }
