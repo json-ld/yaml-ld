@@ -244,6 +244,15 @@
       "expect": "cases/local-context/out.yamlld"
     },
     {
+      "@id": "#compact-local-json-ld-context",
+      "@type": ["jld:PositiveEvaluationTest", "jld:CompactTest"],
+      "name": "Load a context from a local file in JSON-LD format.",
+      "req": "must",
+      "option": {"extractAllScripts": false},
+      "input": "cases/local-context/out.yamlld",
+      "expect": "cases/local-context/jsonld-in.yamlld",
+    },
+    {
       "@id": "#local-yaml-ld-context",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "Load a context from a local file in YAML-LD format.",
@@ -251,6 +260,15 @@
       "option": {"extractAllScripts": false},
       "input": "cases/local-context/yamlld-in.yamlld",
       "expect": "cases/local-context/out.yamlld"
+    },
+    {
+      "@id": "#compact-local-yaml-ld-context",
+      "@type": ["jld:PositiveEvaluationTest", "jld:CompactTest"],
+      "name": "Load a context from a local file in YAML-LD format.",
+      "req": "must",
+      "option": {"extractAllScripts": false},
+      "input": "cases/local-context/out.yamlld",
+      "expect": "cases/local-context/yamlld-in.yamlld",
     }
   ]
 }
