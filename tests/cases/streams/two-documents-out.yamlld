@@ -1,10 +1,6 @@
-- "@base":
-    - https://schema.org/
-  "@id": https://w3.org/yaml-ld/
+- "@id": https://w3.org/yaml-ld/
   "@type":
-    - WebContent
-- "@base":
-    - https://schema.org/
-  "@id": https://www.w3.org/TR/json-ld11/
+    - https://schema.org/WebContent
+- "@id": https://www.w3.org/TR/json-ld11/
   "@type":
-    - WebContent
+    - https://schema.org/WebContent
