@@ -1,9 +1,11 @@
-"@base": https://schema.org/
+"@context":
+  "@base": https://schema.org/
 "@id": https://w3.org/yaml-ld/
 "@type": WebContent
 name: YAML-LD
 ---
-"@base": https://schema.org/
+"@context":
+  "@base": https://schema.org/
 "@id": https://www.w3.org/TR/json-ld11/
 "@type": WebContent
 name: JSON-LD
