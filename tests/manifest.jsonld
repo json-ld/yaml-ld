@@ -271,6 +271,18 @@
       "input": "cases/local-context/expanded.yamlld",
       "context": "cases/local-context/context.yamlld",
       "expect": "cases/local-context/compacted.yamlld"
+    },
+    {
+      "@id": "#flatten",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FlattenTest"],
+      "name": "compactArrays option",
+      "purpose": "Setting compactArrays to false causes single element arrays to be retained",
+      "option": {
+        "compactArrays": false
+      },
+      "input": "cases/flatten/0044-in.yamlld",
+      "context": "cases/flatten/0044-context.yamlld",
+      "expect": "cases/flatten/0044-out.yamlld"
     }
   ]
 }
