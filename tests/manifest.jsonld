@@ -283,6 +283,15 @@
       "input": "cases/flatten/0044-in.yamlld",
       "context": "cases/flatten/0044-context.yamlld",
       "expect": "cases/flatten/0044-out.yamlld"
+    },
+    {
+      "@id": "#frame-t0001",
+      "@type": ["jld:PositiveEvaluationTest", "jld:FrameTest"],
+      "name": "Library framing example",
+      "purpose": "Basic example used in playground and spec examples.",
+      "input": "cases/frame/0001-in.yamlld",
+      "frame": "cases/frame/0001-frame.yamlld",
+      "expect": "cases/frame/0001-out.yamlld"
     }
   ]
 }
