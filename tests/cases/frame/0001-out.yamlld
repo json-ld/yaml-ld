@@ -5,3 +5,11 @@
 "@type": ex:Library
 ex:contains:
   "@id": http://example.org/test#book
+  "@type": ex:Book
+  dcterms:contributor: Writer
+  dcterms:title: My Book
+  ex:contains:
+    "@id": http://example.org/test#chapter
+    "@type": ex:Chapter
+    dcterms:description: Fun
+    dcterms:title: Chapter One
