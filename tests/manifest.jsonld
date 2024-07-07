@@ -199,6 +199,15 @@
       "expect": "cases/html/stream.yamlld"
     },
     {
+      "@id": "#mixed-script-types",
+      "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
+      "name": "YAML Stream with multiple documents embedded into HTML, having JSON-LD and YAML-LD documents in them.",
+      "req": "must",
+      "option": {"extractAllScripts": true},
+      "input": "cases/html/mixed-types.html",
+      "expect": "cases/html/stream.yamlld"
+    },
+    {
       "@id": "#html-dedent-needed",
       "@type": ["jld:PositiveEvaluationTest", "jld:ExpandTest"],
       "name": "YAML Stream with multiple documents embedded into HTML.",
