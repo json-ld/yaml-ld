@@ -32,19 +32,6 @@
     }],
 
     localBiblio: {
-      "I-D.ietf-httpapi-yaml-mediatypes": {
-        title: "YAML Media Type",
-        href: "https://www.ietf.org/archive/id/draft-ietf-httpapi-yaml-mediatypes-03.html",
-        publisher: "IETF",
-        date: "2022-08-05",
-        status: "WG Document",
-        authors: [
-          "Roberto Polli",
-          "Erik Wilde",
-          "Eemeli Aro"
-        ]
-      },
-
       "json-ld-bp": {
         title: "JSON-LD Best Practices",
         href: "https://w3c.github.io/json-ld-bp/",
@@ -61,17 +48,6 @@
           "Philippe Le Hegaret",
         ],
       },
-
-      "YAML": {
-        title: "YAML Ain’t Markup Language (YAML™) version 1.2.2",
-        href: "https://yaml.org/spec/1.2.2/",
-        date: "2021-10-01",
-        authors: [
-          "Oren Ben-Kiki",
-          "Clark Evans",
-          "Ingy döt Net"
-        ]
-      }
     },
 
     // Cross-reference definitions
@@ -355,7 +331,7 @@ schema:hasPart:
     <p>
       Since YAML is more expressive than JSON,
       both in the available data types and in the document structure
-      (see [[I-D.ietf-httpapi-yaml-mediatypes]]),
+      (see [[RFC9512]]),
       this document identifies constraints on YAML
       such that any <a>YAML-LD document</a> can be represented in JSON-LD.
     </p>
@@ -902,7 +878,7 @@ schema:hasPart:
       </p>
 
       <p>
-        See Interoperability considerations of [[I-D.ietf-httpapi-yaml-mediatypes]]
+        See Interoperability considerations of "+yaml" structured syntax suffix
         for more details.
       </p>
     </section>
@@ -1036,8 +1012,8 @@ schema:hasPart:
   <section id="sec" class="informative">
     <h2>Security Considerations</h2>
 
-    <p>See <a data-cite="JSON-LD11#iana-security">Security considerations in JSON-LD 1.1</a>.
-      Also, see the YAML media type registration.</p>
+    <p>See <a data-cite="JSON-LD11#iana-security">Security considerations in JSON-LD 1.1</a>
+       and <code>+yaml</code> structured syntax suffix.</p>
   </section>
 
   <section id="int" class="informative">
@@ -1046,7 +1022,7 @@ schema:hasPart:
     <p>
       For general interoperability considerations on the serialization of
       <a>JSON documents</a> in [[YAML]], see YAML
-      and the Interoperability consideration of <code>application/yaml</code> [[I-D.ietf-httpapi-yaml-mediatypes]].
+      and the Interoperability considerations of the <code>+yaml</code> structured syntax suffix.
     </p>
     <p>
       The YAML-LD format and the media type registration are not restricted to a specific
@@ -1146,7 +1122,7 @@ schema:hasPart:
 
     <p class="note" title="Interoperability considerations on YAML streams">
       For interoperability considerations on YAML streams,
-      see <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#section-3.2">the relevant section in YAML Media Type</a>.
+      see <a data-cite="RFC9512#section-3.2">the relevant section in YAML Media Type</a>.
     </p>
   </section>
 
@@ -1212,7 +1188,7 @@ schema:hasPart:
         </dl>
       </dd>
       <dt>Encoding considerations:</dt>
-      <dd>See <a data-cite="I-D.ietf-httpapi-yaml-mediatypes#">YAML media type</a>.</dd>
+      <dd>Same as <code>+yaml</code>.</dd>
       <dt id="iana-security">Security considerations:</dt>
       <dd>See <a href="#sec" class="sectionRef"></a>.</dd>
       <dt>Interoperability considerations:</dt>
@@ -1226,8 +1202,10 @@ schema:hasPart:
       <dt>Additional information:</dt>
       <dd>
         <dl>
+          <dt>Deprecated alias names for this type:</dt>
+          <dd>N/A</code></dd>
           <dt>Magic number(s):</dt>
-          <dd>See <code>application/yaml</code></dd>
+          <dd>Same as <code>application/yaml</code></dd>
           <dt>File extension(s):</dt>
           <dd>
             <ul>
@@ -1236,11 +1214,13 @@ schema:hasPart:
             </ul>
           </dd>
           <dt>Macintosh file type code(s):</dt>
-          <dd>TEXT</dd>
+          <dd>Same as <code>application/yaml</code></dd>
+          <dt>Windows Clipboard Name:</dt>
+          <dd>Same as <code>application/yaml</code></dd>
         </dl>
       </dd>
       <dt>Person &amp; email address to contact for further information:</dt>
-      <dd>Philippe Le Hégaret &lt;plh@w3.org&gt;</dd>
+      <dd>W3C JSON-LD Working Group &lt;public-json-ld-wg@w3.org&gt;</dd>
       <dt>Intended usage:</dt>
       <dd>Common</dd>
       <dt>Restrictions on usage:</dt>
