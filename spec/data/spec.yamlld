@@ -1,0 +1,41 @@
+$id: "spec:"
+$: YAML-LD
+schema:author:
+  - orcid:0009-0001-8740-4213
+  - orcid:0000-0001-7508-7428
+  - orcid:0000-0001-7046-4474
+  - $id: https://greggkellogg.net/foaf#me
+    dcterms:isReferencedBy: https://greggkellogg.net/foaf.rdf
+  - https://github.com/ioggstream
+  - https://github.com/TallTed
+  - https://github.com/BigBlueHat
+
+license:
+  $id: https://purl.org/NET/rdflicense/W3C1.0
+  dcterms:isReferencedBy: https://purl.org/NET/rdflicense/W3C1.0.ttl
+
+"@context":
+  "@import": https://json-ld.org/contexts/dollar-convenience.jsonld
+  "@base": https://json-ld.github.io/yaml-ld/spec/
+
+  spec: https://json-ld.github.io/yaml-ld/spec/
+
+  prov: http://www.w3.org/ns/prov#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  schema: https://schema.org/
+  dcterms: http://purl.org/dc/terms/
+  orcid: https://orcid.org/
+
+  schema:author:
+    "@type": "@id"
+
+  rdfs:range:
+    "@type": "@id"
+
+  $: rdfs:label
+  license:
+    "@id": schema:license
+    "@type": "@id"
+
+  dcterms:isReferencedBy:
+    "@type": "@id"
