@@ -14,6 +14,9 @@ license:
   $id: https://purl.org/NET/rdflicense/W3C1.0
   dcterms:isReferencedBy: https://purl.org/NET/rdflicense/W3C1.0.ttl
 
+dcterms:references:
+  - namespace-prefixes.yamlld
+
 "@context":
   "@import": https://json-ld.org/contexts/dollar-convenience.jsonld
   "@base": https://json-ld.github.io/yaml-ld/spec/
@@ -38,4 +41,7 @@ license:
     "@type": "@id"
 
   dcterms:isReferencedBy:
+    "@type": "@id"
+
+  dcterms:references:
     "@type": "@id"
