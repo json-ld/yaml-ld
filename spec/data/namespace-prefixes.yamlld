@@ -1,0 +1,26 @@
+"@context":
+  - https://json-ld.org/contexts/dollar-convenience.jsonld
+  - "@base": https://json-ld.github.io/
+    prefix: http://purl.org/vocab/vann/preferredNamespacePrefix
+
+$included:
+  - $id: https://example.org/
+    prefix: ex
+
+  - $id: http://www.w3.org/ns/i18n#
+    prefix: i18n
+
+  - $id: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    prefix: rdf
+
+  - $id: http://www.w3.org/2000/01/rdf-schema#
+    prefix: rdfs
+
+  - $id: http://www.w3.org/2001/XMLSchema#
+    prefix: xsd
+
+  - $id: https://schema.org/
+    prefix: schema
+
+  - $id: http://www.w3.org/ns/prov#
+    prefix: prov
