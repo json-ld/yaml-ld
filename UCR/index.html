@@ -16,6 +16,7 @@
           group: "cg/json-ld",
           doJsonLd:   true,
           wgPublicList: "public-linked-json",
+          maxTocLevel: 2,
       };
     </script>
     <style>
@@ -35,7 +36,7 @@
         This document is a community working draft.
       </p>
     </section>
-
+    <section id="conformance"></section>
     <section>
       <h2>Introduction</h2>
       <p>
@@ -67,9 +68,7 @@
       <h2>Submitted Use Cases</h2>
 
       <section data-format="markdown" id="uc-5">
-        #### Compatibility with existing libraries
-
-        [Submitted Use Case](https://github.com/json-ld/yaml-ld/issues/5)
+        #### Compatibility with existing libraries ([#5](https://github.com/json-ld/yaml-ld/issues/5))
 
         As a developer of YAML-LD processors.
         I want to be able to use off-the-shelf libraries for converting between JSON-LD and YAML-LD serialization formats.
@@ -81,8 +80,9 @@
       </section>
 
       <section id="uc-6">
-        <h4>Distinguish "plain" YAML-LD from "ideomatic" YAML-LD</h4>
-        <p><a href="https://github.com/json-ld/yaml-ld/issues/6">Submitted Use Case</a></p>
+        <h4>Distinguish "plain" YAML-LD from "ideomatic" YAML-LD
+          (<a href="https://github.com/json-ld/yaml-ld/issues/6">#6</a>)</h4>
+
         <p>As a processor. I want to easily distinguish between "plain" YAML-LD and "ideomatic" YAML-LD based on the use of local tags (or similar) which may require post-parsing processing to be interpreted using the JSON-LD processig algorithms. So that more complicated processing steps can be avoided.</p>
         <pre class="example">
           !yaml-ld
@@ -97,6 +97,230 @@
           <li>The hypothetical `!yaml-ld` processing instruction</li>
         </ul>
         </div>
+      </section>
+
+      <section data-format="markdown" id="uc-7">
+        #### File signature ([#7](https://github.com/json-ld/yaml-ld/issues/7))
+
+        As a data consumer.
+        I want an indicator to tell me that a file is probably YAML-LD.
+        So that I know when to expect YAML-LD.
+
+        <pre class="example">
+          !&lt;tag:json-ld.org,2022&gt;
+          $context: http://schema.org/
+          $type: Person
+          name: Pierre-Antoine Champin
+        </pre>
+
+        <p class="note">
+          This may be part of an <em>extended profile</em>,
+          as the <em>basic profile</em> may not use anything more than basic YAML structures.
+          Also, this is contrary to JSON-LD principles that are intended to process arbitrary JSON.
+        </p>
+      </section>
+
+      <section data-format="markdown" id="uc-8">
+        #### Round-trip safe json-ld -&gt; yaml-ld -&gt; json-ld ([#8](https://github.com/json-ld/yaml-ld/issues/8))
+
+        As a user with json-ld files.
+        I want to convert them to yaml-ld.
+        So that they are round-trip safe.
+
+        <p class="note">
+          There seems to be a general concensus against using any special YAML
+          encoding considerations in the <em>basic profile</em>.
+        </p>
+      </section>
+
+      <section data-format="markdown" id="uc-11">
+        #### Replace $-keywords with @-keywords ([#11](https://github.com/json-ld/yaml-ld/issues/11))
+
+        As an author of YAML-LD files.
+        I want an ability to type keywords without quotes.
+        So that my authoring experience is better.
+
+        JSON-LD keywords such as `@id` and `@type` must be quoted when used as keys in YAML. Using an alternative representation such as `$id` and `$type` allows these keywords to be used without quoting.
+
+        <p class="note">
+          This can largely be achieved using aliases in a context, perhaps
+          a standardized context.
+          This does not handle `@context` itself, nor keywords used within
+          a YAML defined context.
+          Alternatively, this may be handled by the <i>documentLoader</i>
+        </p>
+      </section>
+
+      <section data-format="markdown" id="uc-12">
+        #### Convert JSON-LD to YAML-LD using standard YAML libraries ([#12](https://github.com/json-ld/yaml-ld/issues/12))
+
+        As a developer.
+        I want to be able to convert JSON-LD documents to YAML-LD by simply serializing the document using any standard YAML library.
+        So that the resulting YAML is valid YAML-LD, resolving to the same graph as the original JSON-LD.
+
+        Conversely, I would be very surprised (and annoyed) if such a simple conversion did not work.
+
+        This is why, although I do not oppose $-keywords ([#11](#uc-11)) for authoring YAML-LD from scratch, I want @-keywords to be also supported.
+      </section>
+
+      <section data-format="markdown" id="uc-13">
+        #### Define anchor usage in yaml-ld  ([#13](https://github.com/json-ld/yaml-ld/issues/13))
+
+        As a json-ld editor.
+        I want to use yaml anchors.
+        So that I can easily reuse content.
+
+        <div class="note" data-format="markdown">
+          The specification should define:
+
+          * when it is legitimate to use anchors
+          * which are the expectation on anchor usage (e.g. do they represent a specific JSON-LD node or they can just be used to represent content?)
+          * are there any constraint on anchor usage? (e.g. the representation graph MAY / MUST NOT be a cyclic graph...)
+        </div>
+
+        <pre class="example">
+          ---
+          - "@id": &homer http://example.org/#homer  # Anchor the homer url
+            http://example.com/vocab#name:
+            - "@value": Homer
+          - "@id": http://example.org/#bart
+            http://example.com/vocab#name:
+            - "@value": Bart
+            http://example.com/vocab#parent:
+            - "@id": *homer                               # reuse the anchor instead of re-typing the homer url
+          - "@id": http://example.org/#lisa
+            http://example.com/vocab#name:
+            - "@value": Lisa
+            http://example.com/vocab#parent:
+            - "@id": *homer
+        </pre>
+      </section>
+
+      <section data-format="markdown" id="uc-17">
+        #### YAML-LD datatypes (and tags for datatypes)  ([#17](https://github.com/json-ld/yaml-ld/issues/17))
+
+        - RDF uses explicitly tagged literals, in particular lang strings and XSD datatypes, including infinite precision integers and decimals.
+        - JSON carries faithfully strings and small numbers, everything else must be represented as a string with a separate field to indicate the datatype (`@type` in JSON-LD). Eg see https://github.com/w3c/json-ld-syntax/issues/387 for the pitfalls of using large integers or decimals
+        - YAML can use tags to carry literals faithfully (including infinite precision, "markers" like `-.inf` and `.nan`, datetimes), and even more complex structures. One could declare "YAML schemas" with additional tags, eg to represent all XSD datatypes
+
+        Why might we want more than "string plus `@type`"?
+        - convenience (eg see `dc:date` below and many other examples)
+        - normalization (reduce/eliminate lexical vs value space differences): it seems to me easier for a processor to normalize `02022-05-18` to `2022-05-18` if tagged as `!xsd!date` rather than looking at a parallel `@type` field.
+
+        Let's collect below examples of what we could want.
+
+        ---
+
+        @gkellogg in https://github.com/ietf-wg-httpapi/mediatypes/issues/8#issuecomment-1034040169
+        > If I were to revisit anything in the JSON-LD data model, it would be the interpretation of JSON numbers to allow for decimal values. As it is now, JSON numbers are either interpreted as integers (long) or doubles based on the range of the number. But, in JSON-LD 1.1, we use The JSON Canonicalization Scheme ([RFC8785](https://www.w3.org/TR/json-ld11/#bib-rfc8785)) as a way to represent numbers in the rdf:JSON datatype serialization, which allows for a serialization form of either integer, decimal, or double. This really only comes into play in JSON-LD when creating RDF literals from native JSON numbers (something which is generally a bad design point, but is there to allow a reasonable interpretation of native JSON forms), but could also come into play when representing those numbers in the data model, and thus in serializations to forms such as YAML.
+
+        ---
+
+        @VladimirAlexiev from #2:
+        - [Tags](https://yaml.org/spec/1.2.2/#3212-tags) are comparable to datatypes.
+        - the YAML [json schema](https://yaml.org/spec/1.2.2/#102-json-schema) and [core schema](https://yaml.org/spec/1.2.2/#103-core-schema) handle string, boolean, integer, float (the latter allows things like `-.inf` and `.nan`). 
+        - https://yaml.org/type/ handles a wider set, in particular dates and datetimes. But please note these are considered deprecated in 1.2 and are being removed in 1.3 https://github.com/yaml/yaml-spec/issues/268#issuecomment-1039000203 
+        - Maybe we should define a YAML schema to handle more xsd datatypes? 
+            - It should aim to eliminate problems related to the limited and non-standardized set of JSON literals. Eg the JSON number `12345678901234567890.12345` is converted to RDF literal `"12345678901234567168"^^xsd:integer` (see [jsonld playground](https://tinyurl.com/yy6xh52v))
+            - And could even work as a replacement of `@type`, eg
+        ```
+        # short form using tags
+        dc:date: !xsd!date 2022-05-18
+
+        # instead of long form
+        dc:date: {"@type": xsd:date, "@value": 2022-05-18}
+        ```
+
+        ---
+
+        New ones:
+
+        - is it at all feasible to write `"foo"@en` in YAML rather than a separate `@language` field?
+        - JSON-LD cannot capture GeoJSON because that uses nested arrays. Can this be worked around somehow with a YAML tag for "2D array"?
+      </section>
+
+      <section data-format="markdown" id="uc-19">
+        #### Polyglot Modeling ([#19](https://github.com/json-ld/yaml-ld/issues/19))
+
+        As an information architect
+        I want data modeling language(s) independent of technical artefacts
+        So that:
+        - the language is understandable to domain experts
+        - it can generate a variety of required technical artefacts
+        - all these artefacts are kept in sync, thus lowering maintenance effort
+
+        For efficient RDF modeling, you need to define multiple related artefacts:
+        - ontology
+        - shapes (SHACL (@holgerknublauch) or SHEX (@ericprud))
+        - diagrams and other documentation
+        - JSON-LD context,
+        - maybe JSON-LD frames,
+        - JSON schema or Avro schema
+        - API bindings and hypertext controls (HATEOAS)
+        - etc
+
+        Thus, many people have expressed the desire to define a unified or "technology independent" modeling language.
+        - See eg https://github.com/w3c-ccg/traceability-vocab/issues/296 for a brief list of modeling framework requirements
+
+        Many communities like to have a LD expression of their data, but mostly care about defining the data with JSON schema. Efforts to marry JSON Schema with JSON-LD contexts have been undertaken in:
+        - `w3c-ccg` @OR13 @nissimsan @msporny
+        - WoT: https://www.w3.org/2019/wot/json-schema, http://www.w3.org/2019/wot/hypermedia @vcharpenay, @maximelefrancois86, María Poveda Villalón
+        - OAS: [OpenAPI-Specification/](https://github.com/OAI/OpenAPI-Specification/), [OAS Semantic Context](https://docs.google.com/document/d/1fBRH2wtg1p_g4voNSTlHiSJmKgvfNaIsUXwPBO36RuM/edit) in particular for eGovernment APIs @ioggstream @pchampin @giorgialodi
+
+        Many polyglot frameworks are YAML-based. Examples include:
+        - [LinkML](https://linkml.io/) ([github](https://github.com/linkml)) (@cmungall)
+        - [FHIR](https://www.hl7.org/fhir/) (@ericprud): note, this is not YAML-based
+        - [Schema Salad](https://www.commonwl.org/v1.2/SchemaSalad.html) (@mr-c @tetron)
+        - [A.ML](https://a.ml/) and [cloudinformationmodel](https://github.com/cloudinformationmodel/cloudinformationmodel) @danmoralesatx
+        - [RAML](http://raml.org/) (RESTful API Modeling Language), https://github.com/raml-org/raml-spec @sichvoge @krishahn
+        - Dragon at Uber (Joshua Shinavier and others).
+          Eg see [Dragon: Schema Integration at Uber Scale](https://eng.uber.com/dragon-schema-integration-at-uber-scale/), US Semantic Technologies Symposium, March 2020, [cached PDF](https://1fykyq3mdn5r21tpna3wkdyi-wpengine.netdna-ssl.com/wp-content/uploads/2020/03/Schema-Integration-at-Uber-Scale-US2TS-2020-1.pdf). YAML schema examples start slide 42
+        - [SOML](https://platform.ontotext.com/3.0/soml/index.html) (@VladimirAlexiev)
+        - [smart-data-models](https://smartdatamodels.org/) (FIWARE, IUDX, SmartCities, TM forum). Example: [Aircraft](https://github.com/smart-data-models/dataModel.Aeronautics/tree/master/Aircraft). [contribution manual gslides](https://docs.google.com/presentation/d/e/2PACX-1vTs-Ng5dIAwkg91oTTUdt8ua7woBXhPnwavZ0FxgR8BsAI_Ek3C5q97Nd94HS8KhP-r_quD4H0fgyt3/pub?start=false&loop=false&delayms=3000&slide=id.p1)
+        ---
+
+        YAML-LD should not take over these modeling-framework efforts, but should show how they can be used together, show archetypical examples, and maybe make a comparison.
+
+        Even if no Modeling requirements make it into any YAML-LD spec, this git repo could serve as a "meeting place" for people working on these topics, potentially resulting in some unification.
+      </section>
+
+      <section data-format="markdown" id="uc-31">
+        #### Fragment identifier ([#31](https://github.com/json-ld/yaml-ld/issues/31))
+
+        As a user.
+        I want a **fragment identifier specification**.
+        So that **I can reference specific elements of a yaml-ld**.
+
+
+        #### Notes
+        YAML fragid processing is described [here](https://www.ietf.org/archive/id/draft-ietf-httpapi-yaml-mediatypes-02.html#section-2.1-2.20.1) 
+
+        Q0. Do you think that yaml processing is enough?<br/>
+        Q1. Do .jsonld support JSON Pointer or other referencing method?<br/>
+        Q2. Do we need a way to reference a specific resource via id, eg. `#id=&lt;URI&gt;` ? In case, this will be specific  yaml-ld extension that generic    yaml parsers might not support.<br/>
+      </section>
+
+      <section data-format="markdown" id="uc-35">
+        #### Defining various interoperability profiles ([#35](https://github.com/json-ld/yaml-ld/issues/35))
+
+        As an Editor       
+        I want a set of different interoperability profiles  
+        So that I can select the YAML features that are supported by a YAML-LD implementation   
+
+        ## Note
+
+        For example I could define
+
+        * a BASE profile that is just JSON with YAML syntax: no anchors / alias nodes, only string keywords, only JSON datatype values, comments
+        * an EXTENDED profile: with anchors / alias nodes but only with a rooted directed acyclic graph
+
+        ## Elements to be discussed in profiling
+
+        - [ ] data types https://github.com/json-ld/yaml-ld/pull/34/files#r912093915
+        - [ ] usage of anchors / alias nodes
+        - [ ] multiple documents separated by ---
+        - [ ] non-string keywords
+        - [ ] TODO
       </section>
     </section>
   </body>
