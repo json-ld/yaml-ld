@@ -4,22 +4,38 @@ schema:author:
   - orcid:0009-0001-8740-4213
   - orcid:0000-0001-7508-7428
   - orcid:0000-0001-7046-4474
+
   - $id: https://greggkellogg.net/foaf#me
     dcterms:isReferencedBy: https://greggkellogg.net/foaf.rdf
-  - https://github.com/ioggstream
-  - https://github.com/TallTed
-  - https://github.com/BigBlueHat
+    schema:givenName: Gregg
+    schema:familyName: Kellogg
+
+  - $id: https://github.com/ioggstream
+    $type: foaf:Person
+    schema:givenName: Roberto
+    schema:familyName: Polli
+
+  - $id: https://github.com/TallTed
+    $type: foaf:Person
+    schema:givenName: Ted
+    schema:familyName: Thibodeau
+
+  - $id: https://github.com/BigBlueHat
+    $type: foaf:Person
+    schema:givenName: Benjamin
+    schema:familyName: Young
 
 license:
   $id: https://purl.org/NET/rdflicense/W3C1.0
   dcterms:isReferencedBy: https://purl.org/NET/rdflicense/W3C1.0.ttl
 
 dcterms:references:
-  - namespace-prefixes.yamlld
+  - data:namespace-prefixes.yamlld
 
 "@context":
   "@import": https://json-ld.org/contexts/dollar-convenience.jsonld
   "@base": https://json-ld.github.io/yaml-ld/spec/
+  data: https://json-ld.github.io/yaml-ld/spec/data/
 
   spec: https://json-ld.github.io/yaml-ld/spec/
 
@@ -27,6 +43,7 @@ dcterms:references:
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   schema: https://schema.org/
   dcterms: http://purl.org/dc/terms/
+  foaf: http://xmlns.com/foaf/0.1/
   orcid: https://orcid.org/
 
   schema:author:
