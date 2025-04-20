@@ -19,6 +19,7 @@ schema:author:
     $type: foaf:Person
     schema:givenName: Ted
     schema:familyName: Thibodeau
+    schema:honorificSuffix: Jr
 
   - $id: https://github.com/BigBlueHat
     $type: foaf:Person
